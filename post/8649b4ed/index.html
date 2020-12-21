@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>服务器部署-CentOS-Windows-文件传输 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="服务器部署-CentOS-Windows-文件传输">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      880 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">服务器部署-CentOS-Windows-文件传输</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年9月27日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>上传文件总是逃不过的<br>借助第三方平台速度太慢，只能自己寻找协议/工具/代码来实现  </p>
+<h1 id="Window端操作"><a href="#Window端操作" class="headerlink" title="Window端操作"></a>Window端操作</h1><h2 id="SCP命令"><a href="#SCP命令" class="headerlink" title="SCP命令"></a>SCP命令</h2><p><code>scp</code>是<code>secure copy</code>的简写，用于在Linux下进行远程拷贝文件的命令<br><code>scp</code>传输是加密的，速度相对于不加密的传输来说要慢（废话）<br><code>scp</code>还非常不占资源，不会提高多少系统负荷  </p>
+<blockquote>
+<p>在占资源这一点上，<code>rsync</code>就远远不及它了。虽然 <code>rsync</code>比<code>scp</code>会快一点，但当小文件众多的情况下，<code>rsync</code>会导致硬盘<code>I/O</code>非常高，而<code>scp</code>基本不影响系统正常使用。</p>
+</blockquote>
+<p><code>scp</code>是<code>linux</code>系统下基于<code>ssh</code>登陆进行安全的远程文件拷贝命令<br><code>linux</code>的<code>scp</code>命令可以在<code>linux</code>服务器之间复制文件和目录  </p>
+<blockquote>
+<p>注意，在cmd中要使用绝对路径  </p>
+</blockquote>
+<h2 id="SCP上传"><a href="#SCP上传" class="headerlink" title="SCP上传"></a>SCP上传</h2><p>将本地的文件/文件夹上传到目标服务器路径  </p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">scp <span class="hljs-comment">[本地文件路径（含文件名）]</span> <span class="hljs-comment">[SSH用户名]</span>@<span class="hljs-comment">[服务器IP]</span>:<span class="hljs-comment">[服务器上文件路径（不含文件名）]</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>案例：<code>a.txt</code>通过<code>root</code>用户的<code>SSH</code>传输到<code>/home/root</code>文件夹中  </p>
+</blockquote>
+<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp a.txt root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.1</span>.<span class="hljs-number">2</span><span class="hljs-symbol">:/home/root</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>在输入以后，会提示你输入root用户的SSH密码。输入正确以后就开始传输  </p>
+</blockquote>
+<h2 id="SCP下载"><a href="#SCP下载" class="headerlink" title="SCP下载"></a>SCP下载</h2><p>将目标服务器文件/文件夹下载到本地  </p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">scp <span class="hljs-comment">[SSH用户名]</span>@<span class="hljs-comment">[服务器IP]</span>:<span class="hljs-comment">[服务器上文件路径（含文件名）]</span> <span class="hljs-comment">[本地文件路径（不含文件名）]</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>案例：通过<code>SSH</code>的 <code>root</code>用户 从服务器<code>/home/root/a.txt</code>下载<code>a.txt</code>到/Documents/下  </p>
+</blockquote>
+<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.1</span>.<span class="hljs-number">2</span><span class="hljs-symbol">:/home/root/a</span>.txt /Documents/ <br></code></pre></div></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p><code>SSH</code>默认22端口。如果不是22，就需要你填入一个参数<code>-P</code>  </p>
+<blockquote>
+<p>案例：<code>a.txt</code>通过 11024端口 的<code>SSH</code>的 manager用户 传输到<code>/home/manager</code>文件夹中  </p>
+</blockquote>
+<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp -P <span class="hljs-number">11024</span> a.txt manager<span class="hljs-variable">@192</span>.<span class="hljs-number">168.1</span>.<span class="hljs-number">2</span><span class="hljs-symbol">:/home/manager</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="文件夹传输"><a href="#文件夹传输" class="headerlink" title="文件夹传输"></a>文件夹传输</h3><p>如果想要以文件夹为单位传输的话，加个<code>-r</code>参数。路径都改为文件夹路径即可  </p>
+<blockquote>
+<p>案例：将本地的<code>Documents</code>文件夹通过<code>root</code>用户<code>SSH</code>上传到<code>/home/root/folder</code> 下  </p>
+</blockquote>
+<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp -r /Documents  root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.1</span>.<span class="hljs-number">2</span><span class="hljs-symbol">:/home/root/folder</span>  <br></code></pre></div></td></tr></table></figure>
+<h3 id="其它参数"><a href="#其它参数" class="headerlink" title="其它参数"></a>其它参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-1</td>
+<td>强制scp命令使用协议ssh1</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>强制scp命令使用协议ssh2</td>
+</tr>
+<tr>
+<td>-4</td>
+<td>强制scp命令只使用IPv4寻址</td>
+</tr>
+<tr>
+<td>-6</td>
+<td>强制scp命令只使用IPv6寻址</td>
+</tr>
+<tr>
+<td>-B</td>
+<td>使用批处理模式（传输过程中不询问传输口令或短语）</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>允许压缩。（将-C标志传递给ssh，从而打开压缩功能）</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>保留原文件的修改时间，访问时间和访问权限。</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>不显示传输进度条。</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归复制整个目录。</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>详细方式显示输出。scp和ssh(1)会显示出整个过程的调试信息。这些信息用于调试连接，验证和配置问题。</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>cipher 以cipher将数据传输进行加密，这个选项将直接传递给ssh。</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>ssh_config 指定一个替代的ssh配置文件，此参数直接传递给ssh。</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>identity_file 从指定文件中读取传输时使用的密钥文件，此参数直接传递给ssh。</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>limit 限定用户所能使用的带宽，以Kbit/s为单位。</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>ssh_option 如果习惯于使用ssh_config(5)中的参数传递方式，</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>port 注意是大写的P, port是指定数据传输用到的端口号</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>program 指定加密传输时所使用的程序。此程序必须能够理解ssh(1)的选项。</td>
+</tr>
+</tbody></table>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CentOS/">CentOS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Windows/">Windows</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">服务器部署</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/b35a5996/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">硬件-固态硬盘</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/5e31e418/">
+                        <span class="hidden-mobile">Blender-使用记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
