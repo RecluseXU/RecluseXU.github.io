@@ -1,0 +1,1306 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>Javascript-Babel-AST-API-解混淆=基础 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Javascript-Babel-AST-API-解混淆=基础">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11.3k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Javascript-Babel-AST-API-解混淆=基础</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年12月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="相关信息"><a href="#相关信息" class="headerlink" title="相关信息"></a>相关信息</h1><table>
+<thead>
+<tr>
+<th>信息</th>
+<th>地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AST在线解析</td>
+<td><a target="_blank" rel="noopener" href="https://astexplorer.net/">https://astexplorer.net/</a></td>
+</tr>
+<tr>
+<td>babel中文文档</td>
+<td><a target="_blank" rel="noopener" href="https://www.babeljs.cn/docs/">https://www.babeljs.cn/docs/</a></td>
+</tr>
+<tr>
+<td>babel英文文档</td>
+<td><a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/">https://babeljs.io/docs/en/</a></td>
+</tr>
+<tr>
+<td>Github</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/babel/babel">https://github.com/babel/babel</a></td>
+</tr>
+<tr>
+<td>插件手册</td>
+<td><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33826609/article/details/93164633#toc-visitors">https://blog.csdn.net/weixin_33826609/article/details/93164633#toc-visitors</a></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>信息</th>
+<th>地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>babel各节点解释</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/babel/babylon/blob/master/ast/spec.md">https://github.com/babel/babylon/blob/master/ast/spec.md</a></td>
+</tr>
+<tr>
+<td>babel简单剖析</td>
+<td><a target="_blank" rel="noopener" href="http://www.alloyteam.com/2017/04/analysis-of-babel-babel-overview/">http://www.alloyteam.com/2017/04/analysis-of-babel-babel-overview/</a></td>
+</tr>
+<tr>
+<td>淘宝前端团队写的babel相关</td>
+<td><a target="_blank" rel="noopener" href="https://fed.taobao.org/blog/taofed/do71ct/babel-plugins/">https://fed.taobao.org/blog/taofed/do71ct/babel-plugins/</a></td>
+</tr>
+<tr>
+<td>babel到底将代码转换成什么</td>
+<td><a target="_blank" rel="noopener" href="http://www.alloyteam.com/2016/05/babel-code-into-a-bird-like/">http://www.alloyteam.com/2016/05/babel-code-into-a-bird-like/</a></td>
+</tr>
+</tbody></table>
+<h1 id="安装-使用环境"><a href="#安装-使用环境" class="headerlink" title="安装/使用环境"></a>安装/使用环境</h1><h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><h3 id="安装-Node-js-与Babel"><a href="#安装-Node-js-与Babel" class="headerlink" title="安装 Node.js 与Babel"></a>安装 Node.js 与Babel</h3><p>首先你要有<code>Node.js</code>环境  </p>
+<a href="#">Post not found: Node.js</a>
+<p>全局安装 <code>babel</code>的各个库  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install @babel/core -g<br>npm install @babel/parser -g<br>npm install @babel/traverse -g<br>npm install @babel/generator -g<br>npm install @babel/types -g<br></code></pre></div></td></tr></table></figure>
+<p>简单描述一下刚刚安装的库的作用：   </p>
+<ul>
+<li><code>@babel/core</code>是 <code>Babel</code> 的核心代码  </li>
+<li><code>@babel/parser</code>常用于解析代码语法树的模块  </li>
+<li><code>@babel/traverse</code>常用于操作语法树的模块  </li>
+<li><code>@babel/generator</code>常用于将语法树生成代码的模块  </li>
+<li><code>@babel/types</code> 包含类型信息，在生成节点等与类型相关的操作会用到</li>
+</ul>
+<h3 id="安装测试"><a href="#安装测试" class="headerlink" title="安装测试"></a>安装测试</h3><p>启动 <code>Node.js</code> 环境  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">node<br></code></pre></div></td></tr></table></figure>
+<p>引入babel库，测试是否成功  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+<p>这一步可能会出现说没有库的问题，这是由于环境变量导致的<br>一般而言，安装<code>Node.js</code>会默认配置上环境变量，但这个配置不一定有用<br>此时你可以手动设置环境变量，或者用绝对路径来引入  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;E:/Environment/Nodejs/node_global/node_modules/@babel/parser&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+<h2 id="在线解析网站"><a href="#在线解析网站" class="headerlink" title="在线解析网站"></a>在线解析网站</h2><p>链接： <a target="_blank" rel="noopener" href="https://astexplorer.net/">https://astexplorer.net/</a><br>这个是一个解析代码语法树的网站<br>这里是需要用它的<code>Babel</code>解析语法树，所以要做对应设置<br><img src="/Javascript-Babel-AST-API-%E8%A7%A3%E6%B7%B7%E6%B7%86=%E5%9F%BA%E7%A1%80/20200830085956301.png" srcset="/img/loading.gif"><br>打开以后将解析方式改为<code>@babel/parser</code><br>在左边的文本框里输入一些代码，就能在右边看到对应解析出来的语法树了  </p>
+<h1 id="认识AST"><a href="#认识AST" class="headerlink" title="认识AST"></a>认识AST</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>如果将代码中各类的语句都看成节点，那么整个程序的代码就像是由一个个节点组成的树状结构，代码的运行就像是不完全遍历这颗树一样  </p>
+<p>AST解析源代码实际上就是这样干的<br>在代码解析完成后，你会得到一颗语法树，这颗语法树包含了代码中的所有内容  </p>
+<p>你可以对它进行树（数据结构）可以进行的所有操作（从复杂的 <code>有序树转二叉树</code> 到简单的 <code>替换节点</code>，<code>计算树的深度</code>，<code>剪枝</code>，<code>拼接</code>都可以）  </p>
+<p>最后想象一下，程序运行 就是在这棵树里进行 <code>深度优先遍历</code>  </p>
+<blockquote>
+<p>实际上，它的结果更接近图（数据结构），因为可能存在调用循环/递归（树中的节点不允许连接自身或有多个父级）  </p>
+</blockquote>
+<h2 id="常见节点信息解析"><a href="#常见节点信息解析" class="headerlink" title="常见节点信息解析"></a>常见节点信息解析</h2><table>
+<thead>
+<tr>
+<th>节点属性</th>
+<th>记录的信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>当前节点的类型</td>
+</tr>
+<tr>
+<td>start</td>
+<td>当前节点的起始位</td>
+</tr>
+<tr>
+<td>end</td>
+<td>当前节点的末尾</td>
+</tr>
+<tr>
+<td>loc</td>
+<td>当前节点所在的行列位置<br>起始于结束的行列信息</td>
+</tr>
+<tr>
+<td>errors</td>
+<td>File节点所持有的特有属性，可以不用理会</td>
+</tr>
+<tr>
+<td>program</td>
+<td>包含整个源代码，不包含注释节点</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>源代码中所有的注释会显示在这里</td>
+</tr>
+</tbody></table>
+<p>就这么直接列出来可能还不太容易理解<br>可以利用 <a target="_blank" rel="noopener" href="https://astexplorer.net/">在线解析网站</a>  解析一小段<code>javascript</code>代码来帮助理解/记忆  </p>
+<p>输入仪式性的语句  <code>console.log(&quot;Hello World&quot;)</code>  的变种代码  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 这是一段源代码，作用就是计算，输出一些字符</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">var</span> i = [<span class="hljs-string">&#x27;H&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;W&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>];<br>  i = i.join(<span class="hljs-string">&#x27;&#x27;</span>);<br>  <span class="hljs-keyword">return</span> i<br>&#125;<br><span class="hljs-built_in">console</span>.log(test())<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="最外层File节点"><a href="#最外层File节点" class="headerlink" title="最外层File节点"></a>最外层<code>File节点</code></h3><p><img src="/Javascript-Babel-AST-API-%E8%A7%A3%E6%B7%B7%E6%B7%86=%E5%9F%BA%E7%A1%80/20200901023343710.png" srcset="/img/loading.gif"><br>先将节点收得差不多，观察最外面的<code>File节点</code>的信息  </p>
+<ul>
+<li><code>type</code> <code>start</code> <code>end</code> <code>loc</code> 你能在绝大多数节点里看到  </li>
+<li>常用的类型判断方法<code>t.is****(node)</code>就是判断当前节点type是否为某个类型  </li>
+</ul>
+<h3 id="层级结构分析"><a href="#层级结构分析" class="headerlink" title="层级结构分析"></a>层级结构分析</h3><p>实际上，可以通过观察 <code>type</code> 知道一些信息  </p>
+<blockquote>
+<p>层级分析例1:<br><img src="/Javascript-Babel-AST-API-%E8%A7%A3%E6%B7%B7%E6%B7%86=%E5%9F%BA%E7%A1%80/20200901023523804.png" srcset="/img/loading.gif"><br>比如说这整个文件包含了了代码块主要有两部分： <strong>一个函数声明</strong> 和 <strong>一句语句</strong>  </p>
+</blockquote>
+<br>
+>层级分析例2: 
+>![](/Javascript-Babel-AST-API-解混淆=基础/20200901082003100.png)  
+又比如说，这个函数里包含了三个部分：**一个声明**，**一个语句**，**一个返回**  
+
+<h2 id="解析代码-Code→AST"><a href="#解析代码-Code→AST" class="headerlink" title="解析代码 Code→AST"></a>解析代码 Code→AST</h2><p><code>@babel/parser</code>能将<code>javascript</code>代码解析成语法树<br>这个库在前文中已经安装好了，现在用它来解析语法树吧  </p>
+<blockquote>
+<p>例：用babel解析语法树  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">&quot;var a = 123;&quot;</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(ast, <span class="hljs-literal">null</span>, <span class="hljs-string">&#x27;\t&#x27;</span>));<br></code></pre></div></td></tr></table></figure>
+<p>此处会输出和网页解析出来的内容一样的结果<br>做简单分析时，用网页解析比较快捷方便，很少写代码来解析  </p>
+<h2 id="AST寻路"><a href="#AST寻路" class="headerlink" title="AST寻路"></a>AST寻路</h2><p>在解析出语法树后，就可以进行各类的操作了<br>但和想要对树（数据结构）进行任何操作一样，在对AST进行各类操作之前，你要先会 寻路 （到达(遍历到)指定的节点）才能进行操作  </p>
+<blockquote>
+<p>寻路这个词是我自己瞎编的  </p>
+</blockquote>
+<h3 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h3><p>想要约朋友来家里玩，可以向别人描述 家的附近 或者 家本身 有什么特征。比如说:</p>
+<blockquote>
+<p>“我家门口有一颗歪脖子树” 或者 “我家房顶有一个大洞”  </p>
+</blockquote>
+<p>这样子能很方便得让别人找到位置  </p>
+<p>寻路的过程也一样。想要到达 某个/某些 特定节点上，可以根据这个节点的 <code>类型</code> 与 <code>路径</code> 给出判断依据来到达特定的 某个/某些 节点  </p>
+<h3 id="遍历整个语法树"><a href="#遍历整个语法树" class="headerlink" title="遍历整个语法树"></a>遍历整个语法树</h3><p>绝大多数情况下，对AST进行寻路比上面描述的情况更糟糕一些  </p>
+<blockquote>
+<p><strong>在AST中寻路的情况更像是：</strong><br>你的朋友坐在一个城市观光车上，观光车会穿过城市里的每一个街道。你的朋友无法控制车前进的方向，你只能让车在你描述的情况下停下，用这种方式来到达你家    </p>
+</blockquote>
+<p>默认情况下，<code>@babel/traverse</code>能让你遍历整个AST<br>如果想要寻路到达某个节点，就需要给出你想要寻路的 那个/那些 节点的特征进行判断操作  </p>
+<h3 id="使用-Path-进行寻路"><a href="#使用-Path-进行寻路" class="headerlink" title="使用 Path 进行寻路"></a>使用 Path 进行寻路</h3><p>在使用 <code>enter</code> 遍历所有节点的时候，参数 <code>path</code> 会传入当前的路径<br>可以根据<code>path</code>进行各种判断，继而进行各类操作  </p>
+<h4 id="Path基本信息"><a href="#Path基本信息" class="headerlink" title="Path基本信息"></a>Path基本信息</h4><ul>
+<li>获取 <code>Path</code>对应节点的 源代码 <code>path.toString()</code>  </li>
+<li>获取 <code>Path</code>对应节点的 类型 <code>path.type</code>  </li>
+</ul>
+<blockquote>
+<p>例: 寻找代码中包含 字符a 的节点  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = b + 1;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    enter(path)  <span class="hljs-comment">// 此处会遍历所有的节点，并得到对应的路径</span><br>    &#123;<br>        <span class="hljs-keyword">if</span>(path.toString().indexOf(<span class="hljs-string">&#x27;a&#x27;</span>) &gt; -<span class="hljs-number">1</span>)&#123;  <span class="hljs-comment">// 根据路径，得到对应的代码，如果其中包含 字符a 则输出信息</span><br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径类型&#x27;</span>, path.type); <span class="hljs-comment">// 打印当前路径类型</span><br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径源码：&#x27;</span>, path.toString()); <span class="hljs-comment">// 打印当前路径所对应的源代码</span><br>            <span class="hljs-comment">// is + 节点类型全名, 能判断当前路径节点的类型是否是声明的类型</span><br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;这是一个变量声明节点:\t&#x27;</span>, path.isVariableDeclaration())<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;--------------------&#x27;</span>)<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);  <span class="hljs-comment">// traverse会遍历所有的节点</span><br></code></pre></div></td></tr></table></figure>
+<p>会得到如下的结果  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">当前路径类型 Program<br>当前路径源码： var b = 123;<br>a = b + 1;<br>这是一个变量声明节点:	 <span class="hljs-literal">false</span><br>--------------------<br>当前路径类型 VariableDeclaration<br>当前路径源码： var b = 123;<br>这是一个变量声明节点:	 <span class="hljs-literal">true</span><br>--------------------<br>当前路径类型 ExpressionStatement<br>当前路径源码： a = b + 1;<br>这是一个变量声明节点:	 <span class="hljs-literal">false</span><br>--------------------<br>当前路径类型 AssignmentExpression<br>当前路径源码： a = b + 1<br>这是一个变量声明节点:	 <span class="hljs-literal">false</span><br>--------------------<br>当前路径类型 Identifier<br>当前路径源码： a<br>这是一个变量声明节点:	 <span class="hljs-literal">false</span><br>--------------------<br></code></pre></div></td></tr></table></figure>
+<p>此处是对源代码进行判断，所以<code>var</code>这种关键词也是会被认为是包含<code>a</code>的  </p>
+<h3 id="使用-节点-进行寻路"><a href="#使用-节点-进行寻路" class="headerlink" title="使用 节点 进行寻路"></a>使用 节点 进行寻路</h3><blockquote>
+<p>例子：根据特点寻找语法树中的节点</p>
+<ul>
+<li>特点：这个节点是一个 变量声明节点  </li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">&quot;var a = 123;&quot;</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-comment">// 这里的 VariableDeclaration 表明 需要的是 变量声明节点 </span><br>    VariableDeclaration(path)<br>    &#123;   <span class="hljs-comment">// 获取到 路径path 后，可以根据path的信息来进一步进行判断</span><br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 源码:\n&#x27;</span>, path.toString());<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 节点:\n&#x27;</span>, path.node.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 父级节点:\n&#x27;</span>, path.parent.toString());<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 父级路径:\n&#x27;</span>, path.parentPath.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 类型:\n&#x27;</span>, path.type)<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);  <span class="hljs-comment">// 解析语法树</span><br>traverse(ast, visitor);  <span class="hljs-comment">// 遍历以进行操作</span><br></code></pre></div></td></tr></table></figure>
+<p>由于直接输出<code>Node</code>会显示非常多的信息，此处用<code>toString()</code>意思意思<br>得到的输出结果：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">当前路径 源码:<br> var a = 123;<br>当前路径 节点:<br> [object Object]<br>当前路径 父级节点:<br> [object Object]<br>当前路径 父级路径:<br> var a = 123;<br>当前路径 类型:<br> VariableDeclaration<br></code></pre></div></td></tr></table></figure>
+<p>这里用了一个 <code>VariableDeclaration</code>（变量声明节点）来表述特点，更多得节点类型可以查看 <a target="_blank" rel="noopener" href="https://github.com/babel/babylon/blob/master/ast/spec.md#node-objects">Github-Babel-节点类型文档</a>  </p>
+<p><strong>注意：所有符合你描述的特点的节点都会进行声明中的操作</strong>（此处为输出信息）<br>由于此处只有一句声明语句的代码，所以随意给出一个合适的特点就能轻松到达目标节点<br>如果代码量大，又希望只改动部分，那么最好给出更多的语句以精确修改目标  </p>
+<h2 id="用AST生成代码-AST→Code"><a href="#用AST生成代码-AST→Code" class="headerlink" title="用AST生成代码 AST→Code"></a>用AST生成代码 AST→Code</h2><p>尽管你现在可能还并不知道如何对语法树节点进行操作<br>但根据AST生成代码的方法还是要学会的，要不然最终结果长什么样都不知道  </p>
+<p>可以使用<code>@babel/generator</code>来实现 根据AST生成代码的这个过程  </p>
+<blockquote>
+<p>例：根据AST生成代码以查看修改结果  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><span class="hljs-keyword">const</span> generator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/generator&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">&#x27;function squire()&#123;var n = 3; return n*n;&#125;&#x27;</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>  <span class="hljs-function"><span class="hljs-title">BinaryExpression</span>(<span class="hljs-params">path</span>)</span> &#123;  <span class="hljs-comment">// 寻找所有 二元表达式节点</span><br>    <span class="hljs-keyword">if</span> (path.node.operator == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;  <span class="hljs-comment">// 并且这个表达式节点的操作是做 乘法 </span><br>      path.node.operator = <span class="hljs-string">&#x27;+&#x27;</span>;  <span class="hljs-comment">// 将操作改为 加</span><br>    &#125;<br>  &#125;<br>&#125;<br><br>traverse(ast, visitor);  <span class="hljs-comment">// 对AST进行操作</span><br><span class="hljs-built_in">console</span>.log(generator(ast)[<span class="hljs-string">&#x27;code&#x27;</span>]);  <span class="hljs-comment">// 使用 generator 利用AST生成对应的代码</span><br></code></pre></div></td></tr></table></figure>
+<p>运行后会输出结果  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">squire</span></span>() &#123;<br>  var n = 3;<br>  <span class="hljs-built_in">return</span> n + n;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>此处将所有的表达式乘法转为加法，并且将改变后的AST利用<code>@babel/generator</code>生成出新的代码  </p>
+<h2 id="常用基础操作"><a href="#常用基础操作" class="headerlink" title="常用基础操作"></a>常用基础操作</h2><h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><p><code>@babel/types</code>包含了各个节点的定义<br>可以通过使用<code>@babel/types</code>的类型名，查阅<a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-types"><code>@babel/types</code>官方文档</a>，获取对应类型的构造函数，创建对应类型的节点  </p>
+<blockquote>
+<p>例：利用 @babel/types 提供的类来直接创建节点，编写ast内容  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/types&quot;</span>);<br><span class="hljs-keyword">const</span> generator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/generator&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> callee = t.memberExpression(t.identifier(<span class="hljs-string">&#x27;console&#x27;</span>), t.identifier(<span class="hljs-string">&#x27;log&#x27;</span>)),<br>    args = [t.NumericLiteral(<span class="hljs-number">666</span>)],<br>    call_exp = t.callExpression(callee, args),<br>    exp_statement = t.ExpressionStatement(call_exp)<br><br><span class="hljs-built_in">console</span>.log(generator(exp_statement)[<span class="hljs-string">&#x27;code&#x27;</span>])<br></code></pre></div></td></tr></table></figure>
+<p>输出结果：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-number">666</span>)<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h3><p><code>NodePath.insertAfter()</code>方法用于在当前<code>path</code>前面插入节点<br><code>NodePath.insertBefore()</code>方法用于在当前<code>path</code>后面插入节点  </p>
+<blockquote>
+<p>例：向语法树中插入节点  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/types&quot;</span>);<br><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><span class="hljs-keyword">const</span> generator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/generator&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`function square(n) &#123;</span><br><span class="hljs-string">  var a = 2;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>  <span class="hljs-function"><span class="hljs-title">VariableDeclaration</span>(<span class="hljs-params">path</span>)</span> &#123;  <span class="hljs-comment">// 找到变量声明节点，删除</span><br>    <span class="hljs-keyword">var</span> node = t.NumericLiteral(<span class="hljs-number">1</span>)  <span class="hljs-comment">// 使用 types 来生成一个数字节点</span><br>    path.insertAfter(node)  <span class="hljs-comment">// 在当前path前面插入节点</span><br>    node = t.NumericLiteral(<span class="hljs-number">3</span>)<br>    path.insertBefore(node)  <span class="hljs-comment">// 在当前path后面插入</span><br>  &#125;<br>&#125;<br><br>traverse(ast, visitor);<br><span class="hljs-built_in">console</span>.log(generator(ast)[<span class="hljs-string">&#x27;code&#x27;</span>])<br></code></pre></div></td></tr></table></figure>
+<p>结果：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-number">3</span><br>  <span class="hljs-keyword">var</span> a = <span class="hljs-number">2</span>;<br>  <span class="hljs-number">1</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="替换节点"><a href="#替换节点" class="headerlink" title="替换节点"></a>替换节点</h3><p><code>NodePath.replaceInline</code> 方法用于替换对应path的节点  </p>
+<blockquote>
+<p>例：寻找计算节点，计算好了以后，生成新的数字节点，替换原本的节点  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> t = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/types&quot;</span>);<br><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><span class="hljs-keyword">const</span> generator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/generator&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`function square(n) &#123;</span><br><span class="hljs-string">  return 1 + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>  <span class="hljs-function"><span class="hljs-title">BinaryExpression</span>(<span class="hljs-params">path</span>)</span> &#123;<br>    <span class="hljs-keyword">var</span> result = <span class="hljs-built_in">eval</span>(path.toString())  <span class="hljs-comment">// 计算表达式结果</span><br>    <span class="hljs-keyword">var</span> node = t.NumericLiteral(result)  <span class="hljs-comment">// 使用 types 来生成一个数字节点</span><br>    path.replaceInline(node);   <span class="hljs-comment">// 用新的节点来替换表达式内容</span><br>  &#125;<br>&#125;<br><br>traverse(ast, visitor);<br><span class="hljs-built_in">console</span>.log(generator(ast)[<span class="hljs-string">&#x27;code&#x27;</span>])<br></code></pre></div></td></tr></table></figure>
+<p>得到结果：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h3><p><code>NodePath.remove()</code>用于删除路径对应的节点<br>由于是对<code>path</code>操作，所以务必注意不要误删  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><span class="hljs-keyword">const</span> generator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/generator&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`function square(n) &#123;</span><br><span class="hljs-string">  var a = 1;</span><br><span class="hljs-string">  return 1 + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>  <span class="hljs-function"><span class="hljs-title">VariableDeclaration</span>(<span class="hljs-params">path</span>)</span> &#123;  <span class="hljs-comment">// 找到变量声明节点，删除</span><br>      path.remove()<br>  &#125;<br>&#125;<br><br>traverse(ast, visitor);<br><span class="hljs-built_in">console</span>.log(generator(ast)[<span class="hljs-string">&#x27;code&#x27;</span>])<br></code></pre></div></td></tr></table></figure>
+<p>得到结果：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+<h1 id="作用域Scope-与-被绑定量Binding"><a href="#作用域Scope-与-被绑定量Binding" class="headerlink" title="作用域Scope 与 被绑定量Binding"></a>作用域Scope 与 被绑定量Binding</h1><h2 id="词汇描述"><a href="#词汇描述" class="headerlink" title="词汇描述"></a>词汇描述</h2><ul>
+<li><p><strong>作用域scope</strong> - 有效范围<br>作用域（<code>scope</code>，或译作有效范围）是名字（<code>name</code>）与实体（<code>entity</code>）的绑定（<code>binding</code>）保持有效的那部分计算机程序<br>不同的编程语言可能有不同的作用域和名字解析。而同一语言内也可能存在多种作用域，随实体的类型变化而不同<br>作用域类别影响变量的绑定方式，根据语言使用静态作用域还是动态作用域变量的取值可能会有不同的结果  </p>
+<blockquote>
+<p>摘自：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BD%9C%E7%94%A8%E5%9F%9F">维基百科-作用域</a>  </p>
+</blockquote>
+</li>
+<li><p><strong>名字绑定binding</strong><br>名字绑定(简称绑定)是把实体（数据 或/且 代码）关联到标识符<br>标识符绑定到实体被称为引用该对象<br>机器语言没有内建的标识符表示方法，但程序设计语言实现了名字与对象的绑定<br>绑定最初是与作用域相关，因为作用域确定了哪个名字绑定到哪个对象——在程序代码中的哪个位置与哪条执行路径  </p>
+<blockquote>
+<p>摘自：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%90%8D%E5%AD%97%E7%BB%91%E5%AE%9A">维基百科-名字与绑定</a>  </p>
+</blockquote>
+</li>
+</ul>
+<p><strong>最简易理解</strong>  </p>
+<p>对于复杂程度不高的代码，可以可简单的理解为：</p>
+<ul>
+<li>一个<strong>函数</strong>就是一个<strong>作用域</strong>  </li>
+<li>一个<strong>变量</strong>就是一个<strong>名字绑定</strong>，绑定在<strong>作用域</strong>上  </li>
+</ul>
+<p>这对于复杂的代码可能并不会成立，但用于学习最基本的内容已经足够  </p>
+<h2 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域 Scope"></a>作用域 Scope</h2><p><code>@Babel</code>解析出来的语法树节点对象会包含作用域信息，这个信息会作为节点<code>Node</code>对象的一个属性保存<br>这个属性本身是一个<code>Scope</code>对象，其定义位于<code>node_modules/@babel/traverse/lib/scope/index.js</code>中  </p>
+<blockquote>
+<p>例: 查看基本的 作用域与绑定 信息  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function squire(i)&#123;</span><br><span class="hljs-string">    return i * i * i;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">function i()</span><br><span class="hljs-string">&#123;</span><br><span class="hljs-string">    var i = 123;</span><br><span class="hljs-string">    i += 2;</span><br><span class="hljs-string">    return 123;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-string">&quot;FunctionDeclaration&quot;</span>(path)&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n\n这里是函数 &quot;</span>, path.node.id.name + <span class="hljs-string">&#x27;()&#x27;</span>)<br>        path.scope.dump();<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>执行 <code>Scope.dump()</code>，会得到自底向上的 作用域与变量信息<br>得到结果：  </p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc">这里是函数  squire()<br>------------------------------------------------------------<br># FunctionDeclaration<br><span class="hljs-code"> - i &#123; constant: true, references: 3, violations: 0, kind: &#x27;param&#x27; &#125;</span><br># Program<br><span class="hljs-code"> - squire &#123; constant: true, references: 0, violations: 0, kind: &#x27;hoisted&#x27; &#125;</span><br><span class="hljs-code"> - i &#123; constant: true, references: 0, violations: 0, kind: &#x27;hoisted&#x27; &#125;</span><br>------------------------------------------------------------<br><br><br>这里是函数  i()<br>------------------------------------------------------------<br># FunctionDeclaration<br><span class="hljs-code"> - i &#123; constant: false, references: 0, violations: 1, kind: &#x27;var&#x27; &#125;</span><br># Program<br><span class="hljs-code"> - squire &#123; constant: true, references: 0, violations: 0, kind: &#x27;hoisted&#x27; &#125;</span><br><span class="hljs-code"> - i &#123; constant: true, references: 0, violations: 0, kind: &#x27;hoisted&#x27; &#125;</span><br>------------------------------------------------------------<br></code></pre></div></td></tr></table></figure>
+<p><strong>输出查看方法</strong>    </p>
+<ul>
+<li><p>每一个作用域都以<code>#</code>标识输出  </p>
+</li>
+<li><p>每一个绑定都以<code>-</code>标识输出  </p>
+</li>
+<li><p>对于单次输出，都是自底向上的<br>先输出当前作用域，再输出父级作用域，再输出父级的父级作用域……</p>
+</li>
+<li><p>对于单个绑定<code>Binding</code>，会输出4种信息  </p>
+<ul>
+<li>constant 变量在声明后，在作用域内是否会被使用  </li>
+<li>references  被引用次数  </li>
+<li>violations  被重新定义的次数  </li>
+<li>kind  函数声明类型。param 参数, hoisted 提升，var 变量， local 内部  </li>
+</ul>
+<p>后续会单独说明<code>Binding</code>对象，此处留个印象即可  </p>
+</li>
+</ul>
+<p><strong>描述</strong><br>此处从两个函数节点输出了其作用域的信息  </p>
+<ul>
+<li>这两个函数都是定义在同一级下的，所以都会输出相同的父级作用域<code>Program</code>的信息  </li>
+<li>你会发现，代码中有非常多个<code>i</code>，有的是函数定义，有的是参数，有的是变量。仔细观察它们的不同之处<br>解释器就是通过 不同层级的作用域 与 绑定定义信息 来区分不同的名称的量的  </li>
+</ul>
+<h2 id="绑定-Binding"><a href="#绑定-Binding" class="headerlink" title="绑定 Binding"></a>绑定 Binding</h2><p><code>Binding</code> 对象用于存储 被绑定在作用域的量 的信息<br>你可以在 <code>@babel/traverse/lib/scope/binding.js</code> 中查看到它的定义  </p>
+<blockquote>
+<p>显示 Binding 的信息  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function a()&#123;</span><br><span class="hljs-string">    var a = 1;</span><br><span class="hljs-string">    a = a + 1;</span><br><span class="hljs-string">    return a;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">function b()&#123;</span><br><span class="hljs-string">    var b = 1;</span><br><span class="hljs-string">    var c = 2;</span><br><span class="hljs-string">    b = b - c;</span><br><span class="hljs-string">    return b;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">BlockStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n此块节点源码：\n&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;----------------------------------------&#x27;</span>)<br>        <span class="hljs-keyword">var</span> bindings = path.scope.bindings<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;作用域内 被绑定量 数量：&#x27;</span>, <span class="hljs-built_in">Object</span>.keys(bindings).length)<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> binding_ <span class="hljs-keyword">in</span> bindings)&#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;名字：&#x27;</span>, binding_)<br>            binding_ = bindings[binding_];<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;类型：&#x27;</span>, binding_.kind)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;定义：&#x27;</span>, binding_.identifier)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;是否会被修改：&#x27;</span>, binding_.constant)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;被修改信息信息记录&#x27;</span>, binding_.constantViolations)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;是否会被引用：&#x27;</span>, binding_.referenced)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;被引用次数&#x27;</span>, binding_.references)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;被引用信息NodePath记录&#x27;</span>, binding_.referencePaths)<br>        &#125;<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br><br></code></pre></div></td></tr></table></figure>
+<p>会输出一大堆信息。其对应的意义已经写在代码中，可以自行查看  </p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>在解混淆中，作用域与绑定 主要用来处理边界的问题<br>即：某个量哪里引用了，在哪里定义  </p>
+<blockquote>
+<p>例：删除所有定义了, 却从未使用的变量  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><span class="hljs-keyword">const</span> generator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/generator&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var a = 1;</span><br><span class="hljs-string">var b = 2;</span><br><span class="hljs-string">function squire()&#123;</span><br><span class="hljs-string">  var c = 3;</span><br><span class="hljs-string">  var d = 4;</span><br><span class="hljs-string">  return a * d;</span><br><span class="hljs-string">  var e = 5;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">var f = 6;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    VariableDeclarator(path)<br>    &#123;<br>        <span class="hljs-keyword">const</span> func_name = path.node.id.name;<br>        <span class="hljs-keyword">const</span> binding = path.scope.getBinding(func_name);<br>        <span class="hljs-comment">// 如果变量没有被引用过，那么删除也没关系</span><br>        <span class="hljs-comment">//   此处不能用有无修改过进行判断，因为没有被修改过并不意味着没用</span><br>        <span class="hljs-keyword">if</span>(binding &amp;&amp; !binding.referenced)&#123;<br>            path.remove();<br>        &#125;<br>    &#125;,<br>&#125;<br><br><br>traverse(ast, visitor);<br><span class="hljs-built_in">console</span>.log(generator(ast)[<span class="hljs-string">&#x27;code&#x27;</span>]);<br><br></code></pre></div></td></tr></table></figure>
+<p>得到输出  </p>
+<figure class="highlight actionscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs actionscript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">squire</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-keyword">var</span> d = <span class="hljs-number">4</span>;<br>  <span class="hljs-keyword">return</span> a * d;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>这里使用了<a href="#Scope_getBinding"><code>Scope.getBinding()</code></a>方法来获取<code>Binding</code>对象, 判断其引用情况来对语法树进行修改  </p>
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="babel-parse"><a href="#babel-parse" class="headerlink" title="@babel/parse"></a>@babel/parse</h2><h4 id="解析函数"><a href="#解析函数" class="headerlink" title="解析函数"></a>解析函数</h4><h5 id="babelParser-parse-code-options"><a href="#babelParser-parse-code-options" class="headerlink" title="babelParser.parse(code, [options])"></a>babelParser.parse(code, [options])</h5><p>将提供的代码作为一个完整的<code>ECMAScript</code>程序进行解析  </p>
+<h5 id="babelParser-parseExpression-code-options"><a href="#babelParser-parseExpression-code-options" class="headerlink" title="babelParser.parseExpression(code, [options])"></a>babelParser.parseExpression(code, [options])</h5><p>用于解析单个<code>Expression</code>，性能比<code>parse()</code>要高  </p>
+<h5 id="Options-函数参数"><a href="#Options-函数参数" class="headerlink" title="Options 函数参数"></a>Options 函数参数</h5><ul>
+<li><p>allowImportExportEverywhere<br>默认情况下，<code>import</code> 和 <code>export</code> 声明语句只能出现在程序的最顶层<br>把这个设置为<code>true</code>，可以使得语句在任何地方都可以声明  </p>
+</li>
+<li><p>allowAwaitOutsideFunction<br>默认情况下，仅在 异步函数内部 或 启用<code>topLevelAwait插件</code>时 在模块的顶层内允许使用<code>await</code><br>把这个设置为<code>true</code>，可以使得语句在任何地方都可以声明  </p>
+</li>
+<li><p>allowReturnOutsideFunction<br>默认情况下，如果在顶层中使用<code>return</code>语句会引起错误<br>把这个设置为<code>true</code>，就不会报错  </p>
+</li>
+<li><p>allowSuperOutsideMethod<br>默认情况下，在类和对象方法之外不允许使用<code>super</code><br>把这个设置为<code>true</code>就可以声明  </p>
+</li>
+<li><p>allowUndeclaredExports<br>默认情况下，<code>export</code>一个在当前作用域下未声明的内容会报错<br>把这个设置为<code>true</code>就可以防止解析器过早地抛出未声明的错误  </p>
+</li>
+<li><p>createParenthesizedExpressions<br>默认情况下，<code>parser</code>会在<code>expression</code>节点设置<code>extra.parenthesized</code><br>把这个设置为<code>true</code>，则会设置<code>ParenthesizedExpression</code>AST节点  </p>
+</li>
+<li><p>errorRecovery<br>默认情况下，如果<code>Babel</code>发现一些 不正常的代码 就会抛出错误<br>把这个设置为<code>true</code>，则会在保存解析错误的同时继续解析代码，错误的记录将被保存在 最终生成的AST的<code>errors</code>属性中<br>注意，那些严重的错误依然会终止解析  </p>
+</li>
+<li><p>plugins<br>记录希望启动的插件的数组  </p>
+</li>
+<li><p>sourceType<br>代码的解析方式，你可以填入<code>&quot;script&quot;</code>（默认）,<code>&quot;module&quot;</code> 或 <code>&quot;unambiguous&quot;</code><br>如果设置为”unambiguous”，那么系统会根据ES6语法中的<code>imports</code>和<code>export</code>来判断是<code>&quot;module&quot;</code>还是<code>&quot;script&quot;</code>  </p>
+</li>
+<li><p>sourceFilename<br>将输出的AST节点与其源文件名相关联<br>在你处理多个文件时，这个功能会很有用  </p>
+</li>
+<li><p>startLine<br>默认情况下，第一行代码就是<code>line 1</code>。你可以传入一个数字，作为起始行数<br>这个功能在你整合其他插件的时候会很有用  </p>
+</li>
+<li><p>strictMode<br>默认情况下，只有在声明了”use strict”条件下，ECMAScript代码才会被严格解析<br>将此选项设置为<code>true</code>则始终以严格模式解析文件  </p>
+</li>
+<li><p>ranges<br>添加ranges属性到每一个节点中  </p>
+<blockquote>
+<p>ranges: [node.start, node.end]  </p>
+</blockquote>
+</li>
+<li><p>tokens<br>将所有已经解析的<code>tokens</code>保存到<code>File</code>节点的<code>tokens</code>属性中  </p>
+</li>
+</ul>
+<h3 id="输出-Output"><a href="#输出-Output" class="headerlink" title="输出 Output"></a>输出 Output</h3><p><code>Babel parser</code>是根据 <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md">Babel AST format</a> 创建AST的<br>而<code>Babel AST format</code>是基于 <a target="_blank" rel="noopener" href="https://github.com/estree/estree">ESTree 规范</a> 建立的  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/estree/estree/blob/master/es5.md#literal">ESTree 代码生成对应节点文档</a><br><a target="_blank" rel="noopener" href="https://github.com/babel/babel/blob/master/packages/babel-parser/ast/spec.md#stringliteral">Babel parser 代码生成对应节点文档</a></p>
+<blockquote>
+<p><code>Babel parser</code>与ESTree的不同之处  </p>
+<ul>
+<li>用<a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#stringliteral"><code>StringLiteral</code></a>, <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#numericliteral"><code>NumericLiteral</code></a>, <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#booleanliteral"><code>BooleanLiteral</code></a>, <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#nullliteral"><code>NullLiteral</code></a>, <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#regexpliteral"><code>RegExpLiteral</code></a>取代<a target="_blank" rel="noopener" href="https://github.com/estree/estree/blob/master/es5.md#literal"><code>Literal</code></a>  </li>
+<li>用 <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#objectproperty"><code>ObjectProperty</code></a> 和 <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#objectmethod"><code>ObjectMethod</code></a>取代<a target="_blank" rel="noopener" href="https://github.com/estree/estree/blob/master/es5.md#property"><code>Property</code></a>  </li>
+<li>用<a target="_blank" rel="noopener" href="https://github.com/estree/estree/blob/master/es2015.md#methoddefinition"><code>MethodDefinition</code></a>取代<a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#classmethod"><code>ClassMethod</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#programs"><code>Program</code></a> and <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#blockstatement"><code>BlockStatement</code></a> 包含的<code>directives</code>用 <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#directive"><code>Directive</code></a> 和 <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#directiveliteral"><code>DirectiveLiteral</code></a>来填充  </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#functionexpression"><code>FunctionExpression</code></a>中的 <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#classmethod"><code>ClassMethod</code></a>, <a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#objectproperty"><code>ObjectProperty</code></a>,<a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages/babel-parser/ast/spec.md#objectmethod"><code>ObjectMethod</code></a>属性被引入到<code>main方法</code>节点中  </li>
+</ul>
+</blockquote>
+<h3 id="Semver"><a href="#Semver" class="headerlink" title="Semver"></a>Semver</h3><p>大多数情况下<code>Babel Parser</code>会遵循<code>Semver</code>规定  </p>
+<figure class="highlight ruby"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ruby"><span class="hljs-keyword">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>).parse(<span class="hljs-string">&quot;code&quot;</span>, &#123;<br>  /<span class="hljs-regexp">/ parse in strict mode and allow module declarations</span><br><span class="hljs-regexp">  sourceType: &quot;module&quot;,</span><br><span class="hljs-regexp"></span><br><span class="hljs-regexp">  plugins: [</span><br><span class="hljs-regexp">    /</span><span class="hljs-regexp">/ enable jsx and flow syntax</span><br><span class="hljs-regexp">    &quot;jsx&quot;,</span><br><span class="hljs-regexp">    &quot;flow&quot;</span><br><span class="hljs-regexp">  ]</span><br><span class="hljs-regexp">&#125;);</span><br></code></pre></div></td></tr></table></figure>
+<p>剩余请看：<a target="_blank" rel="noopener" href="https://www.babeljs.cn/docs/babel-parser">https://www.babeljs.cn/docs/babel-parser</a>  </p>
+<h2 id="babel-generator"><a href="#babel-generator" class="headerlink" title="@babel/generator"></a>@babel/generator</h2><p>官方文档：<a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-generator">https://babeljs.io/docs/en/babel-generator</a>    </p>
+<h3 id="generate-ast-options-code"><a href="#generate-ast-options-code" class="headerlink" title="generate(ast,  options,  code);"></a>generate(ast,  options,  code);</h3><p>函数用于根据ast生成代码，可以传入一些参数  </p>
+<h4 id="options-参数"><a href="#options-参数" class="headerlink" title="options 参数"></a>options 参数</h4><table>
+<thead>
+<tr>
+<th>name 参数名</th>
+<th>type 类型</th>
+<th>default 默认值</th>
+<th>description 描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auxiliaryCommentAfter</td>
+<td>string</td>
+<td></td>
+<td>Optional 在输出文件内容末尾添加的注释块文字</td>
+</tr>
+<tr>
+<td>auxiliaryCommentBefore</td>
+<td>string</td>
+<td></td>
+<td>Optional 在输出文件内容头部添加的注释块文字</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>输出内容是否包含注释</td>
+</tr>
+<tr>
+<td>compact</td>
+<td>boolean or <code>&#39;auto&#39;</code></td>
+<td><code>opts.minified</code></td>
+<td>是否不添加空格来让代码看起来紧密</td>
+</tr>
+<tr>
+<td>concise</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>是否减少空格来让代码看起来紧凑一些<br>只是减少空格，而不是不添加</td>
+</tr>
+<tr>
+<td>decoratorsBeforeExport</td>
+<td>boolean</td>
+<td></td>
+<td>是否在导出之前<code>print</code>一下装饰器</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td></td>
+<td>Used in warning messages</td>
+</tr>
+<tr>
+<td>jsescOption</td>
+<td>object</td>
+<td></td>
+<td>Use <code>jsesc</code> to process literals. <code>jsesc</code> is applied to numbers only if <code>jsescOption.numbers</code> (added in <code>v7.9.0</code>) is present. You can customize <code>jsesc</code> by <a target="_blank" rel="noopener" href="https://github.com/mathiasbynens/jsesc#api">passing options</a> to it.</td>
+</tr>
+<tr>
+<td>jsonCompatibleStrings</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Set to true to run <code>jsesc</code> with “json”: true to print “\u00A9” vs. “©”;</td>
+</tr>
+<tr>
+<td>minified</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Should the output be minified<br>是否压缩代码</td>
+</tr>
+<tr>
+<td>retainFunctionParens</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Retain parens around function expressions (could be used to change engine parsing behavior)</td>
+</tr>
+<tr>
+<td>retainLines</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>尝试在输出代码中使用与源代码中相同的行号(用于追踪堆栈)</td>
+</tr>
+<tr>
+<td>shouldPrintComment</td>
+<td>function</td>
+<td><code>opts.comments</code></td>
+<td>Function that takes a comment (as a string) and returns <code>true</code> if the comment should be included in the output. <br>By default, comments are included if <code>opts.comments</code> is <code>true</code> or if <code>opts.minified</code> is <code>false</code> and the comment contains <code>@preserve</code> or <code>@license</code></td>
+</tr>
+</tbody></table>
+<h2 id="babel-traverse"><a href="#babel-traverse" class="headerlink" title="@babel/traverse"></a>@babel/traverse</h2><h3 id="index"><a href="#index" class="headerlink" title="index"></a>index</h3><h4 id="NodePath基础属性"><a href="#NodePath基础属性" class="headerlink" title="NodePath基础属性"></a>NodePath基础属性</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f()&#123;</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = [&#x27;a&#x27;, &#x27;b&#x27;];</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    BlockStatement(path)<br>    &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 源码:\n&#x27;</span>, path.toString());<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 节点:\n&#x27;</span>, path.node)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 父级节点:\n&#x27;</span>, path.parent);<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 父级路径:\n&#x27;</span>, path.parentPath)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 类型:\n&#x27;</span>, path.type)<br><br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 contexts:\n&#x27;</span>, path.contexts);<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 hub:\n&#x27;</span>, path.hub);<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 state:\n&#x27;</span>, path.state);<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 opts:\n&#x27;</span>, path.opts)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 skipKeys:\n&#x27;</span>, path.skipKeys)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 container:\n&#x27;</span>, path.container)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 key:\n&#x27;</span>, path.key)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径 scope:\n&#x27;</span>, path.scope)<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+
+<p>你会发现其中有不少值都是没有定义的，这是因为很多值都是懒加载的<br>而且会给与专门的方法进行获取，并不是这样直接获取的  </p>
+<h3 id="ancestry"><a href="#ancestry" class="headerlink" title="ancestry"></a>ancestry</h3><p>父级/祖先相关  </p>
+<p><a id="path_findParent"></a></p>
+<h4 id="NodePath-findParent-callback"><a href="#NodePath-findParent-callback" class="headerlink" title="NodePath.findParent(callback)"></a>NodePath.findParent(callback)</h4><p><code>@return NodePath | None</code><br>逐级递归寻找父级节点的Path，并将<code>Path</code>作为参数传入的判断函数进行判断<br>当判断函数返回<code>true</code>, 则<code>Path.findParent(callback)</code>返回对应<code>Path</code><br>当判断函数返回<code>false</code>, 则递归继续寻找父级, 进行判断。若已无父级，则返回<code>null</code>  </p>
+<blockquote>
+<p>例: 寻找当前Path的父级函数节点  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f()&#123;</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = b + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">AssignmentExpression</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径源码:\n&#x27;</span>, path.toString());<br>        <br>        <span class="hljs-comment">// 寻找父级</span><br>        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">to_parent_function_path</span>(<span class="hljs-params">x</span>)</span>&#123;  <span class="hljs-comment">// 进行判断是否是函数声明节点的判断函数</span><br>            <span class="hljs-keyword">if</span>(x.isFunctionDeclaration())&#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>&#125;<span class="hljs-keyword">else</span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>&#125;<br>        &#125;<br>        <span class="hljs-comment">//      将判断函数传入，进行递归寻找父级path</span><br>        the_path = path.findParent(to_parent_function_path)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;to_parent_function_path 最终路径源码:\n&#x27;</span>, the_path.toString())<br><br>        <span class="hljs-comment">//      递归后如果没有发现符合要求的父级</span><br>        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">to_null</span>(<span class="hljs-params">x</span>)</span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>&#125;<br>        the_path = path.findParent(to_null)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;to_null 最终路径:\n&#x27;</span>, the_path)<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>得到的输出结果  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">当前路径源码:<br> a = b + <span class="hljs-number">1</span><br>to_parent_function_path 最终路径源码:<br> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> b = <span class="hljs-number">123</span>;<br>  a = b + <span class="hljs-number">1</span>;<br>&#125;<br>to_null 最终路径:<br> <span class="hljs-literal">null</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="NodePath-find-callback"><a href="#NodePath-find-callback" class="headerlink" title="NodePath.find(callback)"></a>NodePath.find(callback)</h4><p><code>@return NodePath | None</code><br>此函数与 <code>Path.findParent</code> 基本相同, 但这个判断包含对 当前Path 的判断<br>它会先对 当前Path 进行一次判断. 如果自身符合条件，那就返回 当前Path，然后才递归调用父级进行判断  </p>
+<blockquote>
+<p>例子：当前或父级Path  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f()&#123;</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = b + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">AssignmentExpression</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径源码:\n&#x27;</span>, path.toString());<br>        <br>        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">to_path</span>(<span class="hljs-params">x</span>)</span>&#123;  <br>            <span class="hljs-keyword">if</span>(x.isAssignmentExpression())&#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>&#125;<span class="hljs-keyword">else</span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>&#125;<br>        &#125;<br>        the_path = path.find(to_path)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;to_path最终路径源码:\n&#x27;</span>, the_path.toString())<br><br>        <span class="hljs-comment">// 寻找父级</span><br>        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">to_parent_function_path</span>(<span class="hljs-params">x</span>)</span>&#123;  <span class="hljs-comment">// 进行判断是否是函数声明节点的判断函数</span><br>            <span class="hljs-keyword">if</span>(x.isFunctionDeclaration())&#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>&#125;<span class="hljs-keyword">else</span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>&#125;<br>        &#125;<br>        the_path = path.find(to_parent_function_path)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;to_parent_function_path最终路径源码:\n&#x27;</span>, the_path.toString())<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>得到的输出结果  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">当前路径源码:<br> a = b + <span class="hljs-number">1</span><br>to_path最终路径源码:<br> a = b + <span class="hljs-number">1</span><br>to_parent_function_path最终路径源码:<br> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> b = <span class="hljs-number">123</span>;<br>  a = b + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h4 id="NodePath-getFunctionParent"><a href="#NodePath-getFunctionParent" class="headerlink" title="NodePath.getFunctionParent()"></a>NodePath.getFunctionParent()</h4><p><code>@return NodePath | None</code><br>得到当前节点的第一个 父级/祖先 函数声明节点的Path  </p>
+<p>此方法通过调用 <a href="#path_findParent"><code>Path.findParent(callback)</code></a> 传入内置的判断函数，来得到对应的结果  </p>
+<blockquote>
+<p>例: 寻找 父级/祖先 函数声明节点的Path  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f()&#123;</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = b + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">AssignmentExpression</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径源码:\n&#x27;</span>, path.toString());<br><br>        the_path = path.getFunctionParent()<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;最终路径源码:\n&#x27;</span>, the_path.toString())<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>得到对应结果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">当前路径源码:<br> a = b + <span class="hljs-number">1</span><br>最终路径源码:<br> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> b = <span class="hljs-number">123</span>;<br>  a = b + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="NodePath-getStatementParent"><a href="#NodePath-getStatementParent" class="headerlink" title="NodePath.getStatementParent()"></a>NodePath.getStatementParent()</h4><p><code>@return NodePath</code><br>返回第一个 父级/祖先 声明节点的Path<br>声明节点所包含的节点类型见：<a target="_blank" rel="noopener" href="https://github.com/babel/babylon/blob/master/ast/spec.md#blockstatement">Github文档</a><br>若找不到目标，会报错  </p>
+<blockquote>
+<p>例：返回第一个 父级/祖先 声明节点的 Path  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f2()&#123;</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = b + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">BinaryExpression</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径源码:\n&#x27;</span>, path.toString());<br>        the_path = path.getStatementParent()<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;最终路径源码:\n&#x27;</span>, the_path.toString())<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>得到的结果  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">当前路径源码:<br> b + <span class="hljs-number">1</span><br>最终路径源码:<br> a = b + <span class="hljs-number">1</span>;<br></code></pre></div></td></tr></table></figure>
+<h4 id="NodePath-getAncestry"><a href="#NodePath-getAncestry" class="headerlink" title="NodePath.getAncestry()"></a>NodePath.getAncestry()</h4><p><code>@return Array</code><br>返回所有 父级/祖先 的Path  </p>
+<blockquote>
+<p>例：得到当前Path的所有 父级/祖先 的Path  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f2()&#123;</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = b + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">AssignmentExpression</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径源码:\n&#x27;</span>, path.toString());<br>        the_paths = path.getAncestry()<br><br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;返回类型:\n&#x27;</span>, the_paths <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;结果路径源码:\n&#x27;</span>, the_paths.join(<span class="hljs-string">&#x27;\n\n&#x27;</span>))<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>输出结果  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">当前路径源码:<br> a = b + <span class="hljs-number">1</span><br>返回类型:<br> <span class="hljs-literal">true</span><br>结果路径源码:<br> a = b + <span class="hljs-number">1</span><br><br>a = b + <span class="hljs-number">1</span>;<br><br>&#123;<br>  <span class="hljs-keyword">var</span> b = <span class="hljs-number">123</span>;<br>  a = b + <span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> b = <span class="hljs-number">123</span>;<br>  a = b + <span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> b = <span class="hljs-number">123</span>;<br>  a = b + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><a id="path_isdescendant"></a>  </p>
+<h4 id="NodePath-isDescendant-path"><a href="#NodePath-isDescendant-path" class="headerlink" title="NodePath.isDescendant(path)"></a>NodePath.isDescendant(path)</h4><p><code>@return bool</code><br>判断当前 Path 是否是指定 Path 的后代  </p>
+<p>此方法通过调用 <a href="#path_findParent"><code>Path.findParent()</code></a> 来进行判断，得到结果  </p>
+<blockquote>
+<p>例:辈分判断  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f2()&#123;</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = b + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">AssignmentExpression</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径源码:\n&#x27;</span>, path.toString());<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;儿子是爸爸的后代：&#x27;</span>, path.isDescendant(path.parentPath))<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;儿子是爷爷的后代：&#x27;</span>, path.isDescendant(path.parentPath.parentPath))<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;儿子是孙子的后代：&#x27;</span>, path.isDescendant(path.get(<span class="hljs-string">&#x27;left&#x27;</span>)))<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>输出结果：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">当前路径源码:<br> a = b + <span class="hljs-number">1</span><br>儿子是爸爸的后代： <span class="hljs-literal">true</span><br>儿子是爷爷的后代： <span class="hljs-literal">true</span><br>儿子是孙子的后代： <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="NodePath-isAncestor-path"><a href="#NodePath-isAncestor-path" class="headerlink" title="NodePath.isAncestor(path)"></a>NodePath.isAncestor(path)</h4><p><code>@return bool</code><br>判断当前 Path 是否是指定 Path 的后代  </p>
+<p>此方法是调用 传入的path的<a href="#path_isdescendant"><code>Path.isDescendant()</code></a> 来进行判断的  </p>
+<blockquote>
+<p>例：判断是否是后代  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f2()&#123;</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = b + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">AssignmentExpression</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径源码:\n&#x27;</span>, path.toString());<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;儿子是爸爸的祖先：&#x27;</span>, path.isAncestor(path.parentPath))<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;儿子是爷爷的祖先：&#x27;</span>, path.isAncestor(path.parentPath.parentPath))<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;儿子是孙子的祖先：&#x27;</span>, path.isAncestor(path.get(<span class="hljs-string">&#x27;left&#x27;</span>)))<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>得到结果:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">当前路径源码:<br> a = b + <span class="hljs-number">1</span><br>儿子是爸爸的祖先： <span class="hljs-literal">false</span><br>儿子是爷爷的祖先： <span class="hljs-literal">false</span><br>儿子是孙子的祖先： <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h4 id="NodePath-inType-NodeType-str"><a href="#NodePath-inType-NodeType-str" class="headerlink" title="NodePath.inType(**NodeType_str)"></a>NodePath.inType(**NodeType_str)</h4><p><code>@return bool</code><br>判断当前<code>Path</code>对应节点，或其 父/祖先 节点 是否包含特定类型的节点<br>可以一次性传入多个类型，只要有一个符合就会返回 <code>true</code>, 否则返回 <code>false</code>  </p>
+<blockquote>
+<p>例: 是否包含特定类型的节点  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f2()&#123;</span><br><span class="hljs-string">    var b = 123;</span><br><span class="hljs-string">    a = b + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">AssignmentExpression</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前路径源码:\n&#x27;</span>, path.toString());<br>        _is = path.inType(<span class="hljs-string">&#x27;FunctionDeclaration&#x27;</span>)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;父级或自身包含函数声明节点：&#x27;</span>, _is);<br>        _is = path.inType(<span class="hljs-string">&#x27;WithStatement&#x27;</span>, <span class="hljs-string">&#x27;DebuggerStatement&#x27;</span>)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;父级或自身包含 with 或 debugger：&#x27;</span>, path.inType(_is));<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>输出的结果：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">当前路径源码:<br> a = b + <span class="hljs-number">1</span><br>父级或自身包含函数声明节点： <span class="hljs-literal">true</span><br>父级或自身包含 <span class="hljs-keyword">with</span> 或 <span class="hljs-keyword">debugger</span>： <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure>
+
+
+<p><a id="traverse_getDeepestCommonAncestorFrom"></a></p>
+<h4 id="NodePath-getDeepestCommonAncestorFrom-paths-filter"><a href="#NodePath-getDeepestCommonAncestorFrom-paths-filter" class="headerlink" title="NodePath.getDeepestCommonAncestorFrom(paths, filter)"></a>NodePath.getDeepestCommonAncestorFrom(paths, filter)</h4><p><code>@return NodePath | 自定义</code><br>获取传入的<code>Path</code>对应节点的 最大深度共同祖先节点的<code>Path</code>  </p>
+<ul>
+<li>当 <code>paths</code>不存在<code>length</code>属性时，报错  </li>
+<li>当 <code>paths</code> 长度为0时，返回 <code>null</code>  </li>
+<li>当 <code>paths</code> 长度为1时，返回唯一的<code>Path</code>  </li>
+<li>当 <code>paths</code> 大于1  <ul>
+<li>计算 最大深度共同祖先节点 的<code>Path</code>并返回  </li>
+<li>当传入一个<code>filter</code>函数，那么返回结果会作为参数进行回调。返回结果变为<code>filter(最大深度共同祖先节点Path:NodePath, 深度:int, 所有path的祖先信息:list);</code>  </li>
+</ul>
+</li>
+<li>如果并不存在共同的祖先节点，报错  </li>
+</ul>
+<blockquote>
+<p>例：最大深度的共同祖先节点  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f()&#123;</span><br><span class="hljs-string">    function f3()&#123;</span><br><span class="hljs-string">        function f1()&#123;return 1;&#125;</span><br><span class="hljs-string">        function f2()&#123;return 2;&#125;</span><br><span class="hljs-string">        return 3;</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">&#125;`</span>;<br><br><br><span class="hljs-keyword">let</span> paths = []<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">ReturnStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;路径源码:\n&#x27;</span>, path.toString());<br>        paths.push(path)<br>        <span class="hljs-keyword">if</span> (paths.length &gt; <span class="hljs-number">1</span>)&#123;<br>            _is = path.getDeepestCommonAncestorFrom(paths)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;最大深度的共同祖先节点 源代码：&#x27;</span>, _is.toString());<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>得到结果  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">路径源码:<br> <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>路径源码:<br> <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>最大深度的共同祖先节点 源代码： &#123;<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;<br>&#125;<br>路径源码:<br> <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;<br>最大深度的共同祖先节点 源代码： &#123;<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h4 id="NodePath-getEarliestCommonAncestorFrom-paths"><a href="#NodePath-getEarliestCommonAncestorFrom-paths" class="headerlink" title="NodePath.getEarliestCommonAncestorFrom(paths)"></a>NodePath.getEarliestCommonAncestorFrom(paths)</h4><p><code>@return NodePath</code><br>获取<code>paths</code>中最早出现的共同祖先<br>方法会遍历计算，共同祖先一旦出现, 则返回，不再继续计算所有的path  </p>
+<p>此方法是调用 <a href="#traverse_getDeepestCommonAncestorFrom">getDeepestCommonAncestorFrom(paths, filter)</a> 方法，传入固定的<code>filter</code>函数来实现    </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">var</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function f()&#123;</span><br><span class="hljs-string">    function f3()&#123;</span><br><span class="hljs-string">        function f1()&#123;return 1;&#125;</span><br><span class="hljs-string">        function f2()&#123;return 2;&#125;</span><br><span class="hljs-string">        return 3;</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">&#125;`</span>;<br><br><br><span class="hljs-keyword">let</span> paths = []<br><br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">ReturnStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;路径源码:\n&#x27;</span>, path.toString());<br>        paths.push(path)<br>        <span class="hljs-keyword">if</span> (paths.length &gt; <span class="hljs-number">1</span>)&#123;<br>            _is = path.getEarliestCommonAncestorFrom(paths)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;最早的共同祖先节点 源代码：&#x27;</span>, _is.toString());<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="removal"><a href="#removal" class="headerlink" title="removal"></a>removal</h3><p>移除相关  </p>
+<h4 id="NodePath-remove"><a href="#NodePath-remove" class="headerlink" title="NodePath.remove()"></a>NodePath.remove()</h4><p><code>@return null</code><br>删除路径对应的节点  </p>
+<p>删除以后，对应的<code>removed</code>标识为会被设定，内容会被设定为只读<br>如果再次执行<code>remove</code>方法，则会报错  </p>
+<blockquote>
+<p>例：删除 path 对应的节点  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><span class="hljs-keyword">const</span> generator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/generator&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`function square(n) &#123;</span><br><span class="hljs-string">  var a = 1;</span><br><span class="hljs-string">  return 1 + 1;</span><br><span class="hljs-string">&#125;`</span>;<br><br><span class="hljs-keyword">const</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>  <span class="hljs-function"><span class="hljs-title">VariableDeclaration</span>(<span class="hljs-params">path</span>)</span>&#123;  <span class="hljs-comment">// 找到变量声明节点，删除</span><br>      path.remove()<br>  &#125;<br>&#125;<br><br>traverse(ast, visitor);<br><span class="hljs-built_in">console</span>.log(generator(ast)[<span class="hljs-string">&#x27;code&#x27;</span>])<br></code></pre></div></td></tr></table></figure>
+<p>得到结果：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h3><p>此模块与作用域相关  </p>
+<h4 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h4><p>和 作用域 相关的内容被定义在了 Scope类 中<br>这个类定义位于 <code>@babel/traverse/lib/scope/index.js</code> 文件中  </p>
+<h5 id="Scope属性"><a href="#Scope属性" class="headerlink" title="Scope属性"></a>Scope属性</h5><blockquote>
+<p>例：输出一些属性，一般不会直接使用，但可以留个印象，后面的函数可能会使用属性    </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var g = 1;</span><br><span class="hljs-string">function squire(i)&#123;</span><br><span class="hljs-string">    return i * g * i;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">function i()</span><br><span class="hljs-string">&#123;</span><br><span class="hljs-string">    var i = 123;</span><br><span class="hljs-string">    i += 2;</span><br><span class="hljs-string">    return 123;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">VariableDeclaration</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n这里是&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;--------------------------------&#x27;</span>)<br>        sc = path.scope  <span class="hljs-comment">// 获取对应的 Scope对象</span><br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;这个对象是否已经初始化：&#x27;</span>, sc.inited)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;uid 属性&#x27;</span>, sc.uid)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;cached 属性&#x27;</span>, sc.cached)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;node 属性&#x27;</span>, sc.node)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;作用域节点：&#x27;</span>, sc.block)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;作用对应的path：&#x27;</span>, sc.path.node == sc.block)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;labels 属性&#x27;</span>, sc.labels)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;被绑定量 的信息：&#x27;</span>, sc.bindings)<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;--------------------------------&#x27;</span>)<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>你能够直接访问<code>Scope</code>对象的属性，它本身也提供了一些方法来访问  </p>
+<h5 id="Scope方法"><a href="#Scope方法" class="headerlink" title="Scope方法"></a>Scope方法</h5><h6 id="Scope-parent"><a href="#Scope-parent" class="headerlink" title="Scope.parent"></a>Scope.parent</h6><p><code>@return Scope | undefined</code>  </p>
+<p>获取当前作用域的父级作用域  </p>
+<p>此方法通过引用其<code>Scope.path</code>属性的<a href="#path_findParent"><code>PathNode.findParent</code></a>获取对应<code>PathNode</code>后再次获取作用域的方式获取  </p>
+<blockquote>
+<p>例：获取父级作用域</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var g = 1;</span><br><span class="hljs-string">function squire(i)&#123;</span><br><span class="hljs-string">    return i * g * i;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">function i()</span><br><span class="hljs-string">&#123;</span><br><span class="hljs-string">    var i = 123;</span><br><span class="hljs-string">    i += 2;</span><br><span class="hljs-string">    return 123;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">VariableDeclaration</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n这里是&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;--------------------------------&#x27;</span>)<br>        sc = path.scope  <span class="hljs-comment">// 获取对应的 Scope对象</span><br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;parent结果：&#x27;</span>, sc.parent)<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<details>
+    <summary>结果</summary>   
+    <div class="hljs code-wrapper"><pre><code>       
+    这里是 var g = 1;
+    --------------------------------
+    parent结果： undefined
+    这里是 var i = 123;
+    --------------------------------
+    parent结果： Scope &#123;
+      uid: 0,
+      block: Node &#123;
+        type: 'Program',
+        start: 0,
+        end: 118,
+        loc: SourceLocation &#123; start: [Position], end: [Position] &#125;,
+        sourceType: 'script',
+        interpreter: null,
+        body: [ [Node], [Node], [Node] ],
+        directives: []
+      &#125;,
+      path: NodePath &#123;
+        parent: Node &#123;
+          type: 'File',
+          start: 0,
+          end: 118,
+          loc: [SourceLocation],
+          errors: [],
+          program: [Node],
+          comments: []
+        &#125;,
+        hub: undefined,
+        contexts: [ [TraversalContext] ],
+        data: null,
+        _traverseFlags: 0,
+        state: undefined,
+        opts: &#123; VariableDeclaration: [Object], _exploded: true, _verified: true &#125;,
+        skipKeys: null,
+        parentPath: null,
+        context: TraversalContext &#123;
+          queue: [Array],
+          parentPath: undefined,
+          scope: undefined,
+          state: undefined,
+          opts: [Object],
+          priorityQueue: []
+        &#125;,
+        container: Node &#123;
+          type: 'File',
+          start: 0,
+          end: 118,
+          loc: [SourceLocation],
+          errors: [],
+          program: [Node],
+          comments: []
+        &#125;,
+        listKey: undefined,
+        key: 'program',
+        node: Node &#123;
+          type: 'Program',
+          start: 0,
+          end: 118,
+          loc: [SourceLocation],
+          sourceType: 'script',
+          interpreter: null,
+          body: [Array],
+          directives: []
+        &#125;,
+        scope: [Circular],
+        type: 'Program'
+      &#125;,
+      labels: Map &#123;&#125;,
+      inited: true,
+      references: [Object: null prototype] &#123; g: true, i: true, squire: true &#125;,
+      bindings: [Object: null prototype] &#123;
+        g: Binding &#123;
+          identifier: [Node],
+          scope: [Circular],
+          path: [NodePath],
+          kind: 'var',
+          constantViolations: [],
+          constant: true,
+          referencePaths: [Array],
+          referenced: true,
+          references: 1,
+          hasDeoptedValue: false,
+          hasValue: false,
+          value: null
+        &#125;,
+        squire: Binding &#123;
+          identifier: [Node],
+          scope: [Circular],
+          path: [NodePath],
+          kind: 'hoisted',
+          constantViolations: [],
+          constant: true,
+          referencePaths: [],
+          referenced: false,
+          references: 0,
+          hasDeoptedValue: false,
+          hasValue: false,
+          value: null
+        &#125;,
+        i: Binding &#123;
+          identifier: [Node],
+          scope: [Circular],
+          path: [NodePath],
+          kind: 'hoisted',
+          constantViolations: [],
+          constant: true,
+          referencePaths: [],
+          referenced: false,
+          references: 0,
+          hasDeoptedValue: false,
+          hasValue: false,
+          value: null
+        &#125;
+      &#125;,
+      globals: [Object: null prototype] &#123;&#125;,
+      uids: [Object: null prototype] &#123;&#125;,
+      data: [Object: null prototype] &#123;&#125;,
+      crawling: false
+    &#125;
+    </code></pre></div> 
+</details>
+
+
+<h6 id="Scope-dump"><a href="#Scope-dump" class="headerlink" title="Scope.dump()"></a>Scope.dump()</h6><p><code>return null</code>  </p>
+<p>执行 Scope.dump()，会输出到自底向上的 作用域与被绑定量的信息  </p>
+<p>执行后会得到类似于这样的输出信息  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment"># FunctionDeclaration</span><br> <span class="hljs-bullet">-</span> <span class="hljs-string">i</span> &#123; <span class="hljs-attr">constant:</span> <span class="hljs-literal">false</span>, <span class="hljs-attr">references:</span> <span class="hljs-number">0</span>, <span class="hljs-attr">violations:</span> <span class="hljs-number">1</span>, <span class="hljs-attr">kind:</span> <span class="hljs-string">&#x27;var&#x27;</span> &#125;<br><span class="hljs-comment"># Program</span><br> <span class="hljs-bullet">-</span> <span class="hljs-string">squire</span> &#123; <span class="hljs-attr">constant:</span> <span class="hljs-literal">true</span>, <span class="hljs-attr">references:</span> <span class="hljs-number">0</span>, <span class="hljs-attr">violations:</span> <span class="hljs-number">0</span>, <span class="hljs-attr">kind:</span> <span class="hljs-string">&#x27;hoisted&#x27;</span> &#125;<br> <span class="hljs-bullet">-</span> <span class="hljs-string">i</span> &#123; <span class="hljs-attr">constant:</span> <span class="hljs-literal">true</span>, <span class="hljs-attr">references:</span> <span class="hljs-number">0</span>, <span class="hljs-attr">violations:</span> <span class="hljs-number">0</span>, <span class="hljs-attr">kind:</span> <span class="hljs-string">&#x27;hoisted&#x27;</span> &#125;<br></code></pre></div></td></tr></table></figure>
+<p>作用域 以<code>#</code>划分，此处有两个作用域 <code>FunctionDeclaration</code> 与 <code>Program</code>  </p>
+<p>被绑定量 以最前方设置<code>-</code>来标识，一般显示其中的4种信息  </p>
+<ul>
+<li>constant<br> 量 在声明后，在作用域内是否会被 更变（重定义/赋值）<br> 实际上对应对应量的<code>Binding</code>对象的<code>Binding.constant</code>属性  </li>
+<li>references<br> 被引用次数<br> 实际上对应对应量的<code>Binding</code>对象的<code>Binding.references</code>属性  </li>
+<li>violations<br> 量 被 重新定义/赋值 的次数<br> 实际上对应对应量的<code>Binding</code>对象的<code>Binding.constantViolations</code>的长度。这个属性被用于记录变更位置（每次变更都添加内容）  </li>
+<li>kind<br> 是函数声明类型。常见的有：<code>hoisted</code>提升，<code>var</code>变量， <code>local</code>内部<br> 实际上对应对应量的<code>Binding</code>对象的<code>Binding.kind</code>属性  </li>
+</ul>
+<p>实际上这些信息大部分 （以一个被绑定量，一个 <code>Binding</code>对象的方式）储存在 <code>Scope.bindings</code> 这个属性中  </p>
+<blockquote>
+<p>例：使用案例  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function squire(i)&#123;</span><br><span class="hljs-string">    return i * i * i;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">function i()&#123;</span><br><span class="hljs-string">    var i = 123;</span><br><span class="hljs-string">    i += 2;</span><br><span class="hljs-string">    return 123;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-string">&quot;FunctionDeclaration&quot;</span>(path)&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n\n这里是函数 &quot;</span>, path.node.id.name + <span class="hljs-string">&#x27;()&#x27;</span>)<br>        path.scope.dump();<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>得到结果：  </p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc">这里是函数  squire()<br>------------------------------------------------------------<br># FunctionDeclaration<br><span class="hljs-code"> - i &#123; constant: true, references: 3, violations: 0, kind: &#x27;param&#x27; &#125;</span><br># Program<br><span class="hljs-code"> - squire &#123; constant: true, references: 0, violations: 0, kind: &#x27;hoisted&#x27; &#125;</span><br><span class="hljs-code"> - i &#123; constant: true, references: 0, violations: 0, kind: &#x27;hoisted&#x27; &#125;</span><br>------------------------------------------------------------<br><br><br>这里是函数  i()<br>------------------------------------------------------------<br># FunctionDeclaration<br><span class="hljs-code"> - i &#123; constant: false, references: 0, violations: 1, kind: &#x27;var&#x27; &#125;</span><br># Program<br><span class="hljs-code"> - squire &#123; constant: true, references: 0, violations: 0, kind: &#x27;hoisted&#x27; &#125;</span><br><span class="hljs-code"> - i &#123; constant: true, references: 0, violations: 0, kind: &#x27;hoisted&#x27; &#125;</span><br>------------------------------------------------------------<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="Scope-parentBlock-name"><a href="#Scope-parentBlock-name" class="headerlink" title="Scope.parentBlock(name)"></a>Scope.parentBlock(name)</h6><p><code>@return Node</code>  </p>
+<p>获取 作用域路径 的父级<br>它的源码就一句 <code>return this.path.parent;</code>    </p>
+<blockquote>
+<p>例: 获取作用域路径的父级  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var g = 1;</span><br><span class="hljs-string">function a()&#123;return g;&#125;</span><br><span class="hljs-string">function b()&#123;var z=2; return z;&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">ReturnStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-keyword">var</span> n = path.node.argument.name<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n这里是&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;结果：&#x27;</span>, path.scope.parentBlock)<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<details>
+    <summary>结果</summary>   
+    <div class="hljs code-wrapper"><pre><code>       
+    这里是 return g;
+    结果： Node &#123;
+      type: 'Program',
+      start: 0,
+      end: 69,
+      loc: SourceLocation &#123;
+        start: Position &#123; line: 1, column: 0 &#125;,
+        end: Position &#123; line: 5, column: 0 &#125;
+      &#125;,
+      sourceType: 'script',
+      interpreter: null,
+      body: [
+        Node &#123;
+          type: 'VariableDeclaration',
+          start: 1,
+          end: 11,
+          loc: [SourceLocation],
+          declarations: [Array],
+          kind: 'var'
+        &#125;,
+        Node &#123;
+          type: 'FunctionDeclaration',
+          start: 12,
+          end: 35,
+          loc: [SourceLocation],
+          id: [Node],
+          generator: false,
+          async: false,
+          params: [],
+          body: [Node]
+        &#125;,
+        Node &#123;
+          type: 'FunctionDeclaration',
+          start: 36,
+          end: 68,
+          loc: [SourceLocation],
+          id: [Node],
+          generator: false,
+          async: false,
+          params: [],
+          body: [Node]
+        &#125;
+      ],
+      directives: []
+    &#125;
+    这里是 return z;
+    结果： Node &#123;
+      type: 'Program',
+      start: 0,
+      end: 69,
+      loc: SourceLocation &#123;
+        start: Position &#123; line: 1, column: 0 &#125;,
+        end: Position &#123; line: 5, column: 0 &#125;
+      &#125;,
+      sourceType: 'script',
+      interpreter: null,
+      body: [
+        Node &#123;
+          type: 'VariableDeclaration',
+          start: 1,
+          end: 11,
+          loc: [SourceLocation],
+          declarations: [Array],
+          kind: 'var'
+        &#125;,
+        Node &#123;
+          type: 'FunctionDeclaration',
+          start: 12,
+          end: 35,
+          loc: [SourceLocation],
+          id: [Node],
+          generator: false,
+          async: false,
+          params: [],
+          body: [Node]
+        &#125;,
+        Node &#123;
+          type: 'FunctionDeclaration',
+          start: 36,
+          end: 68,
+          loc: [SourceLocation],
+          id: [Node],
+          generator: false,
+          async: false,
+          params: [],
+          body: [Node]
+        &#125;
+      ],
+      directives: []
+    &#125;
+    </code></pre></div> 
+</details>
+
+
+<p><a id="Scope_getBinding"></a></p>
+<h6 id="Scope-getBinding-name"><a href="#Scope-getBinding-name" class="headerlink" title="Scope.getBinding(name)"></a>Scope.getBinding(name)</h6><p><code>@return Binding</code>  </p>
+<p>获取指定 被绑定量 的 <a href="#Binding"><code>Binding</code></a>对象  </p>
+<p>如果在 当前作用域 找不到指定的 被绑定量，那么就会递归在父级作用域中寻找  </p>
+<blockquote>
+<p>例：获取指定的 被绑定量对象  </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var g = 1;</span><br><span class="hljs-string">function a()&#123;return g;&#125;</span><br><span class="hljs-string">function b()&#123;var z=2; return z;&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">ReturnStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-keyword">var</span> n = path.node.argument.name<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n这里是&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;被绑定量：&#x27;</span>, path.scope.getBinding(n))<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+
+
+<h6 id="Scope-getOwnBinding-name"><a href="#Scope-getOwnBinding-name" class="headerlink" title="Scope.getOwnBinding(name)"></a>Scope.getOwnBinding(name)</h6><p><code>@return Binding</code>  </p>
+<p>传入一个名称，从当前的 作用域 中拿到指定的 被绑定量对象<a href="#Binding"><code>Binding</code></a><br>实际上方法的源码就一句<code>return this.bindings[name];</code>    </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var g = 1;</span><br><span class="hljs-string">function a()&#123;var a=1;return g;&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">ReturnStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-keyword">var</span> n = path.node.argument.name<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n这里是&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;获取挡墙定义域里 a的Binding，结果：&#x27;</span>, path.scope.bindings[<span class="hljs-string">&#x27;a&#x27;</span>])<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="Scope-getBindingIdentifier-name"><a href="#Scope-getBindingIdentifier-name" class="headerlink" title="Scope.getBindingIdentifier(name)"></a>Scope.getBindingIdentifier(name)</h6><p><code>@return Node | void 0</code><br>获取指定的  <a href="#Binding"><code>Binding</code></a> 的定义节点<code>Node</code>  </p>
+<p>方法作用域获取 <a href="#Binding"><code>Binding</code></a> ，再通过这个  <a href="#Binding"><code>Binding</code></a>  获取其定义的节点  </p>
+<p>这个方法通过 <a href="#Scope_getBinding"><code>Scope.getBinding(name)</code></a> 方法获取 <a href="#Binding"><code>Binding</code></a>  ，所以会存在递归向上的情况  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var g = 1;</span><br><span class="hljs-string">function a()&#123;return g;&#125;</span><br><span class="hljs-string">function b()&#123;var z=2; return z;&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">ReturnStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-keyword">var</span> n = path.node.argument.name<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n这里是&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(n, <span class="hljs-string">&#x27;的定义：&#x27;</span>, path.scope.getBindingIdentifier(n))<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+
+
+<h6 id="Scope-getOwnBindingIdentifier-name"><a href="#Scope-getOwnBindingIdentifier-name" class="headerlink" title="Scope.getOwnBindingIdentifier(name)"></a>Scope.getOwnBindingIdentifier(name)</h6><p><code>@return Node|void 0</code><br>获取指定的 <a href="#Binding"><code>Binding</code></a> ，并通过这个  <a href="#Binding"><code>Binding</code></a>  获取其定义的节点<br>这个方法只关注 当前作用域，并不会向上寻找    </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var g = 1;</span><br><span class="hljs-string">function a()&#123;return g;&#125;</span><br><span class="hljs-string">function b()&#123;var z=2; return z;&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">ReturnStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-keyword">var</span> n = path.node.argument.name<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n这里是&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(n, <span class="hljs-string">&#x27;的定义：&#x27;</span>, path.scope.getOwnBindingIdentifier(n))<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+<p>得到结果:  </p>
+<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less">这里是 <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">g</span>;<br><span class="hljs-selector-tag">g</span> 的定义： <span class="hljs-selector-tag">undefined</span><br><br>这里是 <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">z</span>;<br><span class="hljs-selector-tag">z</span> 的定义： <span class="hljs-selector-tag">Node</span> &#123;<br>  <span class="hljs-attribute">type</span>: <span class="hljs-string">&#x27;Identifier&#x27;</span>,<br>  <span class="hljs-attribute">start</span>: <span class="hljs-number">53</span>,<br>  <span class="hljs-attribute">end</span>: <span class="hljs-number">54</span>,<br>  <span class="hljs-attribute">loc</span>: SourceLocation &#123;<br>    <span class="hljs-attribute">start</span>: Position &#123; <span class="hljs-attribute">line</span>: <span class="hljs-number">4</span>, <span class="hljs-attribute">column</span>: <span class="hljs-number">17</span> &#125;,<br>    <span class="hljs-attribute">end</span>: Position &#123; <span class="hljs-attribute">line</span>: <span class="hljs-number">4</span>, <span class="hljs-attribute">column</span>: <span class="hljs-number">18</span> &#125;,<br>    <span class="hljs-attribute">identifierName</span>: <span class="hljs-string">&#x27;z&#x27;</span><br>  &#125;,<br>  <span class="hljs-attribute">name</span>: <span class="hljs-string">&#x27;z&#x27;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h6 id="Scope-hasOwnBinding-name"><a href="#Scope-hasOwnBinding-name" class="headerlink" title="Scope.hasOwnBinding(name)"></a>Scope.hasOwnBinding(name)</h6><p><code>@return bool</code>  </p>
+<p>获知当前作用域是否有某个被绑定变量  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var g = 1;</span><br><span class="hljs-string">function a()&#123;return g;&#125;</span><br><span class="hljs-string">function b()&#123;var z=2; return z;&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">ReturnStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-keyword">var</span> n = path.node.argument.name<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n这里是&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前作用域有 被绑定变量 z:&#x27;</span>, path.scope.hasOwnBinding(<span class="hljs-string">&#x27;z&#x27;</span>))<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;当前作用域有 被绑定变量 g:&#x27;</span>, path.scope.hasOwnBinding(<span class="hljs-string">&#x27;g&#x27;</span>))<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br><br></code></pre></div></td></tr></table></figure>
+<p>得到结果：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">这里是 <span class="hljs-keyword">return</span> g;<br>当前作用域有 被绑定变量 z: <span class="hljs-literal">false</span><br>当前作用域有 被绑定变量 g: <span class="hljs-literal">false</span><br><br>这里是 <span class="hljs-keyword">return</span> z;<br>当前作用域有 被绑定变量 z: <span class="hljs-literal">true</span><br>当前作用域有 被绑定变量 g: <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure>
+<p>两个函数的作用域内都不会有g的绑定，因为它被绑定在更上级作用域中  </p>
+<h6 id="Scope-hasBinding-name-noGlobals"><a href="#Scope-hasBinding-name-noGlobals" class="headerlink" title="Scope.hasBinding(name, noGlobals)"></a>Scope.hasBinding(name, noGlobals)</h6><p><code>@return bool</code><br>向上递归作用域，获知是否有某个被绑定变量  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">var g = 1;</span><br><span class="hljs-string">function a()&#123;return g;&#125;</span><br><span class="hljs-string">function b()&#123;var z=2; return z;&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">ReturnStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n这里是&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;作用域有 被绑定变量 z:&#x27;</span>, path.scope.hasBinding(<span class="hljs-string">&#x27;z&#x27;</span>))<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;作用域有 被绑定变量 g:&#x27;</span>, path.scope.hasBinding(<span class="hljs-string">&#x27;g&#x27;</span>))<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+<p><a id="Binding"></a></p>
+<h4 id="Binding"><a href="#Binding" class="headerlink" title="Binding"></a>Binding</h4><p><code>Binding</code> 对象用于存储 被绑定在作用域的量 的信息<br>你可以在 <code>@babel/traverse/lib/scope/binding.js</code> 查看到它的定义  </p>
+<h5 id="Binding属性"><a href="#Binding属性" class="headerlink" title="Binding属性"></a>Binding属性</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br><span class="hljs-keyword">const</span> traverse = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/traverse&quot;</span>).default;<br><br><span class="hljs-keyword">const</span> jscode = <span class="hljs-string">`</span><br><span class="hljs-string">function a()&#123;</span><br><span class="hljs-string">    var a = 1;</span><br><span class="hljs-string">    a = a + 1;</span><br><span class="hljs-string">    return a;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">function b()&#123;</span><br><span class="hljs-string">    var b = 1;</span><br><span class="hljs-string">    var c = 2;</span><br><span class="hljs-string">    b = b - c;</span><br><span class="hljs-string">    return b;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">`</span>;<br><span class="hljs-keyword">let</span> ast = parser.parse(jscode);<br><span class="hljs-keyword">const</span> visitor = &#123;<br>    <span class="hljs-function"><span class="hljs-title">BlockStatement</span>(<span class="hljs-params">path</span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n此块节点源码：\n&quot;</span>, path.toString())<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;----------------------------------------&#x27;</span>)<br>        <span class="hljs-keyword">var</span> bindings = path.scope.bindings<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;作用域内 被绑定量 数量：&#x27;</span>, <span class="hljs-built_in">Object</span>.keys(bindings).length)<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> binding_ <span class="hljs-keyword">in</span> bindings)&#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;名字：&#x27;</span>, binding_)<br>            binding_ = bindings[binding_];<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;类型：&#x27;</span>, binding_.kind)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;定义：&#x27;</span>, binding_.identifier)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;是否会被用：&#x27;</span>, binding_.constant)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;被修改信息信息记录&#x27;</span>, binding_.constantViolations)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;是否会被引用：&#x27;</span>, binding_.referenced)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;被引用次数&#x27;</span>, binding_.references)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;被引用信息NodePath记录&#x27;</span>, binding_.referencePaths)<br>        &#125;<br>    &#125;<br>&#125;<br><br>traverse(ast, visitor);<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<hr>
+<p><strong>相关链接</strong></p>
+<ul>
+<li>蔡老板的教程：<a target="_blank" rel="noopener" href="https://wx.zsxq.com/dweb2/index/group/48415254524248">https://wx.zsxq.com/dweb2/index/group/48415254524248</a>  </li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Javascript/">Javascript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Babel/">Babel</a>
+                    
+                      <a class="hover-with-bg" href="/tags/AST/">AST</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/2020_e5cd2b3/">
+                        <span class="hidden-mobile">域名-DomainName-意义-购买-解析-备案</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

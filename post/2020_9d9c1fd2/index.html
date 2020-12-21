@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>mitmproxy - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="mitmproxy">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">mitmproxy</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年9月27日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。用于中间人攻击的代理首先会向正常的代理一样转发请求，保障服务端与客户端的通信，其次，会适时的查、记录其截获的数据，或篡改数据，引发服务端或客户端特定的行为  </p>
+<p>不同于 fiddler 或 wireshark 等抓包工具，mitmproxy 不仅可以截获请求帮助开发者查看、分析，更可以通过自定义脚本进行二次开发。举例来说，利用 fiddler 可以过滤出浏览器对某个特定 url 的请求，并查看、分析其数据，但实现不了高度定制化的需求，类似于：“截获对浏览器对该 url 的请求，将返回内容置空，并将真实的返回内容存到某个数据库，出现异常时发出邮件通知”。而对于 mitmproxy，这样的需求可以通过载入自定义 python 脚本轻松实现  </p>
+<p>mitmproxy 工作在 HTTP 层， HTTPS 的普及让客户端拥有了检测并规避中间人攻击的能力，所以要让 mitmproxy 能够正常工作，必须要让客户端（APP 或浏览器）主动信任 mitmproxy 的 SSL 证书，或忽略证书异常  </p>
+<p>利用手机模拟器、无头浏览器来爬取 APP 或网站的数据，mitmpproxy 作为代理可以拦截、存储爬虫获取到的数据，或修改数据调整爬虫的行为  </p>
+<h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><table>
+<thead>
+<tr>
+<th>信息</th>
+<th>链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>官网</td>
+<td><a target="_blank" rel="noopener" href="https://mitmproxy.org/">https://mitmproxy.org/</a></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><a target="_blank" rel="noopener" href="https://docs.mitmproxy.org/stable/">https://docs.mitmproxy.org/stable/</a></td>
+</tr>
+<tr>
+<td>Github</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/mitmproxy/mitmproxy">https://github.com/mitmproxy/mitmproxy</a></td>
+</tr>
+<tr>
+<td>DockerHub</td>
+<td><a target="_blank" rel="noopener" href="https://hub.docker.com/r/mitmproxy/mitmproxy/">https://hub.docker.com/r/mitmproxy/mitmproxy/</a></td>
+</tr>
+</tbody></table>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装程序"><a href="#安装程序" class="headerlink" title="安装程序"></a>安装程序</h2><p><img src="/mitmproxy/20200806041304952.png" srcset="/img/loading.gif"><br>官网首页将安装包下载下来，选择一个地方安装好  </p>
+<h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>在用户目录下找到<code>mitmproxy</code>证书进行安装<br>一般会在<code>C:\Users\Administrator\.mitmproxy</code>文件夹中<br>证书名为<code>mitmproxy-ca.p12</code>，双击开始安装<br><img src="/mitmproxy/20200806041748503.png" srcset="/img/loading.gif"><br>一路下一步，到这里，选择<code>受信任的根证书颁发机构</code><br>最后会弹出警告，选是即可  </p>
+<h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>操作与上述似，但证书文件是<code>mitmproxy-ca-cert.pem</code>  </p>
+<h2 id="python库安装"><a href="#python库安装" class="headerlink" title="python库安装"></a>python库安装</h2><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> mitmproxy<br></code></pre></div></td></tr></table></figure>
+<h2 id="使用代理以验证安装"><a href="#使用代理以验证安装" class="headerlink" title="使用代理以验证安装"></a>使用代理以验证安装</h2><p><code>cmd</code>中输入<code>mitmweb</code>以启用<code>mitmweb</code><br><img src="/mitmproxy/20200806064021137.png" srcset="/img/loading.gif"><br>启用后会提示 web运行信息 和 代理信息<br>将代理信息记录下来，设置到 浏览器代理 或者 系统代理之中  </p>
+<p>若是使用<code>Chrome</code>浏览器，推荐使用插件<code>SwitchyOmega</code>来管理代理<br><a target="_blank" rel="noopener" href="https://github.com/FelisCatus/SwitchyOmega">https://github.com/FelisCatus/SwitchyOmega</a><br><img src="/mitmproxy/20200806064603862.png" srcset="/img/loading.gif"><br>进行设置以后，请求/响应都会通过代理进行，在不使用代理时注意关闭<br><img src="/mitmproxy/20200806064950822.png" srcset="/img/loading.gif"><br>最终会抓到一些包，显示在控制台上  </p>
+<h1 id="插件-Addons"><a href="#插件-Addons" class="headerlink" title="插件  Addons"></a>插件  Addons</h1><p><code>Mitmproxy</code>的<code>Addons</code>机制由一组API组成<br><code>Addons</code>通过响应事件与<code>mitmproxy</code>进行交互，从而使它们能够参与并改变<code>mitmproxy</code>的行为<br><code>Addons</code>是通过<a target="_blank" rel="noopener" href="https://docs.mitmproxy.org/stable/concepts-options/">Option</a>配置的，这些选项可以在<code>mitmproxy</code>的配置文件中设置，也可以由用户交互地更改或通过命令行进行修改<br><code>Addons</code>是<code>mitmproxy</code>的重要组成部分，实际上很多<code>mitmproxy</code>自身的函数都是被定义在 一套<code>Addons</code> 中的<br><code>Mitmproxy</code>为第三方脚本编写程序和扩展程序提供了一套完全相同的工具来实现它自己的功能  </p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">pydoc</span> <span class="hljs-selector-tag">mitmproxy</span><span class="hljs-selector-class">.http</span><br></code></pre></div></td></tr></table></figure>
+<p>你可以通过这个命令来查阅API文档  </p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">一个简单的 mitmproxy addon.</span><br><span class="hljs-string">你可以通过这个命令运行: mitmproxy -s anatomy.py</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> ctx<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.num = <span class="hljs-number">0</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">request</span>(<span class="hljs-params">self, flow</span>):</span><br>        self.num = self.num + <span class="hljs-number">1</span><br>        ctx.log.info(<span class="hljs-string">&quot;We&#x27;ve seen %d flows&quot;</span> % self.num)<br><br>addons = [<br>    Counter()<br>]<br></code></pre></div></td></tr></table></figure>
+<p>这是个简单的案例，每当发送新的请求，都会在控制台输出文字  </p>
+<h1 id="事件-Events"><a href="#事件-Events" class="headerlink" title="事件 Events"></a>事件 Events</h1><p><code>Addons</code>通过<code>Events</code>与mitmproxy的内部机制挂钩<br>许多<code>Events</code>接收<code>Flow</code>对象作为参数，通过修改这些参数，<code>Addons</code>能改变包的信息  </p>
+<h2 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;例子：为每一个响应添加一个统计数量的响应头&quot;&quot;&quot;</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddHeader</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.num = <span class="hljs-number">0</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">response</span>(<span class="hljs-params">self, flow</span>):</span><br>        self.num = self.num + <span class="hljs-number">1</span><br>        flow.response.headers[<span class="hljs-string">&quot;count&quot;</span>] = <span class="hljs-built_in">str</span>(self.num)<br><br>addons = [<br>    AddHeader()<br>]<br></code></pre></div></td></tr></table></figure>
+<p>所支持的所有<code>Events</code>：<a target="_blank" rel="noopener" href="https://docs.mitmproxy.org/stable/addons-events/">https://docs.mitmproxy.org/stable/addons-events/</a>  </p>
+<h1 id="选项-Options"><a href="#选项-Options" class="headerlink" title="选项 Options"></a>选项 Options</h1><p><code>Mitmproxy</code>核心的全局设置存储，包含了决定<code>Mitmproxy</code>及其插件行为的设置<br><code>Options</code>会从配置文件中读取，你可以通过命令行来动态改变它  </p>
+<p>所有<code>Options</code>都使用一组受支持的类型进行。<code>Mitmproxy</code>知道如何序列化和反序列化这些类型。强行设置不合适的值会导致错误   </p>
+<h2 id="案例-2"><a href="#案例-2" class="headerlink" title="案例"></a>案例</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">添加一个新的 mitmproxy option</span><br><span class="hljs-string">启动命令: mitmproxy -s 4_options.py --set addheader true</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> ctx<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddHeader</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.num = <span class="hljs-number">0</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load</span>(<span class="hljs-params">self, loader</span>):</span><br>        loader.add_option(<br>            name = <span class="hljs-string">&quot;addheader&quot;</span>,<br>            typespec = <span class="hljs-built_in">bool</span>,<br>            default = <span class="hljs-literal">False</span>,<br>            <span class="hljs-built_in">help</span> = <span class="hljs-string">&quot;Add a count header to responses&quot;</span>,<br>        )<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">response</span>(<span class="hljs-params">self, flow</span>):</span><br>        <span class="hljs-keyword">if</span> ctx.options.addheader:<br>            self.num = self.num + <span class="hljs-number">1</span><br>            flow.response.headers[<span class="hljs-string">&quot;count&quot;</span>] = <span class="hljs-built_in">str</span>(self.num)<br>addons = [<br>    AddHeader()<br>]<br></code></pre></div></td></tr></table></figure>
+<p><code>load</code> <code>Event</code>会接收一个可以声明<code>Option</code>和命令的<code>mitmproxy.addonmanager.Loader</code>对象。这个<code>Addon</code>添加了一个<code>bool</code>类型的<code>addheader</code> <code>Option</code><br>在命令行里运行脚本  </p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">mitmproxy -s 4_options.py --<span class="hljs-builtin-name">set</span> addheader <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure>
+<p>通过代理访问一下网站，就能够在命令行看到一些信息<br>如果你观察包，你会发现<code>HTTP headers</code>并没有<code>addheader</code>项。这是因为<code>add_option</code>的默认值为<code>false</code>它并不会启动<br>按<code>O</code>进入<code>options</code>编辑器，找到<code>addheader</code>项并将它改为<code>true</code>，你就会看到添加了计数项的响应头部  </p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">HTTP</span>/<span class="hljs-number">1</span>.<span class="hljs-number">1</span> <span class="hljs-number">301</span> Moved Permanently<br><span class="hljs-attribute">Location</span>: http://www.google.com/<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">219</span><br><span class="hljs-attribute">count</span>: <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>在加载这个<code>Addon</code>的时候，<code>addheader</code>的设置会保存在 <a target="_blank" rel="noopener" href="https://docs.mitmproxy.org/stable/concepts-options/">设置文件YAML</a>里<br>你也可以在运行命令的时候用<code>--set</code>参数来设置<code>options</code>  </p>
+<figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">mitmproxy -s .<span class="hljs-regexp">/examples/</span>addons/<span class="hljs-keyword">options</span>-simple.py --set addheader=<span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="配置更新"><a href="#配置更新" class="headerlink" title="配置更新"></a>配置更新</h2><p><code>configure</code> <code>event</code>能在<code>option</code>更变的时候立即做一些响应<br>当<code>option</code>发生变更，<code>configure</code> <code>event</code> 会被被触发。它会收到一组被更变的<code>options</code>的<code>set</code>，<code>Addon</code>可以检查<code>option</code>是否在<code>set</code>里，然后根据上下文的<code>option</code>对象里获取值并作出一些响应<br>这功能最常见的用法是用来检查<code>option</code>是否有效，若无效，则进行记录（反馈）  </p>
+<h3 id="案例-3"><a href="#案例-3" class="headerlink" title="案例"></a>案例</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;React to configuration changes.&quot;&quot;&quot;</span><br><span class="hljs-keyword">import</span> typing<br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> ctx<br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> exceptions<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddHeader</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load</span>(<span class="hljs-params">self, loader</span>):</span><br>        loader.add_option(<br>            name = <span class="hljs-string">&quot;addheader&quot;</span>,<br>            typespec = typing.Optional[<span class="hljs-built_in">int</span>],<br>            default = <span class="hljs-literal">None</span>,<br>            <span class="hljs-built_in">help</span> = <span class="hljs-string">&quot;Add a header to responses&quot;</span>,<br>        )<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">configure</span>(<span class="hljs-params">self, updates</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;addheader&quot;</span> <span class="hljs-keyword">in</span> updates:<br>            <span class="hljs-keyword">if</span> ctx.options.addheader <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> ctx.options.addheader &gt; <span class="hljs-number">100</span>:<br>                <span class="hljs-keyword">raise</span> exceptions.OptionsError(<span class="hljs-string">&quot;addheader must be &lt;= 100&quot;</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">response</span>(<span class="hljs-params">self, flow</span>):</span><br>        <span class="hljs-keyword">if</span> ctx.options.addheader <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>            flow.response.headers[<span class="hljs-string">&quot;addheader&quot;</span>] = <span class="hljs-built_in">str</span>(ctx.options.addheader)<br><br><br>addons = [<br>    AddHeader()<br>]<br></code></pre></div></td></tr></table></figure>
+<p>在你设置一个不符合规定的<code>addheader</code>值时，<code>configure</code> <code>event</code>会给你反馈信息  </p>
+<figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">mitmdump -s .<span class="hljs-regexp">/examples/</span>addons/<span class="hljs-keyword">options</span>-configure.py --set addheader=<span class="hljs-number">1000</span><br>Loading script: .<span class="hljs-regexp">/examples/</span>addons/<span class="hljs-keyword">options</span>-configure.py<br><span class="hljs-regexp">/Users/</span>cortesi<span class="hljs-regexp">/mitmproxy/mi</span>tmproxy<span class="hljs-regexp">/venv/</span>bin/mitmdump: addheader must be &lt;= <span class="hljs-number">100</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="options支持的数据类型"><a href="#options支持的数据类型" class="headerlink" title="options支持的数据类型"></a>options支持的数据类型</h2><p><code>str</code>, <code>int</code>, <code>float</code>, <code>bool</code>, <code>typing.Optional</code>, <code>typing.Sequence</code></p>
+<h1 id="命令-Commands"><a href="#命令-Commands" class="headerlink" title="命令 Commands"></a>命令 Commands</h1><p><code>Commands</code>允许用户与插件进行主动交互-查询其状态，命令他们执行操作以或者让它们转换数据。<br><code>Commands</code>是一个非常强大的结构，<code>mitmproxy</code>控制台中的所有用户交互都是通过将命令绑定到<code>keys</code>来构建的</p>
+<h2 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;添加一个用户自定义Commands&quot;&quot;&quot;</span><br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> command<br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> ctx<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAddon</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.num = <span class="hljs-number">0</span><br><br><span class="hljs-meta">    @command.command(<span class="hljs-params"><span class="hljs-string">&quot;myaddon.inc&quot;</span></span>)</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inc</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-keyword">None</span>:</span><br>        self.num += <span class="hljs-number">1</span><br>        ctx.log.info(<span class="hljs-string">f&quot;num = <span class="hljs-subst">&#123;self.num&#125;</span>&quot;</span>)<br><br><br>addons = [<br>    MyAddon()<br>]<br></code></pre></div></td></tr></table></figure>
+<p>运行脚本代码</p>
+<figure class="highlight coq"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs coq">mitmproxy -s commands-<span class="hljs-built_in">simple</span>.py<br></code></pre></div></td></tr></table></figure>
+<p>输入自己设置的命令即可得到结果</p>
+<figure class="highlight clojure"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clojure"><span class="hljs-symbol">:myaddon.inc</span><br></code></pre></div></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>命令应该是唯一的，不要弄重复  </li>
+<li>你只能运用那些<code>option</code>里能用的变量类型(包括返回值)</li>
+</ul>
+<h2 id="案例2-与flows配合使用"><a href="#案例2-与flows配合使用" class="headerlink" title="案例2 与flows配合使用"></a>案例2 与flows配合使用</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> typing<br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> command<br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> ctx<br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> flow<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAddon</span>:</span><br><span class="hljs-meta">    @command.command(<span class="hljs-params"><span class="hljs-string">&quot;myaddon.addheader&quot;</span></span>)</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addheader</span>(<span class="hljs-params">self, flows: typing.Sequence[flow.Flow]</span>) -&gt; <span class="hljs-keyword">None</span>:</span><br>        <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> flows:<br>            f.request.headers[<span class="hljs-string">&quot;myheader&quot;</span>] = <span class="hljs-string">&quot;value&quot;</span><br>        ctx.log.alert(<span class="hljs-string">&quot;done&quot;</span>)<br><br>addons = [<br>    MyAddon()<br>]<br></code></pre></div></td></tr></table></figure>
+<p><code>myaddon.addheader</code>命令十分简单，它获取一系列的<code>flows</code>被为请求添加一个头部参数<br>这个案例真正有趣的地方是用户如何指定<code>flows</code>。<code>mitmproxy</code>可以检查类型信息，这意味着你能通过类型信息来设置一些过滤条件，增加灵活性<br>启动脚本</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">mitmproxy -s .<span class="hljs-regexp">/examples/</span>addons/commands-flows.py<br></code></pre></div></td></tr></table></figure>
+<p>尝试不同的参数<br>只对<code>@focus</code>的<code>flows</code>执行<code>addheader</code></p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-pseudo">:myaddon.addheader</span> <span class="hljs-keyword">@focus</span><br></code></pre></div></td></tr></table></figure>
+<p>对所有的<code>flows</code>执行<code>addheader</code></p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-pseudo">:myaddon.addheader</span> <span class="hljs-keyword">@all</span><br></code></pre></div></td></tr></table></figure>
+<p>只对来自 google.com 的<code>flows</code>执行<code>addheader</code></p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-pseudo">:myaddon.addheader</span> ~<span class="hljs-selector-tag">d</span> <span class="hljs-selector-tag">google</span><span class="hljs-selector-class">.com</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="案例3-路径类型-paths"><a href="#案例3-路径类型-paths" class="headerlink" title="案例3 路径类型 paths"></a>案例3 路径类型 paths</h2><p>命令可以带有任意数量的参数，演示一种特殊类型：<code>paths</code>  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;将文件路径作为命令参数处理&quot;&quot;&quot;</span><br><span class="hljs-keyword">import</span> typing<br><br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> command<br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> ctx<br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> flow<br><span class="hljs-keyword">from</span> mitmproxy <span class="hljs-keyword">import</span> types<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAddon</span>:</span><br><span class="hljs-meta">    @command.command(<span class="hljs-params"><span class="hljs-string">&quot;myaddon.histogram&quot;</span></span>)</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">histogram</span>(<span class="hljs-params"></span></span><br><span class="hljs-function"><span class="hljs-params">        self,</span></span><br><span class="hljs-function"><span class="hljs-params">        flows: typing.Sequence[flow.Flow],</span></span><br><span class="hljs-function"><span class="hljs-params">        path: types.Path,</span></span><br><span class="hljs-function"><span class="hljs-params">    </span>) -&gt; <span class="hljs-keyword">None</span>:</span><br>        totals = &#123;&#125;<br>        <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> flows:<br>            totals[f.request.host] = totals.setdefault(f.request.host, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(path, <span class="hljs-string">&quot;w+&quot;</span>) <span class="hljs-keyword">as</span> fp:<br>            <span class="hljs-keyword">for</span> cnt, dom <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>([(v, k) <span class="hljs-keyword">for</span> (k, v) <span class="hljs-keyword">in</span> totals.items()]):<br>                fp.write(<span class="hljs-string">&quot;%s: %s\n&quot;</span> % (cnt, dom))<br><br>        ctx.log.alert(<span class="hljs-string">&quot;done&quot;</span>)<br><br><br>addons = [<br>    MyAddon()<br>]<br></code></pre></div></td></tr></table></figure>
+<p>命令的路径参数会作为第二参数来传入，你可以用类似于这种方式来使用它  </p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">:myaddon.histogram @all <span class="hljs-regexp">/tmp/</span>xxx<br></code></pre></div></td></tr></table></figure>
+<h2 id="支持的类型"><a href="#支持的类型" class="headerlink" title="支持的类型"></a>支持的类型</h2><ul>
+<li>Primitive types: <code>str</code>, <code>int</code>, <code>bool</code>  </li>
+<li>Sequences: <code>typing.Sequence[str]</code>  </li>
+<li>Flows and flow sequences: <code>flow.Flow</code> and <code>typing.Sequence[flow.Flow]</code>  </li>
+<li>Multiple choice strings: <code>types.Choice</code>  </li>
+<li>Meta-types: <code>types.Command</code> and <code>types.Arg</code>. These are for constructing commands that invoke other commands. This is most commonly useful in keybinding - see the built-in mitmproxy console keybindings for a rich suite of examples  </li>
+<li>Data types: <code>types.CutSpec</code> and <code>types.Data</code>. The cuts mechanism is in alpha at the moment, and provides a convenient way to snip up flow data  </li>
+<li>Path: <code>types.Path</code></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/mitmproxy/">mitmproxy</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/2020_28d2e22a/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">协程-进程-线程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/2020_2654e413/">
+                        <span class="hidden-mobile">RESTful架构</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

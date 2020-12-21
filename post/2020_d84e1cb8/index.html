@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>Redis-Redlock-锁-Redis分布式锁 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis-Redlock-锁-Redis分布式锁">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis-Redlock-锁-Redis分布式锁</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年11月24日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>官方算法文章：<a target="_blank" rel="noopener" href="https://redis.io/topics/distlock">https://redis.io/topics/distlock</a><br>redlock-py pypi: <a target="_blank" rel="noopener" href="https://pypi.org/project/redlock-py/">https://pypi.org/project/redlock-py/</a><br>redlock-py github: <a target="_blank" rel="noopener" href="https://github.com/SPSCommerce/redlock-py">https://github.com/SPSCommerce/redlock-py</a>  </p>
+<h1 id="安全和可靠性保证"><a href="#安全和可靠性保证" class="headerlink" title="安全和可靠性保证"></a>安全和可靠性保证</h1><p>实现高效分布式锁的基础  </p>
+<ul>
+<li>一致性<br>互斥。不管任何时候，只有一个客户端能持有同一个锁  </li>
+<li>分区可容忍性<br>不会死锁，最终一定会得到锁，就算一个持有锁的客户端宕掉或者发生网络分区  </li>
+<li>可用性<br>只要大多数<code>Redis</code>节点正常工作，客户端应该都能获取和释放锁  </li>
+</ul>
+<h1 id="锁的基础"><a href="#锁的基础" class="headerlink" title="锁的基础"></a>锁的基础</h1><p><code>Redis</code>中本身包含一些命令可以用来实现锁的功能，比如<code>SETNX</code><br>思路:<br>如果 <code>key</code> 不存在，将 <code>key</code> 设置为 <code>value</code><br>如果 <code>key</code> 已存在，则 <code>SETNX</code> 不做任何动作  </p>
+<ol>
+<li>客户端A请求服务器设置key的值，如果设置成功就表示加锁成功  </li>
+<li>客户端B也去请求服务器设置key的值，如果返回失败，那么就代表加锁失败  </li>
+<li>客户端A执行代码完成，删除锁  </li>
+<li>客户端B在等待一段时间后在去请求设置key的值，设置成功  </li>
+<li>客户端B执行代码完成，删除锁  </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-variable">$redis</span>-&gt;setNX(<span class="hljs-variable">$key</span>, <span class="hljs-variable">$value</span>);<br><span class="hljs-variable">$redis</span>-&gt;expire(<span class="hljs-variable">$key</span>, <span class="hljs-variable">$ttl</span>);<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<h3 id="过期时间"><a href="#过期时间" class="headerlink" title="过期时间"></a>过期时间</h3><p>如果请求执行因为某些原因意外退出了，导致创建了锁但是没有删除锁，那么这个锁将一直存在，以至于以后缓存再也得不到更新。<br>为 <code>key</code> 设置过期时间能够确保锁最终能够得到释放    </p>
+</blockquote>
+<blockquote>
+<h3 id="请求与等待-的循环"><a href="#请求与等待-的循环" class="headerlink" title="请求与等待 的循环"></a>请求与等待 的循环</h3><p>程序不能因为发现资源被锁上了就直接停止<br>过于频繁的请求会让服务器压力变大<br>等待的时间应该为一个合理的随机数，因为如果多个客户端同时重试，那么可能会导致谁都无法拿到锁的情况出现  </p>
+</blockquote>
+<p>但是用来设置过期时间的 <code>Expire</code>命令 并不是原子性操作了, 所以需要设置<code>事务</code>来确保原子性  </p>
+<ol>
+<li>客户端A请求服务器设置key的值，如果设置成功就表示加锁成功</li>
+<li>客户端B也去请求服务器设置key的值，如果返回失败，那么就代表加锁失败</li>
+<li>客户端A执行代码完成，删除锁</li>
+<li>客户端B在等待一段时间后在去请求设置key的值，设置成功</li>
+<li>客户端B执行代码完成，删除锁</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-variable">$redis</span>-&gt;<span class="hljs-built_in">set</span>(<span class="hljs-variable">$key</span>, <span class="hljs-variable">$value</span>, array(<span class="hljs-string">&#x27;nx&#x27;</span>, <span class="hljs-string">&#x27;ex&#x27;</span> =&gt; <span class="hljs-variable">$ttl</span>));  //ex表示秒<br></code></pre></div></td></tr></table></figure>
+<h2 id="关于键的值"><a href="#关于键的值" class="headerlink" title="关于键的值"></a>关于键的值</h2><p>值会被填入一个随机数，且必须在所有获取锁请求的客户端里保持唯一<br>键值是用来保证能安全地释放锁的，删除前需要做对比。单纯的用<code>DEL</code>指令有可能造成一个客户端删除了其他客户端的锁  </p>
+<blockquote>
+<p>例: 为什么要设置一个特殊的值  </p>
+<ol>
+<li>A客户端拿到了锁，被某个操作阻塞了很长时间，过了超时时间后自动释放了这个锁  </li>
+<li>B客户端来了，申请，拿到了这个锁  </li>
+<li>A客户端操作结束，尝试删除这个其实已经被其他客户端拿到的锁  <blockquote>
+<p>如果此时没有设置随机数作校对，那么会删掉B的锁  </p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h1 id="Redlock算法"><a href="#Redlock算法" class="headerlink" title="Redlock算法"></a>Redlock算法</h1><p>假设有<code>N</code>个<code>Redis master</code>节点  </p>
+<blockquote>
+<p><strong><code>N</code>是个奇数</strong><br>因为流程中有 <strong>过半数</strong> 这种判断，如果是偶数，那么将无法完成判断<br>节点越多，越能避免部分节点宕机造成的影响，但也越浪费资源    </p>
+</blockquote>
+<ol>
+<li><p>获取当前时间（单位是毫秒）  </p>
+</li>
+<li><p>用 相同的<code>key</code>和随机值 在<code>N</code>个节点上逐一请求锁<br>客户端在每个<code>master</code>上请求锁时，会有一个比总的 <code>锁释放时间</code> 小很多的 <code>连接超时时间</code>  </p>
+<blockquote>
+<p>比如:如果锁自动释放时间是10秒钟，那每个节点锁请求的超时时间可能是5-50毫秒的范围  </p>
+</blockquote>
+<p>设置<strong>连接超时时间</strong> 可以防止一个客户端在某个宕掉的<code>master</code>节点上阻塞过长时间（避免<strong>总连接时间</strong>接近/超过<strong>锁释放时间</strong>）  </p>
+</li>
+<li><p>客户端计算第二步中获取锁所花的总时间  </p>
+</li>
+<li><p>进行判断<br>只有当客户端在过半数<code>master</code>节点上成功获取了锁，而且 <code>总共消耗的时间</code> 不超过 <code>锁释放时间</code>，这个锁才会被认为是获取成功  </p>
+</li>
+</ol>
+<ul>
+<li>如果锁获取成功了<br>那现在锁自动释放时间就是最初的锁释放时间减去之前获取锁所消耗的时间  </li>
+<li>如果锁获取失败了<br>客户端会到每个<code>master</code>节点上释放锁，即便是那些他认为没有获取成功的锁  </li>
+</ul>
+<p>客户端如果没有在多数节点获取到锁，一定要尽快在获取锁成功的节点上释放锁，这样就没必要等到<code>key</code>超时后才能重新获取这个锁（但是如果网络分区的情况发生而且客户端无法连接到<code>Redis</code>节点时，会损失等待key超时这段时间的系统可用性）  </p>
+<h1 id="扩展锁"><a href="#扩展锁" class="headerlink" title="扩展锁"></a>扩展锁</h1><p>如果客户端做的工作都是由一些小的步骤组成，那么就有可能使用更小的默认锁有效时间，而且扩展这个算法来实现一个锁扩展机制<br>客户端如果在执行计算期间发现锁快要超时了，客户端可以给所有服务实例发送一个命令，让<code>master</code>端延长锁的时间<br>只要这个锁的 <code>key</code> 还存在而且值还等于客户端获取时的那个值。 客户端应当只有在 失效时间内无法延长锁时 再去重新获取锁（基本上这个和获取锁的算法是差不多的）  </p>
+<h1 id="安全性的论证"><a href="#安全性的论证" class="headerlink" title="安全性的论证"></a>安全性的论证</h1><p>可以观察不同场景下的情况来理解这个算法为什么是安全的。 </p>
+<p>假设客户端可以在大多数节点都获取到锁，这样所有的节点都会包含一个有相同存活时间的<code>key</code>。需要注意的是，这个<code>key</code>是在不同时间点设置的，所以这些key也会在不同的时间超时  </p>
+<p>假设最坏情况下：  </p>
+<ul>
+<li>第一个<code>key</code>是在<code>T1</code>时间设置的（客户端连接到第一个服务器时的时间）  </li>
+<li>最后一个<code>key</code>是在<code>T2</code>时间设置的（客户端收到最后一个服务器返回结果的时间）  </li>
+</ul>
+<p>从<code>T2</code>时间开始，确认最早超时的<code>key</code>至少也会存在的时间为  </p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">MIN_VALIDITY</span> = TTL - (T<span class="hljs-number">2</span>-T<span class="hljs-number">1</span>) - CLOCK_DRIFT<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>TTL: 锁超时时间  </li>
+<li>（T2-T1）: 最晚获取到的锁的耗时  </li>
+<li>CLOCK_DRIFT: 是不同进程间时钟差异，这个是用来补偿前面的(T2-T1）  </li>
+</ul>
+<p>其他的<code>key</code>都会在这个时间点之后才会超时，所以我们可以确定这些<code>key</code>在这个时间点之前至少都是同时存在的  </p>
+<ul>
+<li><p>无法抢占<br>在过半数<code>master</code>节点的<code>key</code>都<code>set</code>了的时间段内，其他客户端无法抢占这个锁<br>因为在 <code>(N/2)+1</code> 个 <code>master</code> 端的 <code>key</code> 已经存在的情况下不可能再在<code>(N/2)+1</code>个<code>master</code>端上获取锁成功，所以如果一个锁获取成功了，就不可能同时重新获取这个锁成功（不然就违反了分布式锁互斥原则）</p>
+</li>
+<li><p>多个客户端同时尝试获取锁时不会都同时成功<br>如果一个 <strong>客户端获取过半数节点锁的耗时</strong> 接近甚至超过 <strong>锁的最大有效时间</strong>，那么系统会认为这个锁是无效的同时会释放这些节点上的锁，所以仅仅需要考虑获取 <strong>过半数节点所的耗时</strong> 小于 <strong>锁有效时间</strong> 的情况，而在这种情况下，根据我们前面的证明，在<code>MIN_VALIDITY</code>时间内，没有客户端能重新获取锁成功  </p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%94%81/">锁</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/2020_7db30d0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python-UUID</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/2020_2cccdedc/">
+                        <span class="hidden-mobile">正则表达式-断言-预查</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

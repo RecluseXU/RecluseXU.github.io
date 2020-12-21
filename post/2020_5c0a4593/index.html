@@ -1,0 +1,896 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>爬虫基础 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="爬虫基础">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">爬虫基础</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年9月27日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="HTML-DOM"><a href="#HTML-DOM" class="headerlink" title="HTML DOM"></a>HTML DOM</h1><p>文档对象模型  中立于平台和语言的接口<br>允许程序动态地更新文档内容，结构和样式  </p>
+<blockquote>
+<p>js代码和css样式可以改变 HTML，但只是改变显示样式，并没有真正改变HTML文档本身  </p>
+</blockquote>
+<h1 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h1><h2 id="页面渲染流程"><a href="#页面渲染流程" class="headerlink" title="页面渲染流程"></a>页面渲染流程</h2><p><img src="/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/20200807060538670.png" srcset="/img/loading.gif"><br><img src="/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/20200807061040811.png" srcset="/img/loading.gif"><br>因为其它工具里没有js解释器，CSS解释器，所以可以通过这两个东西来进行反爬虫  </p>
+<h2 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h2><ul>
+<li>Cookies<br>用于服务端通信，存储量小  </li>
+<li>Local Storage<br>存储量比Cookies大一些，只能存字符串  </li>
+<li>Session Storage<br>只存在于当前Session,关闭浏览器就丢失  </li>
+<li>IndexedDB<br>相当于浏览器上的SQL数据库，存储空间大，API较难掌握</li>
+</ul>
+<h1 id="HTTP与HTTPS"><a href="#HTTP与HTTPS" class="headerlink" title="HTTP与HTTPS"></a>HTTP与HTTPS</h1><h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>Hyper Text Transfer Protocol<br>超文本传输协议，用于从网络传输超文本数据到本地浏览器的传送协议，能保证高效而准确的传送超文本文档（通常是网页html文件）  </p>
+<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>Hyper Text Transfer Protocol over Secure Socket Layer<br>以安全为目标的HTTP通道，即是在HTTP下加入SSL层，简称为HTTPS<br>简单来说就是更安全的HTTP</p>
+<h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><p>请求一般分为四个部分：请求方法，请求url，请求头，请求体</p>
+<h2 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>请求指定的页面信息，并返回实体主体</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。<BR>POST 请求可能会导致新的资源的建立和/或已有资源的修改</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>类似于 GET 请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>从客户端向服务器传送的数据取代指定的文档的内容</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>从客户端向服务器传送的数据取代指定的文档的内容</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td>HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>允许客户端查看服务器的性能</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>回显服务器收到的请求，主要用于测试或诊断</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>是对 PUT 方法的补充，用来对已知资源进行局部更新</td>
+</tr>
+</tbody></table>
+<p>现在碰到的绝大部分请求都会是GET和POST请求  </p>
+<h3 id="GET与POST的区别"><a href="#GET与POST的区别" class="headerlink" title="GET与POST的区别"></a>GET与POST的区别</h3><ul>
+<li>GET请求的参数 包含在URL中，POST并非在其中，而是会在请求体中通过表单的形式传递  </li>
+<li>GET请求最多提交1024字节的数据，而POST则没有限制  </li>
+</ul>
+<h2 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a>请求头</h2><table>
+<thead>
+<tr>
+<th>常用信息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accept</td>
+<td>请求头域，指定接受的内容类型</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>指定接受的内容的编码格式</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>指定接受的内容的语言</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>指定服务器域名和TCP端口号，如果使用的是服务请求标准端口号，端口号可以省略</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>网站为了辨识用户进行绘画跟踪而储存在用户本地的数据。主要功能是维持当前访问会话</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>用于标识请求从哪个页面发送过来，一般用于给服务器做数据统计</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>简称UA，标明用户使用的操作系统，浏览器信息</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>设置请求体的MIME类型，用于表示具体请求的媒体类型信息</td>
+</tr>
+<tr>
+<td>X-Requested-With</td>
+<td>标识Ajax请求，大部分js框架发送请求时都会设置它为XMLHttpRequest</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>设置请求响应链上所有的缓存机制必须遵守的指令</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>设置请求体的字节长度</td>
+</tr>
+<tr>
+<td>TE</td>
+<td>设置用户代理期望接受的传输编码格式，和响应头中的Transfer-Encoding字段一样</td>
+</tr>
+<tr>
+<td>DNT</td>
+<td>请求web应用禁用用户追踪</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>设置当前连接和hop-by-hop协议请求字段列表的控制选项</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>接受的字符编码</td>
+</tr>
+</tbody></table>
+<p>比较重要的信息：Cookies、Referer、User-Agent……  </p>
+<h2 id="请求体"><a href="#请求体" class="headerlink" title="请求体"></a>请求体</h2><p>承载信息主体</p>
+<h1 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h1><p>响应主要分为三个部分：响应状态码，响应头，响应体  </p>
+<h2 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h2><p>标识请求是否已成功完成<br>响应分为五类：信息响应(100–199)，成功响应(200–299)，重定向(300–399)，客户端错误(400–499)和服务器错误 (500–599)<br>详细：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status</a>  </p>
+<h2 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h2><table>
+<thead>
+<tr>
+<th>常用信息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Date</td>
+<td>响应产生的时间</td>
+</tr>
+<tr>
+<td>Last-Modified</td>
+<td>文档的最后改动时间</td>
+</tr>
+<tr>
+<td>Allow</td>
+<td>服务器支持哪些请求方法</td>
+</tr>
+<tr>
+<td>Content-Encoding</td>
+<td>文档的编码（Encode）方法。只有在解码之后才可以得到Content-Type头指定的内容类型。利用gzip压缩文档能够显著地减少HTML文档的下载时间。</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>内容长度</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>表示后面的文档属于什么MIME类型</td>
+</tr>
+<tr>
+<td>Server</td>
+<td>服务器名字</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td>响应过期时间，数据可以缓存在浏览器或者代理服务器中，如果再次访问，则可以从缓存中加载，降低服务器负荷</td>
+</tr>
+<tr>
+<td>Set-Cookie</td>
+<td>设置和页面关联的Cookie</td>
+</tr>
+</tbody></table>
+<h2 id="响应体"><a href="#响应体" class="headerlink" title="响应体"></a>响应体</h2><p>承载信息主体</p>
+<h1 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h1><h2 id="静态页面与动态页面"><a href="#静态页面与动态页面" class="headerlink" title="静态页面与动态页面"></a>静态页面与动态页面</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>静态页面</th>
+<th>动态页面</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内容</td>
+<td>固定</td>
+<td>可变</td>
+</tr>
+<tr>
+<td>加载速度</td>
+<td>快</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>可维护性</td>
+<td>差</td>
+<td>好</td>
+</tr>
+<tr>
+<td>动态页面可以解析URL中的参数变化，动态呈现不同的页面内容，更加灵活多变</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="无状态HTTP"><a href="#无状态HTTP" class="headerlink" title="无状态HTTP"></a>无状态HTTP</h2><p>无状态HTTP是指HTTP协议对事物处理是没有记忆能力的<br>向服务器发送请求，服务器解析请求，返回对应响应，这个过程是完全独立的，服务器不会记录前后状态的变化。这意味着如果你需要处理前面处理过的信息，则需要重传，会导致资源浪费<br>于是两个用于保持HTTP连接状态的技术出现了：<code>会话</code> 和 <code>Cookies</code></p>
+<h3 id="会话-1"><a href="#会话-1" class="headerlink" title="会话"></a>会话</h3><p>会话对象用来存储特定用户会话所需的属性和配置信息<br>当用户在Web页面中跳转时，存储在会话对象中的变量不会消失，会在整个用户会话中一直存在下去  </p>
+<blockquote>
+<p>当用户请求Web页时，如果用户还没有会话，Web服务器会自动创建一个会话对象。<br>当会话过期或被抛弃后，服务器将终止会话</p>
+</blockquote>
+<h3 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h3><p>网站为了辨识用户身份、进行会话跟踪 存储在用户本地终端上的数据  </p>
+<h4 id="会话维持"><a href="#会话维持" class="headerlink" title="会话维持"></a>会话维持</h4><p>客户端第一次请求服务器时，服务器会返回一个相应头中带有<code>Set-Cookie</code>字段的响应给客户端用于标识用户，客户端则会将<code>Cookies</code>存起来<br>在浏览器再次请求该网站，浏览器会把此前存放的<code>Cookies</code>放到请求头里一起提交给服务器<br><code>Cookies</code>携带了会话ID信息，服务器检查就知道其对应的会话了  </p>
+<h4 id="属性结构"><a href="#属性结构" class="headerlink" title="属性结构"></a>属性结构</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Name</td>
+<td>Cookie名称<br>一旦创建，不可更改</td>
+</tr>
+<tr>
+<td>Value</td>
+<td>Cookie值<br>如果为Unicode字符，则需要为字符编码<br>如果为二进制数据，则需要使用BASE64编码</td>
+</tr>
+<tr>
+<td>Domain</td>
+<td>可以访问该Cookie的域名</td>
+</tr>
+<tr>
+<td>Max Age</td>
+<td>Cookie失效时间，单位为秒，常与Expires一同使用<br>若值为正数，则Cookie在Max Age秒后失效<br>若值为负数，则关闭浏览器后Cookie失效</td>
+</tr>
+<tr>
+<td>Path</td>
+<td>Cookie使用路径<br>如果设置为/path/，则只有路径为/path/的页面才可以访问此Cookie<br>不设置则域名下所有页面均可访问此Cookie</td>
+</tr>
+<tr>
+<td>Size 字段</td>
+<td>Cookie 大小</td>
+</tr>
+<tr>
+<td>HTTP 字段</td>
+<td>Cookie的httponly属性<br>若此属性为true,则只有HTTP头中会带有此Cookie信息，而不能通过document.cookie来访问此Cookie</td>
+</tr>
+<tr>
+<td>Secure</td>
+<td>此Cookie是否只使用安全协议传输</td>
+</tr>
+</tbody></table>
+<h4 id="会话Cookie与持久Cookie"><a href="#会话Cookie与持久Cookie" class="headerlink" title="会话Cookie与持久Cookie"></a>会话Cookie与持久Cookie</h4><p>会话Cookie 指那些被存在浏览器内存中的Cookie，关闭浏览器后该Cookie会失效<br>持久Cookie 指那些保存在客户端硬盘中的Cookie，下次使用浏览器还能用  </p>
+<p>很多时候，Cookie都会被设置为持久Cookie，而且设置一个相当长的失效时间，这样做可以节约登录的资源消耗  </p>
+<h1 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h1><p>服务商的服务器是为普通用户服务的，服务商并不想为爬虫的程序浪费资源，因此会想办法反爬虫<br>在你提交请求的时候，服务器会记录你的IP。当同一个IP在一段时间内访问频率远高于一个正常人操作的频率，那么想都不用想，这就是爬虫程序，他会将你的IP设置在黑名单里，不再接受你的请求<br>使用代理来伪装IP，让服务器以为你是来自不同的地方的用户，本机IP不超出阀值，就不会被封禁</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>proxy server 代理服务器，功能是替代用户去获取网络信息，工作性质像是一个物流中转站<br>设置了代理以后，请求和响应都通过代理进行，服务器识别到的请求的IP是代理的IP<br>当代理足够多，将爬虫客户端高频率的请求分摊到多个代理服务器分别请求，形成很多看似合理的低频率访问，服务器就无法通过观察IP访问频率直接封禁IP来达到反爬虫的目的<br>需要注意的是 一个代理和客户端一样 会有访问频率过高而被封的可能，所以依然要注意访问频率</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
+<li>突破IP访问限制<br>能访问到当前IP访问不了的站点  </li>
+<li>提高访问速度<br>通常代理服务器会设置一个较大的硬盘缓冲区，当有外界的信息通过时，会将它保存到缓冲区中。当其他用户访问相同的信息，可以从缓冲区里直接取出信息，提高访问速度  </li>
+<li>隐藏真实IP<br>保护自己或者，避免被封  </li>
+</ul>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><h3 id="按照协议区分"><a href="#按照协议区分" class="headerlink" title="按照协议区分"></a>按照协议区分</h3><table>
+<thead>
+<tr>
+<th>代理类型</th>
+<th>信息</th>
+<th>协议默认端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FTP代理服务器</td>
+<td>用户访问FTP服务，一般有上传、下载、缓存功能</td>
+<td>21或2121</td>
+</tr>
+<tr>
+<td>HTTP代理服务器</td>
+<td>用于访问网页，一般有内容过滤和缓存功能</td>
+<td>80或8080或3128</td>
+</tr>
+<tr>
+<td>SSL/TLS代理</td>
+<td>用于访问加密网站，一般有SSL或TLS加密功能</td>
+<td>443</td>
+</tr>
+<tr>
+<td>RTSP 代理</td>
+<td>Real流媒体服务器，一般有缓存功能</td>
+<td>554</td>
+</tr>
+<tr>
+<td>Telnet 代理</td>
+<td>用于telnet远程控制（黑客入侵时常用于隐藏身份）</td>
+<td>23</td>
+</tr>
+<tr>
+<td>POP3/SMTP 代理</td>
+<td>POP3/SMTP收发右键，一般有缓存功能</td>
+<td>110、25</td>
+</tr>
+<tr>
+<td>SOCKS 代理</td>
+<td>只是单纯传递数据包，不关心协议和用法，速度较快，一般有缓存功能</td>
+<td>1080</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>SOCKS代理分类  </p>
+</blockquote>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>SOCKS4</th>
+<th>SOCKS5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>协议支持</td>
+<td>TCP</td>
+<td>TCP/UDP</td>
+</tr>
+<tr>
+<td>身份验证/域名解析</td>
+<td>×</td>
+<td>√</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h3 id="按照匿名程度区分"><a href="#按照匿名程度区分" class="headerlink" title="按照匿名程度区分"></a>按照匿名程度区分</h3><table>
+<thead>
+<tr>
+<th>代理类型</th>
+<th>服务器获取到的IP信息</th>
+<th>数据包改动</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>高度匿名代理</td>
+<td>代理服务器IP</td>
+<td>×</td>
+<td>原封不动的转发数据包<br></td>
+</tr>
+<tr>
+<td>普通匿名代理</td>
+<td>知道你用了代理，可以追查到真实IP</td>
+<td>√</td>
+<td>通常会在HTTP头带上<code>HTTP_VIA</code>和<code>HTTP_X_FRORWARDED_FOR</code></td>
+</tr>
+<tr>
+<td>透明代理</td>
+<td>真实IP</td>
+<td>√</td>
+<td>会告诉服务器客户端的真实IP<br>主要作用在于利用缓存提高浏览速度，过滤不安全数据包</td>
+</tr>
+<tr>
+<td>间谍代理</td>
+<td>?</td>
+<td>?</td>
+<td>用于记录用户传输数据，然后进行研究，达到监控的目的</td>
+</tr>
+</tbody></table>
+<p>对于爬虫来说，最好是有高匿代理，普通代理对一些小网站也可以用</p>
+<h2 id="常见代理设置"><a href="#常见代理设置" class="headerlink" title="常见代理设置"></a>常见代理设置</h2><table>
+<thead>
+<tr>
+<th>代理类型</th>
+<th>稳定性</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>免费代理</td>
+<td>差</td>
+<td>可用的不多，使用前最好筛选一下，可以进一步维护出一个代理池</td>
+</tr>
+<tr>
+<td>付费代理</td>
+<td>较好</td>
+<td>质量比免费的好很多</td>
+</tr>
+<tr>
+<td>ADSL拨号</td>
+<td>好</td>
+<td>拨号一次换一个IP，是一种比较有效的解决方案</td>
+</tr>
+</tbody></table>
+<h1 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h1><p>AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）<br><code>AJAX</code> 是一种使用现有标准的新方法<br>利用<code>JavaScript</code>，在页面不刷新的情况下与服务器交换数据，更新部分网页的技术<br>这种技术的使用能节约一部分服务器资源消耗，提升用户体验  </p>
+<h2 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h2><p>一般来说，从发送Ajax请求到更新网页这个过程可以分为三步：发送请求，解析响应，渲染页面<br>这里用原生JavaScript作为例子  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 创建一个 XMLHttpRequest 对象</span><br><span class="hljs-keyword">var</span> xmlhttp;<br><span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.XMLHttpRequest)<br>&#123;<br>    <span class="hljs-comment">//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码</span><br>    xmlhttp=<span class="hljs-keyword">new</span> XMLHttpRequest();<br>&#125;<br><span class="hljs-keyword">else</span><br>&#123;<br>    <span class="hljs-comment">// IE6, IE5 浏览器执行代码</span><br>    xmlhttp=<span class="hljs-keyword">new</span> ActiveXObject(<span class="hljs-string">&quot;Microsoft.XMLHTTP&quot;</span>);<br>&#125;<br><br><span class="hljs-comment">//调用 onreadystatechange 进行监听，等待服务器响应</span><br>xmlhttp.onreadystatechange=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-comment">// 根据readyState和status判断响应状态</span><br>    <span class="hljs-keyword">if</span> (xmlhttp.readyState==<span class="hljs-number">4</span> &amp;&amp; xmlhttp.status==<span class="hljs-number">200</span>)<br>    &#123;<br>        <span class="hljs-comment">//响应回调，对服务器返回的数据进行的操作，刷新页面元素</span><br>        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myDiv&quot;</span>).innerHTML=xmlhttp.responseText;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//调用open()和send()向服务器发送请求</span><br>xmlhttp.open(<span class="hljs-string">&quot;GET&quot;</span>,<span class="hljs-string">&quot;ajax_info.txt&quot;</span>,<span class="hljs-literal">true</span>);<br>xmlhttp.send();<br></code></pre></div></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>XMLHttpRequest 对象</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onreadystatechange</td>
+<td>存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数</td>
+</tr>
+<tr>
+<td>readyState</td>
+<td>存有 XMLHttpRequest 的状态<br>0: 请求未初始化<br>1: 服务器连接已建立<br>2: 请求已接收<br>3: 请求处理中<br>4: 请求已完成，且响应已就绪</td>
+</tr>
+<tr>
+<td>status</td>
+<td>200: “OK”<br>404: 未找到页面</td>
+</tr>
+</tbody></table>
+<h2 id="Ajax分析"><a href="#Ajax分析" class="headerlink" title="Ajax分析"></a>Ajax分析</h2><h3 id="Ajax头部特点"><a href="#Ajax头部特点" class="headerlink" title="Ajax头部特点"></a>Ajax头部特点</h3><p>Ajax有特殊的请求类型<code>xhr</code><br><img src="/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/20200724064909295.png" srcset="/img/loading.gif"><br><code>x-requested-with: XMLHttpRequest</code>就标记了此请求是一个<code>Ajax</code>请求<br>如果需要模拟<code>Ajax</code>发送请求，需要在头部添加这个参数</p>
+<h3 id="Ajax结果"><a href="#Ajax结果" class="headerlink" title="Ajax结果"></a>Ajax结果</h3><p>返回的结果类型多数会是json/xml/text<br><img src="/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/20200724070129095.png" srcset="/img/loading.gif"><br>其内容可能存在被加密的可能性<br>但由于在页面上显示是正确的内容，所以js中一定存在解密的逻辑  </p>
+<h3 id="Ajax溯源"><a href="#Ajax溯源" class="headerlink" title="Ajax溯源"></a>Ajax溯源</h3><p><img src="/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/20200724083416698.png" srcset="/img/loading.gif"><br>可以根据<code>GET</code>方法的参数来进行全局查找<br>可以打<code>XHR断点</code>，根据url来寻找  </p>
+<h4 id="Ajax样式"><a href="#Ajax样式" class="headerlink" title="Ajax样式"></a>Ajax样式</h4><p>流星</p>
+<ul>
+<li>AngularJS  <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 简单的 GET 请求，可以改为 POST</span><br>$http(&#123;<br>    method: <span class="hljs-string">&#x27;GET&#x27;</span>,<br>    url: <span class="hljs-string">&#x27;/someUrl&#x27;</span><br>&#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">successCallback</span>(<span class="hljs-params">response</span>) </span>&#123;<br>        <span class="hljs-comment">// 请求成功执行代码</span><br>    &#125;, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">errorCallback</span>(<span class="hljs-params">response</span>) </span>&#123;<br>        <span class="hljs-comment">// 请求失败执行代码</span><br>&#125;);<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%90%86/">代理</a>
+                    
+                      <a class="hover-with-bg" href="/tags/HTTP-HTTPS/">HTTP/HTTPS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Ajax/">Ajax</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/2020_2654e413/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RESTful架构</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/2020_dc386b6d/">
+                        <span class="hidden-mobile">win10-优化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

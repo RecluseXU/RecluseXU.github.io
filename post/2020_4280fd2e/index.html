@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>CSS-反爬 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CSS-反爬">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CSS-反爬</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年9月27日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><h2 id="CSS是什么"><a href="#CSS是什么" class="headerlink" title="CSS是什么"></a>CSS是什么</h2><p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML或XML等文件样式的计算机语言<br>CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化  </p>
+<h2 id="CSS过程"><a href="#CSS过程" class="headerlink" title="CSS过程"></a>CSS过程</h2><p><img src="/CSS-%E5%8F%8D%E7%88%AC/20200821052643339.png" srcset="/img/loading.gif">  </p>
+<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><p><img src="/CSS-%E5%8F%8D%E7%88%AC/20200821053049847.png" srcset="/img/loading.gif"><br>伪类：实际上不是真正的类名，而是一个内置影式的有特殊功能的类  </p>
+<h1 id="CSS反爬"><a href="#CSS反爬" class="headerlink" title="CSS反爬"></a>CSS反爬</h1><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>成本低  <ul>
+<li>只需要前端混淆样式（不需要后台配合）  </li>
+<li>不需要复杂的加密技术  </li>
+<li>不需要验证码，流量监控等额外配置  </li>
+</ul>
+</li>
+<li>效果好  <ul>
+<li>难以识别  </li>
+<li>抓取内容与预期相近  </li>
+<li>反爬措施不易发觉  </li>
+<li>可以弄假数据  </li>
+<li>没有成熟的破解套路  </li>
+</ul>
+</li>
+</ul>
+<h2 id="字体反爬"><a href="#字体反爬" class="headerlink" title="字体反爬"></a>字体反爬</h2><ul>
+<li>字体反爬通常会操作<code>font-family</code>字段，让其指向自定义的字体  </li>
+<li>通过定义字体的方法，将HTML中用不常见的unicode映射到常用字体中  </li>
+<li>爬虫抓取的数据只能抓到unicode，从而保护了真实数据  </li>
+</ul>
+<h3 id="应对"><a href="#应对" class="headerlink" title="应对"></a>应对</h3><ol>
+<li>下载<code>woff</code>字体文件，转化为 <code>tff</code>文件  </li>
+<li>用字体编辑器打开<code>tff</code>文件，确认unicode与实际值的映射关系  </li>
+<li>将HTML内容按照映射关系进行替换  </li>
+</ol>
+<h4 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h4><p>有些网站会动态生成<code>woff</code></p>
+<h2 id="CSS背景反爬"><a href="#CSS背景反爬" class="headerlink" title="CSS背景反爬"></a>CSS背景反爬</h2><p>其原理是CSS Sprite(雪碧图)，一种利用一张图做多个效果的操作的技术<br>在过去，常用于优化网页提升速度。雪碧图的方式只要求请求一次HTTP相比于多次请求来说性能更优  </p>
+<ul>
+<li>数据利用背景图片展示给用户，而不是直接用文本  </li>
+<li>图片包含一张雪碧图，数据利用背景偏移量获取  </li>
+<li>抓取时看不到实际值  </li>
+</ul>
+<h3 id="应对-1"><a href="#应对-1" class="headerlink" title="应对"></a>应对</h3><ol>
+<li>下载雪碧图，手动检查其对应值  </li>
+<li>调试工具中调整<code>background-position</code>的偏移量，找到各偏移量与实际值的映射关系  </li>
+<li>在爬虫中获取袁术元素偏移量，将其转为实际值  </li>
+</ol>
+<h2 id="CSS伪类反爬"><a href="#CSS伪类反爬" class="headerlink" title="CSS伪类反爬"></a>CSS伪类反爬</h2><ul>
+<li>不直接将内容展现在HTML中  </li>
+<li>通过伪类的<code>content</code>属性将要展示的值展示出来  </li>
+</ul>
+<h3 id="难点-1"><a href="#难点-1" class="headerlink" title="难点"></a>难点</h3><p>获取元素的伪类属性  </p>
+<h3 id="应对-2"><a href="#应对-2" class="headerlink" title="应对"></a>应对</h3><ul>
+<li>利用<code>Puppeteer</code>或<code>Selenium</code>在网页中执行JS来获取content  <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> el = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.valuable-content&#x27;</span>)  <span class="hljs-comment">// 利用选择器选出目标元素</span><br><span class="hljs-keyword">const</span> styles = getComputedStyle(el, <span class="hljs-string">&#x27;before&#x27;</span>) <span class="hljs-comment">// 获取样式（这里可能是before或者after）</span><br><span class="hljs-built_in">console</span>.log(styles.content)  <span class="hljs-comment">// 打印样式查看</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="元素定位反爬"><a href="#元素定位反爬" class="headerlink" title="元素定位反爬"></a>元素定位反爬</h2>利用绝对定位将某一个数字或字符将原数字或字符通过一定的偏移量替换  </li>
+<li>替换的数字或字符通常来说是随机的  </li>
+<li>直接抓取会抓到错误信息  </li>
+</ul>
+<h3 id="应对-3"><a href="#应对-3" class="headerlink" title="应对"></a>应对</h3><p>计算替换元素偏移量，与被替换元素做比对，还原真实值  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 元素获取</span><br><span class="hljs-keyword">const</span> elPr = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.mb-10 .b-airfly:nth-child(1) .fix_price&#x27;</span>)<br><span class="hljs-comment">// 被替换元素类别</span><br><span class="hljs-keyword">let</span> strArr = <span class="hljs-built_in">Array</span>.from(elPr.querySelectorAll(<span class="hljs-string">&#x27;b:first-child &gt; i&#x27;</span>)).map(<span class="hljs-function"><span class="hljs-params">el</span> =&gt;</span> el.innerText)<br><span class="hljs-comment">// 替换元素</span><br>elPr.querySelectorAll(<span class="hljs-string">&#x27;b:not(:first-child)&#x27;</span>).forEach(<span class="hljs-function"><span class="hljs-params">el</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 偏移量</span><br>    <span class="hljs-keyword">const</span> left = <span class="hljs-built_in">Number</span>(getComputedStyle(el).left.replace(<span class="hljs-string">&#x27;px&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>))<br>    <span class="hljs-comment">// 替换值</span><br>    strArr[strArr.length + left/<span class="hljs-number">16</span>] = el.innerText<br>&#125;)<br><span class="hljs-comment">// 真实值</span><br><span class="hljs-built_in">console</span>.log(strArr.join(<span class="hljs-string">&#x27;&#x27;</span>)) <br></code></pre></div></td></tr></table></figure>
+<h2 id="利用字符分割"><a href="#利用字符分割" class="headerlink" title="利用字符分割"></a>利用字符分割</h2><ul>
+<li>将字符串用标签分割开来  </li>
+<li>由于其实内联块级(inline-block)，依旧是一行展示  </li>
+<li>通常还混淆有不显示的标签(display:none)  </li>
+</ul>
+<h3 id="应对-4"><a href="#应对-4" class="headerlink" title="应对"></a>应对</h3><p>将内联块级标签的<code>innerText</code>拼接起来<br>注意过滤掉所有的<code>display:none</code>属性  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 元素获取</span><br><span class="hljs-keyword">const</span> elIp = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.ip&#x27;</span>)<br><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-comment">// 过滤 display: none</span><br><span class="hljs-keyword">const</span> elList = elIp.querySelectorAll(<span class="hljs-string">&#x27;*:not([style=&quot;display: none;&quot;])&#x27;</span>);<br><span class="hljs-comment">// 拼接</span><br>elList.forEach(<span class="hljs-function">(<span class="hljs-params">el, i</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span>(i === elList.length - <span class="hljs-number">1</span> )<br>        <span class="hljs-keyword">return</span> str += el.innerText<br>&#125;)<br><span class="hljs-built_in">console</span>.log(str)<br></code></pre></div></td></tr></table></figure>
+<h2 id="推荐CSS反爬步骤"><a href="#推荐CSS反爬步骤" class="headerlink" title="推荐CSS反爬步骤"></a>推荐CSS反爬步骤</h2><ol>
+<li>通过调试工具，人工查看CSS样式  </li>
+<li>判断CSS反爬类型  </li>
+<li>根据不同的类型采用不同的应对措施  </li>
+<li>对于新的CSS反爬，研究其原理，采用合适的反爬策略  </li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CSS/">CSS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8D%E7%88%AC%E8%99%AB/">反爬虫</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/2020_54ad1f51/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Puppeteer-Pyppeteer</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/2020_3b5ddb7/">
+                        <span class="hidden-mobile">编码和加密-js-Python</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

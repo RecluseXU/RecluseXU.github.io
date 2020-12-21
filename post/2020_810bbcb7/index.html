@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>ConfigParser-Python-ini配置文件 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ConfigParser-Python-ini配置文件">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      862 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ConfigParser-Python-ini配置文件</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年10月30日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>这是一个用来管理配置文件的库<br>一般用来管理<code>.ini</code>配置文件（<code>Windows</code>下的配置文件）  </p>
+<blockquote>
+<p>不太推荐用这个东西，问题较多，感觉还不如直接<code>json</code></p>
+</blockquote>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p>官方文档：<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/configparser.html">https://docs.python.org/3/library/configparser.html</a>  </p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><code>.ini</code>和<code>.conf</code>配置文件,他们大概长这样：  </p>
+<figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-section">[db]</span><br><span class="hljs-attr">db_host</span> = <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span><br><span class="hljs-attr">db_port</span> = <span class="hljs-number">69</span><br><span class="hljs-attr">db_user</span> = root<br><span class="hljs-attr">db_pass</span> = root<br><span class="hljs-attr">host_port</span> = <span class="hljs-number">69</span><br><span class="hljs-attr">is_ok</span> = <span class="hljs-literal">True</span><br> <br><span class="hljs-section">[concurrent]</span><br><span class="hljs-attr">thread</span> = <span class="hljs-number">10</span><br><span class="hljs-attr">processor</span> = <span class="hljs-number">20</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="Section"><a href="#Section" class="headerlink" title="Section"></a>Section</h3><p>上面的<code>[db]</code>,<code>[concurrent]</code>之类的就是<code>section</code><br>内容一般用<code>[]</code>来包裹，表示一块相对独立的配置块  </p>
+<h3 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h3><p>上面的<code>db_host = 127.0.0.1</code>，<code>db_port = 69</code>之类的就是<code>Options</code><br>这是配置的本体，以<code>Key-Value</code>的形式保存着  </p>
+<h1 id="使用入门"><a href="#使用入门" class="headerlink" title="使用入门"></a>使用入门</h1><p>这个东西的用法很像<code>dict</code><br>如果遇到什么想要进行的<code>dict</code>本身又提供函数的操作，可以试试看能不能用  </p>
+<h2 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h2><h3 id="初始化ConfigParser对象"><a href="#初始化ConfigParser对象" class="headerlink" title="初始化ConfigParser对象"></a>初始化ConfigParser对象</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;<span class="hljs-keyword">import</span> configparser<br>&gt;&gt;&gt;config = configparser.ConfigParser()<br>&gt;&gt;&gt;config.read(<span class="hljs-string">&quot;ini&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>)<br></code></pre></div></td></tr></table></figure>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="获取Section节点"><a href="#获取Section节点" class="headerlink" title="获取Section节点"></a>获取Section节点</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;print(config.sections())<br>[<span class="hljs-string">&#x27;db&#x27;</span>, <span class="hljs-string">&#x27;concurrent&#x27;</span>]<br>&gt;&gt;&gt;print(config[<span class="hljs-string">&#x27;db&#x27;</span>])<br>[<span class="hljs-string">&#x27;db&#x27;</span>, <span class="hljs-string">&#x27;concurrent&#x27;</span>]<br></code></pre></div></td></tr></table></figure>
+<h3 id="从Section中获取Options"><a href="#从Section中获取Options" class="headerlink" title="从Section中获取Options"></a>从Section中获取Options</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;config.options(<span class="hljs-string">&quot;db&quot;</span>)<br>[<span class="hljs-string">&#x27;db_host&#x27;</span>, <span class="hljs-string">&#x27;db_port&#x27;</span>, <span class="hljs-string">&#x27;db_user&#x27;</span>, <span class="hljs-string">&#x27;db_pass&#x27;</span>, <span class="hljs-string">&#x27;host_port&#x27;</span>]<br>&gt;&gt;&gt;<span class="hljs-built_in">list</span>(config[<span class="hljs-string">&#x27;db&#x27;</span>].keys())<br>[<span class="hljs-string">&#x27;db_host&#x27;</span>, <span class="hljs-string">&#x27;db_port&#x27;</span>, <span class="hljs-string">&#x27;db_user&#x27;</span>, <span class="hljs-string">&#x27;db_pass&#x27;</span>, <span class="hljs-string">&#x27;host_port&#x27;</span>]<br></code></pre></div></td></tr></table></figure>
+<h3 id="获取Option的值"><a href="#获取Option的值" class="headerlink" title="获取Option的值"></a>获取Option的值</h3><h4 id="获取指定Option的值"><a href="#获取指定Option的值" class="headerlink" title="获取指定Option的值"></a>获取指定Option的值</h4><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;r = config.get(<span class="hljs-string">&quot;db&quot;</span>, <span class="hljs-string">&quot;db_host&quot;</span>)<br><span class="hljs-string">&quot;127.0.0.1&quot;</span><br>&gt;&gt;&gt;r0 = config[<span class="hljs-string">&#x27;db&#x27;</span>][<span class="hljs-string">&#x27;db_host&#x27;</span>]<br><span class="hljs-string">&quot;127.0.0.1&quot;</span><br>&gt;&gt;&gt;r1 = config.getint(<span class="hljs-string">&quot;db&quot;</span>, <span class="hljs-string">&quot;db_port&quot;</span>)  <span class="hljs-comment"># 将获取到值转换为int型</span><br><span class="hljs-number">69</span><br>&gt;&gt;&gt;r2 = config.getboolean(<span class="hljs-string">&quot;db&quot;</span>, <span class="hljs-string">&quot;is_ok&quot;</span> )  <span class="hljs-comment"># 将获取到值转换为bool型</span><br><span class="hljs-literal">True</span><br>&gt;&gt;&gt;r3 = config.getfloat(<span class="hljs-string">&quot;db&quot;</span>, <span class="hljs-string">&quot;host_port&quot;</span> ) <span class="hljs-comment">#将获取到值转换为浮点型</span><br><span class="hljs-number">69.0</span><br></code></pre></div></td></tr></table></figure>
+<h4 id="获取所有Option的值"><a href="#获取所有Option的值" class="headerlink" title="获取所有Option的值"></a>获取所有Option的值</h4><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;config.items(<span class="hljs-string">&quot;db&quot;</span>)<br>[(<span class="hljs-string">&#x27;db_host&#x27;</span>, <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>), (<span class="hljs-string">&#x27;db_port&#x27;</span>, <span class="hljs-string">&#x27;69&#x27;</span>), (<span class="hljs-string">&#x27;db_user&#x27;</span>, <span class="hljs-string">&#x27;root&#x27;</span>), (<span class="hljs-string">&#x27;db_pass&#x27;</span>, <span class="hljs-string">&#x27;root&#x27;</span>), (<span class="hljs-string">&#x27;host_port&#x27;</span>, <span class="hljs-string">&#x27;69&#x27;</span>)]<br>&gt;&gt;&gt;<span class="hljs-built_in">list</span>(config[<span class="hljs-string">&#x27;database-mongo&#x27;</span>].items())<br>[(<span class="hljs-string">&#x27;db_host&#x27;</span>, <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>), (<span class="hljs-string">&#x27;db_port&#x27;</span>, <span class="hljs-string">&#x27;69&#x27;</span>), (<span class="hljs-string">&#x27;db_user&#x27;</span>, <span class="hljs-string">&#x27;root&#x27;</span>), (<span class="hljs-string">&#x27;db_pass&#x27;</span>, <span class="hljs-string">&#x27;root&#x27;</span>), (<span class="hljs-string">&#x27;host_port&#x27;</span>, <span class="hljs-string">&#x27;69&#x27;</span>)]<br></code></pre></div></td></tr></table></figure>
+<h2 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h2><h3 id="检测是否有Section"><a href="#检测是否有Section" class="headerlink" title="检测是否有Section"></a>检测是否有Section</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;config.has_section(<span class="hljs-string">&quot;db&quot;</span>)  <span class="hljs-comment"># 是否存在该section</span><br><span class="hljs-literal">True</span><br>&gt;&gt;&gt;<span class="hljs-string">&#x27;db&#x27;</span> <span class="hljs-keyword">in</span> config<br><span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="检测是否有Option"><a href="#检测是否有Option" class="headerlink" title="检测是否有Option"></a>检测是否有Option</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;config.has_option(<span class="hljs-string">&quot;section&quot;</span>, <span class="hljs-string">&quot;option&quot;</span>)<br><span class="hljs-literal">False</span><br>&gt;&gt;&gt;<span class="hljs-string">&quot;db_host&quot;</span> <span class="hljs-keyword">in</span> config[<span class="hljs-string">&quot;db&quot;</span>]<br><span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="修改-创建"><a href="#修改-创建" class="headerlink" title="修改/创建"></a>修改/创建</h2><h3 id="创建Section"><a href="#创建Section" class="headerlink" title="创建Section"></a>创建Section</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;config.add_section(<span class="hljs-string">&quot;new:section&quot;</span>)<br>&gt;&gt;&gt;config[<span class="hljs-string">&#x27;new:section&#x27;</span>] = &#123;&#125;<br><span class="hljs-comment"># 可以顺便赋值option</span><br>&gt;&gt;&gt;config[<span class="hljs-string">&#x27;new:section&#x27;</span>] = &#123;<span class="hljs-string">&#x27;o1&#x27;</span>: <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;o2&#x27;</span>: <span class="hljs-string">&#x27;2&#x27;</span>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="修改-创建Option"><a href="#修改-创建Option" class="headerlink" title="修改/创建Option"></a>修改/创建Option</h3><p>修改某个<code>option</code>的值，如果不存在该<code>option</code>则会被创建  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># db Section 的 db_port Option 的值为69</span><br>&gt;&gt;&gt;config.<span class="hljs-built_in">set</span>(<span class="hljs-string">&quot;db&quot;</span>, <span class="hljs-string">&quot;db_port&quot;</span>, <span class="hljs-string">&quot;69&quot;</span>)<br>&gt;&gt;&gt;config[<span class="hljs-string">&#x27;db&#x27;</span>][<span class="hljs-string">&quot;db_port&quot;</span>] = <span class="hljs-string">&#x27;69&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="删除Section"><a href="#删除Section" class="headerlink" title="删除Section"></a>删除Section</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;config.pop(<span class="hljs-string">&#x27;db&#x27;</span>)<br>&gt;&gt;&gt;<br>&gt;&gt;&gt;config[<span class="hljs-string">&#x27;db&#x27;</span>] = &#123;&#125;  <span class="hljs-comment"># 重新创建以供删除</span><br>&gt;&gt;&gt;config.remove_section(<span class="hljs-string">&quot;default&quot;</span>)<br></code></pre></div></td></tr></table></figure>
+<h3 id="删除Option"><a href="#删除Option" class="headerlink" title="删除Option"></a>删除Option</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;config.pop(<span class="hljs-string">&#x27;db&#x27;</span>)<br>&gt;&gt;&gt;<br>&gt;&gt;&gt;config[<span class="hljs-string">&#x27;db&#x27;</span>] = &#123;&#125;  <span class="hljs-comment"># 重新创建以供删除</span><br>&gt;&gt;&gt;config.remove_section(<span class="hljs-string">&quot;default&quot;</span>)<br></code></pre></div></td></tr></table></figure>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;example.ini&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    config.write(f)<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="关键词无法使用"><a href="#关键词无法使用" class="headerlink" title="关键词无法使用"></a>关键词无法使用</h2><p>有一些词在文件里是无法使用的，只要一访问带有这个词的Option就会报错<br>比如说 <code>asctime</code><br>解决办法：</p>
+<ol>
+<li>使用<code>RawConfigParser</code>而不是<code>ConfigParser</code>  </li>
+<li>把关键词删除  </li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ConfigParser/">ConfigParser</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/2020_ad65409c/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VSCode-用户代码片段</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/2020_80b1cc67/">
+                        <span class="hidden-mobile">Webpack-前端</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
