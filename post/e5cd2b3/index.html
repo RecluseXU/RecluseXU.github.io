@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.2k 字
+      3.5k 字
     </span>
   
 
@@ -196,7 +196,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年12月21日 晚上
+                  本文最后更新于：2020年12月24日 上午
                 
               </p>
             
@@ -365,9 +365,28 @@
 <td>RFC 3403定义</td>
 <td>它提供了正则表达式方式去映射一个域名<br>NAPTR记录非常著名的一个应用是用于ENUM查询</td>
 </tr>
+<tr>
+<td>邮件交换记录</td>
+<td>MX记录</td>
+<td>RFC 1035定义</td>
+<td>用于指定负责处理发往收件人域名的邮件服务器<br>MX记录允许设置一个优先级，当多个邮件服务器可用时，会根据该值决定投递邮件的服务器。简单邮件传输协议（SMTP）会根据MX记录的值来决定邮件的路由过程。</td>
+</tr>
 </tbody></table>
 <blockquote>
 <p>类型大全：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/DNS%E8%AE%B0%E5%BD%95%E7%B1%BB%E5%9E%8B%E5%88%97%E8%A1%A8">https://zh.wikipedia.org/wiki/DNS%E8……</a>  </p>
+</blockquote>
+<h2 id="最常用类型"><a href="#最常用类型" class="headerlink" title="最常用类型"></a>最常用类型</h2><p>在域名解析控制台里，最常配置的是  </p>
+<ul>
+<li><code>A记录</code> 主机记录  </li>
+<li><code>CNAME记录</code> 别名记录  </li>
+</ul>
+<p>这里用假用百度域名<code>baidu.com</code>和假定的服务器<code>192.168.1.2</code>来举例<br><code>A记录</code> 会作为主记录存在，可以利用域名直接指定  </p>
+<blockquote>
+<p>即<code>baidu.com</code>-A记录解析-&gt;<code>192.168.1.2</code>  </p>
+</blockquote>
+<p>但<code>baidu.com</code>并不是我们最常用的访问域名，我们最常用的访问域名是<code>www.baidu.com</code>，这里实际上并不是指定一个新的<code>A记录</code>，因为如果这样做。未来服务器IP改变的话，就需要更改大量的记录<br><code>CNAME记录</code> 就是用来处理这种情况的。记录可以将子域名<code>www.baidu.com</code>指定到<code>baidu.com</code>上  </p>
+<blockquote>
+<p>即<code>www.baidu.com</code>-CNAME记录解析-&gt;<code>baidu.com</code>-&gt;<code>A记录解析</code>-&gt;<code>192.168.1.2</code>  </p>
 </blockquote>
 <h1 id="域名购买-备案-使用"><a href="#域名购买-备案-使用" class="headerlink" title="域名购买-备案-使用"></a>域名购买-备案-使用</h1><h2 id="域名购买"><a href="#域名购买" class="headerlink" title="域名购买"></a>域名购买</h2><h3 id="确认需求"><a href="#确认需求" class="headerlink" title="确认需求"></a>确认需求</h3><p>一般而言，购买域名适用于部署网站的，当然你也能用来炒<br>如果是用于部署网站，那么最好在网站部署完成前一到半个月考虑域名的事情。买早了浪费，买迟了会被备案拖累  </p>
 <h3 id="运营商选择"><a href="#运营商选择" class="headerlink" title="运营商选择"></a>运营商选择</h3><p>在购买之前需要选择一个运营商<br>不少云服务商也经营着域名相关的业务（例如：<a target="_blank" rel="noopener" href="https://buy.cloud.tencent.com/domain">腾讯云</a>，<a target="_blank" rel="noopener" href="https://wanwang.aliyun.com/domain/yumingheji">阿里云</a>）<br>销售策略也多为捆绑销售（买服务器送域名之类）  </p>
@@ -427,6 +446,8 @@
                     
                       <a class="hover-with-bg" href="/tags/%E5%9F%9F%E5%90%8D/">域名</a>
                     
+                      <a class="hover-with-bg" href="/tags/%E5%A4%87%E6%A1%88/">备案</a>
+                    
                   </div>
                 
               </div>
@@ -438,9 +459,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/post/7389a59f/">
+                      <a href="/post/undefined/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Javascript-Babel-AST-API-解混淆-基础</span>
+                        <span class="hidden-mobile">Javascript-Babel-traverse-NodePath.evaluate方法增强</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -448,8 +469,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/post/ff374aa2/">
-                        <span class="hidden-mobile">Https</span>
+                      <a href="/post/undefined/">
+                        <span class="hidden-mobile">Javascript-Babel-API</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

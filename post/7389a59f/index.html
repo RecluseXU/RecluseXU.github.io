@@ -17,7 +17,7 @@
   <meta name="description" content="自娱自乐">
   <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>Javascript-Babel-AST-API-解混淆-基础 - EvilRecluse</title>
+  <title>Javascript-Babel-AST-解混淆-基础 - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Javascript-Babel-AST-API-解混淆-基础">
+            <span class="h2" id="subtitle" title="Javascript-Babel-AST-解混淆-基础">
               
             </span>
 
@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.9k 字
+      5k 字
     </span>
   
 
@@ -192,16 +192,25 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Javascript-Babel-AST-API-解混淆-基础</h1>
+            <h1 style="display: none">Javascript-Babel-AST-解混淆-基础</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年12月21日 晚上
+                  本文最后更新于：2020年12月24日 晚上
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="相关信息"><a href="#相关信息" class="headerlink" title="相关信息"></a>相关信息</h1><table>
+              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><h2 id="抽象语法树-AST"><a href="#抽象语法树-AST" class="headerlink" title="抽象语法树 AST"></a>抽象语法树 AST</h2><blockquote>
+<p>维基百科-抽象语法树：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9">https://zh.wikipedia.org/wiki/%E6%8A%……</a>  </p>
+</blockquote>
+<p>抽象语法树（Abstract Syntax Tree，AST）是源代码语法结构的一种抽象表示<br>它以树状的形式表现编程语言的语法结构，树上的每个节点都表示源代码中的一种结构<br>之所以说语法是“抽象”的，是因为这里的语法并不会表示出真实语法中出现的每个细节  </p>
+<blockquote>
+<p>例:代码转抽象语法树  </p>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">while <span class="hljs-selector-tag">b</span> ≠ <span class="hljs-number">0</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-selector-tag">a</span> &gt; b<br>        <span class="hljs-selector-tag">a</span> := <span class="hljs-selector-tag">a</span> − b<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-selector-tag">b</span> := <span class="hljs-selector-tag">b</span> − a<br>    return a<br></code></pre></div></td></tr></table></figure>
+<p><img src="/Javascript-Babel-AST-%E8%A7%A3%E6%B7%B7%E6%B7%86-%E5%9F%BA%E7%A1%80/20201224050050034.png" srcset="/img/loading.gif">  </p>
+<h2 id="链接信息"><a href="#链接信息" class="headerlink" title="链接信息"></a>链接信息</h2><table>
 <thead>
 <tr>
 <th>信息</th>
@@ -271,7 +280,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@babel/parser&quot;</span>);<br></code></pre></div></td></tr></table></figure>
 <p>这一步可能会出现说没有库的问题，这是由于环境变量导致的<br>一般而言，安装<code>Node.js</code>会默认配置上环境变量，但这个配置不一定有用<br>此时你可以手动设置环境变量，或者用绝对路径来引入  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;E:/Environment/Nodejs/node_global/node_modules/@babel/parser&quot;</span>);<br></code></pre></div></td></tr></table></figure>
-<h2 id="在线解析网站"><a href="#在线解析网站" class="headerlink" title="在线解析网站"></a>在线解析网站</h2><p>链接： <a target="_blank" rel="noopener" href="https://astexplorer.net/">https://astexplorer.net/</a><br>这个是一个解析代码语法树的网站<br>这里是需要用它的<code>Babel</code>解析语法树，所以要做对应设置<br><img src="/Javascript-Babel-AST-API-%E8%A7%A3%E6%B7%B7%E6%B7%86-%E5%9F%BA%E7%A1%80/20200830085956301.png" srcset="/img/loading.gif"><br>打开以后将解析方式改为<code>@babel/parser</code><br>在左边的文本框里输入一些代码，就能在右边看到对应解析出来的语法树了  </p>
+<h2 id="在线解析网站"><a href="#在线解析网站" class="headerlink" title="在线解析网站"></a>在线解析网站</h2><p>链接： <a target="_blank" rel="noopener" href="https://astexplorer.net/">https://astexplorer.net/</a><br>这个是一个解析代码语法树的网站<br>这里是需要用它的<code>Babel</code>解析语法树，所以要做对应设置<br><img src="/Javascript-Babel-AST-%E8%A7%A3%E6%B7%B7%E6%B7%86-%E5%9F%BA%E7%A1%80/20200830085956301.png" srcset="/img/loading.gif"><br>打开以后将解析方式改为<code>@babel/parser</code><br>在左边的文本框里输入一些代码，就能在右边看到对应解析出来的语法树了  </p>
 <h1 id="认识AST"><a href="#认识AST" class="headerlink" title="认识AST"></a>认识AST</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>如果将代码中各类的语句都看成节点，那么整个程序的代码就像是由一个个节点组成的树状结构，代码的运行就像是不完全遍历这颗树一样  </p>
 <p>AST解析源代码实际上就是这样干的<br>在代码解析完成后，你会得到一颗语法树，这颗语法树包含了代码中的所有内容  </p>
 <p>你可以对它进行树（数据结构）可以进行的所有操作（从复杂的 <code>有序树转二叉树</code> 到简单的 <code>替换节点</code>，<code>计算树的深度</code>，<code>剪枝</code>，<code>拼接</code>都可以）  </p>
@@ -319,19 +328,19 @@
 <p>输入仪式性的语句  <code>console.log(&quot;Hello World&quot;)</code>  的变种代码  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 这是一段源代码，作用就是计算，输出一些字符</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">var</span> i = [<span class="hljs-string">&#x27;H&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;W&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>];<br>  i = i.join(<span class="hljs-string">&#x27;&#x27;</span>);<br>  <span class="hljs-keyword">return</span> i<br>&#125;<br><span class="hljs-built_in">console</span>.log(test())<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="最外层File节点"><a href="#最外层File节点" class="headerlink" title="最外层File节点"></a>最外层<code>File节点</code></h3><p><img src="/Javascript-Babel-AST-API-%E8%A7%A3%E6%B7%B7%E6%B7%86-%E5%9F%BA%E7%A1%80/20200901023343710.png" srcset="/img/loading.gif"><br>先将节点收得差不多，观察最外面的<code>File节点</code>的信息  </p>
+<h3 id="最外层File节点"><a href="#最外层File节点" class="headerlink" title="最外层File节点"></a>最外层<code>File节点</code></h3><p><img src="/Javascript-Babel-AST-%E8%A7%A3%E6%B7%B7%E6%B7%86-%E5%9F%BA%E7%A1%80/20200901023343710.png" srcset="/img/loading.gif"><br>先将节点收得差不多，观察最外面的<code>File节点</code>的信息  </p>
 <ul>
 <li><code>type</code> <code>start</code> <code>end</code> <code>loc</code> 你能在绝大多数节点里看到  </li>
 <li>常用的类型判断方法<code>t.is****(node)</code>就是判断当前节点type是否为某个类型  </li>
 </ul>
 <h3 id="层级结构分析"><a href="#层级结构分析" class="headerlink" title="层级结构分析"></a>层级结构分析</h3><p>实际上，可以通过观察 <code>type</code> 知道一些信息  </p>
 <blockquote>
-<p>层级分析例1:<br><img src="/Javascript-Babel-AST-API-%E8%A7%A3%E6%B7%B7%E6%B7%86-%E5%9F%BA%E7%A1%80/20200901023523804.png" srcset="/img/loading.gif"><br>比如说这整个文件包含了了代码块主要有两部分： <strong>一个函数声明</strong> 和 <strong>一句语句</strong>  </p>
+<p>层级分析例1:<br><img src="/Javascript-Babel-AST-%E8%A7%A3%E6%B7%B7%E6%B7%86-%E5%9F%BA%E7%A1%80/20200901023523804.png" srcset="/img/loading.gif"><br>比如说这整个文件包含了了代码块主要有两部分： <strong>一个函数声明</strong> 和 <strong>一句语句</strong>  </p>
 </blockquote>
 <br>
 
 <blockquote>
-<p>层级分析例2:<br><img src="/Javascript-Babel-AST-API-%E8%A7%A3%E6%B7%B7%E6%B7%86-%E5%9F%BA%E7%A1%80/20200901082003100.png" srcset="/img/loading.gif"><br>又比如说，这个函数里包含了三个部分：<strong>一个声明</strong>，<strong>一个语句</strong>，<strong>一个返回</strong>  </p>
+<p>层级分析例2:<br><img src="/Javascript-Babel-AST-%E8%A7%A3%E6%B7%B7%E6%B7%86-%E5%9F%BA%E7%A1%80/20200901082003100.png" srcset="/img/loading.gif"><br>又比如说，这个函数里包含了三个部分：<strong>一个声明</strong>，<strong>一个语句</strong>，<strong>一个返回</strong>  </p>
 </blockquote>
 <h2 id="解析代码-Code→AST"><a href="#解析代码-Code→AST" class="headerlink" title="解析代码 Code→AST"></a>解析代码 Code→AST</h2><p><code>@babel/parser</code>能将<code>javascript</code>代码解析成语法树<br>这个库在前文中已经安装好了，现在用它来解析语法树吧  </p>
 <blockquote>
@@ -523,8 +532,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/post/e5cd2b3/">
-                        <span class="hidden-mobile">域名-DomainName-意义-购买-解析-备案</span>
+                      <a href="/post/ff374aa2/">
+                        <span class="hidden-mobile">Https</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
