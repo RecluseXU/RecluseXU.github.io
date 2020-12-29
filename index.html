@@ -157,7 +157,7 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/post/undefined/">Javascript-Babel-traverse-NodePath.evaluate方法增强</a>
+        <a href="/post/undefined/">Javascript-Babel-API</a>
       </h1>
 
       <p class="index-excerpt">
@@ -166,10 +166,111 @@
           
             
           
-          NodePath.evaluate() 方法，可以帮我们处理 “1|3|5|7|9”.slice(“|”),但是不支持对 parseInt 等全局函数的处理，因此我们可以修改部分源码，让其支持即可。
-其实很简单，打开node_modules@babel\traverse\lib\path\evaluation.js 文件 ，看看他都支持哪些，往后面添加即可。
-主要是这行代码:
-const VALI
+          API信息這些記錄是我自行查閲文檔/源代碼，來進行編寫的大多數都會編寫一個小例子來進行説明  
+内容并不一定準確，要是發現有什麽問題，歡迎通過 Github 聯係我  
+@babel/parse解析函数babelParser.parse(code, [options])将提供的代码作为一个完整的ECMAScript程序进行解析  
+babelParser.parseExpression(code,
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-29 10:05" pubdate>
+              2020-12-29
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Babel/">Babel</a>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+              <a href="/tags/API/">API</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/undefined/">Python-aiofiles-异步文件操作</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/undefined/">
+          
+          
+            
+          
+          信息简介aiofiles 是一个异步操作文件的库  
+普通IO操作会阻塞程序。造成一些问题aiofiles 能通过将 IO操作 委派给单独的线程池来处理 来解决这个问题  
+pypi链接: https://pypi.org/project/aiofiles/  
+特性
+aiofiles 为文件操作提供 简但的 阻塞的 API  
+支持缓冲读取  
+支持 async/await
+
+使用安装1pip 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-28 15:37" pubdate>
+              2020-12-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/aiofile/">aiofile</a>
+            
+              <a href="/tags/%E5%BC%82%E6%AD%A5/">异步</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/undefined/">Javascript-Babel-AST-traverse-NodePath.evaluate方法增强</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/undefined/">
+          
+          
+            
+          
+          信息NodePath.evaluate()方法非常的好用，但本身也存在着一些限制进行一些源码修改能提升它的能力  
+处理更多全局函数NodePath.evaluate() 方法不支持对parseInt等全局函数的处理我们可以通过修改源码，让其支持  
+
+打开方法定义文件，查看函数处理定义文件路径：node_modules\@babel\traverse\lib\path\evaluation.js
         </a>
       </p>
 
@@ -188,6 +289,8 @@ const VALI
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Babel/">Babel</a>
+            
+              <a href="/tags/Javascript/">Javascript</a>
             
           </div>
         
@@ -247,54 +350,6 @@ const VALI
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/post/undefined/">Javascript-Babel-API</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/undefined/">
-          
-          
-            
-          
-          API信息這些記錄是我自行查閲文檔/源代碼，來進行編寫的大多數都會編寫一個小例子來進行説明  
-内容并不一定準確，要是發現有什麽問題，歡迎通過 Github 聯係我  
-@babel/parse解析函数babelParser.parse(code, [options])将提供的代码作为一个完整的ECMAScript程序进行解析  
-babelParser.parseExpression(code,
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-21 21:00" pubdate>
-              2020-12-21
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Javascript/">Javascript</a>
-            
-              <a href="/tags/Babel/">Babel</a>
-            
-              <a href="/tags/API/">API</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/post/7389a59f/">Javascript-Babel-AST-解混淆-基础</a>
       </h1>
 
@@ -327,9 +382,9 @@ babelParser.parseExpression(code,
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Javascript/">Javascript</a>
-            
               <a href="/tags/Babel/">Babel</a>
+            
+              <a href="/tags/Javascript/">Javascript</a>
             
               <a href="/tags/AST/">AST</a>
             
@@ -1053,53 +1108,6 @@ ES6语法
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Webpack/">Webpack</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/63485ee6/">Django-后端-Python</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/63485ee6/">
-          
-          
-            
-          
-          信息一个python web框架，相较于flask而言体量更大更重 
-文档/网站官网：https://www.djangoproject.com/文档：https://docs.djangoproject.com/zh-hans/3.1/intro/install/  
-使用安装使用pip进行安装即可  
-1pip install Django
-验证安装对应环境启动后，输出django版本号以测试
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-28 21:52" pubdate>
-              2020-10-28
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/Django/">Django</a>
             
           </div>
         
