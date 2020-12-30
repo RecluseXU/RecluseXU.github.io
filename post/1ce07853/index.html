@@ -17,7 +17,7 @@
   <meta name="description" content="自娱自乐">
   <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>部署高匿代理-Squid - EvilRecluse</title>
+  <title>Javascript-Babel-AST-traverse-NodePath.evaluate方法增强 - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="部署高匿代理-Squid">
+            <span class="h2" id="subtitle" title="Javascript-Babel-AST-traverse-NodePath.evaluate方法增强">
               
             </span>
 
@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      629 字
+      615 字
     </span>
   
 
@@ -192,44 +192,53 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">部署高匿代理-Squid</h1>
+            <h1 style="display: none">Javascript-Babel-AST-traverse-NodePath.evaluate方法增强</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年12月9日 下午
+                  本文最后更新于：2020年12月30日 上午
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>用<code>Squid</code>来部署一个高匿代理服务到服务器  </p>
-<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><h2 id="安装-Squid-与-Httpd"><a href="#安装-Squid-与-Httpd" class="headerlink" title="安装 Squid 与 Httpd"></a>安装 Squid 与 Httpd</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install -y openssl squid<br>yum install httpd<br></code></pre></div></td></tr></table></figure>
-<p><code>Squid</code>自然是服务器主体<br><code>Httpd</code>是用于生成密码文件的  </p>
-<blockquote>
-<p>网上为什么那么多的免费代理，有一部分原因就是因为服务器转发没有设置密码，被黑客扫端口扫出来直接用了  </p>
-</blockquote>
-<h2 id="创建密码文件"><a href="#创建密码文件" class="headerlink" title="创建密码文件"></a>创建密码文件</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">htpasswd -c /etc/squid/passwd EvilRecluse<br></code></pre></div></td></tr></table></figure>
-<blockquote>
-<p>命令说明：  </p>
-</blockquote>
+              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p><code>NodePath.evaluate()</code>方法非常的好用，但本身也存在着一些限制<br>进行一些源码修改能提升它的能力  </p>
+<h1 id="处理更多全局函数"><a href="#处理更多全局函数" class="headerlink" title="处理更多全局函数"></a>处理更多全局函数</h1><p><a href=""><code>NodePath.evaluate()</code></a> 方法不支持对<code>parseInt</code>等全局函数的处理<br>我们可以通过修改源码，让其支持  </p>
+<ol>
+<li>打开方法定义文件，查看函数处理定义<br>文件路径：<code>node_modules\@babel\traverse\lib\path\evaluation.js</code>  </li>
+<li>在文件中找到会处理的全局函数定义<br>在代码中找到定义位置  <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> VALID_CALLEES = [<span class="hljs-string">&quot;String&quot;</span>, <span class="hljs-string">&quot;Number&quot;</span>, <span class="hljs-string">&quot;Math&quot;</span>];<br><span class="hljs-keyword">const</span> INVALID_METHODS = [<span class="hljs-string">&quot;random&quot;</span>];<br></code></pre></div></td></tr></table></figure>
+定义包含两种：  </li>
+</ol>
 <ul>
-<li>htpasswd<br><code>htpasswd</code> 用来创建和更新用于基本认证的用户认证密码文件  </li>
-<li>-c<br>创建参数。创建密码文件，如果文件存在，那么内容被清空重写</li>
-<li>/etc/squid/passwd<br>密码文件路径，此处生成文件在<code>squid</code>目录下<code>passwd</code>文件中  </li>
-<li>EvilRecluse<br>用户名，随便填，但要记住  </li>
+<li><p><code>VALID_CALLEES</code> 会进行处理的全局函数  </p>
+</li>
+<li><p><code>INVALID_METHODS</code> 只要包含就不会处理的全局函数  </p>
+<p>根据你的需要对定义进行修改即可    </p>
+</li>
 </ul>
 <blockquote>
-<p><a href="#%E9%99%84%E5%BD%95">附录：关于htpasswd命令</a></p>
+<p>例:希望支持处理 <code>parseInt</code> 函数  </p>
 </blockquote>
-<p>命令输入后会让你输入密码，输入完密码文件就生成了<br>此处生成的密码文件会被用于代理访问，以防端口被扫后就随便访问  </p>
-<h2 id="配置-Squid"><a href="#配置-Squid" class="headerlink" title="配置 Squid"></a>配置 Squid</h2><figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim"># localnet 网络ip配置<br>acl localnet src <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">0</span>    # <span class="hljs-keyword">all</span> network<br>acl localnet src <span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">8</span>    # RFC1918 possible internal network<br>acl localnet src <span class="hljs-number">172.16</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">12</span>    # RFC1918 possible internal network<br>acl localnet src <span class="hljs-number">192.168</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">16</span>    # RFC1918 possible internal network<br>acl localnet src fc00::/<span class="hljs-number">7</span>       # RFC <span class="hljs-number">4193</span> local private network <span class="hljs-built_in">range</span><br>acl localnet src fe80::/<span class="hljs-number">10</span>      # RFC <span class="hljs-number">4291</span> link-local (directly plugged) machines<br><br># SSL_ports SSL端口配置<br>acl SSL_ports port <span class="hljs-number">443</span><br><br># Safe_ports 端口配置<br>acl Safe_ports port <span class="hljs-number">80</span>        # http<br>acl Safe_ports port <span class="hljs-number">21</span>        # ftp<br>acl Safe_ports port <span class="hljs-number">443</span>        # https<br>acl Safe_ports port <span class="hljs-number">70</span>        # gopher<br>acl Safe_ports port <span class="hljs-number">210</span>        # wais<br>acl Safe_ports port <span class="hljs-number">1025</span>-<span class="hljs-number">65535</span>    # unregistered ports<br>acl Safe_ports port <span class="hljs-number">280</span>        # http-mgmt<br>acl Safe_ports port <span class="hljs-number">488</span>        # gss-http<br>acl Safe_ports port <span class="hljs-number">591</span>        # filemaker<br>acl Safe_ports port <span class="hljs-number">777</span>        # multiling http<br><br># CONNECT 连接方法<br>acl CONNECT method CONNECT<br><br># 拒绝所有 非Safe_ports 端口的访问<br>http_access deny !Safe_ports<br># 拒绝所有 非SSL_ports 的连接方法<br>http_access deny CONNECT !SSL_ports<br># 允许<br>http_access allow localhost manager<br>http_access deny manager<br><br># http访问端口为 <span class="hljs-number">65000</span> 注意！！！<br># 以后要用代理就靠这个端口了<br>http_port <span class="hljs-number">65000</span><br><br># squid启动目录<br>coredump_dir /var/spool/squid<br><br># 缓存新旧刷新相关配置<br>refresh_pattern ^ftp:        <span class="hljs-number">1440</span>    <span class="hljs-number">20</span>%    <span class="hljs-number">10080</span><br>refresh_pattern ^gopher:    <span class="hljs-number">1440</span>    <span class="hljs-number">0</span>%    <span class="hljs-number">1440</span><br>refresh_pattern -i (/cgi-bin/|\?) <span class="hljs-number">0</span>    <span class="hljs-number">0</span>%    <span class="hljs-number">0</span><br>refresh_pattern .        <span class="hljs-number">0</span>    <span class="hljs-number">20</span>%    <span class="hljs-number">4320</span><br><br># via 用于检测转发循环，设置禁止则可以避免循环<br>via off<br><br># 转发头部标识删除<br>forwarded_for <span class="hljs-keyword">delete</span><br>forwarded_for off<br><br># 包含特定头部的请求禁止访问<br>request_header_access From deny <span class="hljs-keyword">all</span><br>request_header_access Server deny <span class="hljs-keyword">all</span><br>request_header_access WWW-Authenticate deny <span class="hljs-keyword">all</span><br>request_header_access Link deny <span class="hljs-keyword">all</span><br>request_header_access Cache-Control deny <span class="hljs-keyword">all</span><br>request_header_access Proxy-Connection deny <span class="hljs-keyword">all</span><br>request_header_access <span class="hljs-keyword">X</span>-Cache deny <span class="hljs-keyword">all</span><br>request_header_access <span class="hljs-keyword">X</span>-Cache-Lookup deny <span class="hljs-keyword">all</span><br>request_header_access Via deny <span class="hljs-keyword">all</span><br>request_header_access <span class="hljs-keyword">X</span>-Forwarded-For deny <span class="hljs-keyword">all</span><br>request_header_access Pragma deny <span class="hljs-keyword">all</span><br>request_header_access Keep-Alive deny <span class="hljs-keyword">all</span><br><br># 关闭squid的缓存功能<br>acl NCACHE method GET<br>no_cache deny NCACHE<br><br># 用户认证<br>auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/passwd<br>acl EvilRecluse proxy_auth REQUIRED<br>http_access allow EvilRecluse<br></code></pre></div></td></tr></table></figure>
+<p>在会进行处理的定义里添加函数名即可  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> VALID_CALLEES = [<span class="hljs-string">&quot;String&quot;</span>, <span class="hljs-string">&quot;Number&quot;</span>, <span class="hljs-string">&quot;Math&quot;</span>，<span class="hljs-string">&quot;parseInt&quot;</span>];<br></code></pre></div></td></tr></table></figure>
 
 
-
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p><a id="附录"></a></p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wj78080458/p/10847976.html">htpasswd命令详细</a>  </li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangpengqi/article/details/9224841">关于Squild via</a></li>
-</ul>
+<h1 id="quot-string-quot-quot-length-quot-引用不支持"><a href="#quot-string-quot-quot-length-quot-引用不支持" class="headerlink" title="&quot;string&quot;[&quot;length&quot;]引用不支持"></a><code>&quot;string&quot;[&quot;length&quot;]</code>引用不支持</h1><p>我们知道访问object对象有两种方法，<code>&quot;string&quot;[&quot;length&quot;]</code> 和 <code>&quot;string&quot;.length</code>  </p>
+<p>但 <code>NodePath.evaluate()</code> 只会处理 <code>&quot;string&quot;.length</code> 这种方式的表达式，而 <code>&quot;string&quot;[&quot;length&quot;]</code>  是不会直接进行处理的  </p>
+<p>你可以通过可以把 <code>&quot;string&quot;[&quot;length&quot;]</code> 转变为 <code>&quot;string&quot;.length</code> 这种形式的方式来实现适配<br>也可以通过修改源码达到目的  </p>
+<ol>
+<li><p>打开方法定义文件，查看函数处理定义<br>文件路径：<code>node_modules\@babel\traverse\lib\path\evaluation.js</code> </p>
+</li>
+<li><p>找到 <code>_evaluate</code> 函数，查看 对 <code>MemberExpression</code> 表达式的处理    </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (path.isMemberExpression() &amp;&amp; !path.parentPath.isCallExpression(&#123;<br>  callee: node<br>&#125;)) &#123;<br>  <span class="hljs-keyword">const</span> property = path.get(<span class="hljs-string">&quot;property&quot;</span>);<br>  <span class="hljs-keyword">const</span> object = path.get(<span class="hljs-string">&quot;object&quot;</span>);<br>  <span class="hljs-keyword">if</span> (object.isLiteral() &amp;&amp; property.isIdentifier()) &#123;<br>    <span class="hljs-keyword">const</span> value = object.node.value;<br>    <span class="hljs-keyword">const</span> type = <span class="hljs-keyword">typeof</span> value;<br>    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">&quot;number&quot;</span> || type === <span class="hljs-string">&quot;string&quot;</span>) &#123;<br>      <span class="hljs-keyword">return</span> value[property.node.name];<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>它主要处理在第二个 if 语句里面  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (object.isLiteral() &amp;&amp; property.isIdentifier()) &#123;......&#125;<br></code></pre></div></td></tr></table></figure>
+<p>但是它只考虑了 <code>object</code> 是字面量且 <code>property</code> 必须是 <code>Idernifier</code> 的情况，也就是类似 <code>&quot;string&quot;.length</code>的表达式  </p>
+</li>
+</ol>
+<p>现在把另外一种情况的代码补充进去, 代码如下:  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (object.isLiteral() &amp;&amp; property.isLiteral()) &#123;<br>      <span class="hljs-keyword">const</span> value = object.node.value;<br>      <span class="hljs-keyword">const</span> type = <span class="hljs-keyword">typeof</span> value;<br>      <span class="hljs-keyword">if</span> (type === <span class="hljs-string">&quot;number&quot;</span> || type === <span class="hljs-string">&quot;string&quot;</span>) &#123;<br>        <span class="hljs-keyword">return</span> value[property.node.value];<br>      &#125;<br>    &#125;  <br></code></pre></div></td></tr></table></figure>
+<p>将代码直接添加到 <code>if</code> 语句的后面即可  </p>
+<p>多了一种判断逻辑和对应的处理逻辑，就能处理<code>&quot;string&quot;[&quot;length&quot;]</code>类型的代码了  </p>
 
             </div>
             <hr>
@@ -240,11 +249,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+                      <a class="hover-with-bg" href="/tags/Babel/">Babel</a>
                     
-                      <a class="hover-with-bg" href="/tags/Squid/">Squid</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%90%86/">代理</a>
+                      <a class="hover-with-bg" href="/tags/Javascript/">Javascript</a>
                     
                   </div>
                 
@@ -257,9 +264,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/post/ff374aa2/">
+                      <a href="/post/246948e6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Https</span>
+                        <span class="hidden-mobile">Python-aiofiles-异步文件操作</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -267,8 +274,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/post/a7b96945/">
-                        <span class="hidden-mobile">特殊想法-奇思妙想</span>
+                      <a href="/post/e5cd2b3/">
+                        <span class="hidden-mobile">域名-DomainName-意义-购买-解析-备案</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
