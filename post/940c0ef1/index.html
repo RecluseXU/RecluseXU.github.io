@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.6k 字
     </span>
   
 
@@ -196,7 +196,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年11月10日 下午
+                  本文最后更新于：2021年1月5日 下午
                 
               </p>
             
@@ -312,9 +312,13 @@
 <li>aggregate  <blockquote>
 <p>案例：<br>使用$group操作符去利用一个指定的键进行分组。在$group操作中，指定需要分组的字段为_id。$group通过字段路径访问字段，该字段需要有一个美元符号$作为前缀。$group操作可以使用累加器对本次分组进行计算。下面的例子将使用borough字段对restaurants集合进行操作，并且使用$sum累加器进行文档的统计计算。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">cursor = db.restaurants.aggregate(<br>    [<br>        &#123;<span class="hljs-string">&quot;<span class="hljs-variable">$group</span>&quot;</span>: &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-variable">$borough</span>&quot;</span>, <span class="hljs-string">&quot;count&quot;</span>: &#123;<span class="hljs-string">&quot;<span class="hljs-variable">$sum</span>&quot;</span>: 1&#125;&#125;&#125;<br>    ]<br>)<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">cursor = db.restaurants.aggregate(<br>    [<br>        &#123;<span class="hljs-string">&quot;<span class="hljs-variable">$group</span>&quot;</span>: &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-variable">$borough</span>&quot;</span>, <span class="hljs-string">&quot;count&quot;</span>: &#123;<span class="hljs-string">&quot;<span class="hljs-variable">$sum</span>&quot;</span>: 1&#125;&#125;&#125;<br>    ]<br>)<br></code></pre></div></td></tr></table></figure>
+<h1 id="其它操作"><a href="#其它操作" class="headerlink" title="其它操作"></a>其它操作</h1><h2 id="保存較大的二進制文件"><a href="#保存較大的二進制文件" class="headerlink" title="保存較大的二進制文件"></a>保存較大的二進制文件</h2>将图片、文档等存入<code>mogodb</code>中，需要用到两个模块，pymongo和gridfs<br>在存入过程中必须将文件转换为二进制的格式才能存入，存入<code>mongoDB</code>中会生成两个文件 <strong>xxx.chunk</strong> 和 <strong>xxx.files</strong>  </li>
 </ul>
-
+<p><code>GridFS</code>是一种将大型文件存储在 <code>MongoDB</code> 的文件规范：数据库支持以<code>BSON</code>格式保存二进制对象<br>但是<code>MongoDB</code>中 <code>BSON</code>对象 最大不能超过 4MB  </p>
+<p><code>GridFS</code> 规范提供了一种透明的机制，可以将一个大文件分割成为多个较小的文档  </p>
+<p>为实现这点，该规范指定了一个将文件分块的标准<br>每个文件都将在文件集合对象中保存一个元数据对象，一个或多个块对象可被组合保存在一个块集合中  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pymongo<br><span class="hljs-keyword">import</span> gridfs<br><span class="hljs-keyword">from</span> bson <span class="hljs-keyword">import</span> ObjectId<br><br>client = pymongo.MongoClient(<span class="hljs-string">&#x27;localhost&#x27;</span>, connect=<span class="hljs-literal">False</span>)<br>db = client[<span class="hljs-string">&#x27;demo&#x27;</span>]<br><br><span class="hljs-comment"># 存储到mongodb</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">save_file_to_mongo</span>(<span class="hljs-params">content</span>):</span><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(content, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        data = f.read()<br>    fs = gridfs.GridFS(db, <span class="hljs-string">&#x27;img&#x27;</span>)<br>    <span class="hljs-keyword">return</span> fs.put(data)<br><br><span class="hljs-comment"># 从mongodb取出文件</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_file_from_mongo</span>(<span class="hljs-params"><span class="hljs-built_in">id</span></span>):</span><br>    fs = gridfs.GridFS(db, <span class="hljs-string">&#x27;img&#x27;</span>)<br>    gf = fs.get(ObjectId(<span class="hljs-built_in">id</span>))<br>    content = gf.read()<br>    <span class="hljs-comment"># 将文件写入硬盘</span><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;test.jpg&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span> ) <span class="hljs-keyword">as</span> f:<br>        f.write(content)<br><br><span class="hljs-built_in">id</span> = save_file_to_mongo(<span class="hljs-string">&#x27;test2.jpg&#x27;</span>)<br>write_to_disk(get_file_from_mongo(<span class="hljs-built_in">id</span>))<br><br></code></pre></div></td></tr></table></figure>
             </div>
             <hr>
             <div>
