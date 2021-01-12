@@ -211,7 +211,24 @@
 <p>这里会拿到两个值 <code>JA3</code> 和 <code>JA3_Hash</code>  </p>
 <h2 id="JA3-收集-Client-Hello-报文-特征信息"><a href="#JA3-收集-Client-Hello-报文-特征信息" class="headerlink" title="JA3 收集 Client Hello 报文 特征信息"></a>JA3 收集 <code>Client Hello 报文</code> 特征信息</h2><p>第一次握手中，客户端会发送<code>Client Hello 报文</code>  </p>
 <p><img src="/TLS%E6%8C%87%E7%BA%B9-JA3/hello1.png" srcset="/img/loading.gif"><br><code>JA3</code> 会收集 <code>Client Hello 报文</code>的以下字段的十进制字节值  </p>
-<p>|TLS版本|加密组件|扩展类型列表|支持组|椭圆曲线密码格式|<br>|–|–|–|–|<br>|Version|CipherSuites|Type List of Extensions|Supported Group|Elliptic Curve Formats|</p>
+<table>
+<thead>
+<tr>
+<th>TLS版本</th>
+<th>加密组件</th>
+<th>扩展类型列表</th>
+<th>支持组</th>
+<th>椭圆曲线密码格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Version</td>
+<td>CipherSuites</td>
+<td>Type List of Extensions</td>
+<td>Supported Group</td>
+<td>Elliptic Curve Formats</td>
+</tr>
+</tbody></table>
 <p>将这些值串联在一起。同一字段中的各值用<code>-</code>来分隔，不同字段用<code>,</code>来分隔<br>最终组合成 <code>JA3</code> 值：<br><code>771,4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53,0-23-65281-10-11-35-16-5-13-18-51-45-43-27-21,29-23-24,0</code><br>与在测试网页上获取的信息一致  </p>
 <h2 id="JA3S-MD5-Hash-32-收集-Server-Hello-报文-信息"><a href="#JA3S-MD5-Hash-32-收集-Server-Hello-报文-信息" class="headerlink" title="JA3S MD5-Hash-32 收集 Server Hello 报文 信息"></a>JA3S MD5-Hash-32 收集 <code>Server Hello 报文</code> 信息</h2><p>第二次握手中，客户端会发送<code>Server Hello 报文</code><br>和第一步类似<br><code>JA3</code> 会收集 <code>Server Hello 报文</code>的以下字段的十进制字节值  </p>
 <p>|TLS版本|加密组件|扩展类型列表|<br>|–|–|<br>|TLSVersion|CipherSuites|Extensions|</p>
