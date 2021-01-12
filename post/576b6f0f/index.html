@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>Wireshark-抓包-网络分析工具 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Wireshark-抓包-网络分析工具">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Wireshark-抓包-网络分析工具</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月12日 中午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p><code>Wireshark</code> 是网络数据包分析器<br>它会尽可能详细地显示捕获的数据包数据<br>你可以通过它来对网络情况进行分析<br>特点：开源免费，跨平台，具有GUI，多种协议支持  </p>
+<p>官网：<a target="_blank" rel="noopener" href="https://www.wireshark.org/">https://www.wireshark.org/</a><br>官方文档: <a target="_blank" rel="noopener" href="https://www.wireshark.org/docs/wsug_html_chunked/index.html">https://www.wireshark.org/docs/wsug_html_chunked/index.html</a>  </p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>进入官网下载安装包安装即可，并无特殊操作<br>官网下载地址：<a target="_blank" rel="noopener" href="https://www.wireshark.org/download.html">https://www.wireshark.org/download.html</a>  </p>
+<h1 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h1><p>此处会演示基本的抓包流程  </p>
+<h2 id="选择网卡"><a href="#选择网卡" class="headerlink" title="选择网卡"></a>选择网卡</h2><p><strong>欢迎界面</strong><br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210111090947056.png" srcset="/img/loading.gif"><br>进入<code>Wireshark</code> 后，首先会来到选择网卡来的欢迎界面<br>此时需要你选择一个需要监听网卡即可来到主界面<br>你可以通过查看网卡名称或者观察其右方对应的流量数据图来识别网卡<br>在选择好一个网卡后，会来到主界面  </p>
+<p><strong>主界面</strong><br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210111092336029.png" srcset="/img/loading.gif"><br>主界面主要由：菜单，主工具栏，过滤器工具栏，数据包列表窗口，数据包信息窗口，数据包字节信息窗口，状态栏 这些要素组成<br>可以对各个元素留个印象，后续会时不时提起  </p>
+<h2 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h2><p><strong>开始抓包</strong><br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210111101226917.png" srcset="/img/loading.gif"><br>点击主工具栏的 鲨鱼图标 即可开始抓包  </p>
+<p><strong>停止抓包</strong><br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210111102024640.png" srcset="/img/loading.gif"><br>在认为需要的包已经被抓到以后了，点击主工具栏的 停止图标 即可停止抓包  </p>
+<h2 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h2><p>在停止抓包后，数据包列表窗口会显示已经抓到的包<br>其数量一般都会很多，此时需要 编写过滤器 来获取需要的包<br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/1.gif" srcset="/img/loading.gif"><br>实际上，也可以先编写过滤器再进行抓包，二者顺序并不冲突<br>此处只是指定协议来过滤，更复杂的过滤器编写见后文  </p>
+<p>过滤完毕后，就能找到需要的数据报文  </p>
+<h2 id="对捕获结果进行分析"><a href="#对捕获结果进行分析" class="headerlink" title="对捕获结果进行分析"></a>对捕获结果进行分析</h2><h3 id="观察"><a href="#观察" class="headerlink" title="观察"></a>观察</h3><p><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/3.gif" srcset="/img/loading.gif"><br>点击 数据包列表窗口 中的数据包，在窗口最左边会出现箭头和线段  </p>
+<p><strong>线段</strong>：实线：代表着会话的各个阶段。虚线：代表着与当前会话无关的其它包<br><strong>线段上的圆点</strong>：代表连续的数据帧<br>对于连续的数据帧，在数据包信息窗口有一个栏位用于合并显示<br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210112101806134.png" srcset="/img/loading.gif"><br><strong>箭头</strong>：代表这是一个 <code>HTTP</code> 请求。向右指的箭头为请求，向左指的箭头为响应<br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/2.gif" srcset="/img/loading.gif"><br><strong>弯勾</strong>：<code>TCP</code>的请求数据包<br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210112101414575.png" srcset="/img/loading.gif">  </p>
+<h2 id="保存抓包数据"><a href="#保存抓包数据" class="headerlink" title="保存抓包数据"></a>保存抓包数据</h2><p><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210111103641915.png" srcset="/img/loading.gif"><br>网络环境复杂多变，可以将已经抓到的数据进行保存，以后再打开进行分析  </p>
+<h1 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h1><h2 id="辅助编写过滤器表达式对话框"><a href="#辅助编写过滤器表达式对话框" class="headerlink" title="辅助编写过滤器表达式对话框"></a>辅助编写过滤器表达式对话框</h2><p>在过滤器工具栏里，能直接编写过滤器<br>但对于新手而言，可能并不能直接过滤器，这时就要借助一些提示来编写<br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210112103056510.png" srcset="/img/loading.gif"><br>主菜单中点击 <code>分析</code>-<code>Display Filter Expression</code> 就能进入到 显示过滤器表达式对话框<br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210112104606027.png" srcset="/img/loading.gif"><br>使用这个辅助工具的主要思路：  </p>
+<ol>
+<li>搜索，选择一个协议（或者进一步指定字段）  </li>
+<li>选择关系  </li>
+<li>填入对应值  </li>
+</ol>
+<p>然后就能在下方获得对应的表达式了  </p>
+<h2 id="显示过滤器对话框"><a href="#显示过滤器对话框" class="headerlink" title="显示过滤器对话框"></a>显示过滤器对话框</h2><p>此对话框用于管理已经编写好的过滤器，就像书签那样<br>毕竟大多数时候，过滤器内容都比较类似，若是只是差一点点，就没有完全重写编写的必要<br>将旧的过滤器稍微改写，或者导入已经写好的模板，就能很快速的编写出适应场景的过滤器<br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210112105914533.png" srcset="/img/loading.gif"><br>过滤器工具栏中的书签图标-<code>管理显示过滤器</code>即可打开该对话框<br>在打开过程中能看到一些已经在记录中的过滤器, 点击就能应用<br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/20210112110717623.png" srcset="/img/loading.gif"><br>这个过滤器管理也很简单，左边是过滤器名称，右边是过滤器表达式<br>左下角有 添加、删除、复制按钮 来帮助操作。使用上足够简单，无需多言<br>唯一需要记住的是，只有按OK才会保存操作  </p>
+<h1 id="搜索数据包"><a href="#搜索数据包" class="headerlink" title="搜索数据包"></a>搜索数据包</h1><p>应用过滤器，会使得数据包不在 数据包列表窗口 显示。这也许你并不希望这样<br>如果希望在当前显示的数据包中找到目标数据包，并且不对过滤结果进行操作，那么就需要使用搜索功能<br>在 数据包列表窗口 按 <code>ctrl</code>+<code>F</code> 会弹出搜索框<br><img src="/Wireshark-%E6%8A%93%E5%8C%85-%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/4.gif" srcset="/img/loading.gif"><br>在搜索框的内容里填上过滤器表达式即可进行搜索<br>当然也可以进行其它方式的搜索  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8A%93%E5%8C%85/">抓包</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Wireshark/">Wireshark</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/e877fad7/">
+                        <span class="hidden-mobile">TLS指纹-JA3</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -17,7 +17,7 @@
   <meta name="description" content="自娱自乐">
   <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>Https - EvilRecluse</title>
+  <title>Https-TLS-SSL - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Https">
+            <span class="h2" id="subtitle" title="Https-TLS-SSL">
               
             </span>
 
@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      848 字
+      1.2k 字
     </span>
   
 
@@ -192,46 +192,105 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Https</h1>
+            <h1 style="display: none">Https-TLS-SSL</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年12月9日 下午
+                  本文最后更新于：2021年1月11日 晚上
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="Https"><a href="#Https" class="headerlink" title="Https"></a>Https</h1><p><code>Http</code>是明文传输的，在传输路径中的任何一个节点都能通过抓包能直接得到信息，毫无安全性  </p>
-<p>人们想到了用加密算法对信息进行加密，使得抓包的人只能看到密文，无法看到明文<br>但这依然有问题，双方 使用固定的加密算法 或 临时约定加密算法，都会使得坏人知道加密方式，从而解码得到明文  </p>
+              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>超文本传输安全协议（英语：<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol <strong>S</strong>ecure，缩写：<strong>HTTPS</strong>)  </p>
 <p><code>HTTPS</code> 并非是应用层的一种新协议。 只是 <code>HTTP</code> 通信接口部分用<code>SSL</code>（Secure Socket Layer） 和 <code>TLS</code>（Transport Layer Security） 协议代替而已  </p>
-<h1 id="Https通信"><a href="#Https通信" class="headerlink" title="Https通信"></a>Https通信</h1><p><code>Https</code>通信最重要的地方在于 服务器与客户端如何 <strong>安全的</strong> 约定加密算法  </p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><blockquote>
+<p><code>HTTPS</code> 的主要作用是在不安全的网络上创建一个安全信道，并可在使用适当的加密包和服务器证书可被验证且可被信任时，对窃听和中间人攻击提供合理的防护<br>by: <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%82%B3%E8%BC%B8%E5%B1%A4%E5%AE%89%E5%85%A8%E6%80%A7%E5%8D%94%E5%AE%9A">维基百科</a>  </p>
+</blockquote>
+<p><code>Http</code>是明文传输的，在传输路径中的任何一个节点都能通过抓包能直接得到信息，毫无安全性可言  </p>
+<p>为了能安全的传输数据，其传输的数据则需要进行加密<br>为了通信双方能正确 解密对方的数据，通信的双方必须约定加密算法  </p>
+<p><code>SSL</code>/<code>TLS</code>主要负责事情：让双方 <strong>安全地</strong> 约定加密算法  </p>
+<h2 id="SSL与TLS"><a href="#SSL与TLS" class="headerlink" title="SSL与TLS"></a>SSL与TLS</h2><p>传输层安全性协议（英语：<strong>T</strong>ransport <strong>L</strong>ayer <strong>S</strong>ecurity，缩写：TLS）<br>安全套接层（英语：<strong>S</strong>ecure <strong>S</strong>ockets <strong>L</strong>ayer，缩写：SSL）  </p>
+<p><code>TLS</code>实际上是<code>SSL</code>进行标准化后得到的产物，<code>TLS</code>几乎可以理解为是<code>SSL</code>的别称<br><code>SSL</code>已被弃用，现在使用的基本都为<code>TLS</code>  </p>
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>发布时间</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SSL 1.0</td>
+<td>未公布</td>
+<td>未公布</td>
+</tr>
+<tr>
+<td>SSL 2.0</td>
+<td>1995年</td>
+<td>已于2011年弃用</td>
+</tr>
+<tr>
+<td>SSL 3.0</td>
+<td>1996年</td>
+<td>已于2015年弃用</td>
+</tr>
+<tr>
+<td>TLS 1.0</td>
+<td>1999年</td>
+<td></td>
+</tr>
+<tr>
+<td>TLS 1.1</td>
+<td>2006年</td>
+<td></td>
+</tr>
+<tr>
+<td>TLS 1.2</td>
+<td>2008年</td>
+<td></td>
+</tr>
+<tr>
+<td>TLS 1.3</td>
+<td>2018年</td>
+<td></td>
+</tr>
+</tbody></table>
 <h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><ul>
-<li>非对称加密  <a href="/post/3b5ddb7/" title="加密算法类别">加密算法类别</a>
+<li>非对称加密  <a href="#">Post not found: 编码和加密-js-Python 加密算法类别</a>
 
 </li>
 </ul>
-<h2 id="SSL流程-四次握手"><a href="#SSL流程-四次握手" class="headerlink" title="SSL流程-四次握手"></a>SSL流程-四次握手</h2><h3 id="一次握手"><a href="#一次握手" class="headerlink" title="一次握手"></a>一次握手</h3><h4 id="1-客户端通过发送-Client-Hello-报文-开始-SSL通信"><a href="#1-客户端通过发送-Client-Hello-报文-开始-SSL通信" class="headerlink" title="1. 客户端通过发送 Client Hello 报文 开始 SSL通信"></a>1. 客户端通过发送 <code>Client Hello 报文</code> 开始 SSL通信</h4><p>报文中包含客户端支持的 <code>SSL版本</code>、 加密组件（CipherSuite） 列表（客户端支持的加密算法 及 密钥长度等）  </p>
+<h1 id="SSL流程-四次握手"><a href="#SSL流程-四次握手" class="headerlink" title="SSL流程-四次握手"></a>SSL流程-四次握手</h1><p><img src="/Https-TLS-SSL/20210111041424432.png" srcset="/img/loading.gif">  </p>
+<h2 id="一次握手"><a href="#一次握手" class="headerlink" title="一次握手"></a>一次握手</h2><h3 id="1-客户端通过发送-Client-Hello-报文-开始-SSL通信"><a href="#1-客户端通过发送-Client-Hello-报文-开始-SSL通信" class="headerlink" title="1. 客户端通过发送 Client Hello 报文 开始 SSL通信"></a>1. 客户端通过发送 <code>Client Hello 报文</code> 开始 SSL通信</h3><p>报文中包含客户端支持的 <code>SSL版本</code>、 加密组件（CipherSuite） 列表（客户端支持的加密算法 及 密钥长度等）  </p>
 <blockquote>
 <p>维基百科-加密组件-CipherSuite：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6">链接</a>  </p>
 </blockquote>
-<h3 id="二次握手"><a href="#二次握手" class="headerlink" title="二次握手"></a>二次握手</h3><h4 id="2-服务器可进行-SSL通信-时，会以-Server-Hello-报文-作为应答"><a href="#2-服务器可进行-SSL通信-时，会以-Server-Hello-报文-作为应答" class="headerlink" title="2. 服务器可进行 SSL通信 时，会以 Server Hello 报文 作为应答"></a>2. 服务器可进行 SSL通信 时，会以 <code>Server Hello 报文</code> 作为应答</h4><p>和客户端一样, 在报文中包含 <code>SSL版本</code> 以及 <code>加密组件</code><br>服务器的加密组件内容 是 从接收到的客户端加密组件内 筛选出来的  </p>
+<h2 id="二次握手"><a href="#二次握手" class="headerlink" title="二次握手"></a>二次握手</h2><h3 id="2-服务器可进行-SSL通信-时，会以-Server-Hello-报文-作为应答"><a href="#2-服务器可进行-SSL通信-时，会以-Server-Hello-报文-作为应答" class="headerlink" title="2. 服务器可进行 SSL通信 时，会以 Server Hello 报文 作为应答"></a>2. 服务器可进行 SSL通信 时，会以 <code>Server Hello 报文</code> 作为应答</h3><p>和客户端一样, 在报文中包含 <code>SSL</code>版本 以及 <code>加密组件</code><br>服务器的加密组件内容 是 从接收到的客户端加密组件内 筛选出来的  </p>
 <ul>
 <li>因为是要进行通信的，所以加密组件必须是双方都有的  </li>
 <li>服务器也可以根据客户端的加密组件拒绝相应  </li>
 </ul>
-<h4 id="3-之后服务器发送-Certificate-报文"><a href="#3-之后服务器发送-Certificate-报文" class="headerlink" title="3. 之后服务器发送 Certificate 报文"></a>3. 之后服务器发送 <code>Certificate 报文</code></h4><p>报文中包含公开密钥证书  </p>
-<h4 id="4-最后服务器发送-Server-Hello-Done-报文-通知客户端"><a href="#4-最后服务器发送-Server-Hello-Done-报文-通知客户端" class="headerlink" title="4. 最后服务器发送 Server Hello Done 报文 通知客户端"></a>4. 最后服务器发送 <code>Server Hello Done 报文</code> 通知客户端</h4><p>至此，最初阶段的 SSL握手协商部分结束  </p>
-<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><h4 id="5-客户端以-Client-Key-Exchange-报文作为回应"><a href="#5-客户端以-Client-Key-Exchange-报文作为回应" class="headerlink" title="5. 客户端以 Client Key Exchange 报文作为回应"></a>5. 客户端以 <code>Client Key Exchange 报文</code>作为回应</h4><p>报文中包含通信加密中使用的一种被称为 <code>Pre-mastersecret</code> 的随机密码串<br>该报文已用步骤 3 中的公开密钥进行加密  </p>
-<h4 id="6-接着客户端继续发送-Change-Cipher-Spec-报文"><a href="#6-接着客户端继续发送-Change-Cipher-Spec-报文" class="headerlink" title="6. 接着客户端继续发送 Change Cipher Spec 报文"></a>6. 接着客户端继续发送 <code>Change Cipher Spec 报文</code></h4><p>该报文会提示服务器，在此报文之后的通信会采用<code>Pre-master secret</code> 密钥加密  </p>
-<h4 id="7-客户端发送-Finished-报文"><a href="#7-客户端发送-Finished-报文" class="headerlink" title="7. 客户端发送 Finished 报文"></a>7. 客户端发送 <code>Finished 报文</code></h4><p>该报文包含连接至今全部报文的整体校验值<br>这次握手协商是否能够成功， 要以服务器是否能够正确解密该报文作为判定标准  </p>
-<h3 id="四次握手"><a href="#四次握手" class="headerlink" title="四次握手"></a>四次握手</h3><h4 id="8-服务器同样发送-Change-Cipher-Spec-报文"><a href="#8-服务器同样发送-Change-Cipher-Spec-报文" class="headerlink" title="8. 服务器同样发送 Change Cipher Spec 报文"></a>8. 服务器同样发送 <code>Change Cipher Spec 报文</code></h4><h4 id="9-服务器同样发送-Finished-报文"><a href="#9-服务器同样发送-Finished-报文" class="headerlink" title="9. 服务器同样发送 Finished 报文"></a>9. 服务器同样发送 <code>Finished 报文</code></h4><p>总的来说，SSL会话的建立完成了以下几个工作：</p>
-<p>交换协议版本号，选择一个通信双方都支持的加密方式；对两端实现身份验证；密钥交换。</p>
+<h3 id="3-之后服务器发送-Certificate-报文"><a href="#3-之后服务器发送-Certificate-报文" class="headerlink" title="3. 之后服务器发送 Certificate 报文"></a>3. 之后服务器发送 <code>Certificate 报文</code></h3><p>报文中包含公开密钥证书  </p>
+<h3 id="4-最后服务器发送-Server-Hello-Done-报文-通知客户端"><a href="#4-最后服务器发送-Server-Hello-Done-报文-通知客户端" class="headerlink" title="4. 最后服务器发送 Server Hello Done 报文 通知客户端"></a>4. 最后服务器发送 <code>Server Hello Done 报文</code> 通知客户端</h3><p>至此，最初阶段的 SSL握手协商部分结束  </p>
+<h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><h3 id="5-客户端以-Client-Key-Exchange-报文作为回应"><a href="#5-客户端以-Client-Key-Exchange-报文作为回应" class="headerlink" title="5. 客户端以 Client Key Exchange 报文作为回应"></a>5. 客户端以 <code>Client Key Exchange 报文</code>作为回应</h3><p>报文中包含通信加密中使用的一种被称为 <code>Pre-mastersecret</code> 的随机密码串<br>该报文已用步骤 3 中的公开密钥进行加密  </p>
+<h3 id="6-接着客户端继续发送-Change-Cipher-Spec-报文"><a href="#6-接着客户端继续发送-Change-Cipher-Spec-报文" class="headerlink" title="6. 接着客户端继续发送 Change Cipher Spec 报文"></a>6. 接着客户端继续发送 <code>Change Cipher Spec 报文</code></h3><p>该报文会提示服务器，在此报文之后的通信会采用<code>Pre-master secret</code> 密钥加密  </p>
+<h3 id="7-客户端发送-Finished-报文"><a href="#7-客户端发送-Finished-报文" class="headerlink" title="7. 客户端发送 Finished 报文"></a>7. 客户端发送 <code>Finished 报文</code></h3><p>该报文包含连接至今全部报文的整体校验值<br>这次握手协商是否能够成功， 要以服务器是否能够正确解密该报文作为判定标准  </p>
+<h2 id="四次握手"><a href="#四次握手" class="headerlink" title="四次握手"></a>四次握手</h2><h3 id="8-服务器同样发送-Change-Cipher-Spec-报文"><a href="#8-服务器同样发送-Change-Cipher-Spec-报文" class="headerlink" title="8. 服务器同样发送 Change Cipher Spec 报文"></a>8. 服务器同样发送 <code>Change Cipher Spec 报文</code></h3><h3 id="9-服务器同样发送-Finished-报文"><a href="#9-服务器同样发送-Finished-报文" class="headerlink" title="9. 服务器同样发送 Finished 报文"></a>9. 服务器同样发送 <code>Finished 报文</code></h3><p>总的来说，SSL会话的建立完成了以下几个工作：</p>
+<p>交换协议版本号，选择一个通信双方都支持的加密方式；对两端实现身份验证；密钥交换。<br>服务器和客户端的 <code>Finished</code> 报文交换完毕之后， <code>SSL</code>连接就算建立完成，通信会受到 <code>SSL</code>的保护。 从此处开始进行应用层协议的通信， 即发送 <code>HTTP</code> 请求。</p>
 <h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h1><h2 id="可否修改443端口"><a href="#可否修改443端口" class="headerlink" title="可否修改443端口"></a>可否修改443端口</h2><p><code>Https</code>传输数据，需要服务器开启两个端口<code>80</code>与<code>443</code><br>其中，<code>443</code>端口仅用来建立连接，并不传输真正的数据 </p>
 <p><code>443</code>端口是约定的<code>Https</code>端口，被写入到了浏览器中<br>浏览器在域名中识别到<code>https</code>，就默认请求<code>443</code>  </p>
 <blockquote>
 <p>端口号在服务端是能改的，但浏览器不能改   </p>
 </blockquote>
 <p>如果你修改了<code>https</code>端口，又没有特别指定访问端口。那么用户会无法用浏览器访问（浏览器访问<code>443</code>发现无响应）  </p>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><ul>
+<li>变慢  <ul>
+<li>网络<br>和使用 HTTP 相比， 网络负载可能会变慢 2 到 100 倍。进行 SSL通信 使得整体上处理通信量不可避免会增加  </li>
+<li>处理速度<br>加密/解密 要大量消耗CPU 及内存等资源，导致处理速度变慢  </li>
+</ul>
+</li>
+<li>证书购买花销<br>证书并不是免费的，是需要向 认证机构（CA） 购买的  </li>
+</ul>
 
             </div>
             <hr>

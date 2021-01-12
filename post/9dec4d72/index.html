@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>Python-zipfile-zip压缩文件相关操作 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Python-zipfile-zip压缩文件相关操作">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      824 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python-zipfile-zip压缩文件相关操作</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月6日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p><code>zipfile</code>是<code>Python</code>官方用于对zip压缩文件文件进行操作的库<br>这个模块提供了创建、读取、写入、添加及列出 <code>ZIP</code> 文件的工具  </p>
+<p>由于是官方的库，所以你并不需要担心安装的事情（它本身就在环境中了）  </p>
+<p>此模块目前不能处理分卷 <code>ZIP</code> 文件。它可以处理使用 <code>ZIP64</code> 扩展（超过 4 GB 的 <code>ZIP</code> 文件）的 <code>ZIP</code> 文件。它支持解密 <code>ZIP</code> 归档中的加密文件，但是目前不能创建一个加密的文件。解密非常慢，因为它是使用原生 <code>Python</code> 而不是 <code>C</code> 实现的  </p>
+<p>官方文档: <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/zipfile.html#zipfile-objects">https://docs.python.org/zh-cn/3/library/zipfile.html#zipfile-objects</a>  </p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="基础-创建-关闭-zipfile-ZipFile-对象"><a href="#基础-创建-关闭-zipfile-ZipFile-对象" class="headerlink" title="基础-创建/关闭 zipfile.ZipFile 对象"></a>基础-创建/关闭 zipfile.ZipFile 对象</h2><p>使用<code>zipfile</code>库基本就是围绕着 <code>ZipFile</code> 类/对象 做各种各样的操作  </p>
+<blockquote>
+<p>例：生成一个空的压缩文件  </p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> zipfile<br><br><br>zip_f = zipfile.ZipFile(<br>    file=<span class="hljs-string">&#x27;folder/helloworld.zip&#x27;</span>,<br>    mode=<span class="hljs-string">&#x27;w&#x27;</span>,<br>    allowZip64=<span class="hljs-literal">False</span>,<br>    compression=zipfile.ZIP_DEFLATED,<br>    compresslevel=<span class="hljs-number">5</span>,<br>)<br>zip_f.close()<br></code></pre></div></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file</td>
+<td>传入<code>str</code>时为<code>ZipFile</code>对象关闭后，文件保存的路径<br> 也可以传入<code>ByteIO</code>对象来承接保存的<code>zip</code>文件二进制内容</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>操作模式, 和 open() 里的模式类似<br><code>r</code> 来读取一个存在的文件<br><code>w</code> 来截断并写入新的文件<br><code>a</code> 来添加到一个存在的文件<br><code>x</code> 来仅新建并写入新的文件, 如果 <code>file</code> 指向已经存在的文件,会报错</td>
+</tr>
+<tr>
+<td>allowZip64</td>
+<td>是否使用Zip64创建扩展的zip文件，默认为<code>True</code>。<br>如果指定为<code>False</code>, 且最总<code>zip</code>文件大于 4GB，那么文件处理会报错</td>
+</tr>
+<tr>
+<td>compression</td>
+<td>压缩方法 可填入 <code>ZIP_STORED</code>, <code>ZIP_DEFLATED</code>, <code>ZIP_BZIP2</code><br>如果不支持设定的模式可能会报错</td>
+</tr>
+<tr>
+<td>compresslevel</td>
+<td>压缩级别，默认根据压缩方法自动计算<br>可以填入一个 0~9之间的整数 来设置。传入的 数字越小，压缩速度越快，压缩率越低。 具体参考<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/zlib.html#zlib.compressobj">官方说明</a></td>
+</tr>
+</tbody></table>
+<p>创建一个 <code>ZipFile</code> 对象并不会立刻在对应路径中创建文件<br>执行其 <code>close</code> 方法时才真正创建文件  </p>
+<p>可以使用 <code>with</code> 来自动调用 <code>close</code>方法。使代码更加美观  </p>
+<h2 id="写入压缩内容"><a href="#写入压缩内容" class="headerlink" title="写入压缩内容"></a>写入压缩内容</h2><p>实际上就是写入东西到 <code>ZipFile</code> 对象中<br><code>ZipFile</code> 有两个方法可以将内容写到压缩文件中</p>
+<ul>
+<li><code>write</code>方法 传入文件路径，用于将已经存在的文件写入</li>
+<li><code>writestr</code>方法 直接写入新的内容</li>
+</ul>
+<blockquote>
+<p>例：添加一些压缩内容  </p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> zipfile<br><br>folder_path = <span class="hljs-string">&#x27;example/0_Basic_usage_of_the_library/python_zipfile&#x27;</span><br><span class="hljs-keyword">with</span> zipfile.ZipFile(<span class="hljs-string">&#x27;&#123;&#125;/&#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(folder_path, <span class="hljs-string">&#x27;helloworld.zip&#x27;</span>), <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(<br>        <span class="hljs-comment"># 已经存在的文件的路径</span><br>        filename=<span class="hljs-string">&#x27;&#123;&#125;/example.txt&#x27;</span>.<span class="hljs-built_in">format</span>(folder_path),<br>        <span class="hljs-comment"># 压缩文件中的文件路径</span><br>        arcname=<span class="hljs-string">&#x27;a_folder/z.txt&#x27;</span>,<br>    )<br>    f.writestr(<br>        <span class="hljs-comment"># 压缩文件中的文件路径</span><br>        zinfo_or_arcname=<span class="hljs-string">&#x27;a.txt&#x27;</span>,<br>        <span class="hljs-comment"># 文件数据，可写入 str类型 或 byte类型 数据</span><br>        <span class="hljs-comment">#   如果传入str类型，默认会用 utf-8 进行编码写入</span><br>        data=<span class="hljs-string">&#x27;Hello&#x27;</span>,<br>    )<br></code></pre></div></td></tr></table></figure>
+<h2 id="解压压缩文件"><a href="#解压压缩文件" class="headerlink" title="解压压缩文件"></a>解压压缩文件</h2><blockquote>
+<p>例: 将压缩文件内容解压出来  </p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> zipfile<br><br>folder_path = <span class="hljs-string">&#x27;example/0_Basic_usage_of_the_library/python_zipfile&#x27;</span><br><span class="hljs-keyword">with</span> zipfile.ZipFile(<span class="hljs-string">&#x27;&#123;&#125;/helloworld.zip&#x27;</span>.<span class="hljs-built_in">format</span>(folder_path), <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> f.namelist():<br>        f.extract(file, <span class="hljs-string">&#x27;&#123;&#125;/unzip/&#x27;</span>.<span class="hljs-built_in">format</span>(folder_path))<br></code></pre></div></td></tr></table></figure>
+<p><code>ZipFile.namelist()</code>返回列表，列表中的元素为压缩文件中的每个文件  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/zipfile/">zipfile</a>
+                    
+                      <a class="hover-with-bg" href="/tags/zip/">zip</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/e877fad7/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TLS指纹-JA3</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/77d57432/">
+                        <span class="hidden-mobile">Javascript-Babel-API</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

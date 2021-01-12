@@ -17,7 +17,7 @@
   <meta name="description" content="自娱自乐">
   <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>编码和加密-js-Python - EvilRecluse</title>
+  <title>编码和加密 - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="编码和加密-js-Python">
+            <span class="h2" id="subtitle" title="编码和加密">
               
             </span>
 
@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.4k 字
+      5.1k 字
     </span>
   
 
@@ -192,57 +192,154 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">编码和加密-js-Python</h1>
+            <h1 style="display: none">编码和加密</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年12月24日 上午
+                  本文最后更新于：2021年1月11日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="编码与加密常识"><a href="#编码与加密常识" class="headerlink" title="编码与加密常识"></a>编码与加密常识</h1><h2 id="基础通识"><a href="#基础通识" class="headerlink" title="基础通识"></a>基础通识</h2><ul>
-<li>MD5<br>提取结果通常是 32 位，不受明文长度影响   </li>
-<li>Base64<br>编码结果末尾通常会出现一或二个等于符号，受明文长度影响  </li>
-<li>SHA1<br>加密结果值为 40 位，不受明文长度影响  </li>
-<li>SHA256<br>加密结果值为 64 位，不受明文长度影响  </li>
-</ul>
-<h2 id="盲猜技巧"><a href="#盲猜技巧" class="headerlink" title="盲猜技巧"></a>盲猜技巧</h2><ul>
-<li>一长串无规律数字与字母组合的字符大概率是 AES、DES、SHA 相关加密  </li>
-<li>另外，AES、RSA 等对称和非对称加密都喜欢将结果值用 Base64 进行编码，这样易于传递  </li>
-<li>如果你看到一长串字符里出现 <code>+</code> 、<code>\</code> 和末尾的 <code>=</code> ，那大概率就是上一行描述的加密算法加密后又进行了 <code>Base64</code> 编码的结果  </li>
-<li>32 位的字符串有概率是 <code>MD5</code> 摘要结果  </li>
-<li>64 位的字符串有概率是 <code>SHA</code> 加密结果  </li>
-</ul>
-<p>通过全局搜索找寻可疑字符串，在所有文件中寻找关键字<br>在需要的地方打上断点，找寻到目标的加密逻辑  </p>
-<h2 id="复现做法"><a href="#复现做法" class="headerlink" title="复现做法"></a>复现做法</h2><p>在找寻到以后，可以选择：  </p>
-<ul>
-<li>参照js逻辑用其它语言重新实现  </li>
-<li>直接调用js的加密函数  </li>
-</ul>
-<p>从非常长的 javascript文件 中归纳逻辑，建议将一些关键的变量或者函数复制粘贴到另一个 javascript文件 中，运行以后根据 没有定义 的报错 来逐一补全所需，直到得到结果  </p>
-<h1 id="Ascii"><a href="#Ascii" class="headerlink" title="Ascii"></a>Ascii</h1><p>ASCII (American Standard Code for Information Interchange)美国信息交换标准代码 是基于拉丁字母的一套电脑编码系统，主要用于显示现代英语和其他西欧语言<br>它是最通用的信息交换标准，并等同于国际标准<code>ISO/IEC 646</code><br>ASCII第一次以规范标准的类型发表是在1967年，最后一次更新则是在1986年，到目前为止共定义了128个字符  </p>
-<h2 id="码表"><a href="#码表" class="headerlink" title="码表"></a>码表</h2><p>在计算机中，所有的数据在存储和运算时都要使用二进制数表示（因为计算机用高电平和低电平分别表示<code>1</code>和<code>0</code>）  </p>
+              <h1 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h1><h2 id="Ascii"><a href="#Ascii" class="headerlink" title="Ascii"></a>Ascii</h2><p>ASCII (American Standard Code for Information Interchange)美国信息交换标准代码 是基于拉丁字母的一套电脑编码系统，主要用于显示现代英语和其他西欧语言<br>它是最通用的信息交换标准，并等同于国际标准<code>ISO/IEC 646</code><br>ASCII第一次以规范标准的类型发表是在1967年，最后一次更新则是在1986年，到目前为止共定义了128个字符  </p>
+<h3 id="码表"><a href="#码表" class="headerlink" title="码表"></a>码表</h3><p>在计算机中，所有的数据在存储和运算时都要使用二进制数表示（因为计算机用高电平和低电平分别表示<code>1</code>和<code>0</code>）    </p>
 <blockquote>
 <p>例如，像a、b、c、d这样的52个字母（包括大写）以及0、1等数字还有一些常用的符号（例如*、#、@等）  </p>
 </blockquote>
-<p>在计算机中存储时也要使用二进制数来表示，为了记录具体用哪些二进制数字表示哪个符号，人们建立了码表。每个人都可以约定自己的一套编码方式（码表）<br>为了让大家互相通信而不造成混乱，那么大家就必须使用相同的编码规则，于是美国有关的标准化组织就出台了<code>ASCII</code>编码，统一规定了上述常用符号用哪些二进制数来表示<br><img src="/%E7%BC%96%E7%A0%81%E5%92%8C%E5%8A%A0%E5%AF%86-js-Python/20200819033739113.png" srcset="/img/loading.gif">  </p>
-<h2 id="在Python中获取"><a href="#在Python中获取" class="headerlink" title="在Python中获取"></a>在Python中获取</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_ascii</span>(<span class="hljs-params">text: <span class="hljs-built_in">str</span></span>):</span><br>    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> text:<br>        print(<span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;x&#125;</span>&#x27;</span>, <span class="hljs-built_in">ord</span>(x))<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    get_ascii(<span class="hljs-string">&#x27;Hello world&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
-<h1 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h1><p>Base64是一种基于64个<code>可打印字符</code>来表示二进制数据的方法<br>是网络上最常见的用于传输编码方式之一<br><code>3个字节</code> = <code>8位</code> = <code>24比特</code>， 对应于4个<code>Base64</code>单元<br>即3个字节可以由4个可打印字符来表示  </p>
+<p>在计算机中存储时也要使用二进制数来表示，为了记录具体用哪些二进制数字表示哪个符号，人们建立了码表。每个人都可以约定自己的一套编码方式（码表）<br>为了让大家互相通信而不造成混乱，那么大家就必须使用相同的编码规则，于是美国有关的标准化组织就出台了<code>ASCII</code>编码，统一规定了上述常用符号用哪些二进制数来表示<br><img src="/%E7%BC%96%E7%A0%81%E5%92%8C%E5%8A%A0%E5%AF%86/20200819033739113.png" srcset="/img/loading.gif">  </p>
+<h3 id="相互转换"><a href="#相互转换" class="headerlink" title="相互转换"></a>相互转换</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- encoding: utf-8 -*-</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">@File    :   0.py</span><br><span class="hljs-string">@Time    :   2021年1月11日</span><br><span class="hljs-string">@Author  :   Recluse Xu</span><br><span class="hljs-string">@Version :   1.1</span><br><span class="hljs-string">@Contact :   444640050@qq.com</span><br><span class="hljs-string">@Desc    :   ASCII 相关</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">char_to_ascii_num</span>(<span class="hljs-params">text: <span class="hljs-built_in">str</span></span>):</span><br>    <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> text:<br>        print(char, <span class="hljs-built_in">ord</span>(char))<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ascii_num_to_char</span>(<span class="hljs-params">char_num_list : <span class="hljs-built_in">str</span></span>):</span><br>    <span class="hljs-keyword">for</span> char_num <span class="hljs-keyword">in</span> char_num_list:<br>        print(char_num, <span class="hljs-built_in">chr</span>(char_num))<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    char_to_ascii_num(<span class="hljs-string">&#x27;Hello world&#x27;</span>)<br>    print(<span class="hljs-string">&#x27;----------------&#x27;</span>)<br>    ascii_num_to_char([<span class="hljs-number">72</span>, <span class="hljs-number">101</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>, <span class="hljs-number">32</span>, <span class="hljs-number">119</span>, <span class="hljs-number">111</span>, <span class="hljs-number">114</span>, <span class="hljs-number">114</span>, <span class="hljs-number">108</span>, <span class="hljs-number">100</span>])<br><br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h2><p>Base64是一种基于64个<code>可打印字符</code>来表示二进制数据的方法<br>是网络上最常见的用于传输编码方式之一<br><code>3个字节</code> = <code>8位</code> = <code>24比特</code>， 对应于4个<code>Base64</code>单元<br>即3个字节可以由4个可打印字符来表示  </p>
 <blockquote>
 <p>可打印字符：A-Z、a-z、0-9 （一共62个字符）<br>剩余两个字符在不同的系统中表示不同  </p>
 </blockquote>
 <p>多用于处理文本数据 与 二进制数据的表示、传输、存储<br>例如：网页上的图片  </p>
 <blockquote>
-<p>例: 输入6666<br><img src="/%E7%BC%96%E7%A0%81%E5%92%8C%E5%8A%A0%E5%AF%86-js-Python/20200819035440360.png" srcset="/img/loading.gif"><br>由于后面还没够3字节，所以就会补充一些字符  </p>
+<p>例: 输入6666<br><img src="/%E7%BC%96%E7%A0%81%E5%92%8C%E5%8A%A0%E5%AF%86/20200819035440360.png" srcset="/img/loading.gif"><br>由于后面还没够3字节，所以就会补充一些字符  </p>
 </blockquote>
 <p><code>Base64</code>核心原理是将二进制数据进行分组，每 24Bit/3字节 一大组，再把大组的数据分成 6Bit 的小分组  </p>
 <p>由于6Bit数据只能表示64个不同字符(2^6=64)，所以叫<code>Base64 </code>  </p>
 <blockquote>
-<p>大厂会自己定制特定的字符表，来达到混淆的目的<br>虽然都是base64,但其个字符与值的关系是被更改过的  </p>
+<p>大厂会自己定制特定的字符表，来达到混淆的目的<br>虽然都是base64, 但其个字符与值的关系是被更改过的  </p>
 </blockquote>
-<h2 id="码表-1"><a href="#码表-1" class="headerlink" title="码表"></a>码表</h2><p><img src="/%E7%BC%96%E7%A0%81%E5%92%8C%E5%8A%A0%E5%AF%86-js-Python/20200827043358055.png" srcset="/img/loading.gif"><br>默认的码表是 <code>大写字母 + 小写字母 + 数字 + &#39;+&#39; + &#39;/&#39;</code><br>这东西其实能自己定义  </p>
-<h2 id="Python代码浏览运行过程"><a href="#Python代码浏览运行过程" class="headerlink" title="Python代码浏览运行过程"></a>Python代码浏览运行过程</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- encoding: utf-8 -*-</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">@File    :   7_base64_charset.py</span><br><span class="hljs-string">@Time    :   2020/08/27 12:05:58</span><br><span class="hljs-string">@Author  :   Recluse Xu</span><br><span class="hljs-string">@Version :   1.0</span><br><span class="hljs-string">@Contact :   444640050@qq.com</span><br><span class="hljs-string">@Desc    :   自定义字符集的base64编码与解码</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><br><span class="hljs-comment"># here put the import lib</span><br><span class="hljs-keyword">import</span> string<br><span class="hljs-keyword">import</span> random<br><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    定义自己的64个字符</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><br><span class="hljs-comment"># 从标准库里将大写字母，小写字母，数字（一共62个字符）</span><br>char64 = string.ascii_uppercase + string.ascii_lowercase + string.digits<br><span class="hljs-comment"># 额外添加两个字符(一共64个字符)</span><br>char64 += <span class="hljs-string">&#x27;+&#x27;</span>+<span class="hljs-string">&#x27;/&#x27;</span><br>char64 = <span class="hljs-built_in">list</span>(char64)<br><span class="hljs-comment"># 打乱码表</span><br>random.shuffle(char64)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cut</span>(<span class="hljs-params">obj, sec</span>):</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    将字符串按照指定数量进行切分</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    <span class="hljs-keyword">return</span> [obj[i:i+sec] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(obj), sec)]<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ascii_2_base64</span>(<span class="hljs-params">ascii_str: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    正常来说，一个ASCII字符占8位</span><br><span class="hljs-string">    一个base64字符占6位</span><br><span class="hljs-string">    3*8 = 24 = 4*6位</span><br><span class="hljs-string">    这个函数就是用来做这个转换的</span><br><span class="hljs-string">    单个字符位数不够的，计算时会用0补全</span><br><span class="hljs-string">    整个字符位数不够的，在最后会用=来补足</span><br><span class="hljs-string"></span><br><span class="hljs-string">    b1    b2    b3</span><br><span class="hljs-string">    n1  n2  n3  n4</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    print(<span class="hljs-string">&#x27;传入的数据字符串\t&#x27;</span>, ascii_str)<br>    <span class="hljs-comment"># 将数据转为bytes</span><br>    origin_bytes = ascii_str.encode()<br>    print(<span class="hljs-string">&#x27;将传入数据转为bytes\t&#x27;</span>, origin_bytes)<br><br>    <span class="hljs-comment"># 转为八位二进制</span><br>    base64_8_bin = [<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">str</span>(<span class="hljs-built_in">bin</span>(b)).replace(<span class="hljs-string">&#x27;0b&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>):<span class="hljs-number">0</span>&gt;<span class="hljs-number">8</span>&#125;</span>&quot;</span> <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> origin_bytes]<br>    print(<span class="hljs-string">&#x27;将数据转为八位二进制\t&#x27;</span>, base64_8_bin)<br><br>    <span class="hljs-comment"># 按每6位切分</span><br>    base64_6_bin = cut(<span class="hljs-string">&#x27;&#x27;</span>.join(base64_8_bin), <span class="hljs-number">6</span>)<br>    print(<span class="hljs-string">&#x27;每6位切分一次数据\t&#x27;</span>, base64_6_bin)<br><br>    <span class="hljs-comment"># 最后一位位数补足到6位</span><br>    base64_6_bin[-<span class="hljs-number">1</span>] += <span class="hljs-string">&#x27;0&#x27;</span> * (<span class="hljs-number">6</span> - <span class="hljs-built_in">len</span>(base64_6_bin[-<span class="hljs-number">1</span>]))<br>    print(<span class="hljs-string">&#x27;将最后一位的位数补足\t&#x27;</span>, base64_6_bin)<br><br>    <span class="hljs-comment"># 将被切分的数据重新转为10进制</span><br>    base64_int = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> x: <span class="hljs-built_in">int</span>(x, <span class="hljs-number">2</span>), base64_6_bin))<br>    print(<span class="hljs-string">&#x27;每段二进制数转十进制\t&#x27;</span>, base64_int)<br><br>    <span class="hljs-comment"># 码表中寻找目标字符替换对应项</span><br>    base64_str = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> x: char64[x], base64_int))<br>    print(<span class="hljs-string">&#x27;码表中寻找目标字符替换\t&#x27;</span>, base64_str)<br><br>    <span class="hljs-comment"># 位数不够的地方补=</span><br>    base64_str += [<span class="hljs-string">&#x27;=&#x27;</span>] * (<span class="hljs-number">3</span> - <span class="hljs-built_in">len</span>(base64_8_bin) % <span class="hljs-number">3</span>)<br>    print(<span class="hljs-string">&#x27;用=将数据补全到24*n位\t&#x27;</span>, base64_str)<br><br>    <span class="hljs-comment"># 最终结果</span><br>    base64_str = <span class="hljs-string">&#x27;&#x27;</span>.join(base64_str)<br>    print(<span class="hljs-string">&#x27;ascii转base64 最终结果\t&#x27;</span>, base64_str)<br>    <span class="hljs-keyword">return</span> base64_str<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">base64_2_ascii</span>(<span class="hljs-params">base64_str: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    做和上面相反的操作</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    print(<span class="hljs-string">&#x27;传入的数据字符串\t&#x27;</span>, base64_str)<br>    <span class="hljs-comment"># 处理最后一个字符，通过码表判断是否为填充用的字符，是则在记录后去除</span><br>    <span class="hljs-keyword">if</span> base64_str[-<span class="hljs-number">1</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> char64:<br>        base64_str = base64_str.replace(base64_str[-<span class="hljs-number">1</span>], <span class="hljs-string">&#x27;&#x27;</span>)<br>    print(<span class="hljs-string">&#x27;按码表处理填充字符\t&#x27;</span>, base64_str)<br>    <br>    <span class="hljs-comment"># 码表中寻找目标十进制数字序号替换对应项</span><br>    base64_int = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> x: char64.index(x), base64_str))<br>    print(<span class="hljs-string">&#x27;码表中寻找目标序号替换\t&#x27;</span>, base64_int)<br><br>    <span class="hljs-comment"># 十进制数字序号转六位二进制</span><br>    base64_6_bin = [<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">bin</span>(x)[<span class="hljs-number">2</span>:]:<span class="hljs-number">0</span>&gt;<span class="hljs-number">6</span>&#125;</span>&quot;</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> base64_int]<br>    print(<span class="hljs-string">&#x27;十进制序号转六位二进制\t&#x27;</span>, base64_6_bin)<br><br>    <span class="hljs-comment"># 六位二进制转八位二进制</span><br>    base64_8_bin = cut(<span class="hljs-string">&#x27;&#x27;</span>.join(base64_6_bin), <span class="hljs-number">8</span>)<br>    print(<span class="hljs-string">&#x27;六位二进制转八位二进制\t&#x27;</span>, base64_8_bin)<br><br>    <span class="hljs-comment"># 抛弃位数不足的位数</span><br>    base64_8_bin = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">filter</span>(<span class="hljs-keyword">lambda</span> x: <span class="hljs-built_in">len</span>(x) == <span class="hljs-number">8</span>, base64_8_bin))<br>    print(<span class="hljs-string">&#x27;抛弃位数不足八位的项\t&#x27;</span>, base64_8_bin)<br><br>    <span class="hljs-comment"># 八位二进制转ascii字符</span><br>    ascii_str = [<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">int</span>(x, <span class="hljs-number">2</span>)) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> base64_8_bin]<br>    print(<span class="hljs-string">&#x27;八位二进制转ascii字符\t&#x27;</span>, ascii_str)<br><br>    ascii_str = <span class="hljs-string">&#x27;&#x27;</span>.join(ascii_str)<br>    print(<span class="hljs-string">&#x27;base64转ascii 最终结果\t&#x27;</span>, ascii_str)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    base64_str = ascii_2_base64(<span class="hljs-string">&#x27;Hello&#x27;</span>)<br>    print()<br>    base64_2_ascii(base64_str)<br></code></pre></div></td></tr></table></figure>
+<h3 id="码表-1"><a href="#码表-1" class="headerlink" title="码表"></a>码表</h3><p><img src="/%E7%BC%96%E7%A0%81%E5%92%8C%E5%8A%A0%E5%AF%86/20200827043358055.png" srcset="/img/loading.gif"><br>默认的码表是 <code>大写字母 + 小写字母 + 数字 + &#39;+&#39; + &#39;/&#39;</code><br>这东西其实能自己定义  </p>
+<h3 id="浏览运行过程"><a href="#浏览运行过程" class="headerlink" title="浏览运行过程"></a>浏览运行过程</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- encoding: utf-8 -*-</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">@File    :   7_base64_charset.py</span><br><span class="hljs-string">@Time    :   2020/08/27 12:05:58</span><br><span class="hljs-string">@Author  :   Recluse Xu</span><br><span class="hljs-string">@Version :   1.0</span><br><span class="hljs-string">@Contact :   444640050@qq.com</span><br><span class="hljs-string">@Desc    :   自定义字符集的base64编码与解码</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><br><span class="hljs-comment"># here put the import lib</span><br><span class="hljs-keyword">import</span> string<br><span class="hljs-keyword">import</span> random<br><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    定义自己的64个字符</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><br><span class="hljs-comment"># 从标准库里将大写字母，小写字母，数字（一共62个字符）</span><br>char64 = string.ascii_uppercase + string.ascii_lowercase + string.digits<br><span class="hljs-comment"># 额外添加两个字符(一共64个字符)</span><br>char64 += <span class="hljs-string">&#x27;+&#x27;</span>+<span class="hljs-string">&#x27;/&#x27;</span><br>char64 = <span class="hljs-built_in">list</span>(char64)<br><span class="hljs-comment"># 打乱码表</span><br>random.shuffle(char64)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cut</span>(<span class="hljs-params">obj, sec</span>):</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    将字符串按照指定数量进行切分</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    <span class="hljs-keyword">return</span> [obj[i:i+sec] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(obj), sec)]<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ascii_2_base64</span>(<span class="hljs-params">ascii_str: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    正常来说，一个ASCII字符占8位</span><br><span class="hljs-string">    一个base64字符占6位</span><br><span class="hljs-string">    3*8 = 24 = 4*6位</span><br><span class="hljs-string">    这个函数就是用来做这个转换的</span><br><span class="hljs-string">    单个字符位数不够的，计算时会用0补全</span><br><span class="hljs-string">    整个字符位数不够的，在最后会用=来补足</span><br><span class="hljs-string"></span><br><span class="hljs-string">    b1    b2    b3</span><br><span class="hljs-string">    n1  n2  n3  n4</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    print(<span class="hljs-string">&#x27;传入的数据字符串\t&#x27;</span>, ascii_str)<br>    <span class="hljs-comment"># 将数据转为bytes</span><br>    origin_bytes = ascii_str.encode()<br>    print(<span class="hljs-string">&#x27;将传入数据转为bytes\t&#x27;</span>, origin_bytes)<br><br>    <span class="hljs-comment"># 转为八位二进制</span><br>    base64_8_bin = [<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">str</span>(<span class="hljs-built_in">bin</span>(b)).replace(<span class="hljs-string">&#x27;0b&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>):<span class="hljs-number">0</span>&gt;<span class="hljs-number">8</span>&#125;</span>&quot;</span> <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> origin_bytes]<br>    print(<span class="hljs-string">&#x27;将数据转为八位二进制\t&#x27;</span>, base64_8_bin)<br><br>    <span class="hljs-comment"># 按每6位切分</span><br>    base64_6_bin = cut(<span class="hljs-string">&#x27;&#x27;</span>.join(base64_8_bin), <span class="hljs-number">6</span>)<br>    print(<span class="hljs-string">&#x27;每6位切分一次数据\t&#x27;</span>, base64_6_bin)<br><br>    <span class="hljs-comment"># 最后一位位数补足到6位</span><br>    base64_6_bin[-<span class="hljs-number">1</span>] += <span class="hljs-string">&#x27;0&#x27;</span> * (<span class="hljs-number">6</span> - <span class="hljs-built_in">len</span>(base64_6_bin[-<span class="hljs-number">1</span>]))<br>    print(<span class="hljs-string">&#x27;将最后一位的位数补足\t&#x27;</span>, base64_6_bin)<br><br>    <span class="hljs-comment"># 将被切分的数据重新转为10进制</span><br>    base64_int = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> x: <span class="hljs-built_in">int</span>(x, <span class="hljs-number">2</span>), base64_6_bin))<br>    print(<span class="hljs-string">&#x27;每段二进制数转十进制\t&#x27;</span>, base64_int)<br><br>    <span class="hljs-comment"># 码表中寻找目标字符替换对应项</span><br>    base64_str = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> x: char64[x], base64_int))<br>    print(<span class="hljs-string">&#x27;码表中寻找目标字符替换\t&#x27;</span>, base64_str)<br><br>    <span class="hljs-comment"># 位数不够的地方补=</span><br>    base64_str += [<span class="hljs-string">&#x27;=&#x27;</span>] * (<span class="hljs-number">3</span> - <span class="hljs-built_in">len</span>(base64_8_bin) % <span class="hljs-number">3</span>)<br>    print(<span class="hljs-string">&#x27;用=将数据补全到24*n位\t&#x27;</span>, base64_str)<br><br>    <span class="hljs-comment"># 最终结果</span><br>    base64_str = <span class="hljs-string">&#x27;&#x27;</span>.join(base64_str)<br>    print(<span class="hljs-string">&#x27;ascii转base64 最终结果\t&#x27;</span>, base64_str)<br>    <span class="hljs-keyword">return</span> base64_str<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">base64_2_ascii</span>(<span class="hljs-params">base64_str: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    做和上面相反的操作</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    print(<span class="hljs-string">&#x27;传入的数据字符串\t&#x27;</span>, base64_str)<br>    <span class="hljs-comment"># 处理最后一个字符，通过码表判断是否为填充用的字符，是则在记录后去除</span><br>    <span class="hljs-keyword">if</span> base64_str[-<span class="hljs-number">1</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> char64:<br>        base64_str = base64_str.replace(base64_str[-<span class="hljs-number">1</span>], <span class="hljs-string">&#x27;&#x27;</span>)<br>    print(<span class="hljs-string">&#x27;按码表处理填充字符\t&#x27;</span>, base64_str)<br>    <br>    <span class="hljs-comment"># 码表中寻找目标十进制数字序号替换对应项</span><br>    base64_int = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> x: char64.index(x), base64_str))<br>    print(<span class="hljs-string">&#x27;码表中寻找目标序号替换\t&#x27;</span>, base64_int)<br><br>    <span class="hljs-comment"># 十进制数字序号转六位二进制</span><br>    base64_6_bin = [<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">bin</span>(x)[<span class="hljs-number">2</span>:]:<span class="hljs-number">0</span>&gt;<span class="hljs-number">6</span>&#125;</span>&quot;</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> base64_int]<br>    print(<span class="hljs-string">&#x27;十进制序号转六位二进制\t&#x27;</span>, base64_6_bin)<br><br>    <span class="hljs-comment"># 六位二进制转八位二进制</span><br>    base64_8_bin = cut(<span class="hljs-string">&#x27;&#x27;</span>.join(base64_6_bin), <span class="hljs-number">8</span>)<br>    print(<span class="hljs-string">&#x27;六位二进制转八位二进制\t&#x27;</span>, base64_8_bin)<br><br>    <span class="hljs-comment"># 抛弃位数不足的位数</span><br>    base64_8_bin = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">filter</span>(<span class="hljs-keyword">lambda</span> x: <span class="hljs-built_in">len</span>(x) == <span class="hljs-number">8</span>, base64_8_bin))<br>    print(<span class="hljs-string">&#x27;抛弃位数不足八位的项\t&#x27;</span>, base64_8_bin)<br><br>    <span class="hljs-comment"># 八位二进制转ascii字符</span><br>    ascii_str = [<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">int</span>(x, <span class="hljs-number">2</span>)) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> base64_8_bin]<br>    print(<span class="hljs-string">&#x27;八位二进制转ascii字符\t&#x27;</span>, ascii_str)<br><br>    ascii_str = <span class="hljs-string">&#x27;&#x27;</span>.join(ascii_str)<br>    print(<span class="hljs-string">&#x27;base64转ascii 最终结果\t&#x27;</span>, ascii_str)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    base64_str = ascii_2_base64(<span class="hljs-string">&#x27;Hello&#x27;</span>)<br>    print()<br>    base64_2_ascii(base64_str)<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p><code>Unicode</code>，中文又称万国码、国际码、统一码、单一码，是计算机科学领域的业界标准<br>它整理、编码了世界上大部分的文字系统，使得电脑可以用更为简单的方式来呈现和处理文字  </p>
+<p><code>Unicode</code> 为每一个字符而非字形定义唯一的代码（即一个整数）<br>换句话说，统一码以一种抽象的方式（即数字）来处理字符，并将视觉上的演绎工作（例如字体大小、外观形状、字体形态、文体等）留给其他软件来处理，例如网页浏览器或是文字处理器  </p>
+<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><ul>
+<li>Universality：提供单一、综合的字符集，编码一切现代与大部分历史文献的字符  </li>
+<li>Efficiency：易于处理与分析  </li>
+<li>Characters, not glyphs：字符，而不是字形  </li>
+<li>Semantics：字符要有良好定义的语  </li>
+<li>Plain text：仅限于文本字符  </li>
+<li>Logical order：默认内存表示是其逻辑序  </li>
+<li>Unification：把不同语言的同一书写系统（scripts）中相同字符统一起来  </li>
+<li>Dynamic composition：附加符号可以动态组合  </li>
+<li>Stability：已分配的字符与语义不再改变  </li>
+<li>Convertibility：Unicode与其他著名字符集可以精确转换  </li>
+</ul>
+<h3 id="文种平面"><a href="#文种平面" class="headerlink" title="文种平面"></a>文种平面</h3><p><code>Unicode</code>字符分为17组编排，每组称为平面（Plane），而每平面拥有65536（即216）个代码点<br>然而目前只用了少数平面  </p>
+<table>
+<thead>
+<tr>
+<th>平面</th>
+<th>始末字符值</th>
+<th>中文名称</th>
+<th>英文名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0号平面</td>
+<td>U+0000 - U+FFFF</td>
+<td>基本多文种平面</td>
+<td>Basic Multilingual Plane，简称BMP</td>
+</tr>
+<tr>
+<td>1号平面</td>
+<td>U+10000 - U+1FFFF</td>
+<td>多文种补充平面</td>
+<td>Supplementary Multilingual Plane，简称SMP</td>
+</tr>
+<tr>
+<td>2号平面</td>
+<td>U+20000 - U+2FFFF</td>
+<td>表意文字补充平面</td>
+<td>Supplementary Ideographic Plane，简称SIP</td>
+</tr>
+<tr>
+<td>3号平面</td>
+<td>U+30000 - U+3FFFF</td>
+<td>表意文字第三平面</td>
+<td>Tertiary Ideographic Plane，简称TIP</td>
+</tr>
+<tr>
+<td>4号平面 至 13号平面</td>
+<td>U+40000 - U+DFFFF</td>
+<td>（尚未使用）</td>
+<td></td>
+</tr>
+<tr>
+<td>14号平面</td>
+<td>U+E0000 - U+EFFFF</td>
+<td>特别用途补充平面</td>
+<td>Supplementary Special-purpose Plane，简称SSP</td>
+</tr>
+<tr>
+<td>15号平面</td>
+<td>U+F0000 - U+FFFFF</td>
+<td>保留作为私人使用区（A区）</td>
+<td>Private Use Area-A，简称PUA-A</td>
+</tr>
+<tr>
+<td>16号平面</td>
+<td>U+100000 - U+10FFFF</td>
+<td>保留作为私人使用区（B区）</td>
+<td>Private Use Area-B，简称PUA-B</td>
+</tr>
+</tbody></table>
+<p>实际，光是 BMP基本多文种平面 就已经非常够用了，现在绝大多数的常用语言都能在这里找到（包括中文）  </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84">维基百科：Unicode字符平面映射</a>  </p>
+</blockquote>
+<h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><p>目前实际应用的统一码版本对应于<code>UCS-2</code>，即使用 16位 的编码空间。也就是每个字符占用2个字节  </p>
+<blockquote>
+<p><code>I</code>  <code>0049</code> <code>00000000 01001001</code><br><code>知</code> <code>77e5</code> <code>01110111 11100101</code>  </p>
+</blockquote>
+<p>这样理论上一共最多可以表示 2^16 = 65536 个字符<br>基本满足各种语言的使用<br>实际上当前版本的统一码并未完全使用这16位编码，而是保留了大量空间以作为特殊使用或将来扩展  </p>
+<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><p><code>Unicode</code>的实现方式不同于编码方式<br>一个字符的<code>Unicode</code>编码确定。但是在实际传输过程中，由于不同系统平台的设计不一定一致，以及出于节省空间的目的，对<code>Unicode</code>编码的实现方式有所不同  </p>
+<p><code>Unicode</code>的实现方式称为<code>Unicode</code>转换格式（<code>Unicode Transformation Format</code>，简称为<code>UTF</code>）  </p>
+<blockquote>
+<p><code>I</code>  <code>0049</code> <code>00000000 01001001</code><br><code>知</code> <code>77e5</code> <code>01110111 11100101</code><br>严格按照<code>UCS-2</code>会浪费空间，因为英文只需要一个字节就能够表示出来<br>那一长串的 0 没有记录与传输的必要，因此有了不同的实现方式（比如UTF-8）  </p>
+</blockquote>
+<h3 id="Unicode转换样例"><a href="#Unicode转换样例" class="headerlink" title="Unicode转换样例"></a>Unicode转换样例</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- encoding: utf-8 -*-</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">@File    :   8_unicode.py</span><br><span class="hljs-string">@Time    :   2020-8-29 00:21:05</span><br><span class="hljs-string">@Author  :   Recluse Xu</span><br><span class="hljs-string">@Version :   1.0</span><br><span class="hljs-string">@Contact :   444640050@qq.com</span><br><span class="hljs-string">@Desc    :   基础unicode操作</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">char_2_unicode_char</span>(<span class="hljs-params">char: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>    <span class="hljs-comment"># 字符编码为unicode字符</span><br>    c = char.encode(<span class="hljs-string">&#x27;unicode_escape&#x27;</span>)<br>    c = <span class="hljs-built_in">str</span>(c)<br>    print(char, <span class="hljs-string">&#x27;Unicode编码结果&#x27;</span>, c)<br>    <span class="hljs-keyword">return</span> c<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unicode_char_2_char</span>(<span class="hljs-params">unicode_char: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>    <span class="hljs-comment"># unicode字符解码为字符</span><br>    c = unicode_char.encode().decode(<span class="hljs-string">&#x27;unicode_escape&#x27;</span>)<br>    print(unicode_char, <span class="hljs-string">&#x27;Unicode编码结果&#x27;</span>, c)<br>    <span class="hljs-keyword">return</span> c<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">char_2_unicode_ret</span>(<span class="hljs-params">a_char: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>    <span class="hljs-comment"># 得到一个字符的unicode 数值</span><br>    c = <span class="hljs-built_in">ord</span>(a_char)<br>    print(a_char, <span class="hljs-string">&#x27;对应Unicode值&#x27;</span>, c)<br>    <span class="hljs-keyword">return</span> c<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unicode_ret_2_char</span>(<span class="hljs-params">a_ret: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>    <span class="hljs-comment"># 根据unicode 数值，得到一个字符</span><br>    c = <span class="hljs-built_in">chr</span>(a_ret)<br>    print(a_ret, <span class="hljs-string">&#x27;对应字符&#x27;</span>, c)<br>    <span class="hljs-keyword">return</span> c<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unicode_ret_2_unicode_char</span>(<span class="hljs-params">a_ret: <span class="hljs-built_in">int</span></span>):</span><br>    <span class="hljs-comment"># 根据unicode 数值，得到一个unicode字符</span><br>    c = <span class="hljs-built_in">chr</span>(a_ret).encode(<span class="hljs-string">&#x27;unicode_escape&#x27;</span>)<br>    print(a_ret, <span class="hljs-string">&#x27;对应字符&#x27;</span>, c)<br>    <span class="hljs-keyword">return</span> c<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    c = <span class="hljs-string">&#x27;齤&#x27;</span><br>    char_2_unicode_char(c)<br>    unicode_char_2_char(<span class="hljs-string">&#x27;\\u4f60\\u597d&#x27;</span>)<br><br>    char_2_unicode_ret(c[<span class="hljs-number">0</span>])<br>    unicode_ret_2_char(<span class="hljs-number">38006</span>)<br>    unicode_ret_2_unicode_char(<span class="hljs-number">38006</span>)<br><br></code></pre></div></td></tr></table></figure>
+<h2 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h2><p><code>UTF-8</code>（<code>8-bit Unicode Transformation Format</code>）是一种针对 <code>Unicode</code> 的可变长度字符编码，也是一种前缀码  </p>
+<p>其设计的主要目的是在能正常使用所有字符的同时，减少常用字符（主要指英文/拉丁文）编码长度    </p>
+<h3 id="编码规则"><a href="#编码规则" class="headerlink" title="编码规则"></a>编码规则</h3><ol>
+<li>单字节的字符，字节的第一位设为0，对于英语文本，UTF-8码只占用一个字节，和ASCII码完全相同；  </li>
+<li>n个字节的字符(n&gt;1):<br>第一个字节的前n位设为1<br>第n+1位设为0，后面字节的前两位都设为10，这n个字节的其余空位填充该字符unicode码，高位用0补足  </li>
+</ol>
+<blockquote>
+<p><code>I</code>  = <code>0049</code> = <code>00000000 01001001</code> → <code>01001001</code><br><code>知</code> = <code>77e5</code> = <code>01110111 11100101</code> → <code>11100111 10011111 10100101</code>  </p>
+</blockquote>
+<p>你会发现，<code>UTF-8</code> 编码对于 <code>Unicode</code>字符码 本身较短的字符较为友好，而对于较后的则并不友好（甚至一顿操作后还变长了）  </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/UTF-8"><code>维基百科:UTF-8</code></a>  </p>
+</blockquote>
+<h2 id="百分号编码-URL编码"><a href="#百分号编码-URL编码" class="headerlink" title="百分号编码-URL编码"></a>百分号编码-URL编码</h2><p>百分号编码（英语：Percent-encoding），又称：URL编码（URL encoding）是特定上下文的 统一资源定位符<code>URL</code> 的编码机制，实际上也适用于 统一资源标志符<code>URI</code> 的编码  </p>
+<h3 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h3><ul>
+<li>URI允许字符  <ul>
+<li>保留字符<br>保留字符存在特殊含义  </li>
+<li>未保留字符<br>未保留没有特殊含义  </li>
+</ul>
+</li>
+<li>URI不允许字符  </li>
+</ul>
+<h3 id="保留字符与未保留字符"><a href="#保留字符与未保留字符" class="headerlink" title="保留字符与未保留字符"></a>保留字符与未保留字符</h3><p>保留字符：<code>!</code> <code>*</code> <code>&#39;</code> <code>(</code> <code>)</code> <code>;</code> <code>:</code> <code>@</code> <code>&amp;</code> <code>=</code> <code>+</code> <code>$</code> <code>,</code> <code>/</code> <code>?</code> <code>#</code> <code>[</code> <code>]</code><br>未保留字符: 大小写字母，0<del>9数字，<code>-</code> <code>_</code> <code>.</code> `</del>`  </p>
+<p><code>URI</code>中的其它字符必须用百分号编码<br>如果希望使用保留字符，那么必须要经过百分号编码  </p>
+<p>|<code>!</code>|<code>#</code>|<code>$</code>|<code>&amp;</code>|<code>&#39;</code>|<code>(</code>|<code>)</code>|<code>*</code>|<code>+</code>|<code>,</code>|<code>/</code>|<code>:</code>|<code>;</code>|<code>=</code>|<code>?</code>|<code>@</code>|<code>[</code>|<code>]</code>|<br>|–|–|<br>|%21|%23|%24|%26|%27|%28|%29|%2A|%2B|%2C|%2F|%3A|%3B|%3D|%3F|%40|%5B|%5D|</p>
+<p>其它字符<br>建议先转换为<code>UTF-8</code>字节序列, 然后对其字节值使用百分号编码<br>二进制数据<br>应该表示为8位一组的序列，然后对每个8位组按照上述方式百分号编码. 例如，字节值<code>0F</code> (十六进制)应表示为<code>%0F</code>  </p>
 <h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>信息指纹<br>MD5信息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value）<br>多用于确保信息传输完整一致  </p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>输入任意长度的信息，经过处理，都会输出128位的信息（信息指纹）  </p>
 <h2 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_string_md5</span>(<span class="hljs-params">text</span>):</span><br>    m = hashlib. md5()<br>    m. update(text.encode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>    print(m. hexdigest())<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    get_string_md5(<span class="hljs-string">&#x27;Hello world&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
@@ -250,15 +347,15 @@
 <blockquote>
 <p>MD5的抗碰撞性已经被人破解<br>简单而言，就是能根据一个MD5值，通过一些算法，快速得得到一些内容，其MD5结果与原本MD5一致<br>校验码一致，内容不一致，使得校验的安全性无法确定  </p>
 </blockquote>
-<h1 id="加密算法类别"><a href="#加密算法类别" class="headerlink" title="加密算法类别"></a>加密算法类别</h1><h2 id="对称加密算法"><a href="#对称加密算法" class="headerlink" title="对称加密算法"></a>对称加密算法</h2><p>一方通过秘钥将信息加密后，将密文传给另一方，另一方通过相同的秘钥解开密文得到明文  </p>
-<h2 id="非对称加密算法"><a href="#非对称加密算法" class="headerlink" title="非对称加密算法"></a>非对称加密算法</h2><p>A要向B发送消息，A与B都要昌盛一对用于加密和解密的公钥和私钥，公钥用于加密，私钥用于解密<br>各自的私钥各自保密，各自的公钥对对方公开  </p>
+<h1 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h1><h2 id="加密算法类别"><a href="#加密算法类别" class="headerlink" title="加密算法类别"></a>加密算法类别</h2><h3 id="对称加密算法"><a href="#对称加密算法" class="headerlink" title="对称加密算法"></a>对称加密算法</h3><p>一方通过秘钥将信息加密后，将密文传给另一方，另一方通过相同的秘钥解开密文得到明文  </p>
+<h3 id="非对称加密算法"><a href="#非对称加密算法" class="headerlink" title="非对称加密算法"></a>非对称加密算法</h3><p>A要向B发送消息，A与B都要昌盛一对用于加密和解密的公钥和私钥，公钥用于加密，私钥用于解密<br>各自的私钥各自保密，各自的公钥对对方公开  </p>
 <ol>
 <li>A要发送信息时，A用B的公钥加密信息   </li>
 <li>A将密文用B公钥加密过后的信息发送给B  </li>
 <li>B收到密文后，用B自己的私钥解密密文  </li>
 </ol>
 <p>对于B发送给A的信息也一样<br>由于只有私钥能够解密，这个过程中所有其它收到密文和公钥的人都无法解密信息  </p>
-<h2 id="区别与实际"><a href="#区别与实际" class="headerlink" title="区别与实际"></a>区别与实际</h2><table>
+<h3 id="区别与实际"><a href="#区别与实际" class="headerlink" title="区别与实际"></a>区别与实际</h3><table>
 <thead>
 <tr>
 <th></th>
@@ -278,28 +375,28 @@
 </tr>
 </tbody></table>
 <p>常见的情况是：将 对称加密的秘钥 用 非对称加密公钥 进行加密，接收方使用 非对称加密私钥 解密得到 对称加密的秘钥，然后双方使用 对称加密 进行通信  </p>
-<h1 id="AES"><a href="#AES" class="headerlink" title="AES"></a>AES</h1><p>AES高级加密标准（Advanced Encryption Standard，AES），又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准<br>AES是对称秘钥加密中最流行的算法之一<br>AES是DES的替代品  </p>
-<h2 id="要素"><a href="#要素" class="headerlink" title="要素"></a>要素</h2><h3 id="秘钥"><a href="#秘钥" class="headerlink" title="秘钥"></a>秘钥</h3><p>支持三种秘钥长度128/192/256<br>秘钥越长，越安全，但是处理速度也越慢    </p>
-<h3 id="填充-Padding"><a href="#填充-Padding" class="headerlink" title="填充 Padding"></a>填充 Padding</h3><p>AES并非一股脑将明文加密成密文的，而是把明文拆分成一个个独立的明文块（一块128bit）加密的<br>如果一段明文拆开多个块后，最后一个块没到128bit，那么久需要对明文块进行填充  </p>
-<h4 id="常见填充类型"><a href="#常见填充类型" class="headerlink" title="常见填充类型"></a>常见填充类型</h4><ul>
+<h2 id="AES"><a href="#AES" class="headerlink" title="AES"></a>AES</h2><p>AES高级加密标准（Advanced Encryption Standard，AES），又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准<br>AES是对称秘钥加密中最流行的算法之一<br>AES是DES的替代品  </p>
+<h3 id="要素"><a href="#要素" class="headerlink" title="要素"></a>要素</h3><h4 id="秘钥"><a href="#秘钥" class="headerlink" title="秘钥"></a>秘钥</h4><p>支持三种秘钥长度128/192/256<br>秘钥越长，越安全，但是处理速度也越慢    </p>
+<h4 id="填充-Padding"><a href="#填充-Padding" class="headerlink" title="填充 Padding"></a>填充 Padding</h4><p>AES并非一股脑将明文加密成密文的，而是把明文拆分成一个个独立的明文块（一块128bit）加密的<br>如果一段明文拆开多个块后，最后一个块没到128bit，那么久需要对明文块进行填充  </p>
+<h5 id="常见填充类型"><a href="#常见填充类型" class="headerlink" title="常见填充类型"></a>常见填充类型</h5><ul>
 <li>NoPadding<br>要求明文本身就符合分块要求，不允许不符合要求的明文  </li>
 <li>ZeroPadding<br>用0进行填充，填充到位数够为止<br>并不推荐使用，当文明快最后一位是0时，解密可能出错  </li>
 <li>PKCS7Padding<br>推荐使用<br>假设数据长度需要填充n(n&gt;0)个字节才对齐，那么填充n个字节，每个字节都是n;如果数据本身就已经对齐了，则填充一块长度为块大小的数据，每个字节都是块大小  </li>
 </ul>
-<h3 id="工作模式"><a href="#工作模式" class="headerlink" title="工作模式"></a>工作模式</h3><p>AES的工作模式，体现在把明文块加密成密文块的处理过程中<br>AES加密算法提供了五种不同的工作模式CBC、ECB、CTR、CFB、OFB<br>模式之间的主体思想是相似的，在处理细节上有区别  </p>
-<h4 id="ECB模式"><a href="#ECB模式" class="headerlink" title="ECB模式"></a>ECB模式</h4><p>最简单的模式，此模式下，每个明文块的加密都是独立的，互不干涉的<br>优点是简单快捷，有利于并行计算<br>缺点是明文相同的块会变成相同的密文块，安全性比较差  </p>
-<h3 id="CBC模式"><a href="#CBC模式" class="headerlink" title="CBC模式"></a>CBC模式</h3><p>CBC模式引入了一个新的概念：初始向量IV</p>
+<h4 id="工作模式"><a href="#工作模式" class="headerlink" title="工作模式"></a>工作模式</h4><p>AES的工作模式，体现在把明文块加密成密文块的处理过程中<br>AES加密算法提供了五种不同的工作模式CBC、ECB、CTR、CFB、OFB<br>模式之间的主体思想是相似的，在处理细节上有区别  </p>
+<h5 id="ECB模式"><a href="#ECB模式" class="headerlink" title="ECB模式"></a>ECB模式</h5><p>最简单的模式，此模式下，每个明文块的加密都是独立的，互不干涉的<br>优点是简单快捷，有利于并行计算<br>缺点是明文相同的块会变成相同的密文块，安全性比较差  </p>
+<h5 id="CBC模式"><a href="#CBC模式" class="headerlink" title="CBC模式"></a>CBC模式</h5><p>CBC模式引入了一个新的概念：初始向量IV</p>
 <blockquote>
 <p>初始向量IV<br>其作用与 MD5加盐 类似，目的是为了防止 同样的明文块 被加密成 同样的密文块  </p>
 </blockquote>
 <p>CBC模式在每一个明文块加密前会让明文块和一个值做异或操作<br>IV作为初始化变量，参与第一个明文块的异或，后续的每一个明文块和它前一个明文块所加密出来的密文快相异或<br>最终得到 同样的明文块 被加密成 不同样的密文块<br>优点：安全性被提高<br>缺点：无法并行计算，性能不比ECB。引入了IV增加了复杂度  </p>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
 <li>把明文按128bit拆分为多个明文块  </li>
 <li>按照选择的填充方式填充最后一个明文块  </li>
 <li>每一个明文块利用AES加密器和秘钥加密成密文块  </li>
 <li>拼接所有的密文块，得到结果  </li>
 </ol>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>简单的过程表示</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>简单的过程表示</p>
 <p>secret = encrypt(key_type, message)<br>输入 加密信息，明文，得到加密结果<br>message = decrypt(key_type, message)<br>输入 加密信息，密文，得到明文信息</p>
 <p>常用的对称加密算法</p>
 <table>
@@ -327,6 +424,27 @@
 <p>秘钥的长度越长，加密越安全，但处理速度越慢<br>工作模式与填充模式可以看做是对称加密算法的参数和格式选择  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> base64<br><span class="hljs-keyword">from</span> Crypto.Cipher <span class="hljs-keyword">import</span> AES<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AES_Cipher</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, key</span>):</span><br>        self.bs = <span class="hljs-number">16</span><br>        key = key.encode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br>        self.cipher = AES.new(key, AES.MODE_ECB)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encrypt</span>(<span class="hljs-params">self, raw</span>):</span><br>        raw = self._pad(raw)<br>        raw = raw.encode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br>        encrypted = self.cipher.encrypt(raw)<br>        encoded = base64.b64encode(encrypted)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">str</span>(encoded, <span class="hljs-string">&#x27;utf-8&#x27;</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decrypt</span>(<span class="hljs-params">self, raw</span>):</span><br>        decoded = base64.b64decode(raw)<br>        decrypted = self.cipher.decrypt(decoded)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">str</span>(self._unpad(decrypted), <span class="hljs-string">&#x27;utf-8&#x27;</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_pad</span>(<span class="hljs-params">self, s</span>):</span><br>        <span class="hljs-comment"># 填充算法，由于算法需要特定位数，位数不足就需要填充</span><br>        <span class="hljs-keyword">return</span> s + (self.bs - <span class="hljs-built_in">len</span>(s) % self.bs) * <span class="hljs-built_in">chr</span>(self.bs - <span class="hljs-built_in">len</span>(s) % self.bs)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_unpad</span>(<span class="hljs-params">self, s</span>):</span><br>        <span class="hljs-keyword">return</span> s[:-<span class="hljs-built_in">ord</span>(s[<span class="hljs-built_in">len</span>(s)-<span class="hljs-number">1</span>:])]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    a = <span class="hljs-string">&#x27;HelloWorld&#x27;</span><br>    aes = AES_Cipher(<span class="hljs-string">&#x27;abcdefgh12345678&#x27;</span>)<br>    w = aes.encrypt(a)<br>    print(w)<br>    print(aes.decrypt(w))<br></code></pre></div></td></tr></table></figure>
 
+<h1 id="编码与加密常识"><a href="#编码与加密常识" class="headerlink" title="编码与加密常识"></a>编码与加密常识</h1><h2 id="基础通识"><a href="#基础通识" class="headerlink" title="基础通识"></a>基础通识</h2><ul>
+<li>MD5<br>提取结果通常是 32 位，不受明文长度影响   </li>
+<li>Base64<br>编码结果末尾通常会出现一或二个等于符号，受明文长度影响  </li>
+<li>SHA1<br>加密结果值为 40 位，不受明文长度影响  </li>
+<li>SHA256<br>加密结果值为 64 位，不受明文长度影响  </li>
+</ul>
+<h2 id="盲猜技巧"><a href="#盲猜技巧" class="headerlink" title="盲猜技巧"></a>盲猜技巧</h2><ul>
+<li>一长串无规律数字与字母组合的字符大概率是 AES、DES、SHA 相关加密  </li>
+<li>另外，AES、RSA 等对称和非对称加密都喜欢将结果值用 Base64 进行编码，这样易于传递  </li>
+<li>如果你看到一长串字符里出现 <code>+</code> 、<code>\</code> 和末尾的 <code>=</code> ，那大概率就是上一行描述的加密算法加密后又进行了 <code>Base64</code> 编码的结果  </li>
+<li>32 位的字符串有概率是 <code>MD5</code> 摘要结果  </li>
+<li>64 位的字符串有概率是 <code>SHA</code> 加密结果  </li>
+</ul>
+<p>通过全局搜索找寻可疑字符串，在所有文件中寻找关键字<br>在需要的地方打上断点，找寻到目标的加密逻辑  </p>
+<h2 id="复现做法"><a href="#复现做法" class="headerlink" title="复现做法"></a>复现做法</h2><p>在找寻到以后，可以选择：  </p>
+<ul>
+<li>参照js逻辑用其它语言重新实现  </li>
+<li>直接调用js的加密函数  </li>
+</ul>
+<p>从非常长的 javascript文件 中归纳逻辑，建议将一些关键的变量或者函数复制粘贴到另一个 javascript文件 中，运行以后根据 没有定义 的报错 来逐一补全所需，直到得到结果  </p>
+
             </div>
             <hr>
             <div>
@@ -336,9 +454,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/javascript/">javascript</a>
-                    
                       <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Javascript/">Javascript</a>
                     
                       <a class="hover-with-bg" href="/tags/%E5%8A%A0%E5%AF%86/">加密</a>
                     

@@ -17,7 +17,7 @@
   <meta name="description" content="自娱自乐">
   <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>python-函数记录-技巧记录-特性记录 - EvilRecluse</title>
+  <title>Python-函数记录-技巧记录-特性记录 - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="python-函数记录-技巧记录-特性记录">
+            <span class="h2" id="subtitle" title="Python-函数记录-技巧记录-特性记录">
               
             </span>
 
@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.8k 字
+      3.9k 字
     </span>
   
 
@@ -192,11 +192,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">python-函数记录-技巧记录-特性记录</h1>
+            <h1 style="display: none">Python-函数记录-技巧记录-特性记录</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年1月6日 上午
+                  本文最后更新于：2021年1月7日 下午
                 
               </p>
             
@@ -264,7 +264,12 @@
 <p>案例：遍历两个list，进行判断计算生成新数据</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a, b = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>], [<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>[x+y <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> a <span class="hljs-keyword">if</span> x!=<span class="hljs-string">&#x27;b&#x27;</span> <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> b <span class="hljs-keyword">if</span> y!=<span class="hljs-string">&#x27;e&#x27;</span>]<br>[<span class="hljs-string">&#x27;ad&#x27;</span>, <span class="hljs-string">&#x27;af&#x27;</span>, <span class="hljs-string">&#x27;cd&#x27;</span>, <span class="hljs-string">&#x27;cf&#x27;</span>]<br></code></pre></div></td></tr></table></figure>
-<h2 id="更美观的print"><a href="#更美观的print" class="headerlink" title="更美观的print"></a>更美观的print</h2><h3 id="使用format"><a href="#使用format" class="headerlink" title="使用format"></a>使用format</h3><p>使用format函数能让print函数看上去更美观，同时不会出现需要转换类型的问题  </p>
+<h2 id="更美观的print-pprint"><a href="#更美观的print-pprint" class="headerlink" title="更美观的print - pprint"></a>更美观的print - pprint</h2><p><code>print</code>函数能在终端输出一些东西<br>如果输出的内容是一个数组或元组，且其元素类型各不相同，数量又多，看着很难受。此时可以使用 <code>pprint</code>函数 来取代 <code>print</code>函数 </p>
+<p><code>pprint()</code>模块打印出来的数据结构更加完整，每行为一个数据结构，更加方便阅读打印输出结果  </p>
+<blockquote>
+<p>缺点在于使用需要 <code>from pprint import pprint</code></p>
+</blockquote>
+<h2 id="更美观的字符串拼接-format"><a href="#更美观的字符串拼接-format" class="headerlink" title="更美观的字符串拼接 - format"></a>更美观的字符串拼接 - format</h2><p>使用format函数能让print函数看上去更美观，同时不会出现需要转换类型的问题  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">name = <span class="hljs-string">&#x27;Rem&#x27;</span><br>country = <span class="hljs-string">&#x27;China&#x27;</span><br>print(<span class="hljs-string">&quot;Hi, I&#x27;m &#123;&#125; from &#123;&#125;. &#123;1&#125; &#123;0&#125;&quot;</span>,<span class="hljs-built_in">format</span>(name,country))<br></code></pre></div></td></tr></table></figure>
 <p>输出结果  </p>
 <figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">Hi, I<span class="hljs-symbol">&#x27;m</span> <span class="hljs-keyword">Rem</span> from China. China <span class="hljs-keyword">Rem</span><br></code></pre></div></td></tr></table></figure>
