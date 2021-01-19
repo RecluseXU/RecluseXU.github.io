@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      3k 字
     </span>
   
 
@@ -196,19 +196,31 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年1月11日 晚上
+                  本文最后更新于：2021年1月18日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>超文本传输安全协议（英语：<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol <strong>S</strong>ecure，缩写：<strong>HTTPS</strong>)  </p>
+              <p><strong>前置知识</strong><br><a target="_blank" rel="noopener" href="https://evilrecluse.top/post/3b5ddb7/#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95">对称加密与非对称加密</a>    </p>
+<h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>超文本传输安全协议（英语：<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol <strong>S</strong>ecure，缩写：<strong>HTTPS</strong>)  </p>
 <p><code>HTTPS</code> 并非是应用层的一种新协议。 只是 <code>HTTP</code> 通信接口部分用<code>SSL</code>（Secure Socket Layer） 和 <code>TLS</code>（Transport Layer Security） 协议代替而已  </p>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><blockquote>
-<p><code>HTTPS</code> 的主要作用是在不安全的网络上创建一个安全信道，并可在使用适当的加密包和服务器证书可被验证且可被信任时，对窃听和中间人攻击提供合理的防护<br>by: <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%82%B3%E8%BC%B8%E5%B1%A4%E5%AE%89%E5%85%A8%E6%80%A7%E5%8D%94%E5%AE%9A">维基百科</a>  </p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><h3 id="HTTP的不安全性"><a href="#HTTP的不安全性" class="headerlink" title="HTTP的不安全性"></a>HTTP的不安全性</h3><p><code>Http</code>是明文传输的，由于这个原因，可能出现的风险非常多<br>主要可以分为  <code>窃听风险</code>、<code>篡改风险</code>、<code>冒充风险</code>    </p>
+<blockquote>
+<p>安全通信的四大原则</p>
 </blockquote>
-<p><code>Http</code>是明文传输的，在传输路径中的任何一个节点都能通过抓包能直接得到信息，毫无安全性可言  </p>
-<p>为了能安全的传输数据，其传输的数据则需要进行加密<br>为了通信双方能正确 解密对方的数据，通信的双方必须约定加密算法  </p>
-<p><code>SSL</code>/<code>TLS</code>主要负责事情：让双方 <strong>安全地</strong> 约定加密算法  </p>
+<ul>
+<li>机密性：即对数据加密，解决了窃听风险  </li>
+<li>完整性：指数据在传输过程中没有被篡改，不多不少，保持原样，中途如果哪怕改了一个标点符号，接收方也能识别出来，从来判定接收报文不合法  </li>
+<li>身份认证：确认对方的真实身份，解决了冒充风险，用户不用担心访问的是某宝结果却在和钓鱼网站通信的问题  </li>
+<li>不可否认: 即不可否认已发生的行为，比如小明向小红借了 1000 元，但没打借条，或者打了借条但没有签名，就会造成小红的资金损失  </li>
+</ul>
+<h3 id="HTTPS的作用"><a href="#HTTPS的作用" class="headerlink" title="HTTPS的作用"></a>HTTPS的作用</h3><p>为了让传输过程中的数据更加安全，需要对传输的信息进行加密<br>为了通信双方能正确 解密对方加密的数据，通信的双方必须约定加密算法<br><code>SSL</code>/<code>TLS</code>主要负责事情：让双方 <strong>安全地</strong> 约定加密算法 </p>
+<blockquote>
+<p>为了同时兼顾速度与安全性，通常会采用：<br>对称加密算法加密数据 ，非对称加密算法加密 对称加密的密钥的方式进行加密  </p>
+</blockquote>
+<blockquote>
+<p><code>HTTPS</code> 的主要作用是在不安全的网络上创建一个安全信道，并可在使用适当的加密包和服务器证书可被验证且可被信任时，对窃听和中间人攻击提供合理的防护<br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%82%B3%E8%BC%B8%E5%B1%A4%E5%AE%89%E5%85%A8%E6%80%A7%E5%8D%94%E5%AE%9A">维基百科</a>  </p>
+</blockquote>
 <h2 id="SSL与TLS"><a href="#SSL与TLS" class="headerlink" title="SSL与TLS"></a>SSL与TLS</h2><p>传输层安全性协议（英语：<strong>T</strong>ransport <strong>L</strong>ayer <strong>S</strong>ecurity，缩写：TLS）<br>安全套接层（英语：<strong>S</strong>ecure <strong>S</strong>ockets <strong>L</strong>ayer，缩写：SSL）  </p>
 <p><code>TLS</code>实际上是<code>SSL</code>进行标准化后得到的产物，<code>TLS</code>几乎可以理解为是<code>SSL</code>的别称<br><code>SSL</code>已被弃用，现在使用的基本都为<code>TLS</code>  </p>
 <table>
@@ -255,11 +267,78 @@
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><ul>
-<li>非对称加密  <a href="#">Post not found: 编码和加密-js-Python 加密算法类别</a>
+<h1 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h1><p>讲述升级思路  </p>
+<h2 id="一、全数据对称加密"><a href="#一、全数据对称加密" class="headerlink" title="一、全数据对称加密"></a>一、全数据对称加密</h2><p>在认识到<code>HTTP</code>不安全后，双方决定对数据进行加密<br><strong>情景</strong>  </p>
+<ol>
+<li>一方决定<code>对称加密密钥</code>  </li>
+<li>发送<code>对称加密密钥</code>给对方  </li>
+<li>利用<code>对称加密密钥</code>建立通信，传输<code>被对称加密的数据</code>  </li>
+</ol>
+<p><strong>网络上暴露的内容</strong><br>这个过程，双方交换了：<code>对称加密密钥</code>、<code>被对称加密的数据</code>  </p>
+<p><strong>结果</strong><br>显然这个加密就跟没有一样，用<code>对称加密密钥</code>解开<code>被对称加密的数据</code>就能拿到明文了  </p>
+<h2 id="二、非对称-对称加密"><a href="#二、非对称-对称加密" class="headerlink" title="二、非对称+对称加密"></a>二、非对称+对称加密</h2><p>在认识到直接交换 <code>对称加密密钥</code> 不安全, <code>非对称加密</code>计算速度很慢后<br>进行了折中的处理  </p>
+<p><strong>情景</strong>  </p>
+<ol>
+<li>双方都各自根据<code>对称加密算法</code>生成 公钥 与 私钥  </li>
+<li>（交换）双方交换<code>对称加密公钥</code>  </li>
+<li>服务器使用<code>对称加密算法</code>对数据进行加密，得到了 <code>被对称加密的数据</code> 与 <code>对称加密密钥</code>  </li>
+<li>用 <code>客户端的非对称加密公钥</code> 加密 <code>对称加密密钥</code>，得到 <code>被客户端公钥加密的&quot;对称加密密钥&quot;</code>  </li>
+<li>（交换）传输 <code>被客户端公钥加密的 对称加密公钥</code> 给客户端  </li>
+<li>客户端收到服务器的数据。使用客户端私钥解开 <code>被客户端公钥加密的 &quot;对称加密公钥&quot;</code> 的加密，得到 <code>对称加密密钥</code>  </li>
+<li>利用<code>对称加密密钥</code>建立通信，传输<code>被对称加密的数据</code>  </li>
+</ol>
+<p><strong>网络上暴露的内容</strong><br><code>服务器对称加密公钥</code>、<code>客户端对称加密公钥</code>、<code>被客户端公钥加密的 对称加密公钥</code>  </p>
+<p><strong>结果</strong><br>中间人攻击的可能<br><img src="/Https-TLS-SSL/20210115095213018.png" srcset="/img/loading.gif"></p>
+<h2 id="三、数字证书，数字签名"><a href="#三、数字证书，数字签名" class="headerlink" title="三、数字证书，数字签名"></a>三、数字证书，数字签名</h2><p>现实生活中，员工入职时，企业一般会要求提供学历证明。这个学历必须由第三方权威机构（Certificate Authority，简称 <code>CA</code>）即教育部颁发  </p>
+<p>服务端 也可以向 <code>CA</code> 申请证书，在证书中附上公钥，然后将证书传给 客户端  </p>
+<table><tr><td>证书由站点管理者向 `CA` 申请，申请的时候会提交 `DNS` 主机名等信息，`CA` 会根据这些信息生成证书</td><td>![](/Https-TLS-SSL/20210118095916986.png)</td>
+</tr></table>
 
-</li>
-</ul>
+<h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><p>本质：被<code>CA</code>私钥加密过的证书主要内容的摘要信息<br>作用：验证证书的真实性，防止证书被篡改  </p>
+<p><strong>数字证书（含数字签名）的生成过程</strong>  </p>
+<ol>
+<li>服务端 向CA发出申请，提交自己服务器的信息，交钱，请求生成证书  </li>
+<li>CA根据服务端提供的信息，生成证书的主要内容  </li>
+<li>将证书的主要内容整合，用摘要算法计算出 证书摘要值  </li>
+<li>用<code>CA</code>私钥对 证书摘要值 进行加密，得到 <code>被CA私钥加密的 CA计算的证书摘要值</code> 即 <code>数字签名</code>  </li>
+<li><code>CA</code>将数字签名写入证书之中   </li>
+<li><code>CA</code>返回 <code>数字证书</code> 给服务端  </li>
+</ol>
+<p><img src="/Https-TLS-SSL/20210118101412498.png" srcset="/img/loading.gif">  </p>
+<p><strong>数字证书的使用</strong><br><img src="/Https-TLS-SSL/20210118111039145.png" srcset="/img/loading.gif">  </p>
+<ol>
+<li>在客户端，服务端交换密钥时，服务端返回 <code>数字证书</code> 给客户端，而不是单纯的服务器公钥  </li>
+<li>客户端收到 <code>数字证书</code>。使用操作系统自带的 <code>CA</code>公钥 对 <code>被CA私钥加密的 证书摘要值</code>进行解密，得到 <code>CA计算的证书摘要值</code>  </li>
+<li>客户端根据证书内容计算摘要 得到 <code>客户端计算的证书摘要值</code>  </li>
+<li>客户端使用 <code>客户端计算的证书摘要值</code> 与  <code>CA计算的证书摘要值</code>进行对比。如果摘要值一致，说明内容未被篡改  </li>
+</ol>
+<p>其中第2、3、4步被称为<code>验签</code>  </p>
+<blockquote>
+<p>为何只是对摘要进行加密？<br>非对称加密算法效率低下，速度过慢  </p>
+</blockquote>
+<span>
+>客户端操作系统自带`CA公钥`？  
+如果`CA`公钥通过网络传输，那么依然存在被攻击的可能，情况与前面说明的中间人攻击类似 ![](/Https-TLS-SSL/20210118113727467.png)   
+为了解决这个套娃问题，`CA`公司 与 操作系统公司 达成了PY交易，使它们的证书内置在了操作系统里面   
+
+<span>
+>那么抓包工具如何工作？  
+在用 `charles` 抓 HTTPS 的包之前我们先要安装 charles 的证书  
+这个证书里有 `charles` 的公钥，这样的话 `charles` 就可以将 server 传给 client 的证书调包成自己的证书  
+client 拿到后就可以用你安装的 `charles` 证书来验签等，验证通过之后就会用 `charles` 证书中的公钥来加密对称密钥了  
+![](/Https-TLS-SSL/20210118114203571.png)  
+
+
+<h3 id="证书信任链"><a href="#证书信任链" class="headerlink" title="证书信任链"></a>证书信任链</h3><p>全世界的顶级 <code>CA</code>（Root CA） 就只有那几个。但它可以向下一级<code>CA</code>，下下级 <code>CA</code> 授权。所以一个 一级/二级/三级 <code>CA</code> 也是可以申请证书的  </p>
+<blockquote>
+<p>怎么证明这些 下级<code>CA</code>证书被 <code>Root CA</code> 授权过了?<br>下一级 <code>CA</code> 可以让上一级 <code>CA</code> 来签名认证，比如一级 <code>CA</code> 让 <code>Root CA</code> 来签名认证，二级 <code>CA</code> 让一级 <code>CA</code> 来签名认证<br><code>Root CA</code> 没有人给他签名认证，只能自己证明自己了，这个证书就叫「自签名证书」或者「根证书」，我们必须信任它，不然证书信任链是走不下去的<br>「根证书」就是那些内置在操作系统中的证书  </p>
+</blockquote>
+<p><strong>客户端认证</strong><br>如果站点申请的是二级 <code>CA</code> 颁发的证书，<code>服务端</code> 传了传给二级 <code>CA</code> 的证书外，还会把证书信任链也一起传给客户端<br>这样客户端会逐级验签进行验证：  </p>
+<ol>
+<li>浏览器使用信任的根证书（根公钥）解析证书链的根证书得到一级 证书的公钥 + 摘要验签  </li>
+<li>拿一级证书的公钥解密一级证书，拿到二级证书的公钥和摘要验签  </li>
+<li>拿二级证书的公钥解密 服务端 传过来的二级证书<br>……<br>直到得到服务器的公钥和摘要验签，验证过程就结束了  </li>
+</ol>
 <h1 id="SSL流程-四次握手"><a href="#SSL流程-四次握手" class="headerlink" title="SSL流程-四次握手"></a>SSL流程-四次握手</h1><p><img src="/Https-TLS-SSL/20210111041424432.png" srcset="/img/loading.gif">  </p>
 <h2 id="一次握手"><a href="#一次握手" class="headerlink" title="一次握手"></a>一次握手</h2><h3 id="1-客户端通过发送-Client-Hello-报文-开始-SSL通信"><a href="#1-客户端通过发送-Client-Hello-报文-开始-SSL通信" class="headerlink" title="1. 客户端通过发送 Client Hello 报文 开始 SSL通信"></a>1. 客户端通过发送 <code>Client Hello 报文</code> 开始 SSL通信</h3><p>报文中包含客户端支持的 <code>SSL版本</code>、 加密组件（CipherSuite） 列表（客户端支持的加密算法 及 密钥长度等）  </p>
 <blockquote>
@@ -279,11 +358,8 @@
 <p>交换协议版本号，选择一个通信双方都支持的加密方式；对两端实现身份验证；密钥交换。<br>服务器和客户端的 <code>Finished</code> 报文交换完毕之后， <code>SSL</code>连接就算建立完成，通信会受到 <code>SSL</code>的保护。 从此处开始进行应用层协议的通信， 即发送 <code>HTTP</code> 请求。</p>
 <h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h1><h2 id="可否修改443端口"><a href="#可否修改443端口" class="headerlink" title="可否修改443端口"></a>可否修改443端口</h2><p><code>Https</code>传输数据，需要服务器开启两个端口<code>80</code>与<code>443</code><br>其中，<code>443</code>端口仅用来建立连接，并不传输真正的数据 </p>
 <p><code>443</code>端口是约定的<code>Https</code>端口，被写入到了浏览器中<br>浏览器在域名中识别到<code>https</code>，就默认请求<code>443</code>  </p>
-<blockquote>
-<p>端口号在服务端是能改的，但浏览器不能改   </p>
-</blockquote>
 <p>如果你修改了<code>https</code>端口，又没有特别指定访问端口。那么用户会无法用浏览器访问（浏览器访问<code>443</code>发现无响应）  </p>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><ul>
+<h1 id="HTTPS的缺点"><a href="#HTTPS的缺点" class="headerlink" title="HTTPS的缺点"></a>HTTPS的缺点</h1><ul>
 <li>变慢  <ul>
 <li>网络<br>和使用 HTTP 相比， 网络负载可能会变慢 2 到 100 倍。进行 SSL通信 使得整体上处理通信量不可避免会增加  </li>
 <li>处理速度<br>加密/解密 要大量消耗CPU 及内存等资源，导致处理速度变慢  </li>
@@ -302,6 +378,10 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/Https/">Https</a>
+                    
+                      <a class="hover-with-bg" href="/tags/TLS/">TLS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SSL/">SSL</a>
                     
                   </div>
                 
