@@ -196,7 +196,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年1月18日 下午
+                  本文最后更新于：2021年1月21日 中午
                 
               </p>
             
@@ -216,8 +216,11 @@
 </ul>
 <h3 id="HTTPS的作用"><a href="#HTTPS的作用" class="headerlink" title="HTTPS的作用"></a>HTTPS的作用</h3><p>为了让传输过程中的数据更加安全，需要对传输的信息进行加密<br>为了通信双方能正确 解密对方加密的数据，通信的双方必须约定加密算法<br><code>SSL</code>/<code>TLS</code>主要负责事情：让双方 <strong>安全地</strong> 约定加密算法 </p>
 <blockquote>
-<p>为了同时兼顾速度与安全性，通常会采用：<br>对称加密算法加密数据 ，非对称加密算法加密 对称加密的密钥的方式进行加密  </p>
+<p>加密策略<br>为了兼顾速度与安全性。通常采用的策略：<br>对称加密算法加密数据，非对称加密算法加密 对称加密的密钥的方式进行加密  </p>
 </blockquote>
+<br>
+
+
 <blockquote>
 <p><code>HTTPS</code> 的主要作用是在不安全的网络上创建一个安全信道，并可在使用适当的加密包和服务器证书可被验证且可被信任时，对窃听和中间人攻击提供合理的防护<br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%82%B3%E8%BC%B8%E5%B1%A4%E5%AE%89%E5%85%A8%E6%80%A7%E5%8D%94%E5%AE%9A">维基百科</a>  </p>
 </blockquote>
@@ -289,11 +292,9 @@
 </ol>
 <p><strong>网络上暴露的内容</strong><br><code>服务器对称加密公钥</code>、<code>客户端对称加密公钥</code>、<code>被客户端公钥加密的 对称加密公钥</code>  </p>
 <p><strong>结果</strong><br>中间人攻击的可能<br><img src="/Https-TLS-SSL/20210115095213018.png" srcset="/img/loading.gif"></p>
-<h2 id="三、数字证书，数字签名"><a href="#三、数字证书，数字签名" class="headerlink" title="三、数字证书，数字签名"></a>三、数字证书，数字签名</h2><p>现实生活中，员工入职时，企业一般会要求提供学历证明。这个学历必须由第三方权威机构（Certificate Authority，简称 <code>CA</code>）即教育部颁发  </p>
+<h2 id="三、数字证书，数字签名"><a href="#三、数字证书，数字签名" class="headerlink" title="三、数字证书，数字签名"></a>三、数字证书，数字签名</h2><p>现实生活中，员工入职时，企业一般会要求提供学历证明。这个学历必须由第三方权威机构（<code>Certificate Authority</code>，简称 <code>CA</code>）即教育部颁发  </p>
 <p>服务端 也可以向 <code>CA</code> 申请证书，在证书中附上公钥，然后将证书传给 客户端  </p>
-<table><tr><td>证书由站点管理者向 `CA` 申请，申请的时候会提交 `DNS` 主机名等信息，`CA` 会根据这些信息生成证书</td><td>![](/Https-TLS-SSL/20210118095916986.png)</td>
-</tr></table>
-
+<p><strong>证书基本的信息</strong><br><img src="/Https-TLS-SSL/20210118095916986.png" srcset="/img/loading.gif"><br>证书由站点管理者向 <code>CA</code> 申请，申请的时候会提交 <code>DNS</code> 主机名等信息，<code>CA</code> 会根据这些信息生成证书  </p>
 <h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><p>本质：被<code>CA</code>私钥加密过的证书主要内容的摘要信息<br>作用：验证证书的真实性，防止证书被篡改  </p>
 <p><strong>数字证书（含数字签名）的生成过程</strong>  </p>
 <ol>
@@ -314,24 +315,25 @@
 </ol>
 <p>其中第2、3、4步被称为<code>验签</code>  </p>
 <blockquote>
-<p>为何只是对摘要进行加密？<br>非对称加密算法效率低下，速度过慢  </p>
+<p><strong>为何只是对摘要进行加密？</strong><br>非对称加密算法效率低下，速度过慢  </p>
 </blockquote>
-<span>
->客户端操作系统自带`CA公钥`？  
-如果`CA`公钥通过网络传输，那么依然存在被攻击的可能，情况与前面说明的中间人攻击类似 ![](/Https-TLS-SSL/20210118113727467.png)   
-为了解决这个套娃问题，`CA`公司 与 操作系统公司 达成了PY交易，使它们的证书内置在了操作系统里面   
-
-<span>
->那么抓包工具如何工作？  
-在用 `charles` 抓 HTTPS 的包之前我们先要安装 charles 的证书  
-这个证书里有 `charles` 的公钥，这样的话 `charles` 就可以将 server 传给 client 的证书调包成自己的证书  
-client 拿到后就可以用你安装的 `charles` 证书来验签等，验证通过之后就会用 `charles` 证书中的公钥来加密对称密钥了  
-![](/Https-TLS-SSL/20210118114203571.png)  
-
-
+<p><span></span></p>
+<blockquote>
+<p><strong>客户端操作系统自带<code>CA公钥</code>？</strong><br>如果<code>CA</code>公钥通过网络传输，那么依然存在被攻击的可能，情况与前面说明的中间人攻击类似 <img src="/Https-TLS-SSL/20210118113727467.png" srcset="/img/loading.gif"><br>为了解决这个套娃问题，<code>CA</code>公司 与 操作系统公司 达成了PY交易，使它们的证书内置在了操作系统里面   </p>
+</blockquote>
+<p><span></span></p>
+<blockquote>
+<p><strong>那么抓包工具如何工作</strong><br>在用 <code>charles</code> 抓 HTTPS 的包之前我们先要安装 charles 的证书<br>这个证书里有 <code>charles</code> 的公钥，这样的话 <code>charles</code> 就可以将 server 传给 client 的证书调包成自己的证书<br>client 拿到后就可以用你安装的 <code>charles</code> 证书来验签等，验证通过之后就会用 <code>charles</code> 证书中的公钥来加密对称密钥了<br><img src="/Https-TLS-SSL/20210118114203571.png" srcset="/img/loading.gif">  </p>
+</blockquote>
 <h3 id="证书信任链"><a href="#证书信任链" class="headerlink" title="证书信任链"></a>证书信任链</h3><p>全世界的顶级 <code>CA</code>（Root CA） 就只有那几个。但它可以向下一级<code>CA</code>，下下级 <code>CA</code> 授权。所以一个 一级/二级/三级 <code>CA</code> 也是可以申请证书的  </p>
 <blockquote>
-<p>怎么证明这些 下级<code>CA</code>证书被 <code>Root CA</code> 授权过了?<br>下一级 <code>CA</code> 可以让上一级 <code>CA</code> 来签名认证，比如一级 <code>CA</code> 让 <code>Root CA</code> 来签名认证，二级 <code>CA</code> 让一级 <code>CA</code> 来签名认证<br><code>Root CA</code> 没有人给他签名认证，只能自己证明自己了，这个证书就叫「自签名证书」或者「根证书」，我们必须信任它，不然证书信任链是走不下去的<br>「根证书」就是那些内置在操作系统中的证书  </p>
+<p><strong>怎么证明这些 下级<code>CA</code>证书被 <code>Root CA</code> 授权过了?</strong><br>下一级 <code>CA</code> 可以让上一级 <code>CA</code> 来签名认证，比如一级 <code>CA</code> 让 <code>Root CA</code> 来签名认证，二级 <code>CA</code> 让一级 <code>CA</code> 来签名认证  </p>
+</blockquote>
+<blockquote>
+<p><code>Root CA</code> 没有人给他签名认证，只能自己证明自己了，这个证书就叫「自签名证书」或者「根证书」，我们必须信任它，不然证书信任链是走不下去的  </p>
+</blockquote>
+<blockquote>
+<p>「根证书」就是那些内置在操作系统中的证书  </p>
 </blockquote>
 <p><strong>客户端认证</strong><br>如果站点申请的是二级 <code>CA</code> 颁发的证书，<code>服务端</code> 传了传给二级 <code>CA</code> 的证书外，还会把证书信任链也一起传给客户端<br>这样客户端会逐级验签进行验证：  </p>
 <ol>
@@ -354,8 +356,7 @@ client 拿到后就可以用你安装的 `charles` 证书来验签等，验证�
 <h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><h3 id="5-客户端以-Client-Key-Exchange-报文作为回应"><a href="#5-客户端以-Client-Key-Exchange-报文作为回应" class="headerlink" title="5. 客户端以 Client Key Exchange 报文作为回应"></a>5. 客户端以 <code>Client Key Exchange 报文</code>作为回应</h3><p>报文中包含通信加密中使用的一种被称为 <code>Pre-mastersecret</code> 的随机密码串<br>该报文已用步骤 3 中的公开密钥进行加密  </p>
 <h3 id="6-接着客户端继续发送-Change-Cipher-Spec-报文"><a href="#6-接着客户端继续发送-Change-Cipher-Spec-报文" class="headerlink" title="6. 接着客户端继续发送 Change Cipher Spec 报文"></a>6. 接着客户端继续发送 <code>Change Cipher Spec 报文</code></h3><p>该报文会提示服务器，在此报文之后的通信会采用<code>Pre-master secret</code> 密钥加密  </p>
 <h3 id="7-客户端发送-Finished-报文"><a href="#7-客户端发送-Finished-报文" class="headerlink" title="7. 客户端发送 Finished 报文"></a>7. 客户端发送 <code>Finished 报文</code></h3><p>该报文包含连接至今全部报文的整体校验值<br>这次握手协商是否能够成功， 要以服务器是否能够正确解密该报文作为判定标准  </p>
-<h2 id="四次握手"><a href="#四次握手" class="headerlink" title="四次握手"></a>四次握手</h2><h3 id="8-服务器同样发送-Change-Cipher-Spec-报文"><a href="#8-服务器同样发送-Change-Cipher-Spec-报文" class="headerlink" title="8. 服务器同样发送 Change Cipher Spec 报文"></a>8. 服务器同样发送 <code>Change Cipher Spec 报文</code></h3><h3 id="9-服务器同样发送-Finished-报文"><a href="#9-服务器同样发送-Finished-报文" class="headerlink" title="9. 服务器同样发送 Finished 报文"></a>9. 服务器同样发送 <code>Finished 报文</code></h3><p>总的来说，SSL会话的建立完成了以下几个工作：</p>
-<p>交换协议版本号，选择一个通信双方都支持的加密方式；对两端实现身份验证；密钥交换。<br>服务器和客户端的 <code>Finished</code> 报文交换完毕之后， <code>SSL</code>连接就算建立完成，通信会受到 <code>SSL</code>的保护。 从此处开始进行应用层协议的通信， 即发送 <code>HTTP</code> 请求。</p>
+<h2 id="四次握手"><a href="#四次握手" class="headerlink" title="四次握手"></a>四次握手</h2><h3 id="8-服务器同样发送-Change-Cipher-Spec-报文"><a href="#8-服务器同样发送-Change-Cipher-Spec-报文" class="headerlink" title="8. 服务器同样发送 Change Cipher Spec 报文"></a>8. 服务器同样发送 <code>Change Cipher Spec 报文</code></h3><h3 id="9-服务器同样发送-Finished-报文"><a href="#9-服务器同样发送-Finished-报文" class="headerlink" title="9. 服务器同样发送 Finished 报文"></a>9. 服务器同样发送 <code>Finished 报文</code></h3><p>总的来说，SSL会话的建立完成了以下几个工作：<br>交换协议版本号，选择一个通信双方都支持的加密方式；对两端实现身份验证；密钥交换<br>服务器和客户端的 <code>Finished</code> 报文交换完毕之后， <code>SSL</code>连接就算建立完成，通信会受到 <code>SSL</code>的保护。 从此处开始进行应用层协议的通信， 即发送 <code>HTTP</code> 请求  </p>
 <h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h1><h2 id="可否修改443端口"><a href="#可否修改443端口" class="headerlink" title="可否修改443端口"></a>可否修改443端口</h2><p><code>Https</code>传输数据，需要服务器开启两个端口<code>80</code>与<code>443</code><br>其中，<code>443</code>端口仅用来建立连接，并不传输真正的数据 </p>
 <p><code>443</code>端口是约定的<code>Https</code>端口，被写入到了浏览器中<br>浏览器在域名中识别到<code>https</code>，就默认请求<code>443</code>  </p>
 <p>如果你修改了<code>https</code>端口，又没有特别指定访问端口。那么用户会无法用浏览器访问（浏览器访问<code>443</code>发现无响应）  </p>
@@ -396,7 +397,7 @@ client 拿到后就可以用你安装的 `charles` 证书来验签等，验证�
                     
                       <a href="/post/7389a59f/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Javascript-Babel-AST-解混淆-基础</span>
+                        <span class="hidden-mobile">Javascript-Babel-AST-基础</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
