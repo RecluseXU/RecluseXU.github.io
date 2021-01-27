@@ -157,6 +157,110 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/post/f31007a7/">VSCode-json文件注释报错</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/f31007a7/">
+          
+          
+            
+          
+          信息默认的情况下，用VSCode打开有注释的JSON文件的话，会显示不允许有注释的错误
+解决思路实际上这是标准的问题标准的JSON并不允许注释的存在，所以报错是理所当然的JSONC(JSON with Comments)才是允许写注释的标准  
+
+注释方法与C一样  
+
+解决方法对单文件更改JSON标准为JSONC  
+
+打开标准选择  
+设置标准为 JSONC  
+
+对所有.json文件在用户设
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-11 22:48" pubdate>
+              2020-11-11
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JSON/">JSON</a>
+            
+              <a href="/tags/VSCode/">VSCode</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/aaf3dbde/">Python-大JSON文件读取-ijson</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/aaf3dbde/">
+          
+          
+            
+          
+          信息在学过一些Python的日常使用方法以后，你应该已经知道了Python自带的json库，它能处理一些json数据  
+
+例如：
+
+12json.loads()  # str读取json.dumps()  # 转为str
+但在面对一个体量很大的 JSON 文件时，无论是写还是读都会非常吃力专门用于处理大 JSON 的库是 ijson  
+ijsonIjson是具有标准Python迭代器接口的迭代
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-09 09:24" pubdate>
+              2020-11-09
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/ijson/">ijson</a>
+            
+              <a href="/tags/JSON/">JSON</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/post/2d2478f5/">Python-asyncio-协程</a>
       </h1>
 
@@ -292,7 +396,7 @@ asyncio 往往是构建 IO密集型 和高层级 结构化 网络代码的最佳
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/post/810bbcb7/">ConfigParser-Python-ini配置文件</a>
+        <a href="/post/810bbcb7/">Python-ConfigParser-ini配置文件</a>
       </h1>
 
       <p class="index-excerpt">
@@ -325,9 +429,9 @@ asyncio 往往是构建 IO密集型 和高层级 结构化 网络代码的最佳
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/ConfigParser/">ConfigParser</a>
-            
               <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/ConfigParser/">ConfigParser</a>
             
           </div>
         
@@ -426,9 +530,9 @@ ES6语法
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Python/">Python</a>
-            
               <a href="/tags/Django/">Django</a>
+            
+              <a href="/tags/Python/">Python</a>
             
           </div>
         
@@ -1006,97 +1110,6 @@ Hexo-abbrlink为了应对url又长又臭，文件更改又会更改的问题，�
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E7%A1%AC%E4%BB%B6/">硬件</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/8649b4ed/">服务器部署-CentOS-Windows-文件传输</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/8649b4ed/">
-          
-          
-            
-          
-          信息上传文件总是逃不过的借助第三方平台速度太慢，只能自己寻找协议/工具/代码来实现  
-Window端操作SCP命令scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令scp传输是加密的，速度相对于不加密的传输来说要慢（废话）scp还非常不占资源，不会提高多少系统负荷  
-
-在占资源这一点上，rsync就远远不及它了。虽然 rsync比scp会快一点，但当小文件众多的情况
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-25 21:09" pubdate>
-              2020-09-25
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CentOS/">CentOS</a>
-            
-              <a href="/tags/Windows/">Windows</a>
-            
-              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">服务器部署</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/5e31e418/">Blender-使用记录</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/5e31e418/">
-          
-          
-            
-          
-          安装官网下载：https://www.blender.org/download/清华源下载：https://mirror.tuna.tsinghua.edu.cn/blender/blender-release/
-个人设置模拟maya视图操作键位-3D视图旋转视图 Alt+鼠标左键平移视图 Alt+鼠标中间
-插件Add Curve:Extra ObjectsAdd Mesh:Extra Objec
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-19 17:40" pubdate>
-              2020-09-19
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Blender/">Blender</a>
             
           </div>
         

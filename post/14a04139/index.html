@@ -15,9 +15,9 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="自娱自乐">
-  <meta name="author" content="Recluse">
+  <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>Hexo-toc插件-恢复Markdown失效的toc - EvilRecluse</title>
+  <title>网络-网关、代理、隧道异同 - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Hexo-toc插件-恢复Markdown失效的toc">
+            <span class="h2" id="subtitle" title="网络-网关、代理、隧道异同">
               
             </span>
 
@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      295 字
+      1.7k 字
     </span>
   
 
@@ -192,68 +192,93 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hexo-toc插件-恢复Markdown失效的toc</h1>
+            <h1 style="display: none">网络-网关、代理、隧道异同</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年1月25日 中午
+                  本文最后更新于：2021年1月25日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong>简介</strong></h2><p>总所周知，<code>toc</code> 被用于在<code>markdown</code>文件中自动生成目录。<br>而在某次 npm 更新后，hexo中的 markdown 文件的toc失效了<br>所以如果你如果希望继续使用 <code>toc</code>，就需要安装这个插件了  </p>
-<blockquote>
-<p><strong>注意：如果使用的主题已经拥有显示目录的能力，那么不建议安装</strong>  </p>
-</blockquote>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a><strong>使用方法</strong></h2><h3 id="1-安装hexo-toc"><a href="#1-安装hexo-toc" class="headerlink" title="1. 安装hexo-toc"></a><strong>1. 安装hexo-toc</strong></h3><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-toc <span class="hljs-comment">--save</span><br></code></pre></div></td></tr></table></figure>
-<h3 id="2-在-config-yml文件中添加参数"><a href="#2-在-config-yml文件中添加参数" class="headerlink" title="2. 在_config.yml文件中添加参数"></a><strong>2. 在<code>_config.yml</code>文件中添加参数</strong></h3><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">toc:</span><br>  <span class="hljs-attr">maxdepth:</span> <span class="hljs-number">3</span><br>  <span class="hljs-attr">class:</span> <span class="hljs-string">toc</span><br>  <span class="hljs-attr">slugify:</span> <span class="hljs-string">transliteration</span><br>  <span class="hljs-attr">decodeEntities:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">anchor:</span><br>    <span class="hljs-attr">position:</span> <span class="hljs-string">after</span><br>    <span class="hljs-attr">symbol:</span> <span class="hljs-string">&#x27;#&#x27;</span><br>    <span class="hljs-attr">style:</span> <span class="hljs-string">header-anchor</span><br></code></pre></div></td></tr></table></figure>
-<table>
+              <h1 id="代理-Proxy"><a href="#代理-Proxy" class="headerlink" title="代理 Proxy"></a>代理 Proxy</h1><p>代理（英语：Proxy）也称网络代理，是一种特殊的网络服务，允许一个（一般为客户端）通过这个服务与另一个网络终端（一般为服务器）进行非直接的连接<br>一些网关、路由器等网络设备具备网络代理功能。一般认为代理服务有利于保障网络终端的隐私或安全，防止攻击  </p>
+<p>代理服务器的基本行为就是接收客户端发送的请求后转发给其他服务器。代理不改变请求<code>URI</code>，并不会直接发送给前方持有资源的目标服务器  </p>
+<p>持有资源实体的服务器被称为源服务器。从源服务器返回的响应经过代理服务器后再传给客户端  </p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
+<li>提高访问速度<br>通常代理服务器都设置一个较大的缓冲区，当有外界的信息通过时，同时也将其保存到缓冲区中，当其他用户再访问相同的信息时， 则直接由缓冲区中取出信息，传给用户，以提高访问速度  </li>
+<li>控制对内部资源的访问<br>如某大学FTP（前提是该代理地址在该资源的允许访问范围之内），使用教育网内地址段免费代理服务器，就可以用于对教育网开放的各类FTP下载上传，以及各类资料查询共享等服务  </li>
+<li>过滤内容<br>例如限制对特定计算机的访问，将一种语言的数据翻译成另一种语言，或是防御代理服务器两边的攻击性访问  </li>
+<li>隐藏真实IP<br>上网者也可以通过代理服务器隐藏自己的IP，免受攻击。但是只一个代理很难保证安全，更安全的方法是利用特定的工具创建代理链（如：Tor）  </li>
+<li>突破自身IP访问限制  </li>
+<li>突破内容过滤机制限制，访问被过滤网站<br>如防火长城对中国境内互联网访问的限制可透过使用代理服务器浏览而突破。但是每到国庆、两会等敏感时期，防火长城的封锁力度会大大加强，大多数代理服务器和代理软件都会无法连接  </li>
+</ul>
+<p><strong>代理服务器的特点：</strong>  </p>
+<ul>
+<li>通信协议一致<br>客户端与代理服务器使用的通讯协议，代理服务器与服务器使用的通讯协议是一致的  </li>
+<li>解析重发<br>客户端/服务器 发送给代理服务器的 请求/响应 都会被代理服务器解析，重新封装后再发送给对方  </li>
+</ul>
+<h1 id="网关-Gateway"><a href="#网关-Gateway" class="headerlink" title="网关 Gateway"></a>网关 Gateway</h1><p>网关（英语：Gateway）是转发其他服务器通信数据的服务器，接收从客户端发送来的请求时，它就像自己拥有资源的源服务器一样对请求进行处理。有时客户端可能都不会察觉，自己的通信目标是一个网关  </p>
+<p>区别于路由器（由于历史的原因，许多有关TCP/IP的文献曾经把网络层使用的路由器（英语：Router）称为网关，在今天很多局域网采用都是路由来接入网络，因此现在通常指的网关就是路由器的IP），经常在家庭中或者小型企业网络中使用，用于连接局域网和互联网  </p>
+<p>网关也经常指把一种协议转成另一种协议的设备  </p>
+<p>在现代网络术语中，网关（gateway）与路由器（router）的定义不同。网关（gateway）能在不同协议间移动数据，而路由器（router）是在不同网络间移动数据，相当于传统所说的IP网关（IP gateway）  </p>
+<p>对于以太网中的网关只能转发三层以上数据包，这一点和路由是一样的。而不同的是网关中并没有路由表，他只能按照预先设定的不同网段来进行转发<br>网关最重要的一点就是端口映射，子网内用户在外网看来只是外网的IP地址对应着不同的端口，这样看来就会保护子网内的用户  </p>
+<p><strong>网关特点：</strong></p>
+<ul>
+<li>屏蔽<br>客户端不知道真正的服务器是谁，服务器也不知道客户端是什么样的  </li>
+<li>通信协议不一致<br>客户端同代理服务器，代理服务器同服务器，这两者之间使用的通讯协议或者协议的版本是不一样的  </li>
+<li>解析+协议转换<br>代理服务器会对接收的请求进行解析，转换协议后再发送给服务器；在服务器响应后，对响应进行解析，转换协议后再发送给客户端  </li>
+</ul>
+<h1 id="隧道协议-Tunneling-Protocol"><a href="#隧道协议-Tunneling-Protocol" class="headerlink" title="隧道协议 Tunneling Protocol"></a>隧道协议 Tunneling Protocol</h1><p>隧道协议（英语：Tunneling Protocol）是一种网络协议<br>使用一种网络协议（发送协议），将另一个不同的网络协议，封装在负载部分<br>使用隧道的原因是在不兼容的网络上传输数据，或在不安全网络上提供一个安全路径  </p>
+<p>隧道是在相隔甚远的客户端和服务器两者之间进行中转，并保持双方通信连接的应用程序  </p>
+<p>隧道协议通常（但并非总是）在一个比负载协议还高的层级，或同一层  </p>
+<p><strong>隧道本身不会去解析请求</strong><br>请求保持原样中转给之后的服务器。隧道本身是透明的，客户端不用在意隧道的存在  </p>
+<h2 id="常见隧道协议"><a href="#常见隧道协议" class="headerlink" title="常见隧道协议"></a>常见隧道协议</h2><ul>
+<li>TLS  </li>
+<li>SSH  </li>
+<li>SOCKS  </li>
+<li>IPsec  </li>
+<li>一般路由封装（GRE），支持多种网络层协议和多路技术  </li>
+<li>L2TP（资料链接层隧道协议）  </li>
+<li>PPTP（点对点隧道协议）  </li>
+<li>PPPoE（基于以太网的点对点隧道）  </li>
+<li>PPPoA（基于ATM的点对点隧道）  </li>
+</ul>
+<h2 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h2><h3 id="规避防火墙"><a href="#规避防火墙" class="headerlink" title="规避防火墙"></a>规避防火墙</h3><p>一个被防火墙阻挡的协议可被包在另一个没被防火墙阻挡的协议里，如<code>HTTP</code><br>如果防火墙并没有排除此种包装，这技巧可用来逃避防火墙政策<br>隧道可按要求创建起一条与其他服务器的通信线路，届时使用 <code>SSL</code> 等加密手段进行通信  </p>
+<h3 id="加密网络流量"><a href="#加密网络流量" class="headerlink" title="加密网络流量"></a>加密网络流量</h3><p>将明文网络流量加密以在互联网上安全地传输  </p>
+<p><strong>隧道的特点：</strong>  </p>
+<ul>
+<li>该协议是为承载协议自身以外的流量而编写的协议  </li>
+<li>允许数据从一个网络移动到另一个网络  </li>
+<li>只关心流量的传输，不对承载的流量进行解析  </li>
+</ul>
+<h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table>
 <thead>
 <tr>
-<th>参数</th>
-<th>意义</th>
+<th></th>
+<th>代理</th>
+<th>网关</th>
+<th>隧道</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>maxdepth</td>
-<td>允许的最大节点深度，必填</td>
+<td>服务器客户端相互知晓</td>
+<td>True/False</td>
+<td>False</td>
+<td>True</td>
 </tr>
 <tr>
-<td>class</td>
-<td>toc的CSS样式设置（默认值是<code>false</code>）</td>
+<td>解析数据</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
 </tr>
 <tr>
-<td>slugify</td>
-<td>选择你想要的slugify方法，目前只有<code>uslug</code>（默认）和<code>transliteration</code>两种</td>
-</tr>
-<tr>
-<td>decodeEntities</td>
-<td>是否要编译内容，具体<a target="_blank" rel="noopener" href="https://github.com/bubkoo/hexo-toc/pull/15">看这</a></td>
-</tr>
-<tr>
-<td>anchor</td>
-<td>锚点相关的内容，默认是<code>false</code></td>
-</tr>
-<tr>
-<td>position</td>
-<td>锚点相对于标题的位置设置，可选<code>before</code>或<code>after</code>(默认)</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>锚点的代表字符（默认是<code>#</code>）</td>
-</tr>
-<tr>
-<td>style</td>
-<td>锚点的CSS样式类，默认是<code>header-anchor</code></td>
+<td>协议一致</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
 </tr>
 </tbody></table>
-<h3 id="3-在markdown文档中使用toc"><a href="#3-在markdown文档中使用toc" class="headerlink" title="3. 在markdown文档中使用toc"></a><strong>3. 在markdown文档中使用<code>toc</code></strong></h3><p>在需要使用到toc的地方输入：</p>
-<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- toc --&gt;</span><br></code></pre></div></td></tr></table></figure>
-
-<hr>
-<p>Hexo-toc Github：<a target="_blank" rel="noopener" href="https://github.com/bubkoo/hexo-toc">https://github.com/bubkoo/hexo-toc</a></p>
-<hr>
-<p>参考：<br><a target="_blank" rel="noopener" href="https://imys.net/20150514/hexo-toc.html">https://imys.net/20150514/hexo-toc.html</a><br><a target="_blank" rel="noopener" href="https://www.colabug.com/2018/1022/4979695/">https://www.colabug.com/2018/1022/4979695/</a></p>
 
             </div>
             <hr>
@@ -264,13 +289,13 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%90%86/">代理</a>
                     
-                      <a class="hover-with-bg" href="/tags/npm/">npm</a>
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
                     
-                      <a class="hover-with-bg" href="/tags/Blog/">Blog</a>
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E5%85%B3/">网关</a>
                     
-                      <a class="hover-with-bg" href="/tags/Hexo-toc/">Hexo-toc</a>
+                      <a class="hover-with-bg" href="/tags/%E9%9A%A7%E9%81%93/">隧道</a>
                     
                   </div>
                 
@@ -283,9 +308,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/post/2adc9a5f/">
+                      <a href="/post/e8b7be43/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">HexoEditor-Hexo-编辑文章</span>
+                        <span class="hidden-mobile">Javascript-基础-2</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -293,8 +318,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/post/46c185af/">
-                        <span class="hidden-mobile">Hexo-Github-建立自己的博客</span>
+                      <a href="/post/caa523c5/">
+                        <span class="hidden-mobile">代码规范</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
