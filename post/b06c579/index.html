@@ -196,7 +196,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年9月27日 晚上
+                  本文最后更新于：2021年2月5日 晚上
                 
               </p>
             
@@ -231,14 +231,14 @@
 </li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">after_login</span>(<span class="hljs-params">self, response</span>):</span><br>    <span class="hljs-comment">#首先根据一定条件判断登录是否成功</span><br>    self.login_user = response.meta[<span class="hljs-string">&quot;user_name&quot;</span>] <span class="hljs-comment"># 保存当前登录用户</span><br>    self.cookie = response.data[<span class="hljs-string">&quot;cookies&quot;</span>]  <span class="hljs-comment"># 保存cookie</span><br></code></pre></div></td></tr></table></figure>
-<p>在回调函数中，可以通过response.data来获取lua脚本中返回的内容，而对应的HTML代码的获取方式与使用传统的Request方式 相同。</p>
-<p>另外在回调函数中可以通过response.meta来获取Request中meta传入的参数。</p>
-<p>上述示例演示了如何使用SplashRequest来像Splash发送渲染请求，以及如何在回调函数中获取lua脚本中的返回、 以及如何在回调函数中获取lua脚本中的返回、如何向回调函数传递参数。</p>
-<p>当然您也可以使用常规的scrapy.Request来向Splash发送请求，发送的示例如下:</p>
+<p>在回调函数中，可以通过<code>response.data</code>来获取<code>lua</code>脚本中返回的内容，而对应的HTML代码的获取方式与使用传统的<code>Request</code>方式 相同。</p>
+<p>另外在回调函数中可以通过<code>response.meta</code>来获取<code>Request</code>中<code>meta</code>传入的参数。</p>
+<p>上述示例演示了如何使用<code>SplashRequest</code>来像<code>Splash</code>发送渲染请求，以及如何在回调函数中获取lua脚本中的返回、 以及如何在回调函数中获取lua脚本中的返回、如何向回调函数传递参数。</p>
+<p>当然您也可以使用常规的<code>scrapy.Request</code>来向<code>Splash</code>发送请求，发送的示例如下:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">yield</span> scrapy.Request(url, self.parse_result, meta=&#123;<br>    <span class="hljs-string">&#x27;splash&#x27;</span>: &#123;<br>        <span class="hljs-string">&#x27;args&#x27;</span>: &#123;<br>            <span class="hljs-comment"># 在此处设置端点API的参数</span><br>            <span class="hljs-string">&#x27;html&#x27;</span>: <span class="hljs-number">1</span>,<br>            <span class="hljs-string">&#x27;png&#x27;</span>: <span class="hljs-number">1</span>,<br><br>            <span class="hljs-comment"># &#x27;url&#x27; is prefilled from request url</span><br>            <span class="hljs-comment"># &#x27;http_method&#x27; is set to &#x27;POST&#x27; for POST requests</span><br>            <span class="hljs-comment"># &#x27;body&#x27; is set to request body for POST requests</span><br>        &#125;,<br><br>        <span class="hljs-comment"># optional parameters</span><br>        <span class="hljs-string">&#x27;endpoint&#x27;</span>: <span class="hljs-string">&#x27;render.json&#x27;</span>,  <span class="hljs-comment"># optional; default is render.json</span><br>        <span class="hljs-string">&#x27;splash_url&#x27;</span>: <span class="hljs-string">&#x27;&lt;url&gt;&#x27;</span>,      <span class="hljs-comment"># optional; overrides SPLASH_URL</span><br>        <span class="hljs-string">&#x27;slot_policy&#x27;</span>: scrapy_splash.SlotPolicy.PER_DOMAIN,<br>        <span class="hljs-string">&#x27;splash_headers&#x27;</span>: &#123;&#125;,       <span class="hljs-comment"># optional; a dict with headers sent to Splash</span><br>        <span class="hljs-string">&#x27;dont_process_response&#x27;</span>: <span class="hljs-literal">True</span>, <span class="hljs-comment"># optional, default is False</span><br>        <span class="hljs-string">&#x27;dont_send_headers&#x27;</span>: <span class="hljs-literal">True</span>,  <span class="hljs-comment"># optional, default is False</span><br>        <span class="hljs-string">&#x27;magic_response&#x27;</span>: <span class="hljs-literal">False</span>,    <span class="hljs-comment"># optional, default is True</span><br>    &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
 <p>splash 参数中的内容是用于splash的，使用这个参数表明我们希望向splash发送渲染请求。</p>
-<p>最终它们会被组织成 request.meta[‘splash’] 。在scrapy处理这些请求的时候根据这个来确定是否创建spalsh的 中间件，最终请求会被中间件以HTTP API的方式转发到splash中。</p>
-<p>splash中各个参数的作用如下:</p>
+<p>最终它们会被组织成 request.meta[‘splash’] 。在scrapy处理这些请求的时候根据这个来确定是否创建spalsh的 中间件，最终请求会被中间件以HTTP API的方式转发到splash中  </p>
+<p><code>splash</code>中各个参数的作用如下:</p>
 <ul>
 <li><p>meta[‘splash’][‘args’] 是最终发送到splash HTTP API的参数</p>
 <ul>

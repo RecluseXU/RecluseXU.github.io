@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.6k 字
     </span>
   
 
@@ -196,7 +196,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年1月21日 上午
+                  本文最后更新于：2021年2月7日 晚上
                 
               </p>
             
@@ -447,27 +447,94 @@
 <td>1</td>
 </tr>
 </tbody></table>
-<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h2 id="类型转换函数"><a href="#类型转换函数" class="headerlink" title="类型转换函数"></a>类型转换函数</h2><h3 id="string"><a href="#string" class="headerlink" title="string()"></a>string()</h3><p>string()，number()，boolean()  </p>
-<h2 id="文字运算函数"><a href="#文字运算函数" class="headerlink" title="文字运算函数"></a>文字运算函数</h2><p>concat(), substring(), contains(), substring-before(), substring-after(), translate(), normalize-space(), string-length()  </p>
-<h2 id="数学运算函数"><a href="#数学运算函数" class="headerlink" title="数学运算函数"></a>数学运算函数</h2><p>sum(), round(), floor(), ceiling()  </p>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bookstore</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;eng&quot;</span>&gt;</span>Harry Potter<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>29.99<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;eng&quot;</span>&gt;</span>Learning XML<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>39.95<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;cn&quot;</span>&gt;</span>Learning XPath<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>23.33<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ticket</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">spend</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">spend</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">ticket</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bookstore</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="类型转换函数"><a href="#类型转换函数" class="headerlink" title="类型转换函数"></a>类型转换函数</h2><p>string()，number()，boolean()  </p>
+<h2 id="字符串运算函数"><a href="#字符串运算函数" class="headerlink" title="字符串运算函数"></a>字符串运算函数</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>concat()</td>
+<td>拼接字符串</td>
+<td><code>concat(/bookstore/book[1]/price/text(), &quot;元&quot;)</code><br>结果：29.99元</td>
+</tr>
+<tr>
+<td>string-join((str1,str2,…),sep)</td>
+<td>用指定分割字符拼接多个字符串</td>
+<td><code>string-join(/bookstore/book/title/text(), &#39;,&#39;)</code><br>结果：Harry Potter,Learning XML,Learning XPath</td>
+</tr>
+<tr>
+<td>substring(str,start,length)</td>
+<td>返回指定区间子字符串<br>若不传入长度参数则返回后续全部字符</td>
+<td><code>substring(/bookstore/book[1]/title/text(), 2, 2)</code><br>结果：ar</td>
+</tr>
+<tr>
+<td>substring-before(str, after_str)</td>
+<td>返回在特定字串前的字符串</td>
+<td><code>substring-before(/bookstore/book[1]/title/text(), &quot;ry&quot;)</code><br>结果：Har</td>
+</tr>
+<tr>
+<td>substring-after(str, before_str)</td>
+<td>返回在特定字串后的字符串</td>
+<td><code>substring-after(/bookstore/book[1]/title/text(), &quot;ry &quot;)</code><br>结果：Potter</td>
+</tr>
+<tr>
+<td>translate(str,origin_str,replace_str)</td>
+<td>用指定字符串替换目标字符串</td>
+<td><code>translate(/bookstore/book[1]/title/text(), &quot;Potter&quot;, &quot;After&quot;)</code><br>结果：Harry After</td>
+</tr>
+<tr>
+<td>normalize-space(str)</td>
+<td>删除开头结尾空白字符</td>
+<td><code>normalize-space(&#39; The XML &#39;)</code><br>结果：The XML</td>
+</tr>
+<tr>
+<td>string-length(str)</td>
+<td>得到字符串长度</td>
+<td><code>string-length(&#39;Beatles&#39;)</code><br>结果：7</td>
+</tr>
+<tr>
+<td>contains(str,sub_str)</td>
+<td>检查字符串中是否包含子字符串</td>
+<td><code>contains(/bookstore/book[1]/title/text(), &#39;Harry&#39;)</code><br>结果:True</td>
+</tr>
+</tbody></table>
+<h2 id="数学运算函数"><a href="#数学运算函数" class="headerlink" title="数学运算函数"></a>数学运算函数</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sum()</td>
+<td>求和</td>
+<td><code>sum(/bookstore/book[position()&gt;1]/price/text())</code><br>结果：63.28</td>
+</tr>
+<tr>
+<td>ceiling()</td>
+<td>向上取整</td>
+<td><code>ceiling(/bookstore/book[1]/price/text())</code><br>结果：30</td>
+</tr>
+<tr>
+<td>floor()</td>
+<td>向下取整</td>
+<td><code>floor(/bookstore/book[1]/price/text())</code><br>结果：29</td>
+</tr>
+<tr>
+<td>round()</td>
+<td>取最接近整数<br>并非四舍五入，处中间则向下取整入</td>
+<td><code>round(/bookstore/book[1]/price/text())</code><br>结果：30</td>
+</tr>
+</tbody></table>
 <h2 id="节点属性取得函数"><a href="#节点属性取得函数" class="headerlink" title="节点属性取得函数"></a>节点属性取得函数</h2><p>name(), local-name(), namespace-uri()  </p>
 <h2 id="处理上下文数据取得函数"><a href="#处理上下文数据取得函数" class="headerlink" title="处理上下文数据取得函数"></a>处理上下文数据取得函数</h2><p>position(), last()  </p>
-<h2 id="类型转换函数-1"><a href="#类型转换函数-1" class="headerlink" title="类型转换函数"></a>类型转换函数</h2><p>string(), number(), boolean()  </p>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bookstore</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;eng&quot;</span>&gt;</span>Harry Potter<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>29.99<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;eng&quot;</span>&gt;</span>Learning XML<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>39.95<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;cn&quot;</span>&gt;</span>Learning XPath<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>23.33<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ticket</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">spend</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">spend</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">ticket</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bookstore</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-<blockquote>
-<p>案例：后两本书总价  </p>
-</blockquote>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sum(<span class="hljs-regexp">/bookstore/</span>book[position()&gt;<span class="hljs-number">1</span>]<span class="hljs-regexp">/price/</span>text())<br></code></pre></div></td></tr></table></figure>
-<p><span></span></p>
-<blockquote>
-<p>案例：英文书总价  </p>
-</blockquote>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sum(<span class="hljs-regexp">//</span>title[@lang=<span class="hljs-string">&quot;eng&quot;</span>]<span class="hljs-regexp">/../</span>price/text())<br></code></pre></div></td></tr></table></figure>
-<p><span></span></p>
-<blockquote>
-<p>案例：学习书籍的总价  </p>
-</blockquote>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sum(<span class="hljs-regexp">//</span>title[contains(text(), <span class="hljs-string">&quot;Learn&quot;</span>)]<span class="hljs-regexp">/../</span>price/text())<br></code></pre></div></td></tr></table></figure>
+
             </div>
             <hr>
             <div>
