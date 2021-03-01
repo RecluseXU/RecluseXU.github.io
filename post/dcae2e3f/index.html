@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5k 字
+      5.1k 字
     </span>
   
 
@@ -433,9 +433,17 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> httpx<br><span class="hljs-keyword">from</span> starlette.background <span class="hljs-keyword">import</span> BackgroundTask<br><span class="hljs-keyword">from</span> starlette.responses <span class="hljs-keyword">import</span> StreamingResponse<br><br>client = httpx.AsyncClient()<br><br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">home</span>(<span class="hljs-params">request</span>):</span><br>    req = client.build_request(<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;https://www.example.com/&quot;</span>)<br>    r = <span class="hljs-keyword">await</span> client.send(req, stream=<span class="hljs-literal">True</span>)<br>    <span class="hljs-keyword">return</span> StreamingResponse(r.aiter_text(), background=BackgroundTask(r.aclose))<br></code></pre></div></td></tr></table></figure>
 <h2 id="AsyncIO"><a href="#AsyncIO" class="headerlink" title="AsyncIO"></a>AsyncIO</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> asyncio<br><span class="hljs-keyword">import</span> httpx<br><br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span><br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> httpx.AsyncClient() <span class="hljs-keyword">as</span> client:<br>        response = <span class="hljs-keyword">await</span> client.get(<span class="hljs-string">&#x27;https://www.example.com/&#x27;</span>)<br>        print(response)<br><br>asyncio.run(main())<br></code></pre></div></td></tr></table></figure>
 <h1 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h1><p>HTTP/2 提供了更有效的传输，并具有潜在的性能优势。HTTP2不会更改请求或响应的核心语义，但会更改数据与服务器之间的发送方式  </p>
-<p>HTTP/2 是二进制格式，而不是HTTP/1.1使用的文本格式。 二进制格式提供了完整的请求和响应多路复用，以及HTTP标头的有效压缩<br>流多路复用意味着，对于每个并发请求，HTTP/1.1需要一个TCP流，而HTTP/2则允许单个TCP流处理多个并发请求  </p>
-<p>HTTP / 2还提供对功能的支持，例如响应优先级和服务器推送。</p>
-<p>有关HTTP / 2的全面指南，您可能需要查看“ HTTP2 Explained”。</p>
+<p>详细可以参考：<a target="_blank" rel="noopener" href="https://evilrecluse.top/post/f317f6d8/">我的HTTP2记录</a>  、<a target="_blank" rel="noopener" href="https://http2-explained.haxx.se/zh/part1">HTTP2解析</a>  </p>
+<p>httpx 默认并不支持 HTTP/2，如果想要使用，则需要启用HTTP/2支持<br>首先，需要安装 httpx 的 HTTP/2依赖  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">pip install httpx[http2]<br></code></pre></div></td></tr></table></figure>
+<p>再带那么重初始化支持 HTTP/2 的 <code>Client</code>  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> httpx.AsyncClient(http2=<span class="hljs-literal">True</span>) <span class="hljs-keyword">as</span> client:<br>    ...<br></code></pre></div></td></tr></table></figure>
+<p><code>Client</code> 和 <code>AsyncClient</code> 都可以使用 HTTP/2 支持    </p>
+<h2 id="检查HTTP版本"><a href="#检查HTTP版本" class="headerlink" title="检查HTTP版本"></a>检查HTTP版本</h2><p>在<code>Client</code>上启用 HTTP/2 支持不一定意味着请求和响应将通过 HTTP/2 传输，因为只有客户端和服务器都支持 HTTP/2，HTTP2才会运行。如果连接到仅支持HTTP / 1.1的服务器，那么<code>Client</code>会自动改用 HTTP/1.1 进行连接  </p>
+<p>通过检查<code>Response.http_version</code>属性来确定使用了哪个版本的HTTP协议  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">client = httpx.AsyncClient(http2=<span class="hljs-literal">True</span>)<br>response = <span class="hljs-keyword">await</span> client.get(...)<br>print(response.http_version)  <span class="hljs-comment"># &quot;HTTP/1.0&quot;, &quot;HTTP/1.1&quot;, or &quot;HTTP/2&quot;.</span><br></code></pre></div></td></tr></table></figure>
+<hr>
+<p>后续可继续查阅官方文档内容  </p>
 
             </div>
             <hr>
