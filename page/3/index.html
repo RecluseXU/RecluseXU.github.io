@@ -157,6 +157,149 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/post/f44b67ee/">Git-.gitignore-忽略指定文件的版本控制</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/f44b67ee/">
+          
+          
+            
+          
+          .gitignore文件并不是所有的文件都需要版本控制，程序运行产生的编译的中间文件，日志文件，等等都是不需要版本控制的  
+编写在git的目录创建一个.ignore文件，编写指定的忽略规则就能让git忽略指定的文件或者文件夹，让管理更方便  
+流程
+创建.gitignore文件如果此文件是在项目push之后创建，那么需要进行一些操作才能让这个文件正常工作  
+
+注意！！！在代码提交以后再进行此操
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-09-29 16:53" pubdate>
+              2020-09-29
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Git/">Git</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/a88eb1a7/">Javascript-Hook-脚本</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/a88eb1a7/">
+          
+          
+            
+          
+          信息自行编写或者收集到的Hook脚本代码  
+脚本webpack hook 半自动扣12345678910111213// 在加载器后面下断点  执行下面代码// 这里的f 替换成需要导出的函数名window.zhiyuan = f;window.wbpk_ = &quot;&quot;;window.isz = false;f = function(r)&#123;	if(window.isz)
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-09-27 21:13" pubdate>
+              2020-09-27
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/javascript/">javascript</a>
+            
+              <a href="/tags/Hook/">Hook</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/141cf4a2/">Linux-Shell-后台运行脚本</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/141cf4a2/">
+          
+          
+            
+          
+          信息前台运行脚本会占住你的控制台，控制台关闭以后，脚本也会跟着停下。后台运行会让你感到舒服/干净  
+
+虽然存在忘了脚本在运行和分不清是什么脚本的可能性  
+
+&amp;后台运行脚本直接在运行的脚本后家&amp;即可实现  
+
+例：后台运行test.sh脚本  
+
+1. test.sh &amp;
+虽然这样已经是后台运行了，但这样做会有一个问题关闭终端连接后，脚本会停止运行  
+nohup不挂断的
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-09-27 21:12" pubdate>
+              2020-09-27
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">Linux</a>
+            
+              <a href="/tags/Shell/">Shell</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/post/5ca1c756/">服务器部署-SSH</a>
       </h1>
 
@@ -712,9 +855,9 @@ Babel的作用如果你的浏览器不支持ES6，Babel可以将将代码转换E
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Babel/">Babel</a>
-            
               <a href="/tags/Javascript/">Javascript</a>
+            
+              <a href="/tags/Babel/">Babel</a>
             
           </div>
         
@@ -971,157 +1114,11 @@ CRITICAL - 严重
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/3e8c19c1/">SQLAlchemy-ORM-Python</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/3e8c19c1/">
-          
-          
-            
-          
-          简介SQLAlchemy是Python的SQL``ORM工具SQLAlchemy提供了一整套的持久化方式，提供高性能的数据库访问
-特性
-SQLAlchemy是一个强大的ORM，基于关系映射和核心Core制作  
-可以通过操作对象模型，实现SQL的全部功能（包括连接查询，关联等）  
-拥有一个灵活全面的系统，它可以快速的加载Collections与Objects``Collections被缓存在一个
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-08-16 20:53" pubdate>
-              2020-08-16
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/python/">python</a>
-            
-              <a href="/tags/SQLAlchemy/">SQLAlchemy</a>
-            
-              <a href="/tags/ORM/">ORM</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/a78cd365/">javascript-encode混淆</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/a78cd365/">
-          
-          
-            
-          
-          大体思路这种让你看不懂代码的方式是通过编码实现的  
-编译器能都识别那些 由 16进制字符 或者 Unicode 字符一般而言为了 让字符看起来非常难顶，代码作者会设计将字符转换成一些奇怪的字符但为了不影响代码逻辑，这些奇怪字符的值依然与原本保持一致  
-代码会被保存为非常长的字符串格式在多数情况下是类似于这样  
-
-()[&quot;constructor&quot;][&quot;constr
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-08-15 12:15" pubdate>
-              2020-08-15
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/javascript/">javascript</a>
-            
-              <a href="/tags/js%E6%B7%B7%E6%B7%86/">js混淆</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/747d7228/">Node.js</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/747d7228/">
-          
-          
-            
-          
-          信息Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行时   
-
-官网：https://nodejs.org/zh-cn/  
-官方文档：https://nodejs.org/zh-cn/docs/  
-中文文档：http://nodejs.cn/api/  
-
-安装
-进入官网，下载安装包，安装安装过程中可以改安装路径它会自动给系统添加环境变量  
-
-测试cmd中输
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-08-14 11:21" pubdate>
-              2020-08-14
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/javascript/">javascript</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   
