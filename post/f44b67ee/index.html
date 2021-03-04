@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      308 字
+      324 字
     </span>
   
 
@@ -196,7 +196,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年11月9日 上午
+                  本文最后更新于：2021年3月4日 下午
                 
               </p>
             
@@ -204,15 +204,15 @@
               <h1 id="gitignore文件"><a href="#gitignore文件" class="headerlink" title=".gitignore文件"></a>.gitignore文件</h1><p>并不是所有的文件都需要版本控制，程序运行产生的编译的中间文件，日志文件，等等都是不需要版本控制的  </p>
 <p>编写在git的目录创建一个<code>.ignore</code>文件，编写指定的忽略规则就能让git忽略指定的文件或者文件夹，让管理更方便  </p>
 <h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol>
-<li><p>创建.gitignore文件<br>如果此文件是在项目<code>push</code>之后创建，那么需要进行一些操作才能让这个文件正常工作  </p>
-<blockquote>
+<li>创建.gitignore文件<br>如果此文件是在项目<code>push</code>之后创建，那么需要进行一些操作才能让这个文件正常工作  <blockquote>
 <p>注意！！！<br>在代码提交以后再进行此操作，要不然会丢失进度<br><span></span></p>
 </blockquote>
- <figure class="highlight dockerfile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dockerfile">git rm -r --cached .<br>git <span class="hljs-keyword">add</span><span class="bash"> .</span><br></code></pre></div></td></tr></table></figure>
-<p> stackoverflow：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository">如何在push后创建.gitignore并使它生效</a></p>
 </li>
-<li><p>编写忽略规则  </p>
-</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dockerfile">git rm -r --cached .<br>git <span class="hljs-keyword">add</span><span class="bash"> .</span><br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code>stackoverflow：[如何在push后创建.gitignore并使它生效](https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository)</code></pre></div>
+<ol start="2">
+<li>编写忽略规则  </li>
 </ol>
 <table>
 <thead>
