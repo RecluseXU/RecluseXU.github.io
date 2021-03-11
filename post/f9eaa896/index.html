@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      9.5k 字
+      9.6k 字
     </span>
   
 
@@ -196,7 +196,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月19日 上午
+                  本文最后更新于：2021年3月10日 下午
                 
               </p>
             
@@ -205,7 +205,7 @@
 <p>对于大多数用户来说，<code>Vim</code>有着一个比较陡峭的学习曲线<br>这意味着开始学习的时候可能会进展缓慢，但是一旦掌握一些基本操作之后，能大幅度提高编辑效率  </p>
 <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p><code>vim</code>的使用平台有很多，几乎每个<code>Linux</code>系统都会自带一个<code>vim</code>  </p>
 <p>此处以 <code>VSCode</code> + <code>vim</code>插件 进行学习<br><code>VSCode</code>搜索插件<code>vim</code>安装<br>在插件页可以找到其 <code>setting.json</code> 默认配置<br><img src="/Vim-%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8-%E6%91%86%E8%84%B1%E9%BC%A0%E6%A0%87%E6%8F%90%E9%AB%98%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/20210202114212912.png" srcset="/img/loading.gif"><br>将其添加到 <code>setting.json</code> 即可弯沉给配置<br>在完成配置后，编辑 <code>VSCode</code> 内的文档会变成<code>vim</code>编辑的形式<br>可以在状态栏中查看到现在的模式<br><img src="/Vim-%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8-%E6%91%86%E8%84%B1%E9%BC%A0%E6%A0%87%E6%8F%90%E9%AB%98%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/20210202033715325.png" srcset="/img/loading.gif">  </p>
-<h1 id="一、Vim-语法"><a href="#一、Vim-语法" class="headerlink" title="一、Vim 语法"></a>一、Vim 语法</h1><p>这章将是最重要的一章，一旦你理解了Vim命令的语法结构，你将能够和 Vim “说话”<br>注意，在这一章中当我讨论 Vim 语言时，我讨论并不是 Vimscript (Vim自带的插件编写和自定义设置的语言)，这里讨论的是 Vim 中 normal 模式的下的命令的通用规则  </p>
+<h1 id="Vim-语法"><a href="#Vim-语法" class="headerlink" title="Vim 语法"></a>Vim 语法</h1><p>这章将是最重要的一章，一旦你理解了Vim命令的语法结构，你将能够和 Vim “说话”<br>注意，在这一章中当我讨论 Vim 语言时，我讨论并不是 Vimscript (Vim自带的插件编写和自定义设置的语言)，这里讨论的是 Vim 中 normal 模式的下的命令的通用规则  </p>
 <h2 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h2><p>你只需要知道一个Vim语言的语法规则：  </p>
 <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">verb</span> + noun <span class="hljs-comment"># 动词 + 名词</span><br></code></pre></div></td></tr></table></figure>
 <p>这就类似与在英语中的祈使句：</p>
@@ -501,8 +501,8 @@
 <td>跳到本行最后一个字符</td>
 </tr>
 <tr>
-<td>`n</td>
-<td>`</td>
+<td><code>n|</code></td>
+<td>跳到本行第n列</td>
 </tr>
 <tr>
 <td><code>f&#123;chars&#125;</code></td>

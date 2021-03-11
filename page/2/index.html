@@ -157,6 +157,57 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/post/b9157208/">部署高匿代理-Squid</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/b9157208/">
+          
+          
+            
+          
+          信息用Squid来部署一个高匿代理服务到服务器  
+流程安装 Squid 与 Httpd12yum install -y openssl squidyum install httpd
+Squid自然是服务器主体Httpd是用于生成密码文件的  
+
+网上为什么那么多的免费代理，有一部分原因就是因为服务器转发没有设置密码，被黑客扫端口扫出来直接用了  
+
+创建密码文件1htpasswd -c /etc
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-03 23:00" pubdate>
+              2020-12-03
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+            
+              <a href="/tags/Squid/">Squid</a>
+            
+              <a href="/tags/%E4%BB%A3%E7%90%86/">代理</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/post/a7b96945/">特殊想法-奇思妙想</a>
       </h1>
 
@@ -1064,55 +1115,6 @@ logging可以很好的代替print功能，并且更加方便管理
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Scrapy/">Scrapy</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/c7d0c491/">Python-单例模式</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/c7d0c491/">
-          
-          
-            
-          
-          单例模式单例模式（Singleton Pattern）是一种常用的软件设计模式，该模式的主要目的是确保某一个类只有一个实例存在当你希望在整个系统中，某个类只能出现一个实例时，单例对象就能派上用场  
-
-在那些需要“创建连接”的内容中使用能节约很多资源  
-
-Python实现方式模块方式其实，Python 的模块就是天然的单例模式因为模块在第一次导入时，会生成.pyc文件，当第二次导入时，就会直接加
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-01 09:35" pubdate>
-              2020-10-01
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-            
-              <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a>
             
           </div>
         
