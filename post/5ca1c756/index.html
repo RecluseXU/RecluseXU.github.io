@@ -196,7 +196,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年9月27日 晚上
+                  本文最后更新于：2021年3月15日 晚上
                 
               </p>
             
@@ -243,7 +243,7 @@
 <li><p>打开SSH配置文件  </p>
 </li>
 <li><p>找到 #Port 22<br>这东西本身就被注释了，找到这个东西只是为了将一类设置写一起  </p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#Port 22</span><br>Port 51369 <span class="hljs-comment"># 设置自定义的端口51369</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># Port 22</span><br>Port 51369 <span class="hljs-comment"># 设置自定义的端口51369</span><br></code></pre></div></td></tr></table></figure>
 <h2 id="创建SSH密钥来登录"><a href="#创建SSH密钥来登录" class="headerlink" title="创建SSH密钥来登录"></a>创建SSH密钥来登录</h2><p>虽然理论中说了要双方公钥交换，但实际上只要有一对连接上了，另一个会被自动创建<br>因此有两种方式来创建密钥  </p>
 </li>
 </ol>
@@ -262,7 +262,7 @@
  过程中会需要你输入一些东西，要是不知道是什么，可以直接回车不管   <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">Enter file <span class="hljs-keyword">in</span> which to save the key (<span class="hljs-regexp">/home/</span>用户名<span class="hljs-regexp">/.ssh/i</span>d_rsa):  <span class="hljs-comment"># 设置密钥文件保存路径</span><br>Enter passphrase (empty <span class="hljs-keyword">for</span> no passphrase):  <span class="hljs-comment"># 设置密钥锁码</span><br>Enter same passphrase again:  <span class="hljs-comment"># 密钥锁码确认</span><br></code></pre></div></td></tr></table></figure>
  最后会有一些提示  <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-comment"># 你的私钥保存在这里</span><br>Your identification has been saved <span class="hljs-keyword">in</span> <span class="hljs-regexp">/home/m</span>anager<span class="hljs-regexp">/.ssh/i</span>d_rsa.<br><span class="hljs-comment"># 你的公钥保存在这里</span><br>Your public key has been saved <span class="hljs-keyword">in</span> <span class="hljs-regexp">/home/m</span>anager<span class="hljs-regexp">/.ssh/i</span>d_rsa.pub.<br></code></pre></div></td></tr></table></figure></li>
 <li>服务器公钥注册  <ol>
-<li>来到.ssh目录 <figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> ~<br><span class="hljs-keyword">cd</span> <span class="hljs-string">.ssh</span><br></code></pre></div></td></tr></table></figure></li>
+<li>来到.ssh目录 <figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> ~<span class="hljs-string">/.ssh</span><br></code></pre></div></td></tr></table></figure></li>
 <li>注册公钥  <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">cat</span> <span class="hljs-selector-tag">id_rsa</span><span class="hljs-selector-class">.pub</span> &gt;&gt; <span class="hljs-selector-tag">authorized_keys</span><br></code></pre></div></td></tr></table></figure>
 <blockquote>
 <p>有些时候会遇到权限的问题，把权限设置得高一些就可以解决  </p>

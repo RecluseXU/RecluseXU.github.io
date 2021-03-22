@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      789 字
     </span>
   
 
@@ -196,65 +196,40 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年9月27日 晚上
+                  本文最后更新于：2021年3月15日 晚上
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>Centos7.2 腾讯云服务器</li>
+<li>Centos7.2 腾讯云服务器  </li>
 </ul>
 <h2 id="基本信息确认"><a href="#基本信息确认" class="headerlink" title="基本信息确认"></a>基本信息确认</h2><h3 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h3><ul>
 <li>连接服务器的各类型密码不应低于8位（建议20位）  </li>
 <li>密码字符涵盖类型越多越好。数字、英文大写、小写、特殊字符  </li>
 </ul>
 <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="一、修改主机名"><a href="#一、修改主机名" class="headerlink" title="一、修改主机名"></a>一、修改主机名</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hostnamectl set-hostname  主机名<br></code></pre></div></td></tr></table></figure>
-<h3 id="二、创建新用户，禁用root登录"><a href="#二、创建新用户，禁用root登录" class="headerlink" title="二、创建新用户，禁用root登录"></a>二、创建新用户，禁用root登录</h3><p>禁用在SSH中直接使用root用户登录。<br>想要获取服务器所有权限，需要先用普通用户登录成功后，再进行root用户的登录获取。<br>使得他人更难接触root用户的难度增加，服务器更安全。</p>
-<h4 id="1-新建用户"><a href="#1-新建用户" class="headerlink" title="1. 新建用户"></a>1. 新建用户</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">adduser 用户名  <span class="hljs-comment"># 新建用户</span><br>passwd 用户名  <span class="hljs-comment"># 为新用户设置密码</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="二、创建新用户"><a href="#二、创建新用户" class="headerlink" title="二、创建新用户"></a>二、创建新用户</h3><h4 id="新建用户"><a href="#新建用户" class="headerlink" title="新建用户"></a>新建用户</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">adduser 用户名  <span class="hljs-comment"># 新建用户</span><br>passwd 用户名  <span class="hljs-comment"># 为新用户设置密码</span><br></code></pre></div></td></tr></table></figure>
 <p><a href="#WhatIsadduser">Linux adduser命令是啥？</a>　<a href="#WhatIspasswd">Linux passwd命令是啥？</a></p>
-<h4 id="2-创建doc文件夹"><a href="#2-创建doc文件夹" class="headerlink" title="2. 创建doc文件夹"></a>2. 创建doc文件夹</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mkdir  /opt/doc<br></code></pre></div></td></tr></table></figure>
-<p><a href="#WhatIsmkdir">Linux passwd命令是啥？</a></p>
-<h4 id="3-为新用户分配doc目录权限"><a href="#3-为新用户分配doc目录权限" class="headerlink" title="3. 为新用户分配doc目录权限"></a>3. 为新用户分配doc目录权限</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chown  用户名   /opt/doc<br>chmod  755   /opt/doc<br></code></pre></div></td></tr></table></figure>
+<h4 id="为新用户分配doc目录权限"><a href="#为新用户分配doc目录权限" class="headerlink" title="为新用户分配doc目录权限"></a>为新用户分配doc目录权限</h4><p>可以根据需要来进行授权，如果觉得不需要也可以跳过  </p>
+<p>创建doc文件夹  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mkdir  /opt/doc<br></code></pre></div></td></tr></table></figure>
+<p><a href="#WhatIsmkdir">Linux passwd命令是啥？</a><br>对目标目录进行授权  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chown  用户名   /opt/doc<br>chmod  755   /opt/doc<br></code></pre></div></td></tr></table></figure>
 <p><a href="#WhatIschown">Linux chown命令是啥？</a>　<a href="#WhatIschmod">Linux chmod命令是啥？</a></p>
-<h4 id="4-SSH禁止使用root用户登录"><a href="#4-SSH禁止使用root用户登录" class="headerlink" title="4. SSH禁止使用root用户登录"></a>4. SSH禁止使用root用户登录</h4><ol>
-<li>打开ssh配置文件<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vi /etc/ssh/sshd_config<br></code></pre></div></td></tr></table></figure></li>
-<li>找到对应项并设置为no<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">PermitRootLogin no<br></code></pre></div></td></tr></table></figure></li>
-<li>重新启动SSH服务以应用设置<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">service sshd restart<br></code></pre></div></td></tr></table></figure>
-<h4 id="5-测试root用户登录"><a href="#5-测试root用户登录" class="headerlink" title="5. 测试root用户登录"></a>5. 测试root用户登录</h4>测试看看，是不是通过root用户无法直接登录了。<br>要是登录不了，说明成功了。</li>
-</ol>
-<h3 id="三、修改SSH端口"><a href="#三、修改SSH端口" class="headerlink" title="三、修改SSH端口"></a>三、修改SSH端口</h3><p>SSH端口不为22<br>使得黑客需要扫描很多的端口才能发现真的SSH端口，浪费黑客的时间。</p>
-<h4 id="1-修改SSH配置文件"><a href="#1-修改SSH配置文件" class="headerlink" title="1. 修改SSH配置文件"></a>1. 修改SSH配置文件</h4><ol>
-<li><p>打开配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vi /etc/ssh/sshd_config<br></code></pre></div></td></tr></table></figure></li>
-<li><p>找到 #Port 22 并做修改</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#Port 22</span><br></code></pre></div></td></tr></table></figure>
-<p> 修改为↓</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Port 22 <span class="hljs-comment"># 将旧端口也取消注释保留，使得两端口暂时并存，以防操作失误导致无法连接服务器。</span><br>Port 51369 <span class="hljs-comment"># 新起一行，设置新的SSH端口。注意别与已用端冲突。</span><br></code></pre></div></td></tr></table></figure>
-<h4 id="2-修改修改SELinux"><a href="#2-修改修改SELinux" class="headerlink" title="2. 修改修改SELinux"></a>2. 修改修改SELinux</h4></li>
-<li><p>安装semanage（已安装的可以跳过）</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum -y install policycoreutils-python.x86_64<br></code></pre></div></td></tr></table></figure></li>
-<li><p>添加51369端口到 SELinux</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">semanage port -a -t ssh_port_t -p tcp 51369<br></code></pre></div></td></tr></table></figure></li>
-<li><p>查看当前SElinux 允许的ssh端口</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">semanage port -l | grep ssh<br></code></pre></div></td></tr></table></figure>
-<p> 成果添加端口的话会有两个端口<br> ssh_port_t tcp 51369, 22</p>
-</li>
-<li><p>重新启动SSH服务以应用设置</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl restart sshd.service<br></code></pre></div></td></tr></table></figure>
-<h4 id="3-防火墙-安全组-开放对应端口"><a href="#3-防火墙-安全组-开放对应端口" class="headerlink" title="3. 防火墙/安全组 开放对应端口"></a>3. 防火墙/安全组 开放对应端口</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">firewall-cmd --permanent --zone=public --add-port=51369/tcp <br></code></pre></div></td></tr></table></figure>
-<h4 id="4-尝试通过51369端口SSH登录服务器"><a href="#4-尝试通过51369端口SSH登录服务器" class="headerlink" title="4.尝试通过51369端口SSH登录服务器"></a>4.尝试通过51369端口SSH登录服务器</h4><h4 id="5-在SSH配置文件中删除22端口"><a href="#5-在SSH配置文件中删除22端口" class="headerlink" title="5.在SSH配置文件中删除22端口"></a>5.在SSH配置文件中删除22端口</h4></li>
-<li><p>打开配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vi /etc/ssh/sshd_config<br></code></pre></div></td></tr></table></figure></li>
-<li><p>找到第一步被去掉注释符号的 Port 22 并删除</p>
-</li>
-</ol>
-<h3 id="四、定期检查"><a href="#四、定期检查" class="headerlink" title="四、定期检查"></a><strong>四、定期检查</strong></h3><h4 id="1-定期检查进程"><a href="#1-定期检查进程" class="headerlink" title="1. 定期检查进程"></a>1. 定期检查进程</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">top<br></code></pre></div></td></tr></table></figure>
+<h4 id="测试root用户登录"><a href="#测试root用户登录" class="headerlink" title="测试root用户登录"></a>测试root用户登录</h4><p>测试看看，是不是通过root用户无法直接登录了<br>要是登录不了，说明成功了。</p>
+<h3 id="三、修改SSH"><a href="#三、修改SSH" class="headerlink" title="三、修改SSH"></a>三、修改SSH</h3><p>参考：<a target="_blank" rel="noopener" href="https://evilrecluse.top/post/5ca1c756/">https://evilrecluse.top/post/5ca1c756/</a>  </p>
+<ul>
+<li>禁止使用 root 登录<br>想要获取服务器所有权限，需要先用普通用户登录成功后，再进行root用户的登录获取。<br>使得他人更难接触root用户的难度增加，服务器更安全  </li>
+<li>修改 SSH 端口  </li>
+</ul>
+<h3 id="四、定期检查"><a href="#四、定期检查" class="headerlink" title="四、定期检查"></a>四、定期检查</h3><h4 id="1-定期检查进程"><a href="#1-定期检查进程" class="headerlink" title="1. 定期检查进程"></a>1. 定期检查进程</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">top<br></code></pre></div></td></tr></table></figure>
 <p>top命令在centos下检查有没有占用很大又名字奇怪的进程。</p>
 <h4 id="2-定期检查近期试图登陆"><a href="#2-定期检查近期试图登陆" class="headerlink" title="2. 定期检查近期试图登陆"></a>2. 定期检查近期试图登陆</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">lastb  <span class="hljs-comment"># 显示最近没有登录成功的信息</span><br>last  <span class="hljs-comment"># 显示最近登陆成功的ip地址</span><br></code></pre></div></td></tr></table></figure>
 <h4 id="3-定期检查有没有不合理的命令"><a href="#3-定期检查有没有不合理的命令" class="headerlink" title="3. 定期检查有没有不合理的命令"></a>3. 定期检查有没有不合理的命令</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">history</span>  <span class="hljs-comment"># 显示最近的命令输入</span><br></code></pre></div></td></tr></table></figure>
 <p>查询下有没有近期不合理的命令。</p>
 <hr>
-<h2 id="更多服务器安全设置参考https-blog-csdn-net-scorpio3k-article-details-48678661-depth-1-utm-source-distribute-pc-relevant-none-task-amp-utm-source-distribute-pc-relevant-none-task"><a href="#更多服务器安全设置参考https-blog-csdn-net-scorpio3k-article-details-48678661-depth-1-utm-source-distribute-pc-relevant-none-task-amp-utm-source-distribute-pc-relevant-none-task" class="headerlink" title="更多服务器安全设置参考https://blog.csdn.net/scorpio3k/article/details/48678661?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task"></a>更多服务器安全设置参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/scorpio3k/article/details/48678661?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task">https://blog.csdn.net/scorpio3k/article/details/48678661?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task</a></h2><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a><strong>附录</strong></h2><h3 id="Linux-adduser命令"><a href="#Linux-adduser命令" class="headerlink" title="Linux adduser命令"></a>Linux adduser命令<span id='WhatIsadduser'></span></h3><p>用于新增使用者帐号或更新预设的使用者资料。<br>adduser 与 useradd 指令为同一指令（经由符号连结 symbolic link）。<br>使用权限：系统管理员。<br><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-adduser.html">命令与参数详细</a></p>
+<h2 id="更多服务器安全设置参考-https-blog-csdn-net-scorpio3k-article-details-48678661-depth-1-utm-source-distribute-pc-relevant-none-task-amp-utm-source-distribute-pc-relevant-none-task"><a href="#更多服务器安全设置参考-https-blog-csdn-net-scorpio3k-article-details-48678661-depth-1-utm-source-distribute-pc-relevant-none-task-amp-utm-source-distribute-pc-relevant-none-task" class="headerlink" title="更多服务器安全设置参考  https://blog.csdn.net/scorpio3k/article/details/48678661?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task"></a>更多服务器安全设置参考  <a target="_blank" rel="noopener" href="https://blog.csdn.net/scorpio3k/article/details/48678661?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task">https://blog.csdn.net/scorpio3k/article/details/48678661?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task</a></h2><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a><strong>附录</strong></h2><h3 id="Linux-adduser命令"><a href="#Linux-adduser命令" class="headerlink" title="Linux adduser命令"></a>Linux adduser命令<span id='WhatIsadduser'></span></h3><p>用于新增使用者帐号或更新预设的使用者资料。<br>adduser 与 useradd 指令为同一指令（经由符号连结 symbolic link）。<br>使用权限：系统管理员。<br><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-adduser.html">命令与参数详细</a></p>
 <h3 id="Linux-passwd"><a href="#Linux-passwd" class="headerlink" title="Linux passwd"></a>Linux passwd<span id='WhatIspasswd'></span></h3><p>更改使用者的密码。<br><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-passwd.html">命令与参数详细</a></p>
 <h3 id="Linux-mkdir"><a href="#Linux-mkdir" class="headerlink" title="Linux mkdir"></a>Linux mkdir<span id='WhatIsmkdir'></span></h3><p>用于建立目录。<br><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-mkdir.html">命令与参数详细</a></p>
 <h3 id="Linux-chmod"><a href="#Linux-chmod" class="headerlink" title="Linux chmod"></a>Linux chmod<span id='WhatIschmod'></span></h3><p>Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他。<br>利用 chmod 可以藉以控制文件如何被他人所调用。<br>使用权限 : 所有使用者<br><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-chmod.html">命令与参数详细</a></p>
@@ -271,9 +246,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/CentOS/">CentOS</a>
-                    
                       <a class="hover-with-bg" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+                    
+                      <a class="hover-with-bg" href="/tags/CentOS/">CentOS</a>
                     
                       <a class="hover-with-bg" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8/">服务器安全</a>
                     

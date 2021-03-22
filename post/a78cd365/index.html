@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      3.1k 字
     </span>
   
 
@@ -196,7 +196,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月10日 下午
+                  本文最后更新于：2021年3月19日 上午
                 
               </p>
             
@@ -224,26 +224,26 @@
 <li>作用域内避免标识符碰撞（重复）  </li>
 <li>尽量在不同作用域用多使用重复的标识符，以提升阅读难度  </li>
 </ul>
-<h2 id="数据混淆"><a href="#数据混淆" class="headerlink" title="数据混淆"></a>数据混淆</h2><p>针对不同的数据类型可以对数据进行不同的混淆  </p>
-<h3 id="数字混淆"><a href="#数字混淆" class="headerlink" title="数字混淆"></a>数字混淆</h3><h4 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h4><p>Javascript 除了常用的 十进制 标识形式外，还有 二进制、八进制、十六进制等表示形式。虽然看起来十分的不同（以<code>0b</code>,<code>0</code>,<code>0x</code>开头），但它们的机器码是等值的。但就理解而言，除了 十进制 ，其它的进制都并不好阅读  </p>
+<h1 id="数据混淆"><a href="#数据混淆" class="headerlink" title="数据混淆"></a>数据混淆</h1><p>针对不同的数据类型可以对数据进行不同的混淆  </p>
+<h2 id="数字混淆"><a href="#数字混淆" class="headerlink" title="数字混淆"></a>数字混淆</h2><h3 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h3><p>Javascript 除了常用的 十进制 标识形式外，还有 二进制、八进制、十六进制等表示形式。虽然看起来十分的不同（以<code>0b</code>,<code>0</code>,<code>0x</code>开头），但它们的机器码是等值的。但就理解而言，除了 十进制 ，其它的进制都并不好阅读  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> number = <span class="hljs-number">0b11101001</span>;  <span class="hljs-comment">// 2进制</span><br><span class="hljs-keyword">var</span> number = <span class="hljs-number">0351</span>;  <span class="hljs-comment">// 8进制</span><br><span class="hljs-keyword">var</span> number = <span class="hljs-number">233</span>;  <span class="hljs-comment">// 10进制</span><br><span class="hljs-keyword">var</span> number = <span class="hljs-number">0xe9</span>;  <span class="hljs-comment">// 16进制</span><br></code></pre></div></td></tr></table></figure>
 <p>浮点数并不支持这种类型的转换，因为操作系统底层存储其实并不存在小数，而十进制的小数形式只是迎合数学上的表达<br>大部分语言都不支持十进制以外的其它进制的小数表达式  </p>
 <p>浮点数虽然不能使用进制转换的方法进行混淆，但是 Javascript 支持科学计数法，可以使用科学计数法来进行简单的混淆  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> ft = <span class="hljs-number">2.33</span>;<br><span class="hljs-keyword">var</span> ft = <span class="hljs-number">233e-2</span>;<br><span class="hljs-keyword">var</span> ft = <span class="hljs-number">233E-2</span>;<br></code></pre></div></td></tr></table></figure>
 <p>效果并不怎么好  </p>
-<h4 id="数学技巧"><a href="#数学技巧" class="headerlink" title="数学技巧"></a>数学技巧</h4><p>当数字型变量在代码中有一定的规律和作用范围，就可以通过数学技巧将它的表现形式转换未一种更难分析的形式  </p>
+<h3 id="数学技巧"><a href="#数学技巧" class="headerlink" title="数学技巧"></a>数学技巧</h3><p>当数字型变量在代码中有一定的规律和作用范围，就可以通过数学技巧将它的表现形式转换未一种更难分析的形式  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">var</span> A = [];<br><span class="hljs-keyword">while</span>(i&lt;<span class="hljs-number">1000</span>)&#123;<br>    A[i] = i * <span class="hljs-number">16</span>;<br>    i++;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>通过 <code>y = a * i + b</code> 进行转换  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> i = <span class="hljs-number">11</span>;<br><span class="hljs-keyword">var</span> A = [];<br><span class="hljs-keyword">while</span>(i &lt; <span class="hljs-number">8003</span>)&#123;<br>    A[(i-<span class="hljs-number">3</span>)/<span class="hljs-number">8</span>] = <span class="hljs-number">2</span> * i - <span class="hljs-number">6</span>;<br>    i += <span class="hljs-number">8</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>对比转换前后的代码，它们的语义是等价的，但是理解难度却大不相同<br>需要注意的是，转换前后数字所能表示的值会有所变化（如上代码将数字扩大8倍，会造成可表示的数少8倍），不要因为使用这个技巧使得数字超出可以表示的范围之外  </p>
-<h4 id="数字拆解"><a href="#数字拆解" class="headerlink" title="数字拆解"></a>数字拆解</h4><p>对于数字而言，大多数时候可以通过 将字面量的数字以某种等价的公式拆分为表达式来提升代码分析难度  </p>
+<h3 id="数字拆解"><a href="#数字拆解" class="headerlink" title="数字拆解"></a>数字拆解</h3><p>对于数字而言，大多数时候可以通过 将字面量的数字以某种等价的公式拆分为表达式来提升代码分析难度  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 100天有多少秒</span><br><span class="hljs-keyword">var</span> secend = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span>(va+<br>r i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">100</span>; i++)&#123;<br>    time += <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>根据勾股定理进行转换  <code>5*5 = 4*4 +3*3</code>  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> secend = <span class="hljs-number">25</span> - <span class="hljs-number">16</span> - <span class="hljs-number">9</span>;<br><span class="hljs-keyword">var</span> p = <span class="hljs-built_in">Math</span>.PI / <span class="hljs-number">2</span> * <span class="hljs-built_in">Math</span>.random();<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">169</span>-<span class="hljs-number">144</span>-<span class="hljs-number">24</span>; i&lt;<span class="hljs-number">5</span>*<span class="hljs-number">5</span>*<span class="hljs-number">4</span>; i+=<span class="hljs-built_in">Math</span>.Pow(<span class="hljs-built_in">Math</span>.cos(p),<span class="hljs-number">2</span>)+<span class="hljs-built_in">Math</span>.pow(<span class="hljs-built_in">Math</span>.sin(p),<span class="hljs-number">2</span>)&#123;<br>    time += (<span class="hljs-number">30</span>-<span class="hljs-number">6</span>)*<span class="hljs-number">6</span>*<span class="hljs-number">10</span>*<span class="hljs-number">5</span>*<span class="hljs-number">12</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>其最重要的意义在于破坏语义，你无法直接看出他是在算时间  </p>
 <p><strong>数字拆解与性能</strong><br>拆分代码并不会降低运行效率<br>在浏览器引擎编译过程中会对代码进行优化，以 V8 引擎为例，遇到以上的代码会触发<code>常量折叠</code>优化策略，即在编译器里进行语法分析时，将常量进行计算求值，并用结果取代表达式，放入常量表<br>例如，在编译过程中<code>i &lt; 5*5*4</code>会被转换为 <code>i &lt; 100</code>  </p>
-<h3 id="布尔混淆"><a href="#布尔混淆" class="headerlink" title="布尔混淆"></a>布尔混淆</h3><p>布尔类型的取值范围比较固定而且范围非常小，javascript 隐式类型强转机制也使得对它混淆相对容易，手法也比较多  </p>
-<h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><p>类型转换 指一个值从一个类型隐式的转换到另一个类型的操作  </p>
+<h2 id="布尔混淆"><a href="#布尔混淆" class="headerlink" title="布尔混淆"></a>布尔混淆</h2><p>布尔类型的取值范围比较固定而且范围非常小，javascript 隐式类型强转机制也使得对它混淆相对容易，手法也比较多  </p>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>类型转换 指一个值从一个类型隐式的转换到另一个类型的操作  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span> + <span class="hljs-string">&quot;&quot;</span>  <span class="hljs-comment">// 最终a会是一个字符串类型</span><br></code></pre></div></td></tr></table></figure>
 <p>强制转换为 boolean 类型时，遵循规则：  </p>
 <ul>
@@ -268,17 +268,55 @@
 <li> <code>![]</code>  </li>
 <li> <code>!void(0)</code>  </li>
 </ul>
-<h4 id="构造随机数"><a href="#构造随机数" class="headerlink" title="构造随机数"></a>构造随机数</h4><p>可以利用乘法操作构造特定的随机数混淆布尔值  </p>
+<h3 id="构造随机数"><a href="#构造随机数" class="headerlink" title="构造随机数"></a>构造随机数</h3><p>可以利用乘法操作构造特定的随机数混淆布尔值  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">random</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">100000</span>, <span class="hljs-number">10</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateNumber</span>(<span class="hljs-params">bl</span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> b1 ? <span class="hljs-number">3</span> * (<span class="hljs-number">5</span> * (random()%<span class="hljs-number">10000</span>) + random()%<span class="hljs-number">4</span> + <span class="hljs-number">1</span>)<br>              : <span class="hljs-number">5</span> * (<span class="hljs-number">3</span> * (random()%<span class="hljs-number">10000</span>) + random()%<span class="hljs-number">2</span> + <span class="hljs-number">1</span>)<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p><code>generateNumber(true)</code>会生成一个含有因数3而不含有因数5的整数<br><code>generateNumber(false)</code>会生成一个含有因数5而不含有因数3的整数<br>利用这个特点，在生成特定的随机数后，将布尔值替换成一个表达式，就可以隐藏原有值  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> isTrue = <span class="hljs-literal">true</span>;<br><span class="hljs-keyword">var</span> isFalse = <span class="hljs-literal">false</span>;<br></code></pre></div></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dc</span>(<span class="hljs-params">num</span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> num%<span class="hljs-number">3</span> === <span class="hljs-number">0</span> ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span><br>&#125;<br><span class="hljs-keyword">var</span> isTrue = dc(<span class="hljs-number">26904</span>);<br><span class="hljs-keyword">var</span> isFalse = dc(<span class="hljs-number">62740</span>);<br></code></pre></div></td></tr></table></figure>
 <p>布尔值大多数代码应用场景在代码控制流中，能让代码的控制流走向变得模糊，增加代码分析难度  </p>
-<h3 id="字符串混淆"><a href="#字符串混淆" class="headerlink" title="字符串混淆"></a>字符串混淆</h3><p>字符串往往包含一些重要的语义信息（比如密码错误提示）<br>可以运用一些方法将关键字符串分解成许多的片段，并将它们分散到程序的各个角落；进行异或操作等  </p>
-<h4 id="Mealy机"><a href="#Mealy机" class="headerlink" title="Mealy机"></a>Mealy机</h4><p>Mealy机属于有限状态机的一种，它是基于当前状态和输入生成输出的有限状态自动机，这意味着它的状态图每条转移边都有输入和输出<br>与输出只依赖机器当前状态的摩根机有限状态机不同，它的输出与当前状态和输入都有关<center><code>次态 = f(现态, 输入)</code><br><code>输出 = f(现态, 输入)</code></center><br>根据 Mealy机 的特性，可以将字符串的每一个 bit位 和当前状态输入，输出实际的字符串   </p>
+<h2 id="字符串混淆"><a href="#字符串混淆" class="headerlink" title="字符串混淆"></a>字符串混淆</h2><p>字符串往往包含一些重要的语义信息（比如密码错误提示）<br>可以运用一些方法将关键字符串分解成许多的片段，并将它们分散到程序的各个角落；进行异或操作等  </p>
+<h3 id="Mealy机"><a href="#Mealy机" class="headerlink" title="Mealy机"></a>Mealy机</h3><p>Mealy机属于有限状态机的一种，它是基于当前状态和输入生成输出的有限状态自动机，这意味着它的状态图每条转移边都有输入和输出<br>与输出只依赖机器当前状态的摩根机有限状态机不同，它的输出与当前状态和输入都有关<center><code>次态 = f(现态, 输入)</code><br><code>输出 = f(现态, 输入)</code></center><br>根据 Mealy机 的特性，可以将字符串的每一个 bit位 和当前状态输入，输出实际的字符串   </p>
 <p>通过Mealy机对字符串 ‘mimi’ 和 ‘mila’ 进行加密  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> next = [<br>    [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>],<br>    [<span class="hljs-number">3</span>, <span class="hljs-number">0</span>],<br>    [<span class="hljs-number">3</span>, <span class="hljs-number">2</span>],<br>];<br><span class="hljs-keyword">var</span> out = [<br>    [<span class="hljs-string">&#x27;m&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>],<br>    [<span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>],<br>    [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>],<br>];<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mealy</span>(<span class="hljs-params">bit</span>)</span>&#123;<br>    <span class="hljs-keyword">var</span> str = [];<br>    <span class="hljs-keyword">var</span> state = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">var</span> newBit = bite.split(<span class="hljs-string">&#x27;&#x27;</span>);<br>    <span class="hljs-keyword">var</span> num = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(num &lt; newBit.length)&#123;<br>        <span class="hljs-keyword">var</span> input = newBit[num];<br>        str.push(out[state][input]);<br>        state = next[state][input];<br>        num++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> str.join(<span class="hljs-string">&#x27;&#x27;</span>)<br>&#125;<br>mealy(<span class="hljs-string">&#x27;0100&#x27;</span>)  <span class="hljs-comment">// 输出&#x27;mimi&#x27;</span><br>mealy(<span class="hljs-string">&#x27;0110&#x27;</span>)  <span class="hljs-comment">// 输出&#x27;mila&#x27;</span><br></code></pre></div></td></tr></table></figure>
 <p>实现 Mealy机 的方式有很多种，最简单的方式就是直接查询next表和out表  </p>
+<h3 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h3><p>Javascript 允许直接使用码点表示 Unicode 字符  </p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascrpit">var c &#x3D; &#39;a&#39;;<br>var uc &#x3D; &#39;\u0061&#39;;<br></code></pre></div></td></tr></table></figure>
+<p>这对于机器来说没有区别，但对于人来说就变得不可阅读了  </p>
+<p>将代码中所有的字符串转变为 Unicode 会使得代码体积稍微变大一些，一般无关痛痒<br>如果只是单纯地转变，逆向也相对容易，在进行混淆时，可以选择一些一些不编码字符来增加逆向难度  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> c = <span class="hljs-string">&#x27;abc&#x27;</span>;<br><span class="hljs-keyword">var</span> uc = <span class="hljs-string">&#x27;\u0061\u0062c&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="undefined-与-null-混淆"><a href="#undefined-与-null-混淆" class="headerlink" title="undefined 与 null 混淆"></a>undefined 与 null 混淆</h2><p>并不存在复杂的混淆方式，可以尝试利用语言特性进行混淆  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> c = <span class="hljs-literal">undefined</span>;<br><span class="hljs-keyword">var</span> uc = <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;<br></code></pre></div></td></tr></table></figure>
+
+
+<h1 id="控制混淆"><a href="#控制混淆" class="headerlink" title="控制混淆"></a>控制混淆</h1><p>对程序的控制流进行变换，打乱的代码运行顺序会让代码阅读变得困难<br>控制混淆是一种效果较好的代码保护手段，但存在一定的混淆风险  </p>
+<h2 id="不透明谓词"><a href="#不透明谓词" class="headerlink" title="不透明谓词"></a>不透明谓词</h2><p>不透明谓词的逻辑来自于数理原理<br>通过严格的逻辑证明某些复杂的表达式成立，而这些成立的表达式成为不透明谓词表达式。表达式成立的结果是已知的，表达式结果表面上是不明显的，称为不透明    </p>
+<center>
+∀x ∈ Z:2(x²+x)
+<br>
+∀x,y, z∈Z, D>0, D=z² : x²-Dy²≠2 
+</center>
+
+<p>不透明谓词的模糊性和不透明性能够保护代码，在代码混淆中有广泛成熟的具体用途</p>
+<p>假定源代码由 A与B 两块代码组成<br><img src="/javascript-%E6%B7%B7%E6%B7%86/1.jpg" srcset="/img/loading.gif">  </p>
+<ul>
+<li>构造一个恒真不透明表达式 $ P^T $ 作为判断表达式插入  </li>
+<li>构造一个恒真不透明表达式 $ P^T $ 作为判断表达式插入，并且在结果为假的分支中插入存在BUG的代码    </li>
+<li>构造一个不确定真假的不透明谓词表达式 $ P^? $ ，构造一个和 B 作用相同，但形式不同代码 $ P^’ $ 。因为  $ P^’ $ 真假不定，所以对于攻击者而言，增加了一倍的阅读量  </li>
+</ul>
+<p>不透明谓词作为保护策略，理论上可以再代码的任何需要进行判断的位置中使用<br>要注意，复杂的不透明谓词会影响性能。因此应尽量选择再程序的核心算法或容易受到攻击的位置使用  </p>
+<h2 id="插入冗余代码"><a href="#插入冗余代码" class="headerlink" title="插入冗余代码"></a>插入冗余代码</h2><p>冗余代码是指与程序中的其它代码没有任何调用关系的代码<br>死代码是指程序中永远执行不到的代码<br>将这些代码插入到程序中并不会对程序造成任何影响，同时可以增加代码阅读难度<br>插入代码的方法可以借助 不透明谓词的方式，直接插入非常容易就能去除  </p>
+<h2 id="控制流平坦化"><a href="#控制流平坦化" class="headerlink" title="控制流平坦化"></a>控制流平坦化</h2><p>控制流平坦化是将程序的条件分支和循环语句组成的控制分支转化为单一的分发器结构<br>程序的条件分支和循环语句块可能通过串联、分层嵌套等形式形成复杂结构  </p>
+<p><img src="/javascript-%E6%B7%B7%E6%B7%86/20210317093024200.png" srcset="/img/loading.gif"><br><img src="/javascript-%E6%B7%B7%E6%B7%86/20210317093104757.png" srcset="/img/loading.gif">  </p>
+<p>当所有代码都在同级，在阅读代码时旧无法线性阅读整个代码运行的逻辑流程，从而提升阅读难度  </p>
+<p>混淆前  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">var</span> s = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">while</span>(i&lt;=<span class="hljs-number">100</span>)&#123;<br>    s += i;<br>    i++;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>混淆后  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> swVar = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span>(swVar !=<span class="hljs-number">0</span>):<br>    <span class="hljs-keyword">switch</span>(swVar)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:&#123;<br>            <span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">var</span> s = <span class="hljs-number">0</span>;<br>            swVar = <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">break</span><br>        &#125;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:&#123;<br>            <span class="hljs-keyword">if</span>(i &lt;= <span class="hljs-number">100</span>)<br>                swVar = <span class="hljs-number">3</span>;<br>            <span class="hljs-keyword">else</span><br>                swVar = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">break</span><br>        &#125;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:&#123;<br>            s += i;<br>            i++;<br>            swVar = <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">break</span><br>        &#125;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<p>代码由 自上而下的线性流程 变成了 以switch控制分发平行代码块的结构  </p>
 <hr>
 <p>参考：  </p>
 <ul>
@@ -532,6 +570,45 @@
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 
