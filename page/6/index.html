@@ -157,6 +157,96 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/post/3b797c47/">Redis-Python</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/3b797c47/">
+          
+          
+            
+          
+          信息redis-pyredis包为python连接 Redis键值数据库 提供了接口。
+文档github地址：https://github.com/andymccurdy/redis-py/一些中文函数参考：https://www.runoob.com/w3cnote/python-redis-intro.html
+要求Python2.7 或 Python3.5+
+使用安装1pip install
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-19 11:07" pubdate>
+              2020-04-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Redis/">Redis</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/5b35a369/">Scrapy-Request回调函数未调用</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/5b35a369/">
+          
+          
+            
+          
+          12# 在Spider.parse()中scrapy.Request(url, headers=self.header, callback=self.parse_detail)
+调试的时候，发现回调函数parse_detail没有被调用出现这个问题的原因是，url被Spider Middleware中间件过滤掉了默认中间件会过滤掉那些不在allowed_domains列表中的请求request  
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-19 00:40" pubdate>
+              2020-04-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
+            
+              <a href="/tags/Scrapy/">Scrapy</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/post/8e73e9cb/">Hexo-博客文章内部跳转</a>
       </h1>
 
@@ -1085,112 +1175,6 @@ vim打开设置1vim  /usr/share
               <a href="/tags/CentOS/">CentOS</a>
             
               <a href="/tags/Chrome/">Chrome</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/b43bef47/">CentOS-yum</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/b43bef47/">
-          
-          
-            
-          
-          
-
-环境
-Centos7.2 腾讯云服务器
-
-常用命令
-安装、卸载、更新软件1234yum install 软件名称  # 安装yum remove 软件名称  # 卸载yum update 软件名称  # 更新yum update  # 更新所有软件命令
-清理1234yum remove 包名  # 删除软件包yum clean packages  # 清除缓存目录下的软件包yum clean 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-03-11 18:12" pubdate>
-              2020-03-11
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-            
-              <a href="/tags/CentOS/">CentOS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/2b4c0931/">服务器部署-CentOS-中文乱码-utf-8</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/2b4c0931/">
-          
-          
-            
-          
-          
-
-环境
-Centos7.2 腾讯云服务器
-
-操作1. 安装中文字库1yum groupinstall &quot;fonts&quot; -y
-2. 查看中文字库1locale -a | grep &quot;zh_CN&quot;  
-命令意义：列出所有可用的公共语言环境的名称，然后筛选中文
-如果安装正确的话，会有如下项：
-12345zh_CNzh_CN.gb18030zh_CN.gb2312
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-03-11 17:52" pubdate>
-              2020-03-11
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-            
-              <a href="/tags/CentOS/">CentOS</a>
-            
-              <a href="/tags/%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">中文乱码</a>
-            
-              <a href="/tags/utf-8/">utf-8</a>
             
           </div>
         

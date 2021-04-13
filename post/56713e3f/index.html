@@ -17,7 +17,7 @@
   <meta name="description" content="自娱自乐">
   <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>Unity3D-游戏-通用MOD制作方法-修改游戏资源-文本 - EvilRecluse</title>
+  <title>Unity3D-游戏-通用MOD制作方法-修改游戏资源-未打包的资源修改 - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Unity3D-游戏-通用MOD制作方法-修改游戏资源-文本">
+            <span class="h2" id="subtitle" title="Unity3D-游戏-通用MOD制作方法-修改游戏资源-未打包的资源修改">
               
             </span>
 
@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      521 字
+      1.6k 字
     </span>
   
 
@@ -192,42 +192,69 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Unity3D-游戏-通用MOD制作方法-修改游戏资源-文本</h1>
+            <h1 style="display: none">Unity3D-游戏-通用MOD制作方法-修改游戏资源-未打包的资源修改</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月24日 晚上
+                  本文最后更新于：2021年3月27日 晚上
                 
               </p>
             
             <div class="markdown-body">
               <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>游戏中的文本可能是游戏资源的一部分，也有可能是游戏代码的一部分<br>u3d的游戏资源保存在<code>.asset</code> 文件中，游戏代码则主要在 <code>Assembly-CSharp.dll</code>中<br>只要我们修改游戏的文本内容，那么游戏显示的文本就会被改变  </p>
 <p>此处假定你已经阅读了前文，并且下载好了工具  </p>
-<h1 id="确定操作思路"><a href="#确定操作思路" class="headerlink" title="确定操作思路"></a>确定操作思路</h1><ol>
-<li>找一位 没有加密资源的 U3D制作的 幸运儿游戏中找到游戏资源<code>.asset</code>文件  </li>
-<li>进入游戏，确认目标文本  </li>
+<h1 id="确定基本MOD制作思路"><a href="#确定基本MOD制作思路" class="headerlink" title="确定基本MOD制作思路"></a>确定基本MOD制作思路</h1><ol>
+<li>找一位 没有加密资源的 U3D制作的 幸运儿游戏  </li>
+<li>大致观察其内容   </li>
+<li>进入游戏，确认目标  </li>
 <li>搜索目标所在  </li>
-<li>对目标内容进行修改  </li>
-<li>保存修改后的内容，并使游戏使用上它  </li>
+<li>对目标内容进行修改，保存修改后的内容  </li>
+<li>重启游戏，观察是否修改成功  </li>
 </ol>
-<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="寻找幸运儿"><a href="#寻找幸运儿" class="headerlink" title="寻找幸运儿"></a>寻找幸运儿</h2><p>大部分小成本U3D游戏开头都会有一个很明显的U3D的LOGO，相对而言比较好辨识  </p>
-<blockquote>
-<p>为什么会有这个LOGO？<br>U3D分为个人版（免费）和收费版<br>个人版虽然免费，但在打包游戏的时候，U3D引擎会在游戏开头贴上U3D的LOGO<br>这个LOGO在个人版中无法取消，只有在付费版本中才能取消  </p>
-</blockquote>
-<p><span></span></p>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="寻找幸运儿游戏"><a href="#寻找幸运儿游戏" class="headerlink" title="寻找幸运儿游戏"></a>寻找幸运儿游戏</h2><h3 id="如何确认游戏是否为Unity3D制作"><a href="#如何确认游戏是否为Unity3D制作" class="headerlink" title="如何确认游戏是否为Unity3D制作"></a>如何确认游戏是否为Unity3D制作</h3><h4 id="进游戏出现的-U3D-LOGO"><a href="#进游戏出现的-U3D-LOGO" class="headerlink" title="进游戏出现的 U3D LOGO"></a>进游戏出现的 U3D LOGO</h4><p>没有出现不一定不是U3D制作的游戏<br>但，出现一定是U3D制作的游戏（应该不会有人免费打广告吧<br><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/3.gif" srcset="/img/loading.gif">  </p>
+<p>  大部分小成本U3D游戏开头都会有一个很明显的U3D的LOGO，相对而言比较好辨识  </p>
 <blockquote>
 <p>为什么说是小制作游戏？<br>U3D规定，如果你制作的游戏一年内的财务规模&lt;10万美金的话，才可以使用个人版开发<br>否则必须使用付费版本开发  </p>
 </blockquote>
-<p>也许有一些是U3D收费版本开发的开发的游戏没有LOGO，此时可以通过进入游戏根目录，搜索U3D游戏的游戏资源文件<code>.assets</code>文件  </p>
+<p>  <span></span></p>
+<blockquote>
+<p>为什么会有这个LOGO？<br>U3D分为个人版（免费）和收费版<br>个人版虽然免费，但在打包游戏的时候，U3D引擎会在游戏开头贴上U3D的LOGO<br>这个LOGO在个人版中无法取消，只有在付费版本中才能取消  </p>
+</blockquote>
+<h4 id="游戏资源文件观察"><a href="#游戏资源文件观察" class="headerlink" title="游戏资源文件观察"></a>游戏资源文件观察</h4><p>  通过进入游戏根目录，搜索U3D游戏的游戏资源文件<code>.assets</code>文件可以判断游戏是否是由U3D制作。并且得知我们能不能制作MOD    </p>
 <ul>
-<li>进入游戏根目录<br><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%96%87%E6%9C%AC/1.gif" srcset="/img/loading.gif">  </li>
-<li>搜索<code>.assets</code>文件<br><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%96%87%E6%9C%AC/2.gif" srcset="/img/loading.gif">  </li>
+<li><p>进入游戏根目录<br><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/1.gif" srcset="/img/loading.gif">  </p>
+</li>
+<li><p>搜索<code>.assets</code>文件<br><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/2.gif" srcset="/img/loading.gif"><br>（其实这张图上的，图标、程序名，都可以作为识别依据  </p>
+<p>  如果能够找到，那么游戏就是用U3D制作的。并且我们能够处理这个游戏资源，制作一些简单的MOD<br>如果你找不到<code>.assets</code> ，那么说明游戏可能不是通过U3D制作。或者游戏资源经过了加密。  无论是哪种情况，对于 非逆向程序员 都无从下手，这里不作讨论  </p>
+</li>
 </ul>
-<p>如果能够找到，那么游戏就是用U3D制作的，哪怕没有LOGO  </p>
-<p>（实际上，如果你找不到，那么也无从下手，毕竟并非人人都是程序大佬。精通逆向）  </p>
-<p>最终，在库里随机挑选了一位幸运儿<br>它是：<br><strong>bigbia</strong>(来自老菊玩啥我玩啥系列）  </p>
-<p><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%96%87%E6%9C%AC/20210324080606778.png" srcset="/img/loading.gif"><br>这次的目标是修改文本，所以进入游戏找一段文本  </p>
-<h2 id="进入游戏，确认目标文本"><a href="#进入游戏，确认目标文本" class="headerlink" title="进入游戏，确认目标文本"></a>进入游戏，确认目标文本</h2>
+<h3 id="本次幸运儿挑选"><a href="#本次幸运儿挑选" class="headerlink" title="本次幸运儿挑选"></a>本次幸运儿挑选</h3><p>由于这是第一个篇章，我会用特别的一个案例作为对象进行说明<br>现在，有请我们(来自老菊玩啥我玩啥系列）的幸运儿：<strong>Big Bia</strong> 登场  </p>
+<p><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/20210324080606778.png" srcset="/img/loading.gif">  </p>
+<h2 id="大致观察其内容"><a href="#大致观察其内容" class="headerlink" title="大致观察其内容"></a>大致观察其内容</h2><p>之所以选这个游戏，是因为这个游戏的一部分资源文件是在<code>.assets</code>文件之外的<br>(那些<code>.json</code>文件其实就相当于有格式规范的文本文件，可以用记事本打开直接看)  </p>
+<p><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/20210327084554081.png" srcset="/img/loading.gif">    </p>
+<p>这种情况大概率是因为此游戏打算为MOD提供支持，从而将游戏资源刻意裸露在外<br>（在观察其游戏公告后，也印证了我的想法）  </p>
+<h3 id="确认目标"><a href="#确认目标" class="headerlink" title="确认目标"></a>确认目标</h3><p><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/20210327092330709.png" srcset="/img/loading.gif"><br>这次的目标就定为改这个这句话好了  </p>
+<p>目标：修改“少年，找工作吗？”这句话  </p>
+<h3 id="搜寻目标"><a href="#搜寻目标" class="headerlink" title="搜寻目标"></a>搜寻目标</h3><p>如果你找不到目标，制作MOD来替换目标，或者添加新的目标也就无从谈起<br>对于根本没有任何资料的游戏来说，这个过程是相当痛苦的  </p>
+<h4 id="搜寻目标的关键点-摸清思路"><a href="#搜寻目标的关键点-摸清思路" class="headerlink" title="搜寻目标的关键点 - 摸清思路"></a>搜寻目标的关键点 - 摸清思路</h4><h5 id="分类-与-层级"><a href="#分类-与-层级" class="headerlink" title="分类 与 层级"></a>分类 与 层级</h5><p>程序员（以至于普通人）会将文件按照一定规则加以分类，将同一类型的内容存放在同一位置<br>比如说，如果这个文件夹是存放 色图 的，基本可以确定整个游戏的 色图 都会放在这个文件夹里  </p>
+<p>与分类习惯类似，程序员（以至于普通人）会将文件按照其层级意义进行分类存放，形成一棵文件树（这棵树就像是族谱，不断扩展延伸）<br>就像是这样:<br>    * 武器（文件夹）<br>        * 剑（文件夹）<br>            * 细剑（文件夹）<br>                * 武器描述.txt<br>                * 武器数值.json<br>            * 阔剑（文件夹）<br>                * 武器描述.txt<br>                * 武器数值.json<br>        * 枪（文件夹）<br>            * AK-47（文件夹）<br>                * 武器描述.txt<br>                * 武器数值.json<br>            * 半自动步枪（文件夹）<br>                * 武器描述.txt<br>                * 武器数值.json  </p>
+<p>  这种思路会遍布整个游戏（在游戏代码中用的更多，比游戏资源还多）<br>  这种特点决定了: 找到一个目标的位置很 麻烦/难。但在成功寻找到一个目标以后，同类型的目标都会相对较容易找  </p>
+<h3 id="搜寻目标-1"><a href="#搜寻目标-1" class="headerlink" title="搜寻目标"></a>搜寻目标</h3><p>目标：修改“少年，找工作吗？”这句话  </p>
+<p>在一开始观察游戏资源的时候，就留意到了，有一部分裸露的资源<br>就处理难度来说，裸露的资源修改相对简单，打包后的资源次之，最难的就是编译后的游戏程序代码<br>做MOD一般追寻结果主义，能达到目的即可，没必要完全深挖<br>所以这里会先从裸露资源中的 <code>文本文件</code> 入手  </p>
+<p>这里会用 DocFetcher 这个工具，根据 文本文件 的内容来尝试对目标进行尝试性的搜寻  </p>
+<p><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/4.gif" srcset="/img/loading.gif">  </p>
+<ol>
+<li>添加搜索的文件夹<br>这里是要在暴露的游戏资源中找关键字，所以选择存放游戏资源的文件夹作为搜索目录  </li>
+<li>设置解析文本文件<br>由于游戏存放文本的文件是json类型，这里将json添加到解析内容中。如此一来，软件就会深入到json文本中进行解析  </li>
+<li>确认，等待完成  </li>
+<li>查看结果<br><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/5.gif" srcset="/img/loading.gif"><br><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/20210327111043744.png" srcset="/img/loading.gif">  </li>
+</ol>
+<p>找到了目标文本“少年，找工作吗？”，观察到是保存在霸道总裁的json文件里<br>（这里其实有兴趣的话，可以看看来到这个文件所经过的目录，就可以得知其它英雄的信息）  </p>
+<h2 id="对目标内容进行修改，保存修改后的内容"><a href="#对目标内容进行修改，保存修改后的内容" class="headerlink" title="对目标内容进行修改，保存修改后的内容"></a>对目标内容进行修改，保存修改后的内容</h2><p>由于只是普通的文本文件，直接打开需改内容<br><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/20210327110849229.png" srcset="/img/loading.gif">  </p>
+<h2 id="重启游戏，观察是否修改成功"><a href="#重启游戏，观察是否修改成功" class="headerlink" title="重启游戏，观察是否修改成功"></a>重启游戏，观察是否修改成功</h2><p>然后重启游戏观察是否起作用<br><img src="/Unity3D-%E6%B8%B8%E6%88%8F-%E9%80%9A%E7%94%A8MOD%E5%88%B6%E4%BD%9C%E6%96%B9%E6%B3%95-%E4%BF%AE%E6%94%B9%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90-%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9/20210327111433256.png" srcset="/img/loading.gif"><br>修改成功  </p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于裸露在外的资源文件，修改起来是非常容易的<br>关键在于如何找到目标，理清 游戏程序员的思路  </p>
+<p>这次就先到这里了，下次来修改其它的内容  </p>
+
             </div>
             <hr>
             <div>
@@ -253,6 +280,12 @@
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/post/f430cc2d/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">python-threading</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
