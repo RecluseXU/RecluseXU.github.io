@@ -153,7 +153,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      1.7k 字
     </span>
   
 
@@ -196,14 +196,14 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年9月27日 晚上
+                  本文最后更新于：2021年5月7日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a><strong>链接</strong></h2><p>官网：<a target="_blank" rel="noopener" href="https://scrapy.org/">https://scrapy.org/</a><br>官方文档：<a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/">https://docs.scrapy.org/en/latest/</a><br>翻译文档：<a target="_blank" rel="noopener" href="https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/overview.html">https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/overview.html</a></p>
-<h2 id="信息"><a href="#信息" class="headerlink" title="信息"></a><strong>信息</strong></h2><p>特点：入门快，扩展性强<br>内建CSS选择器和XPath表达式<br>基于IPython shell<br><img src="/Scrapy%E5%9F%BA%E7%A1%80/20200407124348251.png" srcset="/img/loading.gif"></p>
-<h3 id="Scrapy主要组件"><a href="#Scrapy主要组件" class="headerlink" title="Scrapy主要组件"></a><strong>Scrapy主要组件</strong></h3><ul>
+              <h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>官网：<a target="_blank" rel="noopener" href="https://scrapy.org/">https://scrapy.org/</a><br>官方文档：<a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/">https://docs.scrapy.org/en/latest/</a>  </p>
+<h2 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h2><p>特点：入门快，扩展性强<br>内建CSS选择器和XPath表达式<br>基于IPython shell  </p>
+<h3 id="Scrapy主要组件"><a href="#Scrapy主要组件" class="headerlink" title="Scrapy主要组件"></a>Scrapy主要组件</h3><ul>
 <li><strong>引擎(Scrapy)</strong><br>  <em>用来处理整个系统的数据流处理, 触发事务(框架核心)</em></li>
 <li><strong>调度器(Scheduler)</strong><br>  <em>用来接受引擎发过来的请求, 压入队列中, 并在引擎再次请求的时候返回. 可以想像成一个URL（抓取网页的网址或者说是链接）的优先队列, 由它来决定下一个要抓取的网址是什么, 同时去除重复的网址</em></li>
 <li><strong>下载器(Downloader)</strong><br>  <em>用于下载网页内容, 并将网页内容返回给蜘蛛(Scrapy下载器是建立在twisted这个高效的异步模型上的)</em></li>
@@ -213,21 +213,26 @@
 <li><strong>爬虫中间件(Spider Middlewares)</strong><br>  <em>介于Scrapy引擎和爬虫之间的框架，主要工作是处理蜘蛛的响应输入和请求输出。</em></li>
 <li><strong>调度中间件(Scheduler Middewares)</strong><br>  <em>介于Scrapy引擎和调度之间的中间件，从Scrapy引擎发送到调度的请求和响应。</em></li>
 </ul>
-<h3 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a><strong>运行流程</strong></h3><ol>
-<li>Engine从Spider中得到第一个Requests进行爬取</li>
-<li>ENGIN将Request放入SCHEDULER调度器，并且获取下个Request</li>
-<li>SCHEDULER将Requests返回给ENGINE（因为ENGING进行任务调度）</li>
-<li>ENGINE发送Requests到Downoader，通过Downloader Middlewares 进行处理（这一步进行Http请求，返回response）</li>
-<li>通过Downloader Middleware进行资源下载(就是html信息)，如果下载完成，通过Dowloader生成一个Resonse并且发送给ENGINE</li>
-<li>ENGINE 从DOWNLOADER接收 Resonse,并将Resonse发送给Spider进行处理。Spider通过Spider Middleware进行处理Response</li>
-<li>Spider处理Response 并且返回items和新的Requests给ENGINE,这部分处理通过Spilder Middleware进行处理</li>
-<li>Engine发送items到item Pipelines 然后 发送 Request到Scheduler 并且 获取下个Request进行处理</li>
+<h3 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h3><p><img src="https://i.loli.net/2021/05/07/mOEXwKyL8IVzge3.png" srcset="/img/loading.gif" alt="1.png">  </p>
+<ol>
+<li>Engine 从 Spider 中得到第一个Requests进行爬取  </li>
+<li>ENGIN 将 Request 放入 SCHEDULER调度器，并且获取下个Request  </li>
+<li>SCHEDULER 将 Requests 返回给ENGINE（因为ENGING进行任务调度）  </li>
+<li>ENGINE 发送 Requests 到 Downoader，通过 Downloader Middlewares 进行处理（这一步进行Http请求，返回response）  </li>
+<li>通过 Downloader Middleware 进行资源下载(就是html信息)，如果下载完成，通过 Dowloader 生成一个 Resonse 并且发送给 ENGINE  </li>
+<li>ENGINE 从 DOWNLOADER 接收 Resonse, 并将 Resonse 发送给 Spider 进行处理。Spider 通过 Spider Middleware 进行处理 Response  </li>
+<li>Spider 处理 Response 并且返回 items 和新的 Requests 给 ENGINE, 这部分处理通过 Spilder Middleware进行处理  </li>
+<li>Engine 发送 items 到 item Pipelines 然后 发送 Request 到 Scheduler 并且 获取下个 Request 进行处理</li>
 <li>重复第一个步骤进行处理。</li>
 </ol>
-<h3 id="基本代码流程"><a href="#基本代码流程" class="headerlink" title="基本代码流程"></a><strong>基本代码流程</strong></h3><p>编写item，编写spider与setting，编写pipeline</p>
-<h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a><strong>基础操作</strong></h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a><strong>安装</strong></h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">pip install Scrapy<br></code></pre></div></td></tr></table></figure>
+<h3 id="基本代码流程"><a href="#基本代码流程" class="headerlink" title="基本代码流程"></a>基本代码流程</h3><ol>
+<li>根据需要的数据项编写item  </li>
+<li>根据抓取要点编写spider与setting  </li>
+<li>编写pipeline以保存抓取的数据  </li>
+</ol>
+<h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">pip install Scrapy<br></code></pre></div></td></tr></table></figure>
 <p>若是希望使用<code>Scrapy shell</code>的话，需要留意<code>python环境变量</code>的问题</p>
-<h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a><strong>创建项目</strong></h4><p>选定一个文件夹，打开控制台。输入指令</p>
+<h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><p>选定一个文件夹，打开控制台。输入指令</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">scrapy startproject tutorial<br></code></pre></div></td></tr></table></figure>
 <p>命令会创建tutorial目录，并在里面生成一些文件</p>
 <ul>
@@ -242,7 +247,7 @@
 <p>根据需要 爬取的网页 获取到的数据对<code>Item</code>进行建模。 </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> scrapy<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TutorialItem</span>(<span class="hljs-params">scrapy.Item</span>):</span><br>    identification = scrapy.Field()<br>    name = scrapy.Field()<br></code></pre></div></td></tr></table></figure>
 <p>这里定义了一个<code>Item 类</code>，类中包含两个属性  </p>
-<h4 id="编写Spider"><a href="#编写Spider" class="headerlink" title="编写Spider"></a><strong>编写Spider</strong></h4><p>Spider是用户编写用于从单个网站(或者一些网站)爬取数据的类。</p>
+<h4 id="编写Spider"><a href="#编写Spider" class="headerlink" title="编写Spider"></a>编写Spider</h4><p>Spider是用户编写用于从单个网站(或者一些网站)爬取数据的类。</p>
 <p>其包含了一个用于下载的初始URL，如何跟进网页中的链接以及如何分析页面中的内容， 提取生成 item 的方法。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> scrapy<br><span class="hljs-keyword">from</span> tutorial.items <span class="hljs-keyword">import</span> TutorialItem<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BingSpider</span>(<span class="hljs-params">scrapy.spiders.Spider</span>):</span><br>    name = <span class="hljs-string">&quot;first&quot;</span><br>    allowed_domains = [<span class="hljs-string">&quot;bing.com&quot;</span>]<br>    start_urls = [<span class="hljs-string">&quot;https://cn.bing.com/&quot;</span>]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse</span>(<span class="hljs-params">self, response</span>):</span><br>        item = TutorialItem()<br>        item[<span class="hljs-string">&quot;identification&quot;</span>] = response.xpath(<span class="hljs-string">&#x27;//*[@id=&quot;b_footerItems&quot;]//text()&#x27;</span>).extract()<br>        item[<span class="hljs-string">&quot;name&quot;</span>] = response.xpath(<span class="hljs-string">&#x27;//*[@id=&quot;sbox&quot;]//text()&#x27;</span>).extract()<br>        <span class="hljs-keyword">yield</span> item<br></code></pre></div></td></tr></table></figure>
 <ul>
@@ -266,15 +271,15 @@
 <p>如果想要记录整个编码后的网页可以这样做</p>
 </blockquote>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">response</span><span class="hljs-selector-class">.body</span><span class="hljs-selector-class">.decode</span>(<span class="hljs-selector-tag">response</span><span class="hljs-selector-class">.encoding</span>)<br></code></pre></div></td></tr></table></figure>
-<h4 id="进行爬取"><a href="#进行爬取" class="headerlink" title="进行爬取"></a><strong>进行爬取</strong></h4><p>进入项目的根目录，执行下列命令启动<code>Spider</code></p>
+<h4 id="进行爬取"><a href="#进行爬取" class="headerlink" title="进行爬取"></a>进行爬取</h4><p>进入项目的根目录，执行下列命令启动<code>Spider</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">scrapy crawl first<br></code></pre></div></td></tr></table></figure>
 <p>这里的 first 对应着<code>Spider</code>中定义的<code>name</code><br>在控制台里你会看到一些详细的输出信息。<br>过程：</p>
 <ol>
 <li><code>Scrapy</code>为<code>Spider</code>的 <code>start_urls</code> 属性中的每个URL创建了 <code>scrapy.Request</code> 对象，并将 <code>parse</code> 方法作为回调函数(callback)赋值给了<code>Request</code>。</li>
 <li>Request对象经过调度，执行生成 <code>scrapy.http.Response</code> 对象并送回给<code>Spider parse()</code> 方法。</li>
 </ol>
-<h4 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a><strong>保存数据</strong></h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">scrapy crawl first -o items.json<br></code></pre></div></td></tr></table></figure>
-<p>该命令将采用<code>JSON</code>格式对爬取的数据进行序列化，生成 <code>items.json</code> 文件。<br>在类似本篇教程里这样小规模的项目中，这种存储方式已经足够。<br>如果需要对爬取到的<code>item</code>做更多更为复杂的操作，您可以编写 <code>Item Pipeline</code> 。<br>类似于我们在创建项目时对<code>Item</code>做的，用于您编写自己的 <code>tutorial/pipelines.py</code> 也被创建。<br>不过如果您仅仅想要保存<code>item</code>，您不需要实现任何的<code>pipeline</code>  </p>
+<h4 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">scrapy crawl first -o items.json<br></code></pre></div></td></tr></table></figure>
+<p>该命令将采用<code>JSON</code>格式对爬取的数据进行序列化，生成 <code>items.json</code> 文件。<br>在类似本篇教程里这样小规模的项目中，这种存储方式已经足够。<br>如果需要对爬取到的<code>item</code>做更多更为复杂的操作，您可以编写 <code>Item Pipeline</code> 。<br>类似于我们在创建项目时对<code>Item</code>做的，用于编写自己的 <code>tutorial/pipelines.py</code> 也被创建。<br>不过如果仅仅想要保存<code>item</code>，您不需要实现任何的<code>pipeline</code>  </p>
 
             </div>
             <hr>
