@@ -115,6 +115,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/md_editor/">
+                <i class="iconfont icon-category-fill"></i>
+                MDEditor
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
@@ -153,7 +165,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.5k 字
+      5.7k 字
     </span>
   
 
@@ -196,7 +208,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年1月7日 下午
+                  本文最后更新于：2021年6月8日 下午
                 
               </p>
             
@@ -237,6 +249,33 @@
 <p>在创建完用户以后尝试使用新用户进行连接  </p>
 <figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.auth</span>(<span class="hljs-string">&#x27;用户名&#x27;</span>, <span class="hljs-string">&#x27;密码&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
 <p>如果正确可行的话，会返回1，这也意味着账户切换成功  </p>
+<h3 id="其它创建账户"><a href="#其它创建账户" class="headerlink" title="其它创建账户"></a>其它创建账户</h3><figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.createUser</span>(&#123;<span class="hljs-attribute">user</span>: <span class="hljs-string">&quot;账户名&quot;</span>, <span class="hljs-attribute">pwd</span>: <span class="hljs-string">&quot;密码&quot;</span>, <span class="hljs-attribute">roles</span>: [&#123; <span class="hljs-attribute">role</span>: <span class="hljs-string">&quot;角色类型&quot;</span>, <span class="hljs-attribute">db</span>: <span class="hljs-string">&quot;数据库名称&quot;</span> &#125;]&#125;)   <br></code></pre></div></td></tr></table></figure>
+<p>可用角色类型：</p>
+<ul>
+<li>数据库用户角色（Database User Roles）  <ul>
+<li>read：授予User只读数据的权限  </li>
+<li>readWrite：授予User读写数据的权限  </li>
+</ul>
+</li>
+<li>数据库管理角色（Database Administration Roles）  <ul>
+<li>dbAdmin：在当前dB中执行管理操作  </li>
+<li>dbOwner：在当前DB中执行任意操作  </li>
+<li>userAdmin：在当前DB中管理User  </li>
+</ul>
+</li>
+<li>备份和还原角色（Backup and Restoration Roles）  <ul>
+<li>backup  </li>
+<li>restore  </li>
+</ul>
+</li>
+<li>跨库角色（All-Database Roles）  <ul>
+<li>readAnyDatabase：授予在所有数据库上读取数据的权限  </li>
+<li>readWriteAnyDatabase：授予在所有数据库上读写数据的权限  </li>
+<li>userAdminAnyDatabase：授予在所有数据库上管理User的权限  </li>
+<li>dbAdminAnyDatabase：授予管理所有数据库的权限  </li>
+</ul>
+</li>
+</ul>
 <h1 id="MongoDB名词概念"><a href="#MongoDB名词概念" class="headerlink" title="MongoDB名词概念"></a>MongoDB名词概念</h1><table>
 <thead>
 <tr>

@@ -17,7 +17,7 @@
   <meta name="description" content="自娱自乐">
   <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>Pymongo-Python-MongoDB - EvilRecluse</title>
+  <title>Python-Pymongo-MongoDB - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -115,6 +115,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/md_editor/">
+                <i class="iconfont icon-category-fill"></i>
+                MDEditor
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
@@ -138,7 +150,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Pymongo-Python-MongoDB">
+            <span class="h2" id="subtitle" title="Python-Pymongo-MongoDB">
               
             </span>
 
@@ -192,16 +204,16 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Pymongo-Python-MongoDB</h1>
+            <h1 style="display: none">Python-Pymongo-MongoDB</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年1月5日 下午
+                  本文最后更新于：2021年6月8日 晚上
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>PyMongo是MongoDB数据库的python模块  </p>
+              <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>Pymongo 是 Python 阻塞操作 MongoDB 的模块  </p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> pymongo<br></code></pre></div></td></tr></table></figure>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h2><figure class="highlight axapta"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs axapta"><span class="hljs-keyword">from</span> pymongo import MongoClient<br><span class="hljs-keyword">client</span> = MongoClient(<span class="hljs-string">&quot;mongodb://mongodb0.example.net:27019&quot;</span>)<br></code></pre></div></td></tr></table></figure>
 <blockquote>
@@ -219,45 +231,31 @@
 <h2 id="访问文档-Document"><a href="#访问文档-Document" class="headerlink" title="访问文档 Document"></a>访问文档 Document</h2><h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><blockquote>
 <p>如果你所插入的集合在<code>MongoDB</code>中不存在，<code>MongoDB</code>将为你自动创建一个集合  </p>
 </blockquote>
-<h3 id="insert-one"><a href="#insert-one" class="headerlink" title="insert_one()"></a>insert_one()</h3><p>插入一条数据  </p>
+<h3 id="Collection-insert-one"><a href="#Collection-insert-one" class="headerlink" title="Collection.insert_one"></a>Collection.insert_one</h3><p>插入一条数据  </p>
 <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile">con = MyMongo.get_mongo_connect()<br>mydb = con[<span class="hljs-string">&quot;temp&quot;</span>]<br>mycol = mydb[<span class="hljs-string">&quot;cx_sxb_school&quot;</span>]<br>mydict = &#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;EvilRecluse&quot;</span>, <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;https://evilrecluse.top/&quot;</span> &#125;<br>x = mycol.insert_one(mydict) <br>print(result.inserted_id)<br></code></pre></div></td></tr></table></figure>
 <p>操作会返回了一个<code>InsertOneResult</code>对象，它包括了<code>insert_id</code>属性表示被插入的文档的<code>_id</code>  </p>
 <blockquote>
 <p>如果你传递给<code>insert_one()</code>方法的参数不包含<code>_id</code>字段，<code>MongoClient</code>将自动添加这个字段并且生成一个<code>ObjectId</code>设置为这个字段的值。</p>
 </blockquote>
-<h3 id="insert-many"><a href="#insert-many" class="headerlink" title="insert_many()"></a>insert_many()</h3><p>插入多条数据  </p>
+<h3 id="Collection-insert-many"><a href="#Collection-insert-many" class="headerlink" title="Collection.insert_many"></a>Collection.insert_many</h3><p>插入多条数据  </p>
 <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile">myclient = pymongo.MongoClient(<span class="hljs-string">&quot;mongodb://localhost:27017/&quot;</span>)<br>mydb = myclient[<span class="hljs-string">&quot;runoobdb&quot;</span>][<span class="hljs-string">&quot;sites&quot;</span>]<br>mylist = [<br>  &#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;知乎&quot;</span>, <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;https://www.zhihu.com&quot;</span> &#125;,<br>  &#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Github&quot;</span>, <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;https://www.github.com&quot;</span> &#125;<br>]<br> <br>x = mycol.insert_many(mylist)<br>print(x.inserted_ids)<br></code></pre></div></td></tr></table></figure>
-<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><ul>
-<li><p>find_one()<br>查询得到一个结果，通常用于看看搜索结果的样式  </p>
-<blockquote>
-<p>似乎并不能传进去什么参数，似乎就真的只能用来看看样式  </p>
-</blockquote>
-</li>
-<li><p>find()<br>查询可以返回在集合中的所有数据或者只返回符合筛选条件<br>方法返回一个查询结果的游标，这是一个产生文档的迭代对象<br>如果不传入任何参数，则返回所有结果(如果数量庞大，当心内存炸裂)    </p>
-<blockquote>
-<p>查询type为1的记录，只返回它们的name</p>
-  <figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">_col_spider.<span class="hljs-builtin-name">find</span>(&#123;<span class="hljs-string">&#x27;type&#x27;</span>: 1&#125;, &#123;<span class="hljs-string">&#x27;_id&#x27;</span>: 0, <span class="hljs-string">&#x27;name&#x27;</span>:1&#125;)<br></code></pre></div></td></tr></table></figure>
+<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><h2 id="查询方法"><a href="#查询方法" class="headerlink" title="查询方法"></a>查询方法</h2><h3 id="Collection-find-one"><a href="#Collection-find-one" class="headerlink" title="Collection.find_one"></a>Collection.find_one</h3><p>查询集合，得到一个结果，通常用于看看搜索结果的样式   </p>
+<h3 id="Collection-find"><a href="#Collection-find" class="headerlink" title="Collection.find"></a>Collection.find</h3><p>用于查询多个结果，查询可以返回在集合中的所有数据或者只返回符合筛选条件<br>方法返回一个查询结果的游标，这是一个产生文档的迭代对象<br>如果不传入任何参数，则返回所有结果   </p>
+<p>需要注意的是，如果你不指定不返回<code>_id</code>，那么会默认返回这个项<br>你可以使用比较运算符之类的操作，具体见<a href="/post/8ead567e/" title="比较逻辑">比较逻辑</a>  </p>
+<h2 id="查询参数"><a href="#查询参数" class="headerlink" title="查询参数"></a>查询参数</h2><p>这些参数可以在查询时传入，也可以对查询结果进行处理  </p>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h3><p>对结果进行排序  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">database.collect.find(&#123;&#125;, sort=[(key1, ind1), (key2, ind2)])<br>database.collect.find(&#123;&#125;).sort([(key1, ind1), (key2, ind2)])<br></code></pre></div></td></tr></table></figure>
 <ul>
-<li>参数1 dict<br>筛选条件，指定列名与指定s值，这里是指定 type为1  </li>
-<li>参数2 dict<br>返回内容项，指定返回什么数据，值为1则返回，值为0则不返回<br>如果你只指定了0，那么剩余的都会被指定为1，反之亦然  </li>
+<li>key: 用来排序的键  </li>
+<li>ind: 排序顺序，可以填入1或-1  </li>
 </ul>
-</blockquote>
-<p>  需要注意的是，如果你不指定不返回’_id’，那么会默认返回这个项<br>  你可以使用比较运算符之类的操作，具体见<a href="/post/8ead567e/" title="比较逻辑">比较逻辑</a>  </p>
-</li>
-</ul>
-<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="根据-id查询"><a href="#根据-id查询" class="headerlink" title="根据_id查询"></a>根据_id查询</h4><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> bson.objectid <span class="hljs-keyword">import</span> ObjectId<br><br>articles.find_one(&#123;‘_id’:ObjectId(‘50f0d76347f4ec148890ef1e’)&#125;)<br></code></pre></div></td></tr></table></figure>
-<h4 id="结果排序"><a href="#结果排序" class="headerlink" title="结果排序"></a>结果排序</h4><ul>
-<li><p>sort() </p>
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">database</span><span class="hljs-selector-class">.collect</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.sort</span>(<span class="hljs-selector-tag">key</span>, <span class="hljs-selector-tag">ind</span>)<br></code></pre></div></td></tr></table></figure>
-<ul>
-<li>key<br>用来排序的键  </li>
-<li>ind<br>排序顺序，可以填入1或-1</li>
-</ul>
-<p>可以填入多个参照  </p>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">database</span>.collect.find().sort([(key<span class="hljs-number">1</span>, ind<span class="hljs-number">1</span>), (key<span class="hljs-number">2</span>, ind<span class="hljs-number">2</span>)])<br></code></pre></div></td></tr></table></figure>
-<h4 id="比较查询"><a href="#比较查询" class="headerlink" title="比较查询"></a>比较查询</h4></li>
-</ul>
-<table>
+<h3 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h3><p>限定返回的最大结果数量  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">database.collect.find(&#123;&#125;, limit=<span class="hljs-number">2</span>)<br>database.collect.find(&#123;&#125;).limit(<span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
+<h3 id="skip"><a href="#skip" class="headerlink" title="skip"></a>skip</h3><p>跳过指定数量的结果  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">database.collect.find(&#123;&#125;, skip=<span class="hljs-number">1</span>)<br>database.collect.find(&#123;&#125;).limit(<span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="根据-id查询"><a href="#根据-id查询" class="headerlink" title="根据_id查询"></a>根据_id查询</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> bson.objectid <span class="hljs-keyword">import</span> ObjectId<br><br>articles.find_one(&#123;‘_id’: ObjectId(‘50f0d76347f4ec148890ef1e’)&#125;)<br></code></pre></div></td></tr></table></figure>
+<h3 id="比较查询"><a href="#比较查询" class="headerlink" title="比较查询"></a>比较查询</h3><table>
 <thead>
 <tr>
 <th>&lt;</th>
@@ -276,8 +274,9 @@
 </tr>
 </tbody></table>
 <blockquote>
-<p>如果你希望应对数据库中不存在的null，你可以在python中填入None来与之对应<br>案例：字段非空查询</p>
+<p>如果你希望应对数据库中不存在的null，你可以在python中填入None来与之对应  </p>
 </blockquote>
+<p>案例：字段非空查询  </p>
 <figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">col.<span class="hljs-builtin-name">find</span>(&#123;<span class="hljs-string">&quot;字段名&quot;</span>:&#123;<span class="hljs-string">&quot;<span class="hljs-variable">$ne</span>&quot;</span>:None&#125;&#125;,&#123;&#125;)<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>将某个数据记录的某系字段进行更改  </p>

@@ -115,6 +115,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/md_editor/">
+                <i class="iconfont icon-category-fill"></i>
+                MDEditor
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
@@ -196,7 +208,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年10月1日 上午
+                  本文最后更新于：2021年5月28日 中午
                 
               </p>
             
@@ -281,18 +293,11 @@
 <li><strong>安装必要的包</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo yum install -y yum-utils \<br>  device-mapper-persistent-data \<br>  lvm2<br></code></pre></div></td></tr></table></figure></li>
 <li><strong>设置可靠的存储库</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo yum-config-manager \<br>    --add-repo \<br>    https://download.docker.com/linux/centos/docker-ce.repo<br></code></pre></div></td></tr></table></figure></li>
 <li><strong>安装Docker-ce</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install -y docker-ce<br></code></pre></div></td></tr></table></figure></li>
-<li><strong>安装Docker-ce</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start docker<br></code></pre></div></td></tr></table></figure></li>
+<li><strong>启动Docker-ce</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start docker<br></code></pre></div></td></tr></table></figure></li>
 <li><strong>测试运行 hello-world</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">docker run hello-world<br></code></pre></div></td></tr></table></figure>
  由于本地没有hello-world这个镜像，所以会下载一个hello-world的镜像，并在容器内运行，看到以上界面说明Docker已经成功安装</li>
 </ol>
-<h2 id="将docker修改为国内镜像源"><a href="#将docker修改为国内镜像源" class="headerlink" title="将docker修改为国内镜像源"></a><strong>将docker修改为国内镜像源</strong></h2><p>国内<code>pull</code>很慢, 需要更换镜像源<br>这里我将镜像源更改为阿里云的</p>
-<ol>
-<li>打开/创建配置文件<br>没有这个文件就创建<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim /etc/docker/daemon.json<br></code></pre></div></td></tr></table></figure></li>
-<li>修改文件<br>文件中添加下面参数<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://9cpn8tt6.mirror.aliyuncs.com&quot;</span>]<br>&#125;<br></code></pre></div></td></tr></table></figure>
- 保存退出</li>
-<li>重启Docker服务<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo service docker restart<br></code></pre></div></td></tr></table></figure>
-<h3 id="可选的国内加速地址"><a href="#可选的国内加速地址" class="headerlink" title="可选的国内加速地址"></a>可选的国内加速地址</h3>你应该稍微测试一下能不能用，毕竟这东西不时出问题。</li>
-</ol>
+<h2 id="将docker修改为国内镜像源"><a href="#将docker修改为国内镜像源" class="headerlink" title="将docker修改为国内镜像源"></a>将docker修改为国内镜像源</h2><p>国内<code>pull</code>很慢, 需要更换镜像源<br>可选的国内加速地址有不少，你应该稍微测试一下能不能用，毕竟这东西不时出问题  </p>
 <table>
 <thead>
 <tr>
@@ -321,7 +326,16 @@
 <td><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/">https://cr.console.aliyun.com/</a> </br>首页点击“创建我的容器镜像”  得到一个专属的镜像加速地址</td>
 </tr>
 </tbody></table>
-<h2 id="启动参数"><a href="#启动参数" class="headerlink" title="启动参数"></a>启动参数</h2><h3 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h3><table>
+<ol>
+<li><strong>打开/创建配置文件</strong><br>没有这个文件就创建<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim /etc/docker/daemon.json<br></code></pre></div></td></tr></table></figure></li>
+<li><strong>修改配置文件</strong><br>填入镜像地址配置，保存退出<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br><span class="hljs-attr">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>]<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<li><strong>重新加载配置</strong>  <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl daemon-reload<br></code></pre></div></td></tr></table></figure></li>
+<li><strong>重启Docker服务</strong>  <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo service docker restart<br></code></pre></div></td></tr></table></figure>
+<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><figure class="highlight bnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bnf">docker pull <span class="hljs-attribute">&lt;镜像名&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="容器启动"><a href="#容器启动" class="headerlink" title="容器启动"></a>容器启动</h3><figure class="highlight bnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bnf">docker run <span class="hljs-attribute">&lt;参数&gt;</span> <span class="hljs-attribute">&lt;镜像名&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h4 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h4></li>
+</ol>
+<table>
 <thead>
 <tr>
 <th>参数</th>
@@ -346,7 +360,9 @@
 </tr>
 </tbody></table>
 <p><code>-i</code> <code>-t</code> <code>-d</code> 可以简写为<code>-itd</code></p>
-<h2 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h2><h3 id="删除Docker-ce"><a href="#删除Docker-ce" class="headerlink" title="删除Docker-ce"></a>删除Docker-ce</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum remove -y docker \<br>                  docker-client \<br>                  docker-client-latest \<br>                  docker-common \<br>                  docker-latest \<br>                  docker-latest-logrotate \<br>                  docker-logrotate \<br>                  docker-selinux \<br>                  docker-engine-selinux \<br>                  docker-engine<br>rm -rf /var/lib/docker<br></code></pre></div></td></tr></table></figure>
+<h3 id="查看容器运行情况"><a href="#查看容器运行情况" class="headerlink" title="查看容器运行情况"></a>查看容器运行情况</h3><figure class="highlight bnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bnf">docker ps <span class="hljs-attribute">&lt;参数&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>可填入<code>-a</code>以查看所有的容器  </p>
+<h2 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h2><h3 id="卸载Docker-ce"><a href="#卸载Docker-ce" class="headerlink" title="卸载Docker-ce"></a>卸载Docker-ce</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum remove -y docker \<br>                  docker-client \<br>                  docker-client-latest \<br>                  docker-common \<br>                  docker-latest \<br>                  docker-latest-logrotate \<br>                  docker-logrotate \<br>                  docker-selinux \<br>                  docker-engine-selinux \<br>                  docker-engine<br>rm -rf /var/lib/docker<br></code></pre></div></td></tr></table></figure>
 <h3 id="查看Docker版本"><a href="#查看Docker版本" class="headerlink" title="查看Docker版本"></a>查看Docker版本</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">docker --version<br></code></pre></div></td></tr></table></figure>
 
 
