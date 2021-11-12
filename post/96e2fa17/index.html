@@ -1,0 +1,546 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>机械硬盘 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/md_editor/">
+                <i class="iconfont icon-category-fill"></i>
+                MDEditor
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="机械硬盘">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">机械硬盘</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年11月12日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>硬盘的物理结构一般由 磁头、盘片、电动机、主控芯片与排线等部件组成  </p>
+<p>主电动机带动盘片旋转，副电动机带动一组（磁头）到相对应的盘片上，磁头悬浮在碟面上画出一个与盘片同心的圆形轨道（磁轨或称柱面），这时由磁头的磁感线圈感应碟面上的磁性与使用硬盘厂商指定的读取时间或数据间隔定位扇区，从而得到该扇区的数据内容 </p>
+<table>
+<thead>
+<tr>
+<th><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/20211112090947002.png" srcset="/img/loading.gif"></th>
+<th><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/20211112092315057.png" srcset="/img/loading.gif"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="磁道-Track"><a href="#磁道-Track" class="headerlink" title="磁道 Track"></a>磁道 Track</h3><p>当磁盘旋转时，磁头若保持在一个位置上，则每个磁头都会在磁盘表面划出一个圆形轨迹，这些圆形轨迹就叫做磁道  </p>
+<h4 id="水平式磁盘与垂直式磁盘"><a href="#水平式磁盘与垂直式磁盘" class="headerlink" title="水平式磁盘与垂直式磁盘"></a>水平式磁盘与垂直式磁盘</h4><p>根据磁道上的磁极排列方向可以将硬盘分为 水平式磁盘(LMR) 与 垂直式磁盘(HMR)  </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>水平式磁盘 LMR</th>
+<th>垂直式磁盘 HMR</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>模式</td>
+<td><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/1.gif" srcset="/img/loading.gif"></td>
+<td><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/2.gif" srcset="/img/loading.gif"></td>
+</tr>
+<tr>
+<td>描述</td>
+<td>水平磁极，容量较小，基本淘汰</td>
+<td>垂直磁极，容量较大，市面常见</td>
+</tr>
+</tbody></table>
+<h3 id="柱面-Cylinder"><a href="#柱面-Cylinder" class="headerlink" title="柱面 Cylinder"></a>柱面 Cylinder</h3><p>在有多个盘片构成的盘组中，由不同盘片的面，但处于同一半径圆的多个磁道组成的一个圆柱面  </p>
+<h3 id="扇区-Sector"><a href="#扇区-Sector" class="headerlink" title="扇区 Sector"></a>扇区 Sector</h3><p>磁盘上的每个磁道被等分为若干个弧段，这些弧段便是硬盘的扇区    </p>
+<blockquote>
+<p>硬盘的第一个扇区，叫做引导扇区/主引导记录（Master Boot Record，缩写：MBR）<br>是电脑引导后访问硬盘时所必须要读取的首个扇区，主引导扇区记录着硬盘本身的相关消息以及硬盘各个分割的大小及位置消息，是资料消息的重要入口  </p>
+</blockquote>
+<h3 id="数据接口"><a href="#数据接口" class="headerlink" title="数据接口"></a>数据接口</h3><p>|名称|描述|速度|<br>|–|–|<br>|ATA|Advanced Technology Attachment</br>使用传统的40-pin并口数据线连接主板与硬盘</br>因为并口线的抗干扰性太差，且排线占用空间较大，不利电脑内部散热，被SATA所取代|133MB/s|<br>|SATA|Serial ATA</br>使用串口的ATA接口，特点是抗干扰性强，对数据线的要求比ATA低很多，且支持热插拔等功能|300MiB/s(SATA-II)</br>600MiB/s(SATA-III)|<br>|SCSI|Small Computer System Interface（小型机系统接口），经历多代的发展，接口型式也多种多样。SCSI硬盘广为工作站级个人电脑以及服务器所使用，资料传输时CPU占用率较低，但是单价也比相同容量的ATA及SATA硬盘更加昂贵|<br>|SAS|Serial Attached SCSI，是新一代的SCSI技术，可兼容SATA硬盘，同样支持热插拔，采用序列式技术以获得更高的传输速度，盘片转速也较快。而较小的连接线，可改善系统内部空间空气流通。通常应用于服务器等企业级产品。|12Gb/s|<br>|FC|Fibre Channel（光纤通道接口），拥有此接口的硬盘在使用光纤联接时具有热插拔性、高速带宽（4Gb/s或10Gb/s）、远程连接等特点；内部传输速率也比普通硬盘更高。但其价格高昂，因此FC接口通常只用于高端服务器领域||</p>
+<h3 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h3><p>操作系统对硬盘进行读写时需要用到 文件系统 把硬盘的 扇区 组合成 簇，并创建文件和树形目录制度，使操作系统对其访问和查找变得容易<br>操作系统直接对数目众多的扇区进行寻址会十分麻烦  </p>
+<h2 id="选购时的关键信息"><a href="#选购时的关键信息" class="headerlink" title="选购时的关键信息"></a>选购时的关键信息</h2><h3 id="CMR-与-SMR"><a href="#CMR-与-SMR" class="headerlink" title="CMR 与 SMR"></a>CMR 与 SMR</h3><p>传统HMR硬盘此处成称为 CMR硬盘<br>每条磁道之间都存在着间隙，这些间隙会浪费硬盘的空间（因为不能记录数据）<br><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/20211112100457112.png" srcset="/img/loading.gif">  </p>
+<p>为了能扩大硬盘的容量，有些厂商就把磁道叠起来（既SMR硬盘），去除了中间磁道间的间隙<br>这造成了一个问题，由于写磁头比读磁头要宽，在写数据的时候会覆盖旁边磁道的数据，并且会套娃。导致你如果想改一个磁道里的数据却需要读写很多遍<br><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/3.gif" srcset="/img/loading.gif"><br>为了解决这个问题，数据傍边磁道的数据需要被存到缓冲区里防止丢失。待写入完毕后从新将缓冲区中的数据写入<br>虽然容量、缓存大小都上来了，但是速度和写入寿命下来了  </p>
+<p>因为经常使用缓存，所以 SMR硬盘 的缓存普遍较大（256MB以上）<br>CMR硬盘 可以做到2T，如果容量再大基本上都是 SMR硬盘 了<br>笔记本电脑受限于2.5寸大小，基本都是SMR硬盘<br>一般PC没特别需求就不要选 SMR硬盘，能 CMR就CMR  </p>
+<h3 id="转速"><a href="#转速" class="headerlink" title="转速"></a>转速</h3><p>更高的转速能够减少磁头等待目标扇区到来的时间，进而减少读写时间  </p>
+<h3 id="SATA接口版本"><a href="#SATA接口版本" class="headerlink" title="SATA接口版本"></a>SATA接口版本</h3><p>SATA-II 300MiB/s<br>SATA-III 600MiB/s</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%A1%AC%E4%BB%B6/">硬件</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/">机械硬盘</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/a17acb25/">
+                        <span class="hidden-mobile">硬件-机械键盘</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -169,6 +169,97 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/post/d52eeddc/">MessagePack</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/d52eeddc/">
+          
+          
+            
+          
+          信息MessagePack是一种有效的二进制序列化格式相比与于JSON，它处理起来更快，生成的文件也更小小整数被编码为一个字节，典型的短字符串除字符串本身外仅需要一个额外的字节  
+但是这东西的问题其实也很多  
+
+兼容性问题。不同语言的客户端的不同版本经常发生兼容性  
+对于二进制安全需求，json有base64方案。事实上，浏览器就对base64友好  
+对于rpc序列化需求，高性能有prot
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-30 20:50" pubdate>
+              2020-11-30
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MessagePack/">MessagePack</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/7db30d0/">Python-UUID</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/post/7db30d0/">
+          
+          
+            
+          
+          信息UUID（Universally Unique Identifier）是通用唯一识别码，在许多领域用作标识常用的数据库也可以用它来作为主键，原理上它是可以对任何东西进行唯一的编码  
+使用如果你想要的只是一个唯一的ID，你应该用 uuid1()或uuid4()，但是要注意，uuid1()可能会危害隐私.  
+12345678910import uuid print uuid.uuid1()# 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-28 14:05" pubdate>
+              2020-11-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/uuid/">uuid</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/post/d84e1cb8/">Redis-Redlock-锁-Redis分布式锁</a>
       </h1>
 
@@ -1034,103 +1125,6 @@ Python实现方式模块方式其实，Python 的模块就是天然的单例模�
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Git/">Git</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/a88eb1a7/">Javascript-Hook-脚本</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/a88eb1a7/">
-          
-          
-            
-          
-          信息自行编写或者收集到的Hook脚本代码  
-脚本webpack hook 半自动扣12345678910111213// 在加载器后面下断点  执行下面代码// 这里的f 替换成需要导出的函数名window.zhiyuan = f;window.wbpk_ = &quot;&quot;;window.isz = false;f = function(r)&#123;	if(window.isz)
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-27 21:13" pubdate>
-              2020-09-27
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/javascript/">javascript</a>
-            
-              <a href="/tags/Hook/">Hook</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/141cf4a2/">Linux-Shell-后台运行脚本</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/post/141cf4a2/">
-          
-          
-            
-          
-          信息前台运行脚本会占住你的控制台，控制台关闭以后，脚本也会跟着停下。后台运行会让你感到舒服/干净  
-
-虽然存在忘了脚本在运行和分不清是什么脚本的可能性  
-
-&amp;后台运行脚本直接在运行的脚本后家&amp;即可实现  
-
-例：后台运行test.sh脚本  
-
-1. test.sh &amp;
-虽然这样已经是后台运行了，但这样做会有一个问题关闭终端连接后，脚本会停止运行  
-nohup不挂断的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-27 21:12" pubdate>
-              2020-09-27
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-              <a href="/tags/Shell/">Shell</a>
             
           </div>
         
