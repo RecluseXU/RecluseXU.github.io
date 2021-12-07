@@ -17,9 +17,25 @@
   <meta name="description" content="自娱自乐">
   <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>归档 - EvilRecluse</title>
+  <title>supervisor - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -47,7 +63,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -134,9 +150,38 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="千里之行, 始于足下">
+            <span class="h2" id="subtitle" title="supervisor">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      353 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
 
             
           </div>
@@ -149,76 +194,110 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 145 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/post/56713e3f/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Unity3D-游戏-通用MOD制作方法-修改游戏资源-未打包的资源修改</span>
-      <time style="float: right;">03-24</time>
-    </a>
-  
-    
-    <a href="/post/d539756e/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">游戏MOD通识</span>
-      <time style="float: right;">03-24</time>
-    </a>
-  
-    
-    <a href="/post/e8b7be43/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Unity3D-游戏-通用MOD制作方法-基本信息</span>
-      <time style="float: right;">03-23</time>
-    </a>
-  
-    
-    <a href="/post/93ca3a43/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Vue-组件-前端</span>
-      <time style="float: right;">03-22</time>
-    </a>
-  
-    
-    <a href="/post/e7e94394/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">硬件-显示器</span>
-      <time style="float: right;">03-20</time>
-    </a>
-  
-    
-    <a href="/post/7f081fa6/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">uWSGI</span>
-      <time style="float: right;">03-16</time>
-    </a>
-  
-    
-    <a href="/post/5043dcd1/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Javascript-AAencode-混淆-分析</span>
-      <time style="float: right;">03-09</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">supervisor</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月4日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h2><p>Supervisor 是用 Python 开发的一个 client/server 服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统<br>它可以很方便的监听、启动、停止、重启一个或多个进程<br>用Supervisor管理的进程，当一个进程意外被杀死，Supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制  </p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="基础安装"><a href="#基础安装" class="headerlink" title="基础安装"></a>基础安装</h3>   <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install -y epel-release<br>yum install -y supervisor<br></code></pre></div></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
+<li><p>通过默认配置创建配置文件  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo mkdir /etc/supervisor<br>sudo echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf<br></code></pre></div></td></tr></table></figure></li>
+<li><p>修改配置文件  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim /etc/supervisor/supervisord.conf<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>增加配置文件文件夹路径<br> 此配置在配置文件最底部   <figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">[<span class="hljs-keyword">include</span>]<br>files = <span class="hljs-regexp">/etc/</span>supervisor<span class="hljs-regexp">/conf.d/</span>*.conf<br></code></pre></div></td></tr></table></figure></li>
+<li>修改sock文件保存位置<br> <code>file=/tmp/supervisor.sock</code> -&gt; <code>file=/etc/supervisor/supervisor.sock</code>  </li>
+<li>修改日志位置<br> <code>logfile=/tmp/supervisord.log</code> -&gt; <code>logfile=/etc/supervisor/supervisord.log</code>  </li>
+<li>修改 pid文件保存的位置<br> <code>pidfile=/tmp/supervisord.pid</code> -&gt; <code>pidfile=/etc/supervisor/supervisord.pid</code>  </li>
+<li>修改 unix socket 的 url<br> <code>serverurl=unix:///tmp/supervisor.sock</code> -&gt; <code>serverurl=unix:///etc/supervisor/supervisor_unix.sock</code>  </li>
+</ul>
+</li>
+<li><p>创建配置文件夹  </p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">mkdir <span class="hljs-regexp">/etc/</span>supervisor/conf.d<br></code></pre></div></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim /etc/supervisor/conf.d/app.conf <br></code></pre></div></td></tr></table></figure>
 
-
-
-
-              </div>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">supervisorctl status  <span class="hljs-comment"># 运行状态查看</span><br>supervisorctl <span class="hljs-keyword">stop</span> 程序名<br>supervisorctl <span class="hljs-keyword">start</span> 程序名<br>supervisorctl restart  <span class="hljs-comment"># 重启</span><br>supervisorctl <span class="hljs-keyword">update</span>  <span class="hljs-comment"># 配置文件修改后使用该命令加载新的配置</span><br>supervisorctl reload  <span class="hljs-comment"># 重新启动配置中的所有程序</span><br></code></pre></div></td></tr></table></figure>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/supervisor/">supervisor</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/a0ce243d/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RaiDrive-网络文件系统磁盘映射</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/96e2fa17/">
+                        <span class="hidden-mobile">机械硬盘</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -352,9 +431,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 

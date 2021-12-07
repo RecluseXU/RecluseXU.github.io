@@ -4,6 +4,46 @@
   
   
   <entry>
+    <title>RaiDrive-网络文件系统磁盘映射</title>
+    <link href="/post/a0ce243d/"/>
+    <url>/post/a0ce243d/</url>
+    
+    <content type="html"><![CDATA[<h2 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h2><p>电脑本身的磁盘容量有限，不能存储太多东西，携带也不方便<br>自己购买服务器贷款很小，做内网穿透非常慢，体验极差<br>阿里云盘比较快，但不能像 本地磁盘 一样很方便地编辑  </p><p>于是就想到了将 阿里云盘 做磁盘映射到 本地磁盘<br>既像本地磁盘一样 编辑方便；阿里云盘速度也不慢；只要能够访问网络就能使用，不用背来背去；  </p><ul><li>阿里云盘<br>速度挺快的网盘  </li><li>WebDAV-Aliyundriver<br>Github上的开源项目, 将 阿里云盘webdav协议API 做成了webdav协议的文件服务器  </li><li>RaiDrive<br>远程文件服务工具，能够将远程文件服务像磁盘一样挂载  </li></ul><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul><li>RaiDrive 官网 <a href="https://www.raidrive.com/">https://www.raidrive.com/</a>  </li><li>RaiDrive Github <a href="https://github.com/RaiDrive/RaiDrive.Translation">https://github.com/RaiDrive/RaiDrive.Translation</a>  </li><li>阿里云盘 <a href="https://www.aliyundrive.com/drive/">https://www.aliyundrive.com/drive/</a>  </li><li>WebDAV-Aliyundriver <a href="https://github.com/zxbu/webdav-aliyundriver">https://github.com/zxbu/webdav-aliyundriver</a>  </li></ul><h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol><li><p>注册阿里云盘<br>阿里云：<a href="https://www.aliyundrive.com/drive/">https://www.aliyundrive.com/drive/</a>  </p></li><li><p>获取 阿里云盘refresh-token<br>在登录后通过 <code>F12</code> 打开控制台，获取 <strong>阿里云盘refresh-token</strong><br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207114359543.png">  </p></li><li><p>安装 Java 环境（如果没有的话）<br>控制台敲一手 <code>java</code> 就知道有没有<br>如果没有的话就装一个，网上教程很多  </p></li><li><p>下载 WebDAV-Aliyundriver<br>去<a href="https://github.com/zxbu/webdav-aliyundriver">Github</a>下载 已经编译好的 jar包<br>（你也可以用 Docker 直接，然后更配置部署）  </p></li><li><p>编写启动 WebDAV-Aliyundriver启动文件<br>为了方便使用，写一个配置文件来方便启动还是有必要的<br>配置用例模板  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">java -jar &#123;WebDAV-Aliyundriver的jar文件路径&#125; --aliyundrive.refresh-token=<span class="hljs-string">&quot;填入你的阿里云盘refresh-token&quot;</span> --server.port=<span class="hljs-string">&quot;监听端口&quot;</span> --aliyundrive.auth.enable=<span class="hljs-string">&quot;true&quot;</span> --aliyundrive.auth.user-name=<span class="hljs-string">&quot;用户名&quot;</span> --aliyundrive.auth.password=<span class="hljs-string">&quot;密码&quot;</span> --aliyundrive.work-dir=<span class="hljs-string">&quot;用于记录refresh-token的临时文件路径&quot;</span><br></code></pre></td></tr></table></figure><p>保存成批处理文件即可 <strong>???.bat</strong>  </p></li><li><p>通过 WebDAV-Aliyundriver启动文件 启动  </p></li><li><p>下载/安装 RaiDrive<br>官网下载地址：<a href="https://www.raidrive.com/download">https://www.raidrive.com/download</a>  </p></li><li><p>配置 RaiDrive  </p><ol><li>设置中文<br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207115203072.png">  </li><li>修改临时文件路径（如果想改的话）  </li><li>添加 WebDAV 配置<br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207115526852.png">  </li><li>点击确认  </li></ol></li></ol><p>配置完成后能够在我的电脑里看到 阿里云盘磁盘<br>如此一来就相当于有个很方便的磁盘了  </p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>RaiDrive</tag>
+      
+      <tag>阿里云盘</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>supervisor</title>
+    <link href="/post/4d9192f8/"/>
+    <url>/post/4d9192f8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h2><p>Supervisor 是用 Python 开发的一个 client/server 服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统<br>它可以很方便的监听、启动、停止、重启一个或多个进程<br>用Supervisor管理的进程，当一个进程意外被杀死，Supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制  </p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="基础安装"><a href="#基础安装" class="headerlink" title="基础安装"></a>基础安装</h3>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install -y epel-release<br>yum install -y supervisor<br></code></pre></td></tr></table></figure><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol><li><p>通过默认配置创建配置文件  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo mkdir /etc/supervisor<br>sudo echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf<br></code></pre></td></tr></table></figure></li><li><p>修改配置文件  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/supervisor/supervisord.conf<br></code></pre></td></tr></table></figure><ul><li>增加配置文件文件夹路径<br> 此配置在配置文件最底部   <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle">[<span class="hljs-keyword">include</span>]<br>files = <span class="hljs-regexp">/etc/</span>supervisor<span class="hljs-regexp">/conf.d/</span>*.conf<br></code></pre></td></tr></table></figure></li><li>修改sock文件保存位置<br> <code>file=/tmp/supervisor.sock</code> -&gt; <code>file=/etc/supervisor/supervisor.sock</code>  </li><li>修改日志位置<br> <code>logfile=/tmp/supervisord.log</code> -&gt; <code>logfile=/etc/supervisor/supervisord.log</code>  </li><li>修改 pid文件保存的位置<br> <code>pidfile=/tmp/supervisord.pid</code> -&gt; <code>pidfile=/etc/supervisor/supervisord.pid</code>  </li><li>修改 unix socket 的 url<br> <code>serverurl=unix:///tmp/supervisor.sock</code> -&gt; <code>serverurl=unix:///etc/supervisor/supervisor_unix.sock</code>  </li></ul></li><li><p>创建配置文件夹  </p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir <span class="hljs-regexp">/etc/</span>supervisor/conf.d<br></code></pre></td></tr></table></figure><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/supervisor/conf.d/app.conf <br></code></pre></td></tr></table></figure><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql">supervisorctl status  <span class="hljs-comment"># 运行状态查看</span><br>supervisorctl <span class="hljs-keyword">stop</span> 程序名<br>supervisorctl <span class="hljs-keyword">start</span> 程序名<br>supervisorctl restart  <span class="hljs-comment"># 重启</span><br>supervisorctl <span class="hljs-keyword">update</span>  <span class="hljs-comment"># 配置文件修改后使用该命令加载新的配置</span><br>supervisorctl reload  <span class="hljs-comment"># 重新启动配置中的所有程序</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>supervisor</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>机械硬盘</title>
     <link href="/post/96e2fa17/"/>
     <url>/post/96e2fa17/</url>
@@ -692,9 +732,9 @@
     
     <tags>
       
-      <tag>Babel</tag>
-      
       <tag>Javascript</tag>
+      
+      <tag>Babel</tag>
       
       <tag>API</tag>
       
@@ -738,9 +778,9 @@
     
     <tags>
       
-      <tag>Babel</tag>
-      
       <tag>Javascript</tag>
+      
+      <tag>Babel</tag>
       
     </tags>
     
@@ -780,9 +820,9 @@
     
     <tags>
       
-      <tag>Babel</tag>
-      
       <tag>Javascript</tag>
+      
+      <tag>Babel</tag>
       
       <tag>AST</tag>
       
@@ -1551,9 +1591,9 @@
     
     <tags>
       
-      <tag>Babel</tag>
-      
       <tag>Javascript</tag>
+      
+      <tag>Babel</tag>
       
     </tags>
     
