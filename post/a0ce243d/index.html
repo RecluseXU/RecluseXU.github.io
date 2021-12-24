@@ -165,7 +165,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      564 字
+      662 字
     </span>
   
 
@@ -208,7 +208,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年12月8日 凌晨
+                  本文最后更新于：2021年12月11日 下午
                 
               </p>
             
@@ -226,7 +226,7 @@
 <li>阿里云盘 <a target="_blank" rel="noopener" href="https://www.aliyundrive.com/drive/">https://www.aliyundrive.com/drive/</a>  </li>
 <li>WebDAV-Aliyundriver <a target="_blank" rel="noopener" href="https://github.com/zxbu/webdav-aliyundriver">https://github.com/zxbu/webdav-aliyundriver</a>  </li>
 </ul>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol>
+<h2 id="阿里云盘本地磁盘映射流程"><a href="#阿里云盘本地磁盘映射流程" class="headerlink" title="阿里云盘本地磁盘映射流程"></a>阿里云盘本地磁盘映射流程</h2><ol>
 <li><p>注册阿里云盘<br>阿里云：<a target="_blank" rel="noopener" href="https://www.aliyundrive.com/drive/">https://www.aliyundrive.com/drive/</a>  </p>
 </li>
 <li><p>获取 阿里云盘refresh-token<br>在登录后通过 <code>F12</code> 打开控制台，获取 <strong>阿里云盘refresh-token</strong><br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207114359543.png" srcset="/img/loading.gif">  </p>
@@ -253,6 +253,9 @@
 </li>
 </ol>
 <p>配置完成后能够在我的电脑里看到 阿里云盘磁盘<br>如此一来就相当于有个很方便的磁盘了  </p>
+<h3 id="后台启动服务"><a href="#后台启动服务" class="headerlink" title="后台启动服务"></a>后台启动服务</h3><p>Windows中若想要后台启动，可以编写 <code>.vbs</code> 脚本来启动程序<br>后台启动脚本参考</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">ws</span>=WScript.CreateObject(&quot;WScript.Shell&quot;) <br>ws.<span class="hljs-builtin-name">Run</span> <span class="hljs-string">&quot;E:\Software\run_server.bat /start&quot;</span>,0 <br></code></pre></div></td></tr></table></figure>
+<p>直接打开脚本就会运行<br>若希望开机启动，可以将这个脚本放入系统的启动文件夹中  </p>
 
             </div>
             <hr>
@@ -277,6 +280,12 @@
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/post/35a6eef0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Trojan Source 攻击</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

