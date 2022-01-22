@@ -31,7 +31,7 @@
     <link href="/post/a0ce243d/"/>
     <url>/post/a0ce243d/</url>
     
-    <content type="html"><![CDATA[<h2 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h2><p>电脑本身的磁盘容量有限，不能存储太多东西，携带也不方便<br>自己购买服务器贷款很小，做内网穿透非常慢，体验极差<br>阿里云盘比较快，但不能像 本地磁盘 一样很方便地编辑  </p><p>于是就想到了将 阿里云盘 做磁盘映射到 本地磁盘<br>既像本地磁盘一样 编辑方便；阿里云盘速度也不慢；只要能够访问网络就能使用，不用背来背去；  </p><ul><li>阿里云盘<br>速度挺快的网盘  </li><li>WebDAV-Aliyundriver<br>Github上的开源项目, 将 阿里云盘webdav协议API 做成了webdav协议的文件服务器  </li><li>RaiDrive<br>远程文件服务工具，能够将远程文件服务像磁盘一样挂载  </li></ul><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul><li>RaiDrive 官网 <a href="https://www.raidrive.com/">https://www.raidrive.com/</a>  </li><li>RaiDrive Github <a href="https://github.com/RaiDrive/RaiDrive.Translation">https://github.com/RaiDrive/RaiDrive.Translation</a>  </li><li>阿里云盘 <a href="https://www.aliyundrive.com/drive/">https://www.aliyundrive.com/drive/</a>  </li><li>WebDAV-Aliyundriver <a href="https://github.com/zxbu/webdav-aliyundriver">https://github.com/zxbu/webdav-aliyundriver</a>  </li></ul><h2 id="阿里云盘本地磁盘映射流程"><a href="#阿里云盘本地磁盘映射流程" class="headerlink" title="阿里云盘本地磁盘映射流程"></a>阿里云盘本地磁盘映射流程</h2><ol><li><p>注册阿里云盘<br>阿里云：<a href="https://www.aliyundrive.com/drive/">https://www.aliyundrive.com/drive/</a>  </p></li><li><p>获取 阿里云盘refresh-token<br>在登录后通过 <code>F12</code> 打开控制台，获取 <strong>阿里云盘refresh-token</strong><br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207114359543.png">  </p></li><li><p>安装 Java 环境（如果没有的话）<br>控制台敲一手 <code>java</code> 就知道有没有<br>如果没有的话就装一个，网上教程很多  </p></li><li><p>下载 WebDAV-Aliyundriver<br>去<a href="https://github.com/zxbu/webdav-aliyundriver">Github</a>下载 已经编译好的 jar包<br>（你也可以用 Docker 直接，然后更配置部署）  </p></li><li><p>编写启动 WebDAV-Aliyundriver启动文件<br>为了方便使用，写一个配置文件来方便启动还是有必要的<br>配置用例模板  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">java -jar &#123;WebDAV-Aliyundriver的jar文件路径&#125; --aliyundrive.refresh-token=<span class="hljs-string">&quot;填入你的阿里云盘refresh-token&quot;</span> --server.port=<span class="hljs-string">&quot;监听端口&quot;</span> --aliyundrive.auth.enable=<span class="hljs-string">&quot;true&quot;</span> --aliyundrive.auth.user-name=<span class="hljs-string">&quot;用户名&quot;</span> --aliyundrive.auth.password=<span class="hljs-string">&quot;密码&quot;</span> --aliyundrive.work-dir=<span class="hljs-string">&quot;用于记录refresh-token的临时文件路径&quot;</span><br></code></pre></td></tr></table></figure><p>保存成批处理文件即可 <strong>???.bat</strong>  </p></li><li><p>通过 WebDAV-Aliyundriver启动文件 启动  </p></li><li><p>下载/安装 RaiDrive<br>官网下载地址：<a href="https://www.raidrive.com/download">https://www.raidrive.com/download</a>  </p></li><li><p>配置 RaiDrive  </p><ol><li>设置中文<br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207115203072.png">  </li><li>修改临时文件路径（如果想改的话）  </li><li>添加 WebDAV 配置<br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207115526852.png">  </li><li>点击确认  </li></ol></li></ol><p>配置完成后能够在我的电脑里看到 阿里云盘磁盘<br>如此一来就相当于有个很方便的磁盘了  </p><h3 id="后台启动服务"><a href="#后台启动服务" class="headerlink" title="后台启动服务"></a>后台启动服务</h3><p>Windows中若想要后台启动，可以编写 <code>.vbs</code> 脚本来启动程序<br>后台启动脚本参考</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">ws</span>=WScript.CreateObject(&quot;WScript.Shell&quot;) <br>ws.<span class="hljs-builtin-name">Run</span> <span class="hljs-string">&quot;E:\Software\run_server.bat /start&quot;</span>,0 <br></code></pre></td></tr></table></figure><p>直接打开脚本就会运行<br>若希望开机启动，可以将这个脚本放入系统的启动文件夹中  </p>]]></content>
+    <content type="html"><![CDATA[<h2 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h2><p>电脑本身的磁盘容量有限，不能存储太多东西，携带也不方便<br>自己购买服务器带宽很小，做内网穿透非常慢，体验极差<br>阿里云盘比较快，但不能像 本地磁盘 一样很方便地编辑  </p><p>于是就想到了将 阿里云盘 做磁盘映射到 本地磁盘<br>既像本地磁盘一样 编辑方便；阿里云盘速度也不慢；只要能够访问网络就能使用，不用背来背去；  </p><ul><li>阿里云盘<br>速度挺快的网盘  </li><li>WebDAV-Aliyundriver<br>Github上的开源项目, 将 阿里云盘webdav协议API 做成了webdav协议的文件服务器  </li><li>RaiDrive<br>远程文件服务工具，能够将远程文件服务像磁盘一样挂载  </li></ul><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul><li>RaiDrive 官网 <a href="https://www.raidrive.com/">https://www.raidrive.com/</a>  </li><li>RaiDrive Github <a href="https://github.com/RaiDrive/RaiDrive.Translation">https://github.com/RaiDrive/RaiDrive.Translation</a>  </li><li>阿里云盘 <a href="https://www.aliyundrive.com/drive/">https://www.aliyundrive.com/drive/</a>  </li><li>WebDAV-Aliyundriver <a href="https://github.com/zxbu/webdav-aliyundriver">https://github.com/zxbu/webdav-aliyundriver</a>  </li></ul><h2 id="阿里云盘本地磁盘映射流程"><a href="#阿里云盘本地磁盘映射流程" class="headerlink" title="阿里云盘本地磁盘映射流程"></a>阿里云盘本地磁盘映射流程</h2><ol><li><p>注册阿里云盘<br>阿里云：<a href="https://www.aliyundrive.com/drive/">https://www.aliyundrive.com/drive/</a>  </p></li><li><p>获取 阿里云盘refresh-token<br>在登录后通过 <code>F12</code> 打开控制台，获取 <strong>阿里云盘refresh-token</strong><br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207114359543.png">  </p></li><li><p>安装 Java 环境（如果没有的话）<br>控制台敲一手 <code>java</code> 就知道有没有<br>如果没有的话就装一个，网上教程很多  </p></li><li><p>下载 WebDAV-Aliyundriver<br>去<a href="https://github.com/zxbu/webdav-aliyundriver">Github</a>下载 已经编译好的 jar包<br>（你也可以用 Docker 直接，然后更配置部署）  </p></li><li><p>编写启动 WebDAV-Aliyundriver启动文件<br>为了方便使用，写一个配置文件来方便启动还是有必要的<br>配置用例模板  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">java -jar &#123;WebDAV-Aliyundriver的jar文件路径&#125; --aliyundrive.refresh-token=<span class="hljs-string">&quot;填入你的阿里云盘refresh-token&quot;</span> --server.port=<span class="hljs-string">&quot;监听端口&quot;</span> --aliyundrive.auth.enable=<span class="hljs-string">&quot;true&quot;</span> --aliyundrive.auth.user-name=<span class="hljs-string">&quot;用户名&quot;</span> --aliyundrive.auth.password=<span class="hljs-string">&quot;密码&quot;</span> --aliyundrive.work-dir=<span class="hljs-string">&quot;用于记录refresh-token的临时文件路径&quot;</span><br></code></pre></td></tr></table></figure><p>保存成批处理文件即可 <strong>???.bat</strong>  </p></li><li><p>通过 WebDAV-Aliyundriver启动文件 启动  </p></li><li><p>下载/安装 RaiDrive<br>官网下载地址：<a href="https://www.raidrive.com/download">https://www.raidrive.com/download</a>  </p></li><li><p>配置 RaiDrive  </p><ol><li>设置中文<br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207115203072.png">  </li><li>修改临时文件路径（如果想改的话）  </li><li>添加 WebDAV 配置<br><img src="/RaiDrive-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84/20211207115526852.png">  </li><li>点击确认  </li></ol></li></ol><p>配置完成后能够在我的电脑里看到 阿里云盘磁盘<br>如此一来就相当于有个很方便的磁盘了  </p><h3 id="后台启动服务"><a href="#后台启动服务" class="headerlink" title="后台启动服务"></a>后台启动服务</h3><p>Windows中若想要后台启动，可以编写 <code>.vbs</code> 脚本来启动程序<br>后台启动脚本参考</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">ws</span>=WScript.CreateObject(&quot;WScript.Shell&quot;) <br>ws.<span class="hljs-builtin-name">Run</span> <span class="hljs-string">&quot;E:\Software\run_server.bat /start&quot;</span>,0 <br></code></pre></td></tr></table></figure><p>直接打开脚本就会运行<br>若希望开机启动，可以将这个脚本放入系统的启动文件夹中  </p>]]></content>
     
     
     
@@ -67,11 +67,11 @@
   
   
   <entry>
-    <title>机械硬盘</title>
+    <title>硬件-机械硬盘</title>
     <link href="/post/96e2fa17/"/>
     <url>/post/96e2fa17/</url>
     
-    <content type="html"><![CDATA[<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>硬盘的物理结构一般由 磁头、盘片、电动机、主控芯片与排线等部件组成  </p><p>主电动机带动盘片旋转，副电动机带动一组（磁头）到相对应的盘片上，磁头悬浮在碟面上画出一个与盘片同心的圆形轨道（磁轨或称柱面），这时由磁头的磁感线圈感应碟面上的磁性与使用硬盘厂商指定的读取时间或数据间隔定位扇区，从而得到该扇区的数据内容 </p><table><thead><tr><th><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/20211112090947002.png"></th><th><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/20211112092315057.png"></th></tr></thead><tbody><tr><td></td><td></td></tr></tbody></table><h3 id="磁道-Track"><a href="#磁道-Track" class="headerlink" title="磁道 Track"></a>磁道 Track</h3><p>当磁盘旋转时，磁头若保持在一个位置上，则每个磁头都会在磁盘表面划出一个圆形轨迹，这些圆形轨迹就叫做磁道  </p><h4 id="水平式磁盘与垂直式磁盘"><a href="#水平式磁盘与垂直式磁盘" class="headerlink" title="水平式磁盘与垂直式磁盘"></a>水平式磁盘与垂直式磁盘</h4><p>根据磁道上的磁极排列方向可以将硬盘分为 水平式磁盘(LMR) 与 垂直式磁盘(HMR)  </p><table><thead><tr><th></th><th>水平式磁盘 LMR</th><th>垂直式磁盘 HMR</th></tr></thead><tbody><tr><td>模式</td><td><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/1.gif"></td><td><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/2.gif"></td></tr><tr><td>描述</td><td>水平磁极，容量较小，基本淘汰</td><td>垂直磁极，容量较大，市面常见</td></tr></tbody></table><h3 id="柱面-Cylinder"><a href="#柱面-Cylinder" class="headerlink" title="柱面 Cylinder"></a>柱面 Cylinder</h3><p>在有多个盘片构成的盘组中，由不同盘片的面，但处于同一半径圆的多个磁道组成的一个圆柱面  </p><h3 id="扇区-Sector"><a href="#扇区-Sector" class="headerlink" title="扇区 Sector"></a>扇区 Sector</h3><p>磁盘上的每个磁道被等分为若干个弧段，这些弧段便是硬盘的扇区    </p><blockquote><p>硬盘的第一个扇区，叫做引导扇区/主引导记录（Master Boot Record，缩写：MBR）<br>是电脑引导后访问硬盘时所必须要读取的首个扇区，主引导扇区记录着硬盘本身的相关消息以及硬盘各个分割的大小及位置消息，是资料消息的重要入口  </p></blockquote><h3 id="数据接口"><a href="#数据接口" class="headerlink" title="数据接口"></a>数据接口</h3><p>|名称|描述|速度|<br>|–|–|<br>|ATA|Advanced Technology Attachment</br>使用传统的40-pin并口数据线连接主板与硬盘</br>因为并口线的抗干扰性太差，且排线占用空间较大，不利电脑内部散热，被SATA所取代|133MB/s|<br>|SATA|Serial ATA</br>使用串口的ATA接口，特点是抗干扰性强，对数据线的要求比ATA低很多，且支持热插拔等功能|300MiB/s(SATA-II)</br>600MiB/s(SATA-III)|<br>|SCSI|Small Computer System Interface（小型机系统接口），经历多代的发展，接口型式也多种多样。SCSI硬盘广为工作站级个人电脑以及服务器所使用，资料传输时CPU占用率较低，但是单价也比相同容量的ATA及SATA硬盘更加昂贵|<br>|SAS|Serial Attached SCSI，是新一代的SCSI技术，可兼容SATA硬盘，同样支持热插拔，采用序列式技术以获得更高的传输速度，盘片转速也较快。而较小的连接线，可改善系统内部空间空气流通。通常应用于服务器等企业级产品。|12Gb/s|<br>|FC|Fibre Channel（光纤通道接口），拥有此接口的硬盘在使用光纤联接时具有热插拔性、高速带宽（4Gb/s或10Gb/s）、远程连接等特点；内部传输速率也比普通硬盘更高。但其价格高昂，因此FC接口通常只用于高端服务器领域||</p><h3 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h3><p>操作系统对硬盘进行读写时需要用到 文件系统 把硬盘的 扇区 组合成 簇，并创建文件和树形目录制度，使操作系统对其访问和查找变得容易<br>操作系统直接对数目众多的扇区进行寻址会十分麻烦  </p><h2 id="选购时的关键信息"><a href="#选购时的关键信息" class="headerlink" title="选购时的关键信息"></a>选购时的关键信息</h2><h3 id="CMR-与-SMR"><a href="#CMR-与-SMR" class="headerlink" title="CMR 与 SMR"></a>CMR 与 SMR</h3><p>传统HMR硬盘此处成称为 CMR硬盘<br>每条磁道之间都存在着间隙，这些间隙会浪费硬盘的空间（因为不能记录数据）<br><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/20211112100457112.png">  </p><p>为了能扩大硬盘的容量，有些厂商就把磁道叠起来（既SMR硬盘），去除了中间磁道间的间隙<br>这造成了一个问题，由于写磁头比读磁头要宽，在写数据的时候会覆盖旁边磁道的数据，并且会套娃。导致你如果想改一个磁道里的数据却需要读写很多遍<br><img src="/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/3.gif"><br>为了解决这个问题，数据傍边磁道的数据需要被存到缓冲区里防止丢失。待写入完毕后从新将缓冲区中的数据写入<br>虽然容量、缓存大小都上来了，但是速度和写入寿命下来了  </p><p>因为经常使用缓存，所以 SMR硬盘 的缓存普遍较大（256MB以上）<br>CMR硬盘 可以做到2T，如果容量再大基本上都是 SMR硬盘 了<br>笔记本电脑受限于2.5寸大小，基本都是SMR硬盘<br>一般PC没特别需求就不要选 SMR硬盘，能 CMR就CMR  </p><h3 id="转速"><a href="#转速" class="headerlink" title="转速"></a>转速</h3><p>更高的转速能够减少磁头等待目标扇区到来的时间，进而减少读写时间  </p><h3 id="SATA接口版本"><a href="#SATA接口版本" class="headerlink" title="SATA接口版本"></a>SATA接口版本</h3><p>SATA-II 300MiB/s<br>SATA-III 600MiB/s</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>硬盘的物理结构一般由 磁头、盘片、电动机、主控芯片与排线等部件组成  </p><p>主电动机带动盘片旋转，副电动机带动一组（磁头）到相对应的盘片上，磁头悬浮在碟面上画出一个与盘片同心的圆形轨道（磁轨或称柱面），这时由磁头的磁感线圈感应碟面上的磁性与使用硬盘厂商指定的读取时间或数据间隔定位扇区，从而得到该扇区的数据内容 </p><table><thead><tr><th><img src="/%E7%A1%AC%E4%BB%B6-%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/20211112090947002.png"></th><th><img src="/%E7%A1%AC%E4%BB%B6-%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/20211112092315057.png"></th></tr></thead><tbody><tr><td></td><td></td></tr></tbody></table><h3 id="磁道-Track"><a href="#磁道-Track" class="headerlink" title="磁道 Track"></a>磁道 Track</h3><p>当磁盘旋转时，磁头若保持在一个位置上，则每个磁头都会在磁盘表面划出一个圆形轨迹，这些圆形轨迹就叫做磁道  </p><h4 id="水平式磁盘与垂直式磁盘"><a href="#水平式磁盘与垂直式磁盘" class="headerlink" title="水平式磁盘与垂直式磁盘"></a>水平式磁盘与垂直式磁盘</h4><p>根据磁道上的磁极排列方向可以将硬盘分为 水平式磁盘(LMR) 与 垂直式磁盘(HMR)  </p><table><thead><tr><th></th><th>水平式磁盘 LMR</th><th>垂直式磁盘 HMR</th></tr></thead><tbody><tr><td>模式</td><td><img src="/%E7%A1%AC%E4%BB%B6-%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/1.gif"></td><td><img src="/%E7%A1%AC%E4%BB%B6-%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/2.gif"></td></tr><tr><td>描述</td><td>水平磁极，容量较小，基本淘汰</td><td>垂直磁极，容量较大，市面常见</td></tr></tbody></table><h3 id="柱面-Cylinder"><a href="#柱面-Cylinder" class="headerlink" title="柱面 Cylinder"></a>柱面 Cylinder</h3><p>在有多个盘片构成的盘组中，由不同盘片的面，但处于同一半径圆的多个磁道组成的一个圆柱面  </p><h3 id="扇区-Sector"><a href="#扇区-Sector" class="headerlink" title="扇区 Sector"></a>扇区 Sector</h3><p>磁盘上的每个磁道被等分为若干个弧段，这些弧段便是硬盘的扇区    </p><blockquote><p>硬盘的第一个扇区，叫做引导扇区/主引导记录（Master Boot Record，缩写：MBR）<br>是电脑引导后访问硬盘时所必须要读取的首个扇区，主引导扇区记录着硬盘本身的相关消息以及硬盘各个分割的大小及位置消息，是资料消息的重要入口  </p></blockquote><h3 id="数据接口"><a href="#数据接口" class="headerlink" title="数据接口"></a>数据接口</h3><table><thead><tr><th>名称</th><th>描述</th><th>速度</th></tr></thead><tbody><tr><td>ATA</td><td>Advanced Technology Attachment</br>使用传统的40-pin并口数据线连接主板与硬盘</br>因为并口线的抗干扰性太差，且排线占用空间较大，不利电脑内部散热，被SATA所取代</td><td>133MB/s</td></tr><tr><td>SATA</td><td>Serial ATA</br>使用串口的ATA接口，特点是抗干扰性强，对数据线的要求比ATA低很多，且支持热插拔等功能</td><td>300MiB/s(SATA-II)</br>600MiB/s(SATA-III)</td></tr><tr><td>SCSI</td><td>Small Computer System Interface（小型机系统接口），经历多代的发展，接口型式也多种多样。SCSI硬盘广为工作站级个人电脑以及服务器所使用，资料传输时CPU占用率较低，但是单价也比相同容量的ATA及SATA硬盘更加昂贵</td><td></td></tr><tr><td>SAS</td><td>Serial Attached SCSI，是新一代的SCSI技术，可兼容SATA硬盘，同样支持热插拔，采用序列式技术以获得更高的传输速度，盘片转速也较快。而较小的连接线，可改善系统内部空间空气流通。通常应用于服务器等企业级产品。</td><td>12Gb/s</td></tr><tr><td>FC</td><td>Fibre Channel（光纤通道接口），拥有此接口的硬盘在使用光纤联接时具有热插拔性、高速带宽（4Gb/s或10Gb/s）、远程连接等特点；内部传输速率也比普通硬盘更高。但其价格高昂，因此FC接口通常只用于高端服务器领域</td><td></td></tr></tbody></table><h3 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h3><p>操作系统对硬盘进行读写时需要用到 文件系统 把硬盘的 扇区 组合成 簇，并创建文件和树形目录制度，使操作系统对其访问和查找变得容易<br>操作系统直接对数目众多的扇区进行寻址会十分麻烦  </p><h2 id="选购时的关键信息"><a href="#选购时的关键信息" class="headerlink" title="选购时的关键信息"></a>选购时的关键信息</h2><h3 id="CMR-与-SMR"><a href="#CMR-与-SMR" class="headerlink" title="CMR 与 SMR"></a>CMR 与 SMR</h3><p>传统HMR硬盘此处成称为 CMR硬盘<br>每条磁道之间都存在着间隙，这些间隙会浪费硬盘的空间（因为不能记录数据）<br><img src="/%E7%A1%AC%E4%BB%B6-%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/20211112100457112.png">  </p><p>为了能扩大硬盘的容量，有些厂商就把磁道叠起来（既SMR硬盘），去除了中间磁道间的间隙<br>这造成了一个问题，由于写磁头比读磁头要宽，在写数据的时候会覆盖旁边磁道的数据，并且会套娃。导致你如果想改一个磁道里的数据却需要读写很多遍<br><img src="/%E7%A1%AC%E4%BB%B6-%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/3.gif"><br>为了解决这个问题，数据傍边磁道的数据需要被存到缓冲区里防止丢失。待写入完毕后从新将缓冲区中的数据写入<br>虽然容量、缓存大小都上来了，但是速度和写入寿命下来了  </p><p>因为经常使用缓存，所以 SMR硬盘 的缓存普遍较大（256MB以上）<br>CMR硬盘 可以做到2T，如果容量再大基本上都是 SMR硬盘 了<br>笔记本电脑受限于2.5寸大小，基本都是SMR硬盘<br>一般PC没特别需求就不要选 SMR硬盘，能 CMR就CMR  </p><h3 id="转速"><a href="#转速" class="headerlink" title="转速"></a>转速</h3><p>更高的转速能够减少磁头等待目标扇区到来的时间，进而减少读写时间  </p><h3 id="SATA接口版本"><a href="#SATA接口版本" class="headerlink" title="SATA接口版本"></a>SATA接口版本</h3><p>SATA-II 300MiB/s<br>SATA-III 600MiB/s</p>]]></content>
     
     
     
@@ -264,9 +264,9 @@
     
     <tags>
       
-      <tag>wireshark</tag>
-      
       <tag>TLS</tag>
+      
+      <tag>wireshark</tag>
       
     </tags>
     
@@ -755,9 +755,9 @@
     
     <tags>
       
-      <tag>Javascript</tag>
-      
       <tag>Babel</tag>
+      
+      <tag>Javascript</tag>
       
       <tag>API</tag>
       
@@ -801,9 +801,9 @@
     
     <tags>
       
-      <tag>Javascript</tag>
-      
       <tag>Babel</tag>
+      
+      <tag>Javascript</tag>
       
     </tags>
     
@@ -843,9 +843,9 @@
     
     <tags>
       
-      <tag>Javascript</tag>
-      
       <tag>Babel</tag>
+      
+      <tag>Javascript</tag>
       
       <tag>AST</tag>
       
@@ -1614,9 +1614,9 @@
     
     <tags>
       
-      <tag>Javascript</tag>
-      
       <tag>Babel</tag>
+      
+      <tag>Javascript</tag>
       
     </tags>
     
@@ -1897,11 +1897,11 @@
       
       <tag>反爬虫</tag>
       
+      <tag>混淆</tag>
+      
       <tag>Javascript</tag>
       
       <tag>加密</tag>
-      
-      <tag>混淆</tag>
       
     </tags>
     
