@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -222,6 +222,7 @@
 <p>例：后台运行<code>test.sh</code>脚本  </p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">. test.sh &amp;<br></code></pre></div></td></tr></table></figure>
+
 <p>虽然这样已经是后台运行了，但这样做会有一个问题<br>关闭终端连接后，脚本会停止运行  </p>
 <h1 id="nohup不挂断的运行"><a href="#nohup不挂断的运行" class="headerlink" title="nohup不挂断的运行"></a><code>nohup</code>不挂断的运行</h1><blockquote>
 <p>nohup 是 no hang up 的缩写，就是不挂断的意思  </p>
@@ -231,6 +232,7 @@
 <p>例：后台不挂断运行<code>test.sh</code>脚本  </p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nohup test.sh &amp;<br></code></pre></div></td></tr></table></figure>
+
 <p>注意：用这个命令运行的脚本的所有输出都被重定向到一个名为nohup.out的文件中  </p>
 
             </div>

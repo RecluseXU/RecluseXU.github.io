@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -300,9 +300,11 @@
 </ol>
 <h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><ol>
 <li><p>拉取镜像  </p>
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker pull redis</span><br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker pull redis</span><br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>查看是否拉取成功  </p>
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker images</span><br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker images</span><br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>创建设置文件夹</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">mkdir -p etc<span class="hljs-regexp">/docker/</span>redis/conf<br>mkdir -p etc<span class="hljs-regexp">/docker/</span>redis/data<br></code></pre></div></td></tr></table></figure>
 <p> 一个用于映射设置，一个用于映射数据  </p>
@@ -337,14 +339,16 @@
 <h3 id="关闭服务端"><a href="#关闭服务端" class="headerlink" title="关闭服务端"></a>关闭服务端</h3><ul>
 <li>杀进程方式<br>会造成数据丢失<figure class="highlight perl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs perl">ps -ef | <span class="hljs-keyword">grep</span> -i redis  <span class="hljs-comment"># 查询redis进程</span><br><span class="hljs-keyword">kill</span> -<span class="hljs-number">9</span> PID <span class="hljs-comment"># 通过进程id杀进程</span><br></code></pre></div></td></tr></table></figure></li>
 <li>正常关闭方式<br>客户端执行<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-built_in">shutdown</span><br></code></pre></div></td></tr></table></figure>
-<h3 id="启动客户端"><a href="#启动客户端" class="headerlink" title="启动客户端"></a>启动客户端</h3></li>
+
+</li>
 </ul>
-<ol>
+<h3 id="启动客户端"><a href="#启动客户端" class="headerlink" title="启动客户端"></a>启动客户端</h3><ol>
 <li>来到安装目录<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/redis<br></code></pre></div></td></tr></table></figure></li>
 <li>启动Redis客户端<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./bin/redis-cli<br></code></pre></div></td></tr></table></figure>
 命令参考：<code>redis-cli –h IP地址 –p 端口 -a 密码</code> </li>
 </ol>
 <h3 id="退出客户端"><a href="#退出客户端" class="headerlink" title="退出客户端"></a>退出客户端</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">键盘上按 Ctrl+C<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h3><blockquote>
 <p>必须设置密码, 注意防火墙的问题</p>
 </blockquote>
@@ -499,9 +503,11 @@
 </blockquote>
 </li>
 <li><p>设置在向客户端应答时，是否把较小的包合并为一个包发送，默认为开启</p>
-  <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">glueoutputbuf</span> <span class="hljs-literal">yes</span><br></code></pre></div></td></tr></table></figure></li>
+  <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">glueoutputbuf</span> <span class="hljs-literal">yes</span><br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>指定在超过一定的数量或者最大的元素超过某一临界值时，采用一种特殊的哈希算法</p>
-  <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-built_in">hash</span>-<span class="hljs-built_in">max</span>-zipmap-entries <span class="hljs-number">64</span><br><span class="hljs-built_in">hash</span>-<span class="hljs-built_in">max</span>-zipmap-value <span class="hljs-number">512</span><br></code></pre></div></td></tr></table></figure></li>
+  <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-built_in">hash</span>-<span class="hljs-built_in">max</span>-zipmap-entries <span class="hljs-number">64</span><br><span class="hljs-built_in">hash</span>-<span class="hljs-built_in">max</span>-zipmap-value <span class="hljs-number">512</span><br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>指定是否激活重置哈希</p>
   <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">activerehashing</span> <span class="hljs-literal">yes</span><br></code></pre></div></td></tr></table></figure>
 <blockquote>
@@ -701,16 +707,22 @@
 <li><code>sadd &lt;key_name&gt; &lt;menber_1&gt; &lt;menber_2&gt; ......</code><br>向集合添加一个或多个成员</li>
 </ul>
 <h4 id="取值-3"><a href="#取值-3" class="headerlink" title="取值"></a>取值</h4><ul>
-<li><code>scard &lt;key_name&gt;</code><br>获取集合的成员数</li>
-<li><code>smembers &lt;key_name&gt;</code><br>返回集合的所有成员</li>
-<li><code>sismember &lt;key_name&gt; &lt;member&gt;</code><br>判断<code>member</code>是否为<code>key</code>集合的成员</li>
-<li><code>srandmamber &lt;key_name&gt; &lt;int_count&gt;</code><br>返回<code>int_count</code>个结合中的元素</li>
-</ul>
-<h4 id="删除-4"><a href="#删除-4" class="headerlink" title="删除"></a>删除</h4><ul>
-<li><code>del &lt;key_name&gt;</code><br>删除<code>key</code></li>
-<li><code>srem &lt;key_name&gt; &lt;menber_1&gt; &lt;menber_2&gt; ......</code><br>删除集合中的一个或多个成员</li>
-<li><code>spop &lt;key_name&gt; &lt;int_count&gt;</code><br>移除并返回集合中的<code>int_count</code>个随机元素</li>
-<li><code>smove &lt;key_name_1&gt; &lt;key_name_2&gt; &lt;member&gt;</code><br>将成员<code>menber</code>从<code>key_name_1</code>集合移动到<code>key_name_2</code>集合中去</li>
+<li><p><code>scard &lt;key_name&gt;</code><br>获取集合的成员数</p>
+</li>
+<li><p><code>smembers &lt;key_name&gt;</code><br>返回集合的所有成员</p>
+</li>
+<li><p><code>sismember &lt;key_name&gt; &lt;member&gt;</code><br>判断<code>member</code>是否为<code>key</code>集合的成员</p>
+</li>
+<li><p><code>srandmamber &lt;key_name&gt; &lt;int_count&gt;</code><br>返回<code>int_count</code>个结合中的元素</p>
+<h4 id="删除-4"><a href="#删除-4" class="headerlink" title="删除"></a>删除</h4></li>
+<li><p><code>del &lt;key_name&gt;</code><br>删除<code>key</code></p>
+</li>
+<li><p><code>srem &lt;key_name&gt; &lt;menber_1&gt; &lt;menber_2&gt; ......</code><br>删除集合中的一个或多个成员</p>
+</li>
+<li><p><code>spop &lt;key_name&gt; &lt;int_count&gt;</code><br>移除并返回集合中的<code>int_count</code>个随机元素</p>
+</li>
+<li><p><code>smove &lt;key_name_1&gt; &lt;key_name_2&gt; &lt;member&gt;</code><br>将成员<code>menber</code>从<code>key_name_1</code>集合移动到<code>key_name_2</code>集合中去</p>
+</li>
 </ul>
 <h4 id="集合操作"><a href="#集合操作" class="headerlink" title="集合操作"></a>集合操作</h4><h5 id="差集"><a href="#差集" class="headerlink" title="差集"></a>差集</h5><ul>
 <li><code>sdiff &lt;key_name_1&gt; &lt;key_name_2&gt; ......</code><br>返回给定所有集合的差集</li>
@@ -796,12 +808,14 @@
 <li>执行事务</li>
 </ol>
 <h3 id="示例1-A向B转50元"><a href="#示例1-A向B转50元" class="headerlink" title="示例1 A向B转50元"></a>示例1 A向B转50元</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livecodeserver">multi <span class="hljs-comment"> // 事务开始</span><br><span class="hljs-built_in">get</span> account:<span class="hljs-keyword">a</span> <span class="hljs-comment"> // 获取a账户金额</span><br>incrby account:b <span class="hljs-number">50</span> <span class="hljs-comment"> // b账户增加50元</span><br>decrby account:<span class="hljs-keyword">a</span> <span class="hljs-number">50</span> <span class="hljs-comment"> // a账户减少50元</span><br><span class="hljs-built_in">get</span> account:<span class="hljs-keyword">a</span> <span class="hljs-comment"> // 得到a账户余额</span><br><span class="hljs-built_in">get</span> account:b <span class="hljs-comment"> // 得到b账户余额</span><br>exec <span class="hljs-comment"> // 执行队列</span><br></code></pre></div></td></tr></table></figure>
+
 <h3 id="示例2-DISCARD放弃队列运行"><a href="#示例2-DISCARD放弃队列运行" class="headerlink" title="示例2 DISCARD放弃队列运行"></a>示例2 DISCARD放弃队列运行</h3><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">multi  <span class="hljs-comment">// 事务开始</span><br><span class="hljs-keyword">set</span> aa <span class="hljs-comment">123</span><br>get <span class="hljs-comment">aa</span><br>discard<br></code></pre></div></td></tr></table></figure>
 <p>实际上什么都不会执行，事务将命令传入，并没有执行就解散了队列  </p>
 <h3 id="示例3-事务错误处理"><a href="#示例3-事务错误处理" class="headerlink" title="示例3 事务错误处理"></a>示例3 事务错误处理</h3><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">multi<br><span class="hljs-keyword">set</span> aa <span class="hljs-comment">hello</span><br>get <span class="hljs-comment">aa</span><br>incr <span class="hljs-comment">aa</span><br>exec<br></code></pre></div></td></tr></table></figure>
 <p>如果某个命令报错，则有报错的命令不会被执行，其他命令照样执行，且不会回滚  </p>
 <h3 id="示例4-事务的WATCH"><a href="#示例4-事务的WATCH" class="headerlink" title="示例4 事务的WATCH"></a>示例4 事务的WATCH</h3><p>某一账户在事务内进行操作，在提交事务前，另一个进程对账户进行操作  </p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livecodeserver">watch <span class="hljs-keyword">a</span> <span class="hljs-comment"> // 开启监视，如果目标在事务开启前被改动，则打断事务（不会执行）</span><br>multi<br><span class="hljs-built_in">get</span> <span class="hljs-keyword">a</span><br>incr <span class="hljs-keyword">a</span><br>exec <span class="hljs-comment"> // 执行事务</span><br></code></pre></div></td></tr></table></figure>
+
 <h2 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h2><p>想要保证一组命令执行过程中不被其它命令插入<br>原子性<br>诸如商品秒杀之类的  </p>
 <h1 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h1><p>持久化：把内存的数据写到磁盘中去，防止服务器宕机后数据丢失<br>Redis提供了两种持久化方式</p>
 <ul>

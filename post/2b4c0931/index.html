@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -225,6 +225,7 @@
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">zh_CN</span><br><span class="hljs-selector-tag">zh_CN</span><span class="hljs-selector-class">.gb18030</span><br><span class="hljs-selector-tag">zh_CN</span><span class="hljs-selector-class">.gb2312</span><br><span class="hljs-selector-tag">zh_CN</span><span class="hljs-selector-class">.gbk</span><br><span class="hljs-selector-tag">zh_CN</span><span class="hljs-selector-class">.utf8</span><br></code></pre></div></td></tr></table></figure>
 <p>每项结果的含义：{语言代号}_{国家代号}.{字符集}<br>自此，中文显示会变得正常。<br>但系统的语言环境是英文，所以显示的都是英文信息。</p>
 <h3 id="3-重启系统"><a href="#3-重启系统" class="headerlink" title="3. 重启系统"></a><strong>3. 重启系统</strong></h3><figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">reboot</span><br></code></pre></div></td></tr></table></figure>
+
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a><strong>其他</strong></h2><h3 id="修改系统语言环境"><a href="#修改系统语言环境" class="headerlink" title="修改系统语言环境"></a><strong>修改系统语言环境</strong></h3><p>个人其实不建议作这种修改。</p>
 <h4 id="修改方法"><a href="#修改方法" class="headerlink" title="修改方法"></a>修改方法</h4><p>这里将环境改为 <code>zh_CN.UTF-8</code><br>如果直接 <code>zh_CN</code>，会出现乱码。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">localectl set-locale LANG=zh_CN.UTF-8<br></code></pre></div></td></tr></table></figure>

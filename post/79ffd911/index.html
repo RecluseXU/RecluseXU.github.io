@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -217,6 +217,7 @@
 <figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">示例 <span class="hljs-number">1</span>:<br>输入: <span class="hljs-number">2.00000</span>, <span class="hljs-number">10</span><br>输出: <span class="hljs-number">1024.00000</span><br></code></pre></div></td></tr></table></figure>
 <figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">示例 <span class="hljs-number">2</span>:<br>输入: <span class="hljs-number">2.10000</span>, <span class="hljs-number">3</span><br>输出: <span class="hljs-number">9.26100</span><br></code></pre></div></td></tr></table></figure>
 <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile">示例 3:<br><span class="hljs-section">输入: 2.00000, -2</span><br><span class="hljs-section">输出: 0.25000</span><br><span class="hljs-section">解释: 2-2 = 1/22 = 1/4 = 0.25</span><br></code></pre></div></td></tr></table></figure>
+
 <h2 id="自解"><a href="#自解" class="headerlink" title="自解"></a>自解</h2><p>简单递归，一次次乘，得到结果。</p>
 <h2 id="官方解法-快速幂算法"><a href="#官方解法-快速幂算法" class="headerlink" title="官方解法-快速幂算法"></a>官方解法-快速幂算法</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>假设我们已经得到了 $$x ^ {n / 2}$$ 的结果，现在想要计算 $$x^n$$ 的结果<br>设 A 是 $$x^{n/2}$$ 的结果，我们可以分别根据 n 的奇偶来讨论 $$x ^ n$$   </p>
 <ul>
@@ -225,6 +226,7 @@
 </ul>
 <p>直观地说，我们需要将另一个 x 和结果相乘，所以 $$x^n = A * A * x$$ 。这种方法可以很容易地用递归实现<br>我们称这个方法为“快速幂（Fast Power）”，因为我们最多只需要 O(log(n)) 次计算就可以得到 $$ x^n $$  </p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fastpow</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">float</span>, n: <span class="hljs-built_in">int</span></span>):</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>: <br>            <span class="hljs-keyword">return</span> x<br>        <span class="hljs-keyword">return</span> self.fastpow(x, n/<span class="hljs-number">2</span>)**<span class="hljs-number">2</span> <span class="hljs-keyword">if</span> n%<span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> self.fastpow(x, (n-<span class="hljs-number">1</span>)/<span class="hljs-number">2</span>)**<span class="hljs-number">2</span> * x<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myPow</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">float</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; float:</span><br>        <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">0</span>: <br>            x = <span class="hljs-number">1</span>/x<br>            n = -n<br>        <span class="hljs-keyword">elif</span> n == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> self.fastpow(x, n)<br></code></pre></div></td></tr></table></figure>
+
             </div>
             <hr>
             <div>

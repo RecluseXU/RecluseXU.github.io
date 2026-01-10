@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -215,6 +215,7 @@
             <div class="markdown-body">
               <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>一个简单的例子  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">ꓐ = <span class="hljs-number">1</span><br>B = <span class="hljs-number">2</span><br>print(ꓐ)<br></code></pre></div></td></tr></table></figure>
+
 <p>这端代码看起来结果是 2 但实际上结果是1<br>因为 <code>ꓐ</code> 与 <code>B</code> 并不是同一个字符, 尽管它们看起来长得一模一样  </p>
 <h2 id="Trojan-Source"><a href="#Trojan-Source" class="headerlink" title="Trojan Source"></a>Trojan Source</h2><p>剑桥大学的研究人员在11月1日公开了一个会影响大多数编译器和软件开发环境的漏洞，并命名为 <strong>Trojan Source</strong>  </p>
 <blockquote>
@@ -235,6 +236,7 @@
 <p>这段代码使用 Express 框架搭建了一个 API 接口，当你调用 <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/network_health">http://127.0.0.1:8080/network_health</a> 的时候, 后台会首先ping一下 Google，然后再使用curl访问 <a href="http://example.com/">http://example.com</a><br>如果都成功了，那么显然你的网络是正常的，于是给你返回ok  </p>
 <p>这个功能简单得不能再简单了，能有什么问题呢？我现在就把代码放到你的面前让你来 Review , 你能说我的代码有问题？<br>但实际上，上面这段代码确实有一个后门，可以让我在部署了这个接口的机器上执行任意命令，包括但不限于下载木马或者 <code>rm -rf *</code>  </p>
 <figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">......<br>    <span class="hljs-keyword">const</span> &#123; timeout, 这里&#125; = req.query;<br>    <span class="hljs-keyword">const</span> checkCommands = [<br>        <span class="hljs-string">&#x27;ping -c 1 google.com&#x27;</span>,<br>        <span class="hljs-string">&#x27;curl -s http://example.com/&#x27;</span>,这里<br>    ];<br>......<br></code></pre></div></td></tr></table></figure>
+
 <p>因为代码中有两个肉眼不可见的字符, 利用它们就能够接收参数, 执行任何命令  </p>
 <h2 id="Unicode-的-Bidi-攻击算法-CVE-2021-42574"><a href="#Unicode-的-Bidi-攻击算法-CVE-2021-42574" class="headerlink" title="Unicode 的 Bidi 攻击算法(CVE-2021-42574)"></a>Unicode 的 Bidi 攻击算法(CVE-2021-42574)</h2><p>并非所有的语言文字都是从左往右的, 例如阿拉伯语（从右到左阅读）<br>计算机系统需要有一种确定性的方法来解决文本中的方向冲突  </p>
 <p>Unicode 规定了一些方向指示字符，一旦使用了这些方向转换字符，文字方向就会改变  </p>
@@ -309,6 +311,7 @@
 <p>大多数IDE会自动根据 覆盖控制字符 调整字符顺序<br>但并非所有地方都会调整, 有些地方会按原本字符顺序显示<br>比如: Github 上看到的 HTML 中的 代码内容是不会根据 覆盖控制字符 来调整顺序的   </p>
 <p>例子: 1+1=2 不是吗？  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simple_add</span>():</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27; I just want to ⁧&#x27;&#x27;&#x27;</span> ;<span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;2&#x27;</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;3&#x27;</span><br><br>print(<span class="hljs-string">&#x27;1 + 1 =&#x27;</span>, simple_add())<br></code></pre></div></td></tr></table></figure>
+
 <p>这段代码执行的结果是 <code>1 + 1 = 2</code>, 尽管怎么看都应该是 <code>1 + 1 = 3</code><br>这是因为这段代码使用了 <code>RLI</code> 这个 <strong>覆盖控制符</strong><br>将这个代码复制到 IDE 里, 它会显示出它原来的样貌，因为 IDE 会处理这个 <strong>覆盖控制符</strong>, 将之”还原”成”正确”的顺序    </p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://trojansource.codes/trojan-source.pdf">《Trojan Source: Invisible Vulnerabilities》</a>  </li>
@@ -343,6 +346,12 @@
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/post/c840767a/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">硬件-电源</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

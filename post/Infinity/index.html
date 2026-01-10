@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -217,6 +217,7 @@
 <h1 id="Hexo-abbrlink"><a href="#Hexo-abbrlink" class="headerlink" title="Hexo-abbrlink"></a>Hexo-abbrlink</h1><p>为了应对url又长又臭，文件更改又会更改的问题，有人作出了插件让文章生成唯一不变的url的插件<code>Hexo-abbrlink</code><br>Github: <a target="_blank" rel="noopener" href="https://github.com/Rozbo/hexo-abbrlink">https://github.com/Rozbo/hexo-abbrlink</a></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>博客目录下npm安装，如果提示缺少前置，那就把前置装上就行    </p>
 <figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-abbrlink <span class="hljs-comment">--save</span><br></code></pre></div></td></tr></table></figure>
+
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>打开博客目录的配置文件<code>_config.yml</code>，修改<code>permalink</code>设置(只能在原本的位置进行更改)  </p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">permalink: posts<span class="hljs-regexp">/:abbrlink/</span><br></code></pre></div></td></tr></table></figure>
 <p><code>:abbrlink</code>是生成的文章标识<br>你可以像我一样完全只用这个生成后不会变的id来构建路由，也可以根据自己的需要设置路由  </p>

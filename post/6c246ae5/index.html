@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -262,11 +262,13 @@
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> logging<br>logging.debug(<span class="hljs-string">&#x27;debug 信息&#x27;</span>)<br>logging.info(<span class="hljs-string">&#x27;info 信息&#x27;</span>)<br>logging.warning(<span class="hljs-string">&#x27;warning 信息&#x27;</span>)<br>logging.error(<span class="hljs-string">&#x27;error 信息&#x27;</span>)<br>logging.critical(<span class="hljs-string">&#x27;critial 信息&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
 
+
 <p>可以在使用前,用<code>logging.basicConfig</code>规定日志的输出等级(上面说过的等级都有)<br>低于规定等级的日志，在程序运行过程中不会记录  </p>
 <blockquote>
 <p>案例：指定输出日志等级  </p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> logging<br>logging.basicConfig(level=logging.INFO)<br>logging.debug(<span class="hljs-string">&#x27;debug 信息&#x27;</span>)<br>logging.error(<span class="hljs-string">&#x27;error 信息&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="文件日志"><a href="#文件日志" class="headerlink" title="文件日志"></a>文件日志</h2><p>可以在使用前,用<code>logging.basicConfig</code>规定日志的输出文件与输出方式  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">logging.basicConfig(<br>    filename=<span class="hljs-string">&#x27;new.log&#x27;</span>,  <span class="hljs-comment"># 日志文件文件路径</span><br>    filemode=<span class="hljs-string">&#x27;a&#x27;</span>  <span class="hljs-comment"># 记录模式，可填入&#x27;a&#x27;或&#x27;w&#x27;,与`open`函数的对应参数效果一致</span><br>)<br></code></pre></div></td></tr></table></figure>
 <ul>
@@ -276,6 +278,7 @@
 <h2 id="日志格式"><a href="#日志格式" class="headerlink" title="日志格式"></a>日志格式</h2><p>日志中的信息除了基本写在程序中的信息以外，还包括了一些附属的信息（时间，级别，模块名……）<br>设置日志记录的格式结构，可以让记录更加精简或更加详细  </p>
 <p>可以在使用前,用<code>logging.basicConfig</code>规定日志格式  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">logging.basicConfig(<br>    <span class="hljs-built_in">format</span>=<span class="hljs-string">&#x27;%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s&#x27;</span><br>)<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="格式参数参考"><a href="#格式参数参考" class="headerlink" title="格式参数参考"></a>格式参数参考</h3><table>
 <thead>
 <tr>

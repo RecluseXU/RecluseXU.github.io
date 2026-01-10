@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -214,9 +214,13 @@
             
             <div class="markdown-body">
               <h1 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h1><h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> 列名称 <span class="hljs-keyword">FROM</span> 表名称<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> table_name (列<span class="hljs-number">1</span>, 列<span class="hljs-number">2</span>,...) <span class="hljs-keyword">VALUES</span> (值<span class="hljs-number">1</span>, 值<span class="hljs-number">2</span>,....)<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><figure class="highlight n1ql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs n1ql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> 表名称 <span class="hljs-keyword">WHERE</span> 列名称 = 值<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><figure class="highlight n1ql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs n1ql"><span class="hljs-keyword">UPDATE</span> 表名称 <span class="hljs-keyword">SET</span> 列名称 = 新值 <span class="hljs-keyword">WHERE</span> 列名称 = 某值<br></code></pre></div></td></tr></table></figure>
+
 <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><h2 id="逻辑判断"><a href="#逻辑判断" class="headerlink" title="逻辑判断"></a>逻辑判断</h2><h3 id="IF"><a href="#IF" class="headerlink" title="IF"></a>IF</h3><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">IF</span><span class="hljs-params">(判断语句, 判断结果为True时的返回值, 判断结果为False时的返回值)</span></span><br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>返回值为数字值或字符串值  </li>
@@ -225,6 +229,7 @@
 <p>案例：将salary表中的记录性别进行更变<br><img src="/SQL%E8%AE%B0%E5%BD%95/20200902114505313.png" srcset="/img/loading.gif">  </p>
 </blockquote>
 <figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">update salary <span class="hljs-keyword">set</span> <br>    sex <span class="hljs-comment">= IF(sex=</span><span class="hljs-comment">&#x27;f&#x27;</span><span class="hljs-comment">,</span><span class="hljs-comment">&#x27;m&#x27;</span><span class="hljs-comment">,</span><span class="hljs-comment">&#x27;f&#x27;</span><span class="hljs-comment">)</span>;<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="CASE"><a href="#CASE" class="headerlink" title="CASE"></a>CASE</h3><figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada"><span class="hljs-keyword">CASE</span> 判断目标 <span class="hljs-keyword">WHEN</span> 所期望的值 <span class="hljs-keyword">THEN</span> 目标是期望值时所执行内容 <span class="hljs-keyword">ELSE</span> 目标不是期望值时所执行内容 <span class="hljs-keyword">END</span><br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>如果没有ELSE 部分，则返回值为 NULL</li>
@@ -233,6 +238,7 @@
 <p>案例：将salary表中的记录性别进行更变<br><img src="/SQL%E8%AE%B0%E5%BD%95/20200902114505313.png" srcset="/img/loading.gif">  </p>
 </blockquote>
 <figure class="highlight n1ql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs n1ql"><span class="hljs-keyword">UPDATE</span> salary<br><span class="hljs-keyword">SET</span><br>    sex = <span class="hljs-keyword">CASE</span> sex<br>        <span class="hljs-keyword">WHEN</span> <span class="hljs-string">&#x27;m&#x27;</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">&#x27;f&#x27;</span><br>        <span class="hljs-keyword">ELSE</span> <span class="hljs-string">&#x27;m&#x27;</span><br>    <span class="hljs-keyword">END</span>;<br></code></pre></div></td></tr></table></figure>
+
 <h1 id="多表"><a href="#多表" class="headerlink" title="多表"></a>多表</h1><h2 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h2><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span><br>     column_name<br><span class="hljs-keyword">FROM</span> Table_name1  <span class="hljs-keyword">JOIN</span> Table_name2 <br>     <span class="hljs-keyword">ON</span> 连接条件<br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>符合连接条件的内容才会连接  </li>
@@ -241,6 +247,7 @@
 <p>案例<br>Employee 表包含所有员工，他们的经理也属于员工。每个员工都有一个 Id，此外还有一列对应员工的经理的 Id<br>Employee 表<br><img src="/SQL%E8%AE%B0%E5%BD%95/20200903010508843.png" srcset="/img/loading.gif"><br>编写一个 SQL 查询，该查询可以获取收入超过他们经理的员工的姓名   </p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span><br>     a.NAME <span class="hljs-keyword">AS</span> Employee<br><span class="hljs-keyword">FROM</span> Employee <span class="hljs-keyword">AS</span> a <span class="hljs-keyword">JOIN</span> Employee <span class="hljs-keyword">AS</span> b<br>     <span class="hljs-keyword">ON</span> a.ManagerId = b.Id <span class="hljs-keyword">AND</span> a.Salary &gt; b.Salary<br><br></code></pre></div></td></tr></table></figure>
+
 <ul>
 <li>INNER JOIN：如果表中有至少一个匹配，则返回行</li>
 <li>LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行</li>
@@ -258,6 +265,7 @@
 <p>Address表<br><img src="/SQL%E8%AE%B0%E5%BD%95/20200903121900913.png" srcset="/img/loading.gif"></p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> FirstName, LastName, City, State <br><span class="hljs-keyword">from</span> Person <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Address <span class="hljs-keyword">on</span> Person.PersonId = Address.PersonId;<br></code></pre></div></td></tr></table></figure>
+
 <h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">column_name</span>, <span class="hljs-built_in">column_name</span><br><span class="hljs-keyword">FROM</span> <span class="hljs-built_in">table_name</span><br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> 用作排序的列名, 第二个用作排序的列名 <span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>;<br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>升序<code>ASC</code> |  降序<code>DESC</code>  </li>

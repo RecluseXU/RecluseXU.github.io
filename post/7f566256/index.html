@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -223,39 +223,44 @@
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">bookstore</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>Harry Potter<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">author</span>&gt;</span>J K. Rowling<span class="hljs-tag">&lt;/<span class="hljs-name">author</span>&gt;</span> <br>      <span class="hljs-tag">&lt;<span class="hljs-name">year</span>&gt;</span>2005<span class="hljs-tag">&lt;/<span class="hljs-name">year</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>29.99<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bookstore</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 
+
 <h2 id="节点-Node"><a href="#节点-Node" class="headerlink" title="节点 Node"></a>节点 Node</h2><p>从标签开头到标签结束都是节点内容  </p>
 <blockquote>
 <p>比如  </p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">author</span>&gt;</span>J K. Rowling<span class="hljs-tag">&lt;/<span class="hljs-name">author</span>&gt;</span> <br></code></pre></div></td></tr></table></figure>
+
 <h2 id="值-Atomic-value"><a href="#值-Atomic-value" class="headerlink" title="值 Atomic value"></a>值 Atomic value</h2><blockquote>
 <p>比如  </p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml">29.99<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="项-Item"><a href="#项-Item" class="headerlink" title="项 Item"></a>项 Item</h2><p>值或节点  </p>
 <h2 id="父级-Parent-与-子级-Children"><a href="#父级-Parent-与-子级-Children" class="headerlink" title="父级 Parent 与 子级 Children"></a>父级 Parent 与 子级 Children</h2><p>直接父级指上级节点，直接子级指下级节点  </p>
 <blockquote>
 <p>比如：title节点的父级是book节点<br>比如：book节点有子节点title</p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>Harry Potter<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      ......<br><span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-<div class="hljs code-wrapper"><pre><code>&gt;比如：book节点有子节点title</code></pre></div>
+<div class="hljs code-wrapper"><pre><code>&gt;比如：book节点有子节点title
+</code></pre></div>
 <h2 id="祖先-Ancestor-与-后代-Descendant"><a href="#祖先-Ancestor-与-后代-Descendant" class="headerlink" title="祖先 Ancestor 与 后代 Descendant"></a>祖先 Ancestor 与 后代 Descendant</h2><p>多级父级关系与多级子级关系  </p>
 <blockquote>
 <p>比如：bookstore有后代节点title节点<br>比如：title有祖先bookstore节点  </p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bookstore</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Harry Potter<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      ......<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bookstore</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 
+
 <h2 id="同胞-Sibling"><a href="#同胞-Sibling" class="headerlink" title="同胞 Sibling"></a>同胞 Sibling</h2><p>拥有相同父节点的节点<br>然而我还是喜欢叫兄弟节点多一点</p>
 <blockquote>
 <p>比如：title节点与year节点是同胞</p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Harry Potter<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">year</span>&gt;</span>2005<span class="hljs-tag">&lt;/<span class="hljs-name">year</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-
 <h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>指节点标签内部声明的内容  </p>
 <blockquote>
 <p>比如：title节点有lang属性，其值为en  </p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>Harry Potter<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
 
 <h1 id="轴描述语法"><a href="#轴描述语法" class="headerlink" title="轴描述语法"></a>轴描述语法</h1><p>语法本身是比较的冗长<br>缩写的语法虽然简易，但是无法做到一些比较复杂的事情  </p>
 <table>
@@ -367,6 +372,7 @@
 <p>案例：缩写语法 获取price节点</p>
 </blockquote>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>price<br></code></pre></div></td></tr></table></figure>
+
 <h1 id="节点测试"><a href="#节点测试" class="headerlink" title="节点测试"></a>节点测试</h1><table>
 <thead>
 <tr>
@@ -448,6 +454,7 @@
 </tr>
 </tbody></table>
 <h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bookstore</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;eng&quot;</span>&gt;</span>Harry Potter<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>29.99<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;eng&quot;</span>&gt;</span>Learning XML<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>39.95<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">book</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;cn&quot;</span>&gt;</span>Learning XPath<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">price</span>&gt;</span>23.33<span class="hljs-tag">&lt;/<span class="hljs-name">price</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">book</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ticket</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">spend</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">spend</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">ticket</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bookstore</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
 <h2 id="类型转换函数"><a href="#类型转换函数" class="headerlink" title="类型转换函数"></a>类型转换函数</h2><p>string()，number()，boolean()  </p>
 <h2 id="字符串运算函数"><a href="#字符串运算函数" class="headerlink" title="字符串运算函数"></a>字符串运算函数</h2><h3 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h3><ul>
 <li><p>concat(string1, string2)<br>拼接两个字符串  </p>

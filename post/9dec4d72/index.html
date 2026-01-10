@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -222,6 +222,7 @@
 <p>例：生成一个空的压缩文件  </p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> zipfile<br><br><br>zip_f = zipfile.ZipFile(<br>    file=<span class="hljs-string">&#x27;folder/helloworld.zip&#x27;</span>,<br>    mode=<span class="hljs-string">&#x27;w&#x27;</span>,<br>    allowZip64=<span class="hljs-literal">False</span>,<br>    compression=zipfile.ZIP_DEFLATED,<br>    compresslevel=<span class="hljs-number">5</span>,<br>)<br>zip_f.close()<br></code></pre></div></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
@@ -261,6 +262,7 @@
 <p>例：添加一些压缩内容  </p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> zipfile<br><br>folder_path = <span class="hljs-string">&#x27;example/0_Basic_usage_of_the_library/python_zipfile&#x27;</span><br><span class="hljs-keyword">with</span> zipfile.ZipFile(<span class="hljs-string">&#x27;&#123;&#125;/&#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(folder_path, <span class="hljs-string">&#x27;helloworld.zip&#x27;</span>), <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(<br>        <span class="hljs-comment"># 已经存在的文件的路径</span><br>        filename=<span class="hljs-string">&#x27;&#123;&#125;/example.txt&#x27;</span>.<span class="hljs-built_in">format</span>(folder_path),<br>        <span class="hljs-comment"># 压缩文件中的文件路径</span><br>        arcname=<span class="hljs-string">&#x27;a_folder/z.txt&#x27;</span>,<br>    )<br>    f.writestr(<br>        <span class="hljs-comment"># 压缩文件中的文件路径</span><br>        zinfo_or_arcname=<span class="hljs-string">&#x27;a.txt&#x27;</span>,<br>        <span class="hljs-comment"># 文件数据，可写入 str类型 或 byte类型 数据</span><br>        <span class="hljs-comment">#   如果传入str类型，默认会用 utf-8 进行编码写入</span><br>        data=<span class="hljs-string">&#x27;Hello&#x27;</span>,<br>    )<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="解压压缩文件"><a href="#解压压缩文件" class="headerlink" title="解压压缩文件"></a>解压压缩文件</h2><blockquote>
 <p>例: 将压缩文件内容解压出来  </p>
 </blockquote>

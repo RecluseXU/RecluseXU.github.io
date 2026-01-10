@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -165,7 +165,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      943 字
+      953 字
     </span>
   
 
@@ -245,39 +245,71 @@
 </tbody></table>
 <h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a><strong>官方文档</strong></h2><p><a target="_blank" rel="noopener" href="https://tigervnc.org/">官方首页</a><br>在首页下面有配置相关的文档<br>[TigerVNC的官方github Wiki](<a target="_blank" rel="noopener" href="https://github.com/TigerVNC/tigervnc/wiki">https://github.com/TigerVNC/tigervnc/wiki</a><br><a target="_blank" rel="noopener" href="https://tigervnc.org/doc/vncconfig.html">https://tigervnc.org/doc/vncconfig.html</a>)</p>
 <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a><strong>操作</strong></h2><h3 id="部署服务器端"><a href="#部署服务器端" class="headerlink" title="部署服务器端"></a><strong>部署服务器端</strong></h3><h4 id="TightVNC安装与配置"><a href="#TightVNC安装与配置" class="headerlink" title="TightVNC安装与配置"></a><strong>TightVNC安装与配置</strong></h4><ol>
-<li><strong>检查是否安装VNC</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">rpm -q tigervnc tigervnc-server<br></code></pre></div></td></tr></table></figure></li>
-<li><strong>安装X-Window</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum groupinstall <span class="hljs-string">&quot;X Window System&quot;</span><br></code></pre></div></td></tr></table></figure></li>
-<li><strong>安装VNC</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install tigervnc-server -y <br></code></pre></div></td></tr></table></figure></li>
-<li><strong>更改启动设置</strong></li>
-<li>打开启动设置配置文件<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim /root/.vnc/xstartup<br></code></pre></div></td></tr></table></figure></li>
-<li>将配置文件的内容替换为以下下内容<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><span class="hljs-comment">#Uncomment the following two lines for normal desktop:</span><br><span class="hljs-built_in">unset</span> SESSION_MANAGER<br><span class="hljs-comment">#exec /etc/X11/xinit/xinitrc</span><br>[ -x /etc/vnc/xstartup ] &amp;&amp; <span class="hljs-built_in">exec</span> /etc/vnc/xstartup<br>[ -r <span class="hljs-variable">$HOME</span>/.Xresources ] &amp;&amp; xrdb KaTeX parse error: Expected <span class="hljs-string">&#x27;EOF&#x27;</span>, got <span class="hljs-string">&#x27;&amp;&#x27;</span> at position 59: …config -iconic &amp;̲ <span class="hljs-comment">#xterm -geome…VNCDESKTOP Desktop&quot;&amp;</span><br><span class="hljs-comment">#twm &amp;</span><br>startxfce4 &amp;<br></code></pre></div></td></tr></table></figure></li>
-<li><strong>配置VNC</strong><ol>
+<li><p><strong>检查是否安装VNC</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">rpm -q tigervnc tigervnc-server<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p><strong>安装X-Window</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum groupinstall <span class="hljs-string">&quot;X Window System&quot;</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p><strong>安装VNC</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install tigervnc-server -y <br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p><strong>更改启动设置</strong></p>
+</li>
+<li><p>打开启动设置配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim /root/.vnc/xstartup<br></code></pre></div></td></tr></table></figure></li>
+<li><p>将配置文件的内容替换为以下下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><span class="hljs-comment">#Uncomment the following two lines for normal desktop:</span><br><span class="hljs-built_in">unset</span> SESSION_MANAGER<br><span class="hljs-comment">#exec /etc/X11/xinit/xinitrc</span><br>[ -x /etc/vnc/xstartup ] &amp;&amp; <span class="hljs-built_in">exec</span> /etc/vnc/xstartup<br>[ -r <span class="hljs-variable">$HOME</span>/.Xresources ] &amp;&amp; xrdb KaTeX parse error: Expected <span class="hljs-string">&#x27;EOF&#x27;</span>, got <span class="hljs-string">&#x27;&amp;&#x27;</span> at position 59: …config -iconic &amp;̲ <span class="hljs-comment">#xterm -geome…VNCDESKTOP Desktop&quot;&amp;</span><br><span class="hljs-comment">#twm &amp;</span><br>startxfce4 &amp;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p><strong>配置VNC</strong></p>
+<ol>
 <li><strong>打开配置文件</strong><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim /etc/systemd/system/vncserver@\:1.service<br></code></pre></div></td></tr></table></figure></li>
 <li><strong>根据文件里的提示修改一些配置</strong><br><img src="/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2-CentOS-VNC-tigervnc/20200313124928499.png" srcset="/img/loading.gif"><br>这里给出一个xfce的简单配置<figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=Remote desktop service (VNC)<br><span class="hljs-attr">After</span>=syslog.target network.target<br><br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">Type</span>=simple<br><br><span class="hljs-comment"># Clean any existing files in /tmp/.X11-unix environment</span><br><span class="hljs-attr">ExecStartPre</span>=/bin/sh -c <span class="hljs-string">&#x27;/usr/bin/vncserver -kill %i &gt; /dev/null 2&gt;&amp;1 || :&#x27;</span><br><span class="hljs-attr">ExecStart</span>=/usr/sbin/runuser -l root -c <span class="hljs-string">&quot;/usr/bin/vncserver %i&quot;</span><br><span class="hljs-attr">PIDFile</span>=/root/.vnc/%H%i.pid<br><span class="hljs-attr">ExecStop</span>=/bin/sh -c <span class="hljs-string">&#x27;/usr/bin/vncserver -kill %i &gt; /dev/null 2&gt;&amp;1 || :&#x27;</span><br><br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></div></td></tr></table></figure>
 实际上，如果你有多个用户想用vnc就要配置多份配置</li>
 </ol>
 </li>
-<li>系统重新加载配置<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl daemon-reload<br></code></pre></div></td></tr></table></figure></li>
-<li>为VNC配置密码<br>这个密码是使用VNC客户端链接服务器时所使用的密码<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vncpasswd /etc/vncpasswd<br></code></pre></div></td></tr></table></figure></li>
-<li>启动VNC服务<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start vncserver@\:1.service<br></code></pre></div></td></tr></table></figure></li>
-<li>设置VNC服务开机启动<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl <span class="hljs-built_in">enable</span> vncserver@\:1.service<br></code></pre></div></td></tr></table></figure>
-<h4 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a><strong>设置防火墙</strong></h4>VNC的运行端口是基于配置的。<br>VNC的默认端口是<code>5900</code><br>我在上面配置了<code>vncserver@:1.service</code><br>那么这个配置的 VNC 会运行在 <code>5900</code> + <code>1</code> = <code>5901</code> 端口<br>输入代码在防火墙中开启 对应端口的TCP连接即可。<a href="/post/67dbc8e6/" title="服务器部署-CentOS-firewall-防火墙">服务器部署-CentOS-firewall-防火墙</a>
-
+<li><p>系统重新加载配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl daemon-reload<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>为VNC配置密码<br>这个密码是使用VNC客户端链接服务器时所使用的密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vncpasswd /etc/vncpasswd<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>启动VNC服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start vncserver@\:1.service<br></code></pre></div></td></tr></table></figure></li>
+<li><p>设置VNC服务开机启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl <span class="hljs-built_in">enable</span> vncserver@\:1.service<br></code></pre></div></td></tr></table></figure>
 
 </li>
 </ol>
+<h4 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a><strong>设置防火墙</strong></h4><p>VNC的运行端口是基于配置的。<br>VNC的默认端口是<code>5900</code><br>我在上面配置了<code>vncserver@:1.service</code><br>那么这个配置的 VNC 会运行在 <code>5900</code> + <code>1</code> = <code>5901</code> 端口<br>输入代码在防火墙中开启 对应端口的TCP连接即可。</p>
+<a href="/post/67dbc8e6/" title="服务器部署-CentOS-firewall-防火墙">服务器部署-CentOS-firewall-防火墙</a>
+
+
 <h4 id="常用VNC命令"><a href="#常用VNC命令" class="headerlink" title="常用VNC命令"></a><strong>常用VNC命令</strong></h4><ol>
-<li>运行一个VNC服务<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vncserver :服务号码<br></code></pre></div></td></tr></table></figure></li>
-<li>查看正在运行的VNC服务进程<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vncserver -list<br></code></pre></div></td></tr></table></figure></li>
-<li>关闭某个VNC服务进程<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vncserver -<span class="hljs-built_in">kill</span> :VNC服务号<br></code></pre></div></td></tr></table></figure>
-<h3 id="用户端"><a href="#用户端" class="headerlink" title="用户端"></a><strong>用户端</strong></h3><h4 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a><strong>下载客户端</strong></h4>这个Tiger VNC Viewer的github页<br><a target="_blank" rel="noopener" href="https://github.com/TigerVNC/tigervnc/releases">https://github.com/TigerVNC/tigervnc/releases</a><br>软件下载的网页不挂梯子的话卡的不行，基本不可能下载下来。</li>
+<li><p>运行一个VNC服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vncserver :服务号码<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>查看正在运行的VNC服务进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vncserver -list<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>关闭某个VNC服务进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vncserver -<span class="hljs-built_in">kill</span> :VNC服务号<br></code></pre></div></td></tr></table></figure>
+
+</li>
 </ol>
+<h3 id="用户端"><a href="#用户端" class="headerlink" title="用户端"></a><strong>用户端</strong></h3><h4 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a><strong>下载客户端</strong></h4><p>这个Tiger VNC Viewer的github页<br><a target="_blank" rel="noopener" href="https://github.com/TigerVNC/tigervnc/releases">https://github.com/TigerVNC/tigervnc/releases</a><br>软件下载的网页不挂梯子的话卡的不行，基本不可能下载下来。</p>
 <h4 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a><strong>连接服务器</strong></h4><p>输入地址和VNC服务号码即可。<br>形如：<code>服务器ip:VNC配置防火墙端口号</code><br>例如：<code>192.168.1.1:5901</code><br>成功连接后会要求输入VNC密码<br>输入正确后就能连上了</p>
 <h2 id="更多操作"><a href="#更多操作" class="headerlink" title="更多操作"></a><strong>更多操作</strong></h2><h3 id="修改TigerVNC默认端口"><a href="#修改TigerVNC默认端口" class="headerlink" title="修改TigerVNC默认端口"></a><strong>修改TigerVNC默认端口</strong></h3><ol>
-<li>打开源码文件<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vi /usr/bin/vncserver<br></code></pre></div></td></tr></table></figure></li>
-<li>在文中找到端口内容<figure class="highlight perl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs perl">vncPort = <span class="hljs-number">5900</span> + $displayNumber<br><span class="hljs-keyword">if</span> (!<span class="hljs-keyword">bind</span>(S, <span class="hljs-keyword">pack</span>(<span class="hljs-string">&#x27;S n x12&#x27;</span>, $AF_INET, <span class="hljs-number">5900</span> + $n))) &#123; <br></code></pre></div></td></tr></table></figure></li>
-<li>修改端口内容<br>这里我把默认的<code>5900</code>端口改成了<code>15900</code>端口<figure class="highlight perl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs perl">vncPort = <span class="hljs-number">15900</span> + $displayNumber<br><span class="hljs-keyword">if</span> (!<span class="hljs-keyword">bind</span>(S, <span class="hljs-keyword">pack</span>(<span class="hljs-string">&#x27;S n x12&#x27;</span>, $AF_INET, <span class="hljs-number">15900</span> + $n))) &#123; <br></code></pre></div></td></tr></table></figure>
-需要注意的是，端口改了，防火墙设置也要改，连接时用的端口号也要改。<br>由于RealVNC viewer没有手动设置端口的功能，只能从默认端口登入。所以上面我给的是TigerVNC viewer。</li>
+<li><p>打开源码文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vi /usr/bin/vncserver<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>在文中找到端口内容</p>
+<figure class="highlight perl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs perl">vncPort = <span class="hljs-number">5900</span> + $displayNumber<br><span class="hljs-keyword">if</span> (!<span class="hljs-keyword">bind</span>(S, <span class="hljs-keyword">pack</span>(<span class="hljs-string">&#x27;S n x12&#x27;</span>, $AF_INET, <span class="hljs-number">5900</span> + $n))) &#123; <br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>修改端口内容<br>这里我把默认的<code>5900</code>端口改成了<code>15900</code>端口</p>
+<figure class="highlight perl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs perl">vncPort = <span class="hljs-number">15900</span> + $displayNumber<br><span class="hljs-keyword">if</span> (!<span class="hljs-keyword">bind</span>(S, <span class="hljs-keyword">pack</span>(<span class="hljs-string">&#x27;S n x12&#x27;</span>, $AF_INET, <span class="hljs-number">15900</span> + $n))) &#123; <br></code></pre></div></td></tr></table></figure>
+<p>需要注意的是，端口改了，防火墙设置也要改，连接时用的端口号也要改。<br>由于RealVNC viewer没有手动设置端口的功能，只能从默认端口登入。所以上面我给的是TigerVNC viewer。</p>
+</li>
 </ol>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a><strong>问题</strong></h2><p>会与Anconda发生冲突，如果设置了环境变量的话</p>
 

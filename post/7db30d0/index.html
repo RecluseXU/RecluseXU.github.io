@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -216,6 +216,7 @@
               <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>UUID（Universally Unique Identifier）是通用唯一识别码，在许多领域用作标识<br>常用的数据库也可以用它来作为主键，原理上它是可以对任何东西进行唯一的编码  </p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>如果你想要的只是一个唯一的ID，你应该用 <code>uuid1()</code>或<code>uuid4()</code>，但是要注意，<code>uuid1()</code>可能会危害隐私.  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> uuid<br> <br><span class="hljs-built_in">print</span> uuid.uuid1()<br><span class="hljs-comment"># bf1dfacf-67d8-11e8-9a23-408d5c985711</span><br><span class="hljs-built_in">print</span> uuid.uuid3(uuid.NAMESPACE_DNS, <span class="hljs-string">&#x27;yuanlin&#x27;</span>)<br><span class="hljs-comment"># ddb366f5-d4bc-3a20-ac68-e13c0560058f</span><br><span class="hljs-built_in">print</span> uuid.uuid4()<br><span class="hljs-comment"># 144d622b-e83a-40ea-8ca1-66af8a86261c</span><br><span class="hljs-built_in">print</span> uuid.uuid5(uuid.NAMESPACE_DNS, <span class="hljs-string">&#x27;yuanlin&#x27;</span>)<br><span class="hljs-comment"># 4a47c18d-037a-5df6-9e12-20b643c334d3</span><br></code></pre></div></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>

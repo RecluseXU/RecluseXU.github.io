@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -218,6 +218,7 @@
 <p><strong>注意：如果使用的主题已经拥有显示目录的能力，那么不建议安装</strong>  </p>
 </blockquote>
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a><strong>使用方法</strong></h2><h3 id="1-安装hexo-toc"><a href="#1-安装hexo-toc" class="headerlink" title="1. 安装hexo-toc"></a><strong>1. 安装hexo-toc</strong></h3><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-toc <span class="hljs-comment">--save</span><br></code></pre></div></td></tr></table></figure>
+
 <h3 id="2-在-config-yml文件中添加参数"><a href="#2-在-config-yml文件中添加参数" class="headerlink" title="2. 在_config.yml文件中添加参数"></a><strong>2. 在<code>_config.yml</code>文件中添加参数</strong></h3><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">toc:</span><br>  <span class="hljs-attr">maxdepth:</span> <span class="hljs-number">3</span><br>  <span class="hljs-attr">class:</span> <span class="hljs-string">toc</span><br>  <span class="hljs-attr">slugify:</span> <span class="hljs-string">transliteration</span><br>  <span class="hljs-attr">decodeEntities:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">anchor:</span><br>    <span class="hljs-attr">position:</span> <span class="hljs-string">after</span><br>    <span class="hljs-attr">symbol:</span> <span class="hljs-string">&#x27;#&#x27;</span><br>    <span class="hljs-attr">style:</span> <span class="hljs-string">header-anchor</span><br></code></pre></div></td></tr></table></figure>
 <table>
 <thead>
@@ -261,6 +262,7 @@
 </tbody></table>
 <h3 id="3-在markdown文档中使用toc"><a href="#3-在markdown文档中使用toc" class="headerlink" title="3. 在markdown文档中使用toc"></a><strong>3. 在markdown文档中使用<code>toc</code></strong></h3><p>在需要使用到toc的地方输入：</p>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- toc --&gt;</span><br></code></pre></div></td></tr></table></figure>
+
 
 <hr>
 <p>Hexo-toc Github：<a target="_blank" rel="noopener" href="https://github.com/bubkoo/hexo-toc">https://github.com/bubkoo/hexo-toc</a></p>

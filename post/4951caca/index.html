@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -224,6 +224,7 @@
 <p>思路：每次比较两数组最后有效的数，大的放后面。</p>
 <h2 id="大佬解法"><a href="#大佬解法" class="headerlink" title="大佬解法"></a><strong>大佬解法</strong></h2><p>这一次我的思路居然和大佬的一样…..<br><img src="/LeetCode%E6%97%A5%E5%B8%B8-%E7%AE%80%E5%8D%95-%E9%9D%A2%E8%AF%95%E9%A2%98-10.01.-%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%9A%84%E6%95%B0%E7%BB%84/20200316035302605.gif" srcset="/img/loading.gif"></p>
 <h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge</span>(<span class="hljs-params">self, A: List[<span class="hljs-built_in">int</span>], m: <span class="hljs-built_in">int</span>, B: List[<span class="hljs-built_in">int</span>], n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-keyword">None</span>:</span><br>        idx1 = m - <span class="hljs-number">1</span><br>        idx2 = n - <span class="hljs-number">1</span><br>        cur = m + n - <span class="hljs-number">1</span> <span class="hljs-comment"># 添加 cur 指针追踪位置</span><br>        <span class="hljs-keyword">while</span> idx1 &gt; -<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> idx2 &gt; -<span class="hljs-number">1</span>:<br>            <span class="hljs-comment"># print(A)</span><br>            <span class="hljs-keyword">if</span> A[idx1] &lt; B[idx2]:<br>                A[cur] = B[idx2]<br>                cur -= <span class="hljs-number">1</span><br>                idx2 -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                A[cur] = A[idx1]<br>                cur -= <span class="hljs-number">1</span><br>                idx1 -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> idx2 != -<span class="hljs-number">1</span>: A[:idx2 + <span class="hljs-number">1</span>] = B[:idx2 + <span class="hljs-number">1</span>] <span class="hljs-comment"># 比较完B还有剩下的，全填到A前面即可</span><br>        <span class="hljs-keyword">return</span> A<br></code></pre></div></td></tr></table></figure>
+
 
 
 <hr>

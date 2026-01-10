@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -220,12 +220,15 @@
 <li><p>安装Docker<br>需求：Docker版本≥17  </p>
 </li>
 <li><p>拉取splash  </p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo docker pull scrapinghub/splash<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo docker pull scrapinghub/splash<br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>启动  </p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo docker run -itd -p 8050:8050 scrapinghub/splash<br></code></pre></div></td></tr></table></figure>
+
 <blockquote>
 <p>有些时候docker会抽风，无法连接，重启一下<code>docker</code>就好<code>service docker restart</code><br>  要是觉得太麻烦，可以在启动时添加启动参数</p>
-<div class="hljs code-wrapper"><pre><code><figure class="highlight routeros"><table><tr><td class="gutter hljs"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">docker <span class="hljs-builtin-name">run</span> -p 8050:8050 <span class="hljs-attribute">--restart</span>=always -d scrapinghub/splash<br></code></pre></div></td></tr></table></figure></code></pre>
+<div class="hljs code-wrapper"><pre><code><figure class="highlight routeros"><table><tr><td class="gutter hljs"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">docker <span class="hljs-builtin-name">run</span> -p 8050:8050 <span class="hljs-attribute">--restart</span>=always -d scrapinghub/splash<br></code></pre></div></td></tr></table></figure>
+</code></pre>
 <ul>
 <li>-d 后台运行</li>
 <li>–restart=always 崩溃后自动重新启动</li>

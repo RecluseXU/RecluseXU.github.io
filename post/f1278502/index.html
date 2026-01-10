@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -232,6 +232,7 @@
 </blockquote>
 <p>你也可以设置请求头来访问  </p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">scrapy shell -s USER_AGENT=<span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0&quot;</span> <span class="hljs-string">&quot;https://www.jianshu.com/recommendations/users?page=1&quot;</span><br></code></pre></div></td></tr></table></figure>
+
 <h2 id="代码启动"><a href="#代码启动" class="headerlink" title="代码启动"></a>代码启动</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">inspect_response(response, self)<br></code></pre></div></td></tr></table></figure>
 <p><code>response</code>参数是<code>parse</code>方法中的参数，<code>self</code>是<code>Spider</code>类的参数<br>在适当的地方启用shell能达到很好的目的（比如说使用<code>catch.....except</code>捕获错误以后，看看为什么解析错误报错之类）  </p>
 <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><h2 id="捷径"><a href="#捷径" class="headerlink" title="捷径"></a>捷径</h2><p><img src="/Scrapy-%E5%9F%BA%E7%A1%80-Shell/20200916075633932.png" srcset="/img/loading.gif"><br>在你打开<code>shell</code>之后，会显示一些捷径提示，你可以在<code>shell</code>中使用这些捷径来快速做事  </p>

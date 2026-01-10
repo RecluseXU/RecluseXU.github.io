@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -224,6 +224,7 @@
 </blockquote>
 <h2 id="SCP上传"><a href="#SCP上传" class="headerlink" title="SCP上传"></a>SCP上传</h2><p>将本地的文件/文件夹上传到目标服务器路径  </p>
 <figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">scp <span class="hljs-comment">[本地文件路径（含文件名）]</span> <span class="hljs-comment">[SSH用户名]</span>@<span class="hljs-comment">[服务器IP]</span>:<span class="hljs-comment">[服务器上文件路径（不含文件名）]</span><br></code></pre></div></td></tr></table></figure>
+
 <blockquote>
 <p>案例：<code>a.txt</code>通过<code>root</code>用户的<code>SSH</code>传输到<code>/home/root</code>文件夹中  </p>
 </blockquote>
@@ -238,16 +239,19 @@
 </blockquote>
 <figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.1</span>.<span class="hljs-number">2</span><span class="hljs-symbol">:/home/root/a</span>.txt /Documents/ <br></code></pre></div></td></tr></table></figure>
 
+
 <h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p><code>SSH</code>默认22端口。如果不是22，就需要你填入一个参数<code>-P</code>  </p>
 <blockquote>
 <p>案例：<code>a.txt</code>通过 11024端口 的<code>SSH</code>的 manager用户 传输到<code>/home/manager</code>文件夹中  </p>
 </blockquote>
 <figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp -P <span class="hljs-number">11024</span> a.txt manager<span class="hljs-variable">@192</span>.<span class="hljs-number">168.1</span>.<span class="hljs-number">2</span><span class="hljs-symbol">:/home/manager</span><br></code></pre></div></td></tr></table></figure>
+
 <h3 id="文件夹传输"><a href="#文件夹传输" class="headerlink" title="文件夹传输"></a>文件夹传输</h3><p>如果想要以文件夹为单位传输的话，加个<code>-r</code>参数。路径都改为文件夹路径即可  </p>
 <blockquote>
 <p>案例：将本地的<code>Documents</code>文件夹通过<code>root</code>用户<code>SSH</code>上传到<code>/home/root/folder</code> 下  </p>
 </blockquote>
 <figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp -r /Documents  root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.1</span>.<span class="hljs-number">2</span><span class="hljs-symbol">:/home/root/folder</span>  <br></code></pre></div></td></tr></table></figure>
+
 <h3 id="其它参数"><a href="#其它参数" class="headerlink" title="其它参数"></a>其它参数</h3><table>
 <thead>
 <tr>

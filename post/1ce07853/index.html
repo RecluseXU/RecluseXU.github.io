@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -234,6 +234,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> VALID_CALLEES = [<span class="hljs-string">&quot;String&quot;</span>, <span class="hljs-string">&quot;Number&quot;</span>, <span class="hljs-string">&quot;Math&quot;</span>，<span class="hljs-string">&quot;parseInt&quot;</span>];<br></code></pre></div></td></tr></table></figure>
 
 
+
 <h1 id="quot-string-quot-quot-length-quot-引用不支持"><a href="#quot-string-quot-quot-length-quot-引用不支持" class="headerlink" title="&quot;string&quot;[&quot;length&quot;]引用不支持"></a><code>&quot;string&quot;[&quot;length&quot;]</code>引用不支持</h1><p>我们知道访问object对象有两种方法，<code>&quot;string&quot;[&quot;length&quot;]</code> 和 <code>&quot;string&quot;.length</code>  </p>
 <p>但 <code>NodePath.evaluate()</code> 只会处理 <code>&quot;string&quot;.length</code> 这种方式的表达式，而 <code>&quot;string&quot;[&quot;length&quot;]</code>  是不会直接进行处理的  </p>
 <p>你可以通过可以把 <code>&quot;string&quot;[&quot;length&quot;]</code> 转变为 <code>&quot;string&quot;.length</code> 这种形式的方式来实现适配<br>也可以通过修改源码达到目的  </p>
@@ -242,11 +243,12 @@
 </li>
 <li><p>找到 <code>_evaluate</code> 函数，查看 对 <code>MemberExpression</code> 表达式的处理    </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (path.isMemberExpression() &amp;&amp; !path.parentPath.isCallExpression(&#123;<br>  callee: node<br>&#125;)) &#123;<br>  <span class="hljs-keyword">const</span> property = path.get(<span class="hljs-string">&quot;property&quot;</span>);<br>  <span class="hljs-keyword">const</span> object = path.get(<span class="hljs-string">&quot;object&quot;</span>);<br>  <span class="hljs-keyword">if</span> (object.isLiteral() &amp;&amp; property.isIdentifier()) &#123;<br>    <span class="hljs-keyword">const</span> value = object.node.value;<br>    <span class="hljs-keyword">const</span> type = <span class="hljs-keyword">typeof</span> value;<br>    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">&quot;number&quot;</span> || type === <span class="hljs-string">&quot;string&quot;</span>) &#123;<br>      <span class="hljs-keyword">return</span> value[property.node.name];<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+</li>
+</ol>
 <p>它主要处理在第二个 if 语句里面  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (object.isLiteral() &amp;&amp; property.isIdentifier()) &#123;......&#125;<br></code></pre></div></td></tr></table></figure>
 <p>但是它只考虑了 <code>object</code> 是字面量且 <code>property</code> 必须是 <code>Idernifier</code> 的情况，也就是类似 <code>&quot;string&quot;.length</code>的表达式  </p>
-</li>
-</ol>
 <p>现在把另外一种情况的代码补充进去, 代码如下:  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (object.isLiteral() &amp;&amp; property.isLiteral()) &#123;<br>      <span class="hljs-keyword">const</span> value = object.node.value;<br>      <span class="hljs-keyword">const</span> type = <span class="hljs-keyword">typeof</span> value;<br>      <span class="hljs-keyword">if</span> (type === <span class="hljs-string">&quot;number&quot;</span> || type === <span class="hljs-string">&quot;string&quot;</span>) &#123;<br>        <span class="hljs-keyword">return</span> value[property.node.value];<br>      &#125;<br>    &#125;  <br></code></pre></div></td></tr></table></figure>
 <p>将代码直接添加到 <code>if</code> 语句的后面即可  </p>

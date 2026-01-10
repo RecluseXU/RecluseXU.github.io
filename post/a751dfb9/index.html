@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -225,7 +225,9 @@
 <p>可能会遇到 GBK字符编码问题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/gao_zhennan/article/details/89261672">解决</a>  </p>
 </blockquote>
 <h3 id="class转-jar"><a href="#class转-jar" class="headerlink" title=".class转.jar"></a><code>.class</code>转<code>.jar</code></h3><figure class="highlight crystal"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crystal">jar cvf [生成jar的名称.jar] [列出<span class="hljs-class"><span class="hljs-keyword">class</span>文件] </span><br></code></pre></div></td></tr></table></figure>
+
 <h2 id="JPype代码编写"><a href="#JPype代码编写" class="headerlink" title="JPype代码编写"></a>JPype代码编写</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> jpype <span class="hljs-keyword">import</span> startJVM, JClass, getDefaultJVMPath, shutdownJVM<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_run_java_script</span>():</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    通过调用 java代码获取no</span><br><span class="hljs-string">    options = &#123;&#x27;jar_path&#x27;:jar路径&#125;</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    <span class="hljs-comment"># 启动Java环境</span><br>    startJVM(<br>        getDefaultJVMPath(), <span class="hljs-comment">#  这里是jre的jvm.dll路径,这个方法能让JPype自动去获取，你可以自己写</span><br>        <span class="hljs-string">&quot;-ea&quot;</span>,<br>        <span class="hljs-string">&quot;-Djava.class.path=&quot;</span>+<span class="hljs-string">&quot;ddd.jar&quot;</span>) <span class="hljs-comment">#  jar路径</span><br><br>    <span class="hljs-comment"># 加载自定义的Java代码中的 Java类</span><br>    MyClass = JClass(<span class="hljs-string">&quot;MyClass&quot;</span>)<br>    <span class="hljs-comment"># Java类实例化</span><br>    myclass = MyClass()<br>    <span class="hljs-comment"># 执行成员方法</span><br>    myclass.hello()<br>    <span class="hljs-comment"># 关闭Java环境</span><br>    shutdownJVM()<br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>

@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -218,8 +218,10 @@
 <p>最多最多就是把<code>host</code>拿来用一下减轻一些观感上的压力，但实际上就是很麻烦  </p>
 <h2 id="response-joinurl"><a href="#response-joinurl" class="headerlink" title="response.joinurl"></a>response.joinurl</h2><p><code>scrapy</code>的解析函数参数<code>response</code>的函数<code>joinurl</code>能够很轻松的处理<code>url</code>拼接问题  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a_href = <span class="hljs-string">&#x27;/a/1.html&#x27;</span><br>url = response.urljoin(a_href)<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="response-follow"><a href="#response-follow" class="headerlink" title="response.follow"></a>response.follow</h2><p>此函数用于直接对新的<code>url</code>发起请求，它会计算新的<code>url</code>来访问  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a_href = <span class="hljs-string">&#x27;/a/1.html&#x27;</span><br><span class="hljs-keyword">yield</span> response.follow(a_href, callback=self.parse)<br></code></pre></div></td></tr></table></figure>
+
             </div>
             <hr>
             <div>

@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -229,6 +229,7 @@
 <li>客户端B执行代码完成，删除锁  </li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-variable">$redis</span>-&gt;setNX(<span class="hljs-variable">$key</span>, <span class="hljs-variable">$value</span>);<br><span class="hljs-variable">$redis</span>-&gt;expire(<span class="hljs-variable">$key</span>, <span class="hljs-variable">$ttl</span>);<br></code></pre></div></td></tr></table></figure>
+
 <blockquote>
 <h3 id="过期时间"><a href="#过期时间" class="headerlink" title="过期时间"></a>过期时间</h3><p>如果请求执行因为某些原因意外退出了，导致创建了锁但是没有删除锁，那么这个锁将一直存在，以至于以后缓存再也得不到更新。<br>为 <code>key</code> 设置过期时间能够确保锁最终能够得到释放    </p>
 </blockquote>
@@ -244,6 +245,7 @@
 <li>客户端B执行代码完成，删除锁</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-variable">$redis</span>-&gt;<span class="hljs-built_in">set</span>(<span class="hljs-variable">$key</span>, <span class="hljs-variable">$value</span>, array(<span class="hljs-string">&#x27;nx&#x27;</span>, <span class="hljs-string">&#x27;ex&#x27;</span> =&gt; <span class="hljs-variable">$ttl</span>));  //ex表示秒<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="关于键的值"><a href="#关于键的值" class="headerlink" title="关于键的值"></a>关于键的值</h2><p>值会被填入一个随机数，且必须在所有获取锁请求的客户端里保持唯一<br>键值是用来保证能安全地释放锁的，删除前需要做对比。单纯的用<code>DEL</code>指令有可能造成一个客户端删除了其他客户端的锁  </p>
 <blockquote>
 <p>例: 为什么要设置一个特殊的值  </p>

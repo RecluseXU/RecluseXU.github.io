@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -608,6 +608,7 @@
 <h1 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h1><p>AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）<br><code>AJAX</code> 是一种使用现有标准的新方法<br>利用<code>JavaScript</code>，在页面不刷新的情况下与服务器交换数据，更新部分网页的技术<br>这种技术的使用能节约一部分服务器资源消耗，提升用户体验  </p>
 <h2 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h2><p>一般来说，从发送Ajax请求到更新网页这个过程可以分为三步：发送请求，解析响应，渲染页面<br>这里用原生JavaScript作为例子  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 创建一个 XMLHttpRequest 对象</span><br><span class="hljs-keyword">var</span> xmlhttp;<br><span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.XMLHttpRequest)<br>&#123;<br>    <span class="hljs-comment">//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码</span><br>    xmlhttp=<span class="hljs-keyword">new</span> XMLHttpRequest();<br>&#125;<br><span class="hljs-keyword">else</span><br>&#123;<br>    <span class="hljs-comment">// IE6, IE5 浏览器执行代码</span><br>    xmlhttp=<span class="hljs-keyword">new</span> ActiveXObject(<span class="hljs-string">&quot;Microsoft.XMLHTTP&quot;</span>);<br>&#125;<br><br><span class="hljs-comment">//调用 onreadystatechange 进行监听，等待服务器响应</span><br>xmlhttp.onreadystatechange=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-comment">// 根据readyState和status判断响应状态</span><br>    <span class="hljs-keyword">if</span> (xmlhttp.readyState==<span class="hljs-number">4</span> &amp;&amp; xmlhttp.status==<span class="hljs-number">200</span>)<br>    &#123;<br>        <span class="hljs-comment">//响应回调，对服务器返回的数据进行的操作，刷新页面元素</span><br>        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myDiv&quot;</span>).innerHTML=xmlhttp.responseText;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//调用open()和send()向服务器发送请求</span><br>xmlhttp.open(<span class="hljs-string">&quot;GET&quot;</span>,<span class="hljs-string">&quot;ajax_info.txt&quot;</span>,<span class="hljs-literal">true</span>);<br>xmlhttp.send();<br></code></pre></div></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
@@ -634,6 +635,7 @@
 <h4 id="Ajax样式"><a href="#Ajax样式" class="headerlink" title="Ajax样式"></a>Ajax样式</h4><p>流星</p>
 <ul>
 <li>AngularJS  <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 简单的 GET 请求，可以改为 POST</span><br>$http(&#123;<br>    method: <span class="hljs-string">&#x27;GET&#x27;</span>,<br>    url: <span class="hljs-string">&#x27;/someUrl&#x27;</span><br>&#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">successCallback</span>(<span class="hljs-params">response</span>) </span>&#123;<br>        <span class="hljs-comment">// 请求成功执行代码</span><br>    &#125;, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">errorCallback</span>(<span class="hljs-params">response</span>) </span>&#123;<br>        <span class="hljs-comment">// 请求失败执行代码</span><br>&#125;);<br></code></pre></div></td></tr></table></figure>
+
 </li>
 </ul>
 
@@ -676,7 +678,7 @@
                     
                     
                       <a href="/post/dc386b6d/">
-                        <span class="hidden-mobile">win10-优化</span>
+                        <span class="hidden-mobile">windows-基本优化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

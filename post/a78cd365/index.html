@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -224,6 +224,7 @@
 </ul>
 <h2 id="标识符重命名"><a href="#标识符重命名" class="headerlink" title="标识符重命名"></a>标识符重命名</h2><p>标识符(Identifier)一般指常量名，变量名，函数名。其字面意义可以帮助理解代码，所以要将标识符变为无意义的内容  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;x&quot;</span>;<br>VAR a = <span class="hljs-string">&quot;X&quot;</span>;<br></code></pre></div></td></tr></table></figure>
+
 <p>将变量名变成了无意义的内容。对于解释器来说，改更改不影响代码执行，也不会增加内存消耗<br>标识符重命名是少数几种没有明显副作用的混淆方法之一  </p>
 <p>常见处理方式：  </p>
 <ul>
@@ -239,6 +240,7 @@
 <h1 id="数据混淆"><a href="#数据混淆" class="headerlink" title="数据混淆"></a>数据混淆</h1><p>针对不同的数据类型可以对数据进行不同的混淆  </p>
 <h2 id="数字混淆"><a href="#数字混淆" class="headerlink" title="数字混淆"></a>数字混淆</h2><h3 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h3><p>Javascript 除了常用的 十进制 标识形式外，还有 二进制、八进制、十六进制等表示形式。虽然看起来十分的不同（以<code>0b</code>,<code>0</code>,<code>0x</code>开头），但它们的机器码是等值的。但就理解而言，除了 十进制 ，其它的进制都并不好阅读  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> number = <span class="hljs-number">0b11101001</span>;  <span class="hljs-comment">// 2进制</span><br><span class="hljs-keyword">var</span> number = <span class="hljs-number">0351</span>;  <span class="hljs-comment">// 8进制</span><br><span class="hljs-keyword">var</span> number = <span class="hljs-number">233</span>;  <span class="hljs-comment">// 10进制</span><br><span class="hljs-keyword">var</span> number = <span class="hljs-number">0xe9</span>;  <span class="hljs-comment">// 16进制</span><br></code></pre></div></td></tr></table></figure>
+
 <p>浮点数并不支持这种类型的转换，因为操作系统底层存储其实并不存在小数，而十进制的小数形式只是迎合数学上的表达<br>大部分语言都不支持十进制以外的其它进制的小数表达式  </p>
 <p>浮点数虽然不能使用进制转换的方法进行混淆，但是 Javascript 支持科学计数法，可以使用科学计数法来进行简单的混淆  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> ft = <span class="hljs-number">2.33</span>;<br><span class="hljs-keyword">var</span> ft = <span class="hljs-number">233e-2</span>;<br><span class="hljs-keyword">var</span> ft = <span class="hljs-number">233E-2</span>;<br></code></pre></div></td></tr></table></figure>
@@ -298,8 +300,10 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> c = <span class="hljs-string">&#x27;abc&#x27;</span>;<br><span class="hljs-keyword">var</span> uc = <span class="hljs-string">&#x27;\u0061\u0062c&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
 
 
+
 <h2 id="undefined-与-null-混淆"><a href="#undefined-与-null-混淆" class="headerlink" title="undefined 与 null 混淆"></a>undefined 与 null 混淆</h2><p>并不存在复杂的混淆方式，可以尝试利用语言特性进行混淆  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> c = <span class="hljs-literal">undefined</span>;<br><span class="hljs-keyword">var</span> uc = <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;<br></code></pre></div></td></tr></table></figure>
+
 
 
 <h1 id="控制混淆"><a href="#控制混淆" class="headerlink" title="控制混淆"></a>控制混淆</h1><p>对程序的控制流进行变换，打乱的代码运行顺序会让代码阅读变得困难<br>控制混淆是一种效果较好的代码保护手段，但存在一定的混淆风险  </p>
@@ -326,6 +330,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">var</span> s = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">while</span>(i&lt;=<span class="hljs-number">100</span>)&#123;<br>    s += i;<br>    i++;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>混淆后  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> swVar = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span>(swVar !=<span class="hljs-number">0</span>):<br>    <span class="hljs-keyword">switch</span>(swVar)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:&#123;<br>            <span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">var</span> s = <span class="hljs-number">0</span>;<br>            swVar = <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">break</span><br>        &#125;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:&#123;<br>            <span class="hljs-keyword">if</span>(i &lt;= <span class="hljs-number">100</span>)<br>                swVar = <span class="hljs-number">3</span>;<br>            <span class="hljs-keyword">else</span><br>                swVar = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">break</span><br>        &#125;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:&#123;<br>            s += i;<br>            i++;<br>            swVar = <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">break</span><br>        &#125;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+
 
 
 <p>代码由 自上而下的线性流程 变成了 以switch控制分发平行代码块的结构  </p>

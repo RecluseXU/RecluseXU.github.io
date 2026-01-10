@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -222,6 +222,7 @@
 <li>支持 <code>async</code>/<code>await</code></li>
 </ul>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">pip install aiofiles<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="open"><a href="#open" class="headerlink" title="open()"></a>open()</h2><p>它的操作和原生的<code>open()</code>函数非常类似  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> aiofiles.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;filename&#x27;</span>, mode=<span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    contents = <span class="hljs-keyword">await</span> f.read()<br>print(contents)<br></code></pre></div></td></tr></table></figure>
 <p>在操作成功以后，返回的对象包含以下的方法可以使用  </p>

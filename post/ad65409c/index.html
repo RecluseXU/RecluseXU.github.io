@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -218,6 +218,7 @@
 <h2 id="代码片段文件"><a href="#代码片段文件" class="headerlink" title="代码片段文件"></a>代码片段文件</h2><p>代码片段的编写语法就和<code>JSON</code>一样<br>支持编写C语言类型的注释（也就是”//“注释）<br>一个代码片段文件可以编写任意个代码片段  </p>
 <h2 id="编写代码片段"><a href="#编写代码片段" class="headerlink" title="编写代码片段"></a>编写代码片段</h2><p>在代码片段文件中写入用户代码片段<br>此处我以Python头举例  </p>
 <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>	<span class="hljs-attr">&quot;Python-Commom&quot;</span>: &#123;<br>		<span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;python&quot;</span>,<br>		<span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Python声明头部，包含编码，解释器指定，文件信息&quot;</span>,<br>		<span class="hljs-attr">&quot;prefix&quot;</span>: [<span class="hljs-string">&quot;header&quot;</span>],<br>		<span class="hljs-attr">&quot;body&quot;</span>: [<br>			<span class="hljs-string">&quot;#!/usr/bin/env python&quot;</span>,<br>			<span class="hljs-string">&quot;# -*- encoding: utf-8 -*-&quot;</span>,<br>			<span class="hljs-string">&quot;&#x27;&#x27;&#x27;&quot;</span>,<br>			<span class="hljs-string">&quot;@File    :   $TM_FILENAME&quot;</span>,<br>			<span class="hljs-string">&quot;@Time    :   $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE&quot;</span>,<br>			<span class="hljs-string">&quot;@Contact :   https://github.com/RecluseXU&quot;</span>,<br>			<span class="hljs-string">&quot;@Desc    :   $1&quot;</span>,<br>			<span class="hljs-string">&quot;&#x27;&#x27;&#x27;&quot;</span>,<br>			<span class="hljs-string">&quot;&quot;</span>,<br>			<span class="hljs-string">&quot;# here put the import lib&quot;</span>,<br>			<span class="hljs-string">&quot;$0&quot;</span>,<br>		],<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
@@ -390,11 +391,13 @@
 <p>案例：将文件名改为大写字母  </p>
 </blockquote>
 <figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir"><span class="hljs-variable">$&#123;</span>TM_FILENAME/(.*)/<span class="hljs-variable">$&#123;</span><span class="hljs-number">1</span><span class="hljs-symbol">:/upcase</span>&#125;/&#125;<br></code></pre></div></td></tr></table></figure>
+
 <p><span></span></p>
 <blockquote>
 <p>案例：只保留数字与字母 </p>
 </blockquote>
 <figure class="highlight parser3"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs parser3"><span class="hljs-variable">$&#123;TM_FILENAME</span><span class="xml">/[</span><span class="hljs-keyword">^0-9</span><span class="hljs-keyword">^a-z</span><span class="xml">]//gi&#125;</span><br></code></pre></div></td></tr></table></figure>
+
 
 
             </div>

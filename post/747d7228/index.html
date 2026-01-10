@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -225,7 +225,8 @@
 <li><p>测试<br>cmd中输入<code>npm</code>得到一堆信息，则说明安装成功<br><img src="/Node.js-%E5%9F%BA%E7%A1%80/20200816114606605.png" srcset="/img/loading.gif"></p>
 </li>
 <li><p>配置node_cache路径<br>这个文件夹是<code>Node.js</code>用来存放下载包的缓存的地方  </p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> cache <span class="hljs-string">&quot;cache路径&quot;</span><br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> cache <span class="hljs-string">&quot;cache路径&quot;</span><br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>设置全局模块存放路径<br>这个文件夹是<code>Node.js</code>用来存放通过全局安装的模块的地方<br><code>Node.js</code>会自动寻找该路径下的<code>node_modules</code>文件夹为实际存放全局模块的路径<br>我一般设置为在Node.js目录  </p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> prefix <span class="hljs-string">&quot;全局模块存放的路径&quot;</span><br></code></pre></div></td></tr></table></figure>
 <blockquote>
@@ -236,7 +237,9 @@
 </li>
 </ol>
 <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h2><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">npm <span class="hljs-keyword">install</span> -g 包名<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="全局卸载"><a href="#全局卸载" class="headerlink" title="全局卸载"></a>全局卸载</h2><figure class="highlight coffeescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> uninstall -g 包名<br></code></pre></div></td></tr></table></figure>
+
             </div>
             <hr>
             <div>

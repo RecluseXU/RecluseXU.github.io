@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -218,18 +218,25 @@
 </ul>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="一、添加yum源"><a href="#一、添加yum源" class="headerlink" title="一、添加yum源"></a>一、添加yum源</h2><ol>
 <li><p>mysql的官网下载yum repo配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm<br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>安装repo</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">rpm -ivh mysql57-community-release-el7-9.noarch.rpm<br></code></pre></div></td></tr></table></figure>
-<h2 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h2><h3 id="原生mysql安装"><a href="#原生mysql安装" class="headerlink" title="原生mysql安装"></a>原生mysql安装</h3></li>
+
+</li>
+</ol>
+<h2 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h2><h3 id="原生mysql安装"><a href="#原生mysql安装" class="headerlink" title="原生mysql安装"></a>原生mysql安装</h3><ol>
 <li><p>yum安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install mysql-server<br></code></pre></div></td></tr></table></figure></li>
 <li><p>启动mysql</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start mysqld <br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start mysqld <br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>临时密码获取</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">grep <span class="hljs-string">&#x27;temporary password&#x27;</span> /var/<span class="hljs-built_in">log</span>/mysqld.log<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">grep <span class="hljs-string">&#x27;temporary password&#x27;</span> /var/<span class="hljs-built_in">log</span>/mysqld.log<br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>重启mysql</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start mysqld<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start mysqld<br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>临时登录</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mysql -u root -p<br></code></pre></div></td></tr></table></figure>
 <p> 然后输入密码（刚刚获取的临时密码）</p>
@@ -246,7 +253,8 @@
 <li><p>拉取镜像  </p>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> pull mysql <span class="hljs-number">5</span>.<span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure>
 <p> 你可以指定版本号，也可以不指定（默认最新版）<br> 拉取完毕后看看是否有了镜像  </p>
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker images</span><br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker images</span><br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>创建容器  </p>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -p <span class="hljs-number">3307</span>:<span class="hljs-number">3306</span> --name mysql -e MYSQL_ROOT_PASSWORD=起始mysql-root用户密码 -d mysql:<span class="hljs-number">5</span>.<span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure>
 <ul>
@@ -268,11 +276,16 @@
 </li>
 <li><p>连接容器，输入用户/密码,进入mysql  </p>
 <figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">docker exec -<span class="hljs-keyword">it</span> mysql bash<br>mysql -u用户名 -p密码<br></code></pre></div></td></tr></table></figure>
-<h2 id="配置mysql"><a href="#配置mysql" class="headerlink" title="配置mysql"></a>配置mysql</h2><h3 id="开启远程控制"><a href="#开启远程控制" class="headerlink" title="开启远程控制"></a>开启远程控制</h3></li>
+
+</li>
+</ol>
+<h2 id="配置mysql"><a href="#配置mysql" class="headerlink" title="配置mysql"></a>配置mysql</h2><h3 id="开启远程控制"><a href="#开启远程控制" class="headerlink" title="开启远程控制"></a>开启远程控制</h3><ol>
 <li><p>登录数据库  </p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mysql -u root -p<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mysql -u root -p<br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>进去mysql数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">use mysql;<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">use mysql;<br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>创建用户(可选操作)</p>
 <figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create user &#39;用户名&#39;@&#39;用户的HOST&#39; identified by &#39;密码&#39;;<br></code></pre></div></td></tr></table></figure>
 <p> 如果想要任意客户端都可以访问的话，给<code>HOST</code>设置一个<code>%</code>即可，也可以输入ip<br> 如果选择创建用户的话后面的步骤就可以跳过了</p>
@@ -287,8 +300,11 @@
 </li>
 <li><p>刷新权限</p>
 <figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">flush privileges;<br></code></pre></div></td></tr></table></figure>
-<h3 id="Navicat连接报错2059"><a href="#Navicat连接报错2059" class="headerlink" title="Navicat连接报错2059"></a>Navicat连接报错2059</h3><p><code>Navicat</code>不支持<code>MySQL</code>新版本的默认加密方式<code>caching_sha2_password</code>导致报错  </p>
+
 </li>
+</ol>
+<h3 id="Navicat连接报错2059"><a href="#Navicat连接报错2059" class="headerlink" title="Navicat连接报错2059"></a>Navicat连接报错2059</h3><p><code>Navicat</code>不支持<code>MySQL</code>新版本的默认加密方式<code>caching_sha2_password</code>导致报错  </p>
+<ol>
 <li><p>查看<code>mysql</code>用户信息  </p>
 <figure class="highlight n1ql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs n1ql"><span class="hljs-keyword">select</span> host, <span class="hljs-keyword">user</span>, plugin <span class="hljs-keyword">from</span> mysql.<span class="hljs-keyword">user</span>;<br></code></pre></div></td></tr></table></figure>
 <p> <img src="/Mysql-CentOS/20200911105251476.png" srcset="/img/loading.gif"><br> 可以查看到，其加密方式为<code>caching_sha2_password</code>  </p>
@@ -301,9 +317,11 @@
 <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><ul>
 <li>用户对某个数据库内的所有表 增删改查权限<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-keyword">grant</span> <span class="hljs-keyword">select</span>, <span class="hljs-keyword">insert</span>, <span class="hljs-keyword">update</span>, <span class="hljs-keyword">delete</span> <span class="hljs-keyword">on</span> 数据库名.* <span class="hljs-keyword">to</span> 用户名@<span class="hljs-string">&#x27;用户Host&#x27;</span>  <br></code></pre></div></td></tr></table></figure>
 
+
 </li>
 </ul>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="mysql服务"><a href="#mysql服务" class="headerlink" title="mysql服务"></a>mysql服务</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start mysqld  <span class="hljs-comment"># 启动mysql服务</span><br>systemctl stop mysqld  <span class="hljs-comment"># 关闭mysql服务</span><br>systemctl restart mysqld  <span class="hljs-comment"># 重启 mysql服务</span><br>systemctl status mysqld  <span class="hljs-comment"># 查看mysql服务运行状态</span><br>systemctl <span class="hljs-built_in">enable</span> mysqld   <span class="hljs-comment"># 开机启动mysql</span><br>systemctl <span class="hljs-built_in">disable</span> mysqld    <span class="hljs-comment"># 关闭开机启动mysql</span><br></code></pre></div></td></tr></table></figure>
+
 <h2 id="查看mysql版本"><a href="#查看mysql版本" class="headerlink" title="查看mysql版本"></a>查看mysql版本</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select version();<br></code></pre></div></td></tr></table></figure>
             </div>
             <hr>

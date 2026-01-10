@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -215,6 +215,7 @@
             <div class="markdown-body">
               <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p>Pymongo 是 Python 阻塞操作 MongoDB 的模块  </p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> pymongo<br></code></pre></div></td></tr></table></figure>
+
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h2><figure class="highlight axapta"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs axapta"><span class="hljs-keyword">from</span> pymongo import MongoClient<br><span class="hljs-keyword">client</span> = MongoClient(<span class="hljs-string">&quot;mongodb://mongodb0.example.net:27019&quot;</span>)<br></code></pre></div></td></tr></table></figure>
 <blockquote>
 <p>MongoClient(‘mongodb://用户名:用户密码@服务IP:服务端口/‘)</p>
@@ -228,6 +229,7 @@
 </blockquote>
 <h2 id="访问集合-Collection"><a href="#访问集合-Collection" class="headerlink" title="访问集合 Collection"></a>访问集合 Collection</h2><p>访问方式与访问database类似  </p>
 <figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">coll</span> = db.dataset<br><span class="hljs-attr">coll</span> = db[<span class="hljs-string">&#x27;dataset&#x27;</span>]<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="访问文档-Document"><a href="#访问文档-Document" class="headerlink" title="访问文档 Document"></a>访问文档 Document</h2><h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><blockquote>
 <p>如果你所插入的集合在<code>MongoDB</code>中不存在，<code>MongoDB</code>将为你自动创建一个集合  </p>
 </blockquote>
@@ -239,6 +241,7 @@
 </blockquote>
 <h3 id="Collection-insert-many"><a href="#Collection-insert-many" class="headerlink" title="Collection.insert_many"></a>Collection.insert_many</h3><p>插入多条数据  </p>
 <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile">myclient = pymongo.MongoClient(<span class="hljs-string">&quot;mongodb://localhost:27017/&quot;</span>)<br>mydb = myclient[<span class="hljs-string">&quot;runoobdb&quot;</span>][<span class="hljs-string">&quot;sites&quot;</span>]<br>mylist = [<br>  &#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;知乎&quot;</span>, <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;https://www.zhihu.com&quot;</span> &#125;,<br>  &#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Github&quot;</span>, <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;https://www.github.com&quot;</span> &#125;<br>]<br> <br>x = mycol.insert_many(mylist)<br>print(x.inserted_ids)<br></code></pre></div></td></tr></table></figure>
+
 <h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><h2 id="查询方法"><a href="#查询方法" class="headerlink" title="查询方法"></a>查询方法</h2><h3 id="Collection-find-one"><a href="#Collection-find-one" class="headerlink" title="Collection.find_one"></a>Collection.find_one</h3><p>查询集合，得到一个结果，通常用于看看搜索结果的样式   </p>
 <h3 id="Collection-find"><a href="#Collection-find" class="headerlink" title="Collection.find"></a>Collection.find</h3><p>用于查询多个结果，查询可以返回在集合中的所有数据或者只返回符合筛选条件<br>方法返回一个查询结果的游标，这是一个产生文档的迭代对象<br>如果不传入任何参数，则返回所有结果   </p>
 <p>需要注意的是，如果你不指定不返回<code>_id</code>，那么会默认返回这个项<br>你可以使用比较运算符之类的操作，具体见<a href="/post/8ead567e/" title="比较逻辑">比较逻辑</a>  </p>
@@ -251,10 +254,13 @@
 </ul>
 <h3 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h3><p>限定返回的最大结果数量  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">database.collect.find(&#123;&#125;, limit=<span class="hljs-number">2</span>)<br>database.collect.find(&#123;&#125;).limit(<span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="skip"><a href="#skip" class="headerlink" title="skip"></a>skip</h3><p>跳过指定数量的结果  </p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">database.collect.find(&#123;&#125;, skip=<span class="hljs-number">1</span>)<br>database.collect.find(&#123;&#125;).limit(<span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
 
+
 <h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="根据-id查询"><a href="#根据-id查询" class="headerlink" title="根据_id查询"></a>根据_id查询</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> bson.objectid <span class="hljs-keyword">import</span> ObjectId<br><br>articles.find_one(&#123;‘_id’: ObjectId(‘50f0d76347f4ec148890ef1e’)&#125;)<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="比较查询"><a href="#比较查询" class="headerlink" title="比较查询"></a>比较查询</h3><table>
 <thead>
 <tr>
@@ -279,41 +285,61 @@
 <p>案例：字段非空查询  </p>
 <figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">col.<span class="hljs-builtin-name">find</span>(&#123;<span class="hljs-string">&quot;字段名&quot;</span>:&#123;<span class="hljs-string">&quot;<span class="hljs-variable">$ne</span>&quot;</span>:None&#125;&#125;,&#123;&#125;)<br></code></pre></div></td></tr></table></figure>
 
+
 <h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>将某个数据记录的某系字段进行更改  </p>
 <ul>
-<li>update_one()<br>修改匹配的第一条记录<br>第一个参数为查询的条件，第二个参数为要修改的字段    <blockquote>
+<li><p>update_one()<br>修改匹配的第一条记录<br>第一个参数为查询的条件，第二个参数为要修改的字段    </p>
+<blockquote>
 <p>案例：将name为DIO的记录的power项改为stander  </p>
 </blockquote>
-<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">mycol.update_one(<br>    &#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;DIO&quot;</span> &#125;, &#123; <span class="hljs-string">&quot;$set&quot;</span>: &#123;<span class="hljs-symbol">&#x27;power</span><span class="hljs-string">&quot;:&quot;</span>stander<span class="hljs-string">&quot; &#125; &#125;)</span><br></code></pre></div></td></tr></table></figure></li>
-<li>update_many()<br>修改匹配的所有记录<br>参数与<code>update_one</code>是一样的  <blockquote>
+<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">mycol.update_one(<br>    &#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;DIO&quot;</span> &#125;, &#123; <span class="hljs-string">&quot;$set&quot;</span>: &#123;<span class="hljs-symbol">&#x27;power</span><span class="hljs-string">&quot;:&quot;</span>stander<span class="hljs-string">&quot; &#125; &#125;)</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>update_many()<br>修改匹配的所有记录<br>参数与<code>update_one</code>是一样的  </p>
+<blockquote>
 <p>案例：修改所有name是JO开头的power项值为1000000  </p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mycol.update_many(&#123;<span class="hljs-string">&quot;name&quot;</span>: &#123; <span class="hljs-string">&quot;<span class="hljs-variable">$regex</span>&quot;</span>: <span class="hljs-string">&quot;^JO&quot;</span> &#125; &#125;, &#123; <span class="hljs-string">&quot;<span class="hljs-variable">$set</span>&quot;</span>: &#123; <span class="hljs-string">&quot;power&quot;</span>: <span class="hljs-string">&quot;1000000&quot;</span> &#125; &#125;)<br></code></pre></div></td></tr></table></figure>
-<h2 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h2>将旧的文档丢弃，传入一个新的文档替代原本的文档  </li>
+
+</li>
+</ul>
+<h2 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h2><p>将旧的文档丢弃，传入一个新的文档替代原本的文档  </p>
+<ul>
 <li>update()<br>替代文档对应原来的文档可以有不同的字段<br>替代文档可以忽略_id字段因为它是不变的。(如果你硬是要填入那它必须和原文档的值相同)  <blockquote>
 </blockquote>
 <figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript"><span class="hljs-literal">result</span> = db.restaurants.replace_one(<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-string">&quot;5f60b67d7c68de24d1745024&quot;</span>&#125;,<br>    &#123;<br>        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;DIO&quot;</span>,<br>        <span class="hljs-string">&quot;power&quot;</span>: <span class="hljs-string">&quot;The World&quot;</span><br>    &#125;<br>)<br></code></pre></div></td></tr></table></figure>
 
+
 </li>
 </ul>
 <h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ul>
-<li>delete_one()<br>删除第一个匹配的项  <blockquote>
+<li><p>delete_one()<br>删除第一个匹配的项  </p>
+<blockquote>
 <p>案例：删除找寻出来第一个name为Jax的记录  </p>
 </blockquote>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">mycol.delete<span class="hljs-constructor">_one(&#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Jax&quot;</span> &#125;)</span><br></code></pre></div></td></tr></table></figure></li>
-<li>delete_many()<br>删除多个文档<br>如果不传入参数，则删除集合中的所有文档  <blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">mycol.delete<span class="hljs-constructor">_one(&#123; <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Jax&quot;</span> &#125;)</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>delete_many()<br>删除多个文档<br>如果不传入参数，则删除集合中的所有文档  </p>
+<blockquote>
 <p>案例：删除所有name以F开头的记录  </p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mycol.delete_many(&#123; <span class="hljs-string">&quot;name&quot;</span>: &#123;<span class="hljs-string">&quot;<span class="hljs-variable">$regex</span>&quot;</span>: <span class="hljs-string">&quot;^F&quot;</span>&#125; &#125;)<br></code></pre></div></td></tr></table></figure>
-<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3></li>
+
+</li>
+</ul>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><ul>
 <li>drop()<br>删除一个集合  <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">mycol</span><span class="hljs-selector-class">.drop</span>()<br></code></pre></div></td></tr></table></figure>
-<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2></li>
+
+</li>
+</ul>
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><ul>
 <li>aggregate  <blockquote>
 <p>案例：<br>使用$group操作符去利用一个指定的键进行分组。在$group操作中，指定需要分组的字段为_id。$group通过字段路径访问字段，该字段需要有一个美元符号$作为前缀。$group操作可以使用累加器对本次分组进行计算。下面的例子将使用borough字段对restaurants集合进行操作，并且使用$sum累加器进行文档的统计计算。</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">cursor = db.restaurants.aggregate(<br>    [<br>        &#123;<span class="hljs-string">&quot;<span class="hljs-variable">$group</span>&quot;</span>: &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-variable">$borough</span>&quot;</span>, <span class="hljs-string">&quot;count&quot;</span>: &#123;<span class="hljs-string">&quot;<span class="hljs-variable">$sum</span>&quot;</span>: 1&#125;&#125;&#125;<br>    ]<br>)<br></code></pre></div></td></tr></table></figure>
-<h1 id="其它操作"><a href="#其它操作" class="headerlink" title="其它操作"></a>其它操作</h1><h2 id="保存較大的二進制文件"><a href="#保存較大的二進制文件" class="headerlink" title="保存較大的二進制文件"></a>保存較大的二進制文件</h2>将图片、文档等存入<code>mogodb</code>中，需要用到两个模块，pymongo和gridfs<br>在存入过程中必须将文件转换为二进制的格式才能存入，存入<code>mongoDB</code>中会生成两个文件 <strong>xxx.chunk</strong> 和 <strong>xxx.files</strong>  </li>
+
+</li>
 </ul>
+<h1 id="其它操作"><a href="#其它操作" class="headerlink" title="其它操作"></a>其它操作</h1><h2 id="保存較大的二進制文件"><a href="#保存較大的二進制文件" class="headerlink" title="保存較大的二進制文件"></a>保存較大的二進制文件</h2><p>将图片、文档等存入<code>mogodb</code>中，需要用到两个模块，pymongo和gridfs<br>在存入过程中必须将文件转换为二进制的格式才能存入，存入<code>mongoDB</code>中会生成两个文件 <strong>xxx.chunk</strong> 和 <strong>xxx.files</strong>  </p>
 <p><code>GridFS</code>是一种将大型文件存储在 <code>MongoDB</code> 的文件规范：数据库支持以<code>BSON</code>格式保存二进制对象<br>但是<code>MongoDB</code>中 <code>BSON</code>对象 最大不能超过 4MB  </p>
 <p><code>GridFS</code> 规范提供了一种透明的机制，可以将一个大文件分割成为多个较小的文档  </p>
 <p>为实现这点，该规范指定了一个将文件分块的标准<br>每个文件都将在文件集合对象中保存一个元数据对象，一个或多个块对象可被组合保存在一个块集合中  </p>

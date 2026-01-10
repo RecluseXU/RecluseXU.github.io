@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -165,7 +165,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      85 字
+      86 字
     </span>
   
 
@@ -219,9 +219,14 @@
 <li>Centos7.4 腾讯云服务器</li>
 </ul>
 <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a><strong>操作</strong></h2><ol>
-<li>添加源<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo wget http://repo.fdzh.org/chrome/google-chrome-mirrors.repo -P /etc/yum.repos.d/<br></code></pre></div></td></tr></table></figure></li>
-<li>安装Chrome<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo yum install google-chrome-stable<br></code></pre></div></td></tr></table></figure></li>
-<li>为Chrome添加启动参数<ol>
+<li><p>添加源</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo wget http://repo.fdzh.org/chrome/google-chrome-mirrors.repo -P /etc/yum.repos.d/<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>安装Chrome</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo yum install google-chrome-stable<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>为Chrome添加启动参数</p>
+<ol>
 <li>vim打开设置<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim  /usr/share/applications/google-chrome.desktop<br></code></pre></div></td></tr></table></figure></li>
 <li>修改设置<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Exec=/usr/bin/google-chrome-stable %U<br></code></pre></div></td></tr></table></figure>
 ↓修改为↓<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Exec=/usr/bin/google-chrome-stable %U --no-sandbox<br></code></pre></div></td></tr></table></figure></li>

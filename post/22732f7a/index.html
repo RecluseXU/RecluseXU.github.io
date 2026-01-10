@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -165,7 +165,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      242 字
+      243 字
     </span>
   
 
@@ -221,9 +221,15 @@
 </ul>
 <h3 id="什么是EPEL"><a href="#什么是EPEL" class="headerlink" title="什么是EPEL?"></a><strong>什么是EPEL?</strong><span id='WhatIsEPEL'></span></h3><p>　　EPEL的全称叫 Extra Packages for Enterprise Linux 。EPEL是由 Fedora 社区打造，为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。<br>　　<strong>装上了 EPEL之后，就相当于添加了一个第三方源。</strong><br>　　如果你知道rpmfusion.org的话，拿 rpmfusion 做比较还是很恰当的。rpmfusion 主要为桌面发行版提供大量rpm包，而EPEL则为服务器版本提供大量的rpm包，而且大多数rpm包在官方 repository 中是找不到的。EPEL绝大多数rpm包要比官方repository 的rpm包版本要来得新。</p>
 <h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a><strong>过程</strong></h2><ol>
-<li>安装 EPEL<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install epel-release<br></code></pre></div></td></tr></table></figure></li>
-<li>更新源<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum clean all &amp;&amp; yum makecache<br></code></pre></div></td></tr></table></figure>
-<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a><strong>其它</strong></h2><h3 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h3></li>
+<li><p>安装 EPEL</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install epel-release<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>更新源</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum clean all &amp;&amp; yum makecache<br></code></pre></div></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a><strong>其它</strong></h2><h3 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h3><ol>
 <li>卸载本体<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum remove epel-release<br></code></pre></div></td></tr></table></figure></li>
 <li>清空epel目录<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">rm -rf /var/cache/yum/x86_64/7/epel/<br></code></pre></div></td></tr></table></figure>
 注意到有一个叫 7 的目录，这代表着是EPEL7的记录。<br>如果你试图卸载其它版本，那么是其它数字。</li>

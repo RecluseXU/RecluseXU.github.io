@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -261,12 +261,17 @@
 <h3 id="难点-1"><a href="#难点-1" class="headerlink" title="难点"></a>难点</h3><p>获取元素的伪类属性  </p>
 <h3 id="应对-2"><a href="#应对-2" class="headerlink" title="应对"></a>应对</h3><ul>
 <li>利用<code>Puppeteer</code>或<code>Selenium</code>在网页中执行JS来获取content  <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> el = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.valuable-content&#x27;</span>)  <span class="hljs-comment">// 利用选择器选出目标元素</span><br><span class="hljs-keyword">const</span> styles = getComputedStyle(el, <span class="hljs-string">&#x27;before&#x27;</span>) <span class="hljs-comment">// 获取样式（这里可能是before或者after）</span><br><span class="hljs-built_in">console</span>.log(styles.content)  <span class="hljs-comment">// 打印样式查看</span><br></code></pre></div></td></tr></table></figure>
-<h2 id="元素定位反爬"><a href="#元素定位反爬" class="headerlink" title="元素定位反爬"></a>元素定位反爬</h2>利用绝对定位将某一个数字或字符将原数字或字符通过一定的偏移量替换  </li>
+
+</li>
+</ul>
+<h2 id="元素定位反爬"><a href="#元素定位反爬" class="headerlink" title="元素定位反爬"></a>元素定位反爬</h2><p>利用绝对定位将某一个数字或字符将原数字或字符通过一定的偏移量替换  </p>
+<ul>
 <li>替换的数字或字符通常来说是随机的  </li>
 <li>直接抓取会抓到错误信息  </li>
 </ul>
 <h3 id="应对-3"><a href="#应对-3" class="headerlink" title="应对"></a>应对</h3><p>计算替换元素偏移量，与被替换元素做比对，还原真实值  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 元素获取</span><br><span class="hljs-keyword">const</span> elPr = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.mb-10 .b-airfly:nth-child(1) .fix_price&#x27;</span>)<br><span class="hljs-comment">// 被替换元素类别</span><br><span class="hljs-keyword">let</span> strArr = <span class="hljs-built_in">Array</span>.from(elPr.querySelectorAll(<span class="hljs-string">&#x27;b:first-child &gt; i&#x27;</span>)).map(<span class="hljs-function"><span class="hljs-params">el</span> =&gt;</span> el.innerText)<br><span class="hljs-comment">// 替换元素</span><br>elPr.querySelectorAll(<span class="hljs-string">&#x27;b:not(:first-child)&#x27;</span>).forEach(<span class="hljs-function"><span class="hljs-params">el</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 偏移量</span><br>    <span class="hljs-keyword">const</span> left = <span class="hljs-built_in">Number</span>(getComputedStyle(el).left.replace(<span class="hljs-string">&#x27;px&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>))<br>    <span class="hljs-comment">// 替换值</span><br>    strArr[strArr.length + left/<span class="hljs-number">16</span>] = el.innerText<br>&#125;)<br><span class="hljs-comment">// 真实值</span><br><span class="hljs-built_in">console</span>.log(strArr.join(<span class="hljs-string">&#x27;&#x27;</span>)) <br></code></pre></div></td></tr></table></figure>
+
 <h2 id="利用字符分割"><a href="#利用字符分割" class="headerlink" title="利用字符分割"></a>利用字符分割</h2><ul>
 <li>将字符串用标签分割开来  </li>
 <li>由于其实内联块级(inline-block)，依旧是一行展示  </li>
@@ -274,6 +279,7 @@
 </ul>
 <h3 id="应对-4"><a href="#应对-4" class="headerlink" title="应对"></a>应对</h3><p>将内联块级标签的<code>innerText</code>拼接起来<br>注意过滤掉所有的<code>display:none</code>属性  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 元素获取</span><br><span class="hljs-keyword">const</span> elIp = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.ip&#x27;</span>)<br><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-comment">// 过滤 display: none</span><br><span class="hljs-keyword">const</span> elList = elIp.querySelectorAll(<span class="hljs-string">&#x27;*:not([style=&quot;display: none;&quot;])&#x27;</span>);<br><span class="hljs-comment">// 拼接</span><br>elList.forEach(<span class="hljs-function">(<span class="hljs-params">el, i</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span>(i === elList.length - <span class="hljs-number">1</span> )<br>        <span class="hljs-keyword">return</span> str += el.innerText<br>&#125;)<br><span class="hljs-built_in">console</span>.log(str)<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="推荐CSS反爬步骤"><a href="#推荐CSS反爬步骤" class="headerlink" title="推荐CSS反爬步骤"></a>推荐CSS反爬步骤</h2><ol>
 <li>通过调试工具，人工查看CSS样式  </li>
 <li>判断CSS反爬类型  </li>

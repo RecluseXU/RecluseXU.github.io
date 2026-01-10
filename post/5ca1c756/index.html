@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -238,53 +238,68 @@
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vi /etc/ssh/sshd_config<br></code></pre></div></td></tr></table></figure>
 <p>在进行完修改以后，重新启动SSH服务以应用设置  </p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">service sshd restart<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="SSH禁止使用root用户直接登录"><a href="#SSH禁止使用root用户直接登录" class="headerlink" title="SSH禁止使用root用户直接登录"></a>SSH禁止使用root用户直接登录</h2><p>想要获取root权限？先用普通用户登录再切换用户  </p>
 <blockquote>
 <p>注意，要是没有其它用户又禁用了root用户就会很麻烦  </p>
 </blockquote>
 <ol>
-<li><p>打开SSH配置文件</p>
+<li>打开SSH配置文件</li>
+<li>找到对应项并设置为no<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">PermitRootLogin no<br></code></pre></div></td></tr></table></figure>
+
 </li>
-<li><p>找到对应项并设置为no</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">PermitRootLogin no<br></code></pre></div></td></tr></table></figure>
+</ol>
 <h2 id="修改SSH端口"><a href="#修改SSH端口" class="headerlink" title="修改SSH端口"></a>修改SSH端口</h2><p>如果<code>SSH端口</code>不是22，那就不能直接暴力破解了，需要扫描很多的端口才能发现真的<code>SSH端口</code>，浪费黑客的时间  </p>
 <blockquote>
 <p>注意防火墙的问题，连不上就麻烦了  </p>
 </blockquote>
-</li>
-<li><p>打开SSH配置文件  </p>
-</li>
-<li><p>找到 #Port 22<br>这东西本身就被注释了，找到这个东西只是为了将一类设置写一起  </p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># Port 22</span><br>Port 51369 <span class="hljs-comment"># 设置自定义的端口51369</span><br></code></pre></div></td></tr></table></figure>
-<h2 id="创建SSH密钥来登录"><a href="#创建SSH密钥来登录" class="headerlink" title="创建SSH密钥来登录"></a>创建SSH密钥来登录</h2><p>虽然理论中说了要双方公钥交换，但实际上只要有一对连接上了，另一个会被自动创建<br>因此有两种方式来创建密钥  </p>
+<ol>
+<li>打开SSH配置文件  </li>
+<li>找到 #Port 22<br>这东西本身就被注释了，找到这个东西只是为了将一类设置写一起  <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># Port 22</span><br>Port 51369 <span class="hljs-comment"># 设置自定义的端口51369</span><br></code></pre></div></td></tr></table></figure>
+
 </li>
 </ol>
+<h2 id="创建SSH密钥来登录"><a href="#创建SSH密钥来登录" class="headerlink" title="创建SSH密钥来登录"></a>创建SSH密钥来登录</h2><p>虽然理论中说了要双方公钥交换，但实际上只要有一对连接上了，另一个会被自动创建<br>因此有两种方式来创建密钥  </p>
 <ul>
 <li>客户端创建密钥，将公钥给服务器  </li>
 <li>服务器创建密钥，将私钥给客户端，自己将公钥注册下来  </li>
 </ul>
 <p>以下方式为第二种  </p>
 <ol>
-<li>SSH设置允许密钥登录  <ol>
+<li><p>SSH设置允许密钥登录  </p>
+<ol>
 <li>打开SSH配置文件  </li>
-<li>编辑配置  <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">RSAAuthentication</span> <span class="hljs-literal">yes</span><br><span class="hljs-string">PubkeyAuthentication</span> <span class="hljs-literal">yes</span><br></code></pre></div></td></tr></table></figure></li>
+<li>编辑配置  <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">RSAAuthentication</span> <span class="hljs-literal">yes</span><br><span class="hljs-string">PubkeyAuthentication</span> <span class="hljs-literal">yes</span><br></code></pre></div></td></tr></table></figure>
+</li>
 </ol>
 </li>
-<li>切换到希望创建密钥的用户，创建密钥对  <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ssh-keygen<br></code></pre></div></td></tr></table></figure>
- 过程中会需要你输入一些东西，要是不知道是什么，可以直接回车不管   <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">Enter file <span class="hljs-keyword">in</span> which to save the key (<span class="hljs-regexp">/home/</span>用户名<span class="hljs-regexp">/.ssh/i</span>d_rsa):  <span class="hljs-comment"># 设置密钥文件保存路径</span><br>Enter passphrase (empty <span class="hljs-keyword">for</span> no passphrase):  <span class="hljs-comment"># 设置密钥锁码</span><br>Enter same passphrase again:  <span class="hljs-comment"># 密钥锁码确认</span><br></code></pre></div></td></tr></table></figure>
- 最后会有一些提示  <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-comment"># 你的私钥保存在这里</span><br>Your identification has been saved <span class="hljs-keyword">in</span> <span class="hljs-regexp">/home/m</span>anager<span class="hljs-regexp">/.ssh/i</span>d_rsa.<br><span class="hljs-comment"># 你的公钥保存在这里</span><br>Your public key has been saved <span class="hljs-keyword">in</span> <span class="hljs-regexp">/home/m</span>anager<span class="hljs-regexp">/.ssh/i</span>d_rsa.pub.<br></code></pre></div></td></tr></table></figure></li>
-<li>服务器公钥注册  <ol>
+<li><p>切换到希望创建密钥的用户，创建密钥对  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ssh-keygen<br></code></pre></div></td></tr></table></figure>
+<p> 过程中会需要你输入一些东西，要是不知道是什么，可以直接回车不管  </p>
+ <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">Enter file <span class="hljs-keyword">in</span> which to save the key (<span class="hljs-regexp">/home/</span>用户名<span class="hljs-regexp">/.ssh/i</span>d_rsa):  <span class="hljs-comment"># 设置密钥文件保存路径</span><br>Enter passphrase (empty <span class="hljs-keyword">for</span> no passphrase):  <span class="hljs-comment"># 设置密钥锁码</span><br>Enter same passphrase again:  <span class="hljs-comment"># 密钥锁码确认</span><br></code></pre></div></td></tr></table></figure>
+<p> 最后会有一些提示  </p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-comment"># 你的私钥保存在这里</span><br>Your identification has been saved <span class="hljs-keyword">in</span> <span class="hljs-regexp">/home/m</span>anager<span class="hljs-regexp">/.ssh/i</span>d_rsa.<br><span class="hljs-comment"># 你的公钥保存在这里</span><br>Your public key has been saved <span class="hljs-keyword">in</span> <span class="hljs-regexp">/home/m</span>anager<span class="hljs-regexp">/.ssh/i</span>d_rsa.pub.<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>服务器公钥注册  </p>
+<ol>
 <li>来到.ssh目录 <figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> ~<span class="hljs-string">/.ssh</span><br></code></pre></div></td></tr></table></figure></li>
 <li>注册公钥  <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">cat</span> <span class="hljs-selector-tag">id_rsa</span><span class="hljs-selector-class">.pub</span> &gt;&gt; <span class="hljs-selector-tag">authorized_keys</span><br></code></pre></div></td></tr></table></figure>
+
+</li>
+</ol>
 <blockquote>
 <p>有些时候会遇到权限的问题，把权限设置得高一些就可以解决  </p>
 </blockquote>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">chmod</span> <span class="hljs-number">600</span> authorized_keys<br></code></pre></div></td></tr></table></figure></li>
-</ol>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">chmod</span> <span class="hljs-number">600</span> authorized_keys<br></code></pre></div></td></tr></table></figure>
 </li>
-<li>重启SSH以应用设置  <figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">service sshd restart</span><br></code></pre></div></td></tr></table></figure></li>
-<li>客户端获取密钥私钥文件<br>使用<a href="/post/8649b4ed/" title="scp命令">scp命令</a>即可，这里是从服务器把私钥下载下来，放到E盘  <figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.1</span>.<span class="hljs-number">2</span><span class="hljs-symbol">:/home/manager/</span>.ssh/id_rsa <span class="hljs-symbol">E:</span>/ <br></code></pre></div></td></tr></table></figure></li>
-<li>客户端使用私钥<br>这里以<code>putty</code>为例  <ol>
+<li><p>重启SSH以应用设置  </p>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">service sshd restart</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>客户端获取密钥私钥文件<br>使用<a href="/post/8649b4ed/" title="scp命令">scp命令</a>即可，这里是从服务器把私钥下载下来，放到E盘  </p>
+<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">scp root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.1</span>.<span class="hljs-number">2</span><span class="hljs-symbol">:/home/manager/</span>.ssh/id_rsa <span class="hljs-symbol">E:</span>/ <br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>客户端使用私钥<br>这里以<code>putty</code>为例  </p>
+<ol>
 <li>将密钥转为<code>putty</code>能使用的类型的密钥文件<br><img src="/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2-SSH/convert_key.gif" srcset="/img/loading.gif">  </li>
 <li>在登录时应用密钥<br><img src="/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2-SSH/use_key.gif" srcset="/img/loading.gif">  </li>
 </ol>
@@ -292,7 +307,8 @@
 </ol>
 <h2 id="禁用密码登录"><a href="#禁用密码登录" class="headerlink" title="禁用密码登录"></a>禁用密码登录</h2><ol>
 <li>打开SSH配置文件  </li>
-<li>修改配置  <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">PasswordAuthentication</span> <span class="hljs-literal">no</span><br></code></pre></div></td></tr></table></figure></li>
+<li>修改配置  <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">PasswordAuthentication</span> <span class="hljs-literal">no</span><br></code></pre></div></td></tr></table></figure>
+</li>
 </ol>
 
             </div>

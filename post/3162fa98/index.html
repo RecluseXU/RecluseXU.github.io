@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -216,6 +216,7 @@
               <h1 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h1><p><code>python</code>可以使用的一个进度条<br>github/文档：<a target="_blank" rel="noopener" href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tqdm</a>  </p>
 <h1 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h1><h2 id="tqdm-tqdm"><a href="#tqdm-tqdm" class="headerlink" title="tqdm.tqdm"></a>tqdm.tqdm</h2><p>使用之前先将<code>tqdm</code>导入进来  </p>
 <figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="基于可迭代对象使用"><a href="#基于可迭代对象使用" class="headerlink" title="基于可迭代对象使用"></a>基于可迭代对象使用</h3><blockquote>
 <p>案例 1  </p>
 </blockquote>
@@ -224,21 +225,23 @@
 <p>显示结果</p>
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">76%</span><span class="bash">|████████████████████████        | 7568/10000 [00:33&lt;00:10, 229.00it/s]</span><br></code></pre></div></td></tr></table></figure>
+
 <br>
 >案例 2  
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm<br><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep<br><br>text = <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> tqdm([<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;d&quot;</span>]):<br>    sleep(<span class="hljs-number">0.25</span>)<br>    text = text + char<br></code></pre></div></td></tr></table></figure>
-`tqdm.tqdm()`会接收一个可迭代的对象，通过`len()`计算它的长度来实现进度条的效果  
-只要满足这两个条件，就能塞东西进去显示进度条  
 
+<p><code>tqdm.tqdm()</code>会接收一个可迭代的对象，通过<code>len()</code>计算它的长度来实现进度条的效果<br>只要满足这两个条件，就能塞东西进去显示进度条  </p>
 <h3 id="基于数值使用"><a href="#基于数值使用" class="headerlink" title="基于数值使用"></a>基于数值使用</h3><p>并非所有对象都可以进行迭代<br>在遇到不能迭代的内容时，可以使用预先设置数值来进行进度条的计算  </p>
 <blockquote>
 <p>案例 1</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">pbar = tqdm(total=<span class="hljs-number">100</span>)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):<br>    sleep(<span class="hljs-number">0.1</span>)<br>    pbar.update(<span class="hljs-number">10</span>)<br>pbar.close()<br></code></pre></div></td></tr></table></figure>
+
 <blockquote>
 <p>案例 2</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">with</span> tqdm(total=<span class="hljs-number">100</span>) <span class="hljs-keyword">as</span> pbar:<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):<br>        sleep(<span class="hljs-number">0.1</span>)<br>        pbar.update(<span class="hljs-number">10</span>)<br></code></pre></div></td></tr></table></figure>
+
 
 <h1 id="tqdm详细"><a href="#tqdm详细" class="headerlink" title="tqdm详细"></a>tqdm详细</h1><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">class tqdm():<br>  <span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">  装饰一个可迭代的对象，返回一个迭代器。迭代器返回的对象与原本一致，但是会更新进度条信息  </span><br><span class="hljs-string">  &quot;</span><span class="hljs-string">&quot;&quot;</span><br><br>  def __init__(self, <span class="hljs-attribute">iterable</span>=None, <span class="hljs-attribute">desc</span>=None, <span class="hljs-attribute">total</span>=None, <span class="hljs-attribute">leave</span>=<span class="hljs-literal">True</span>,<br>               <span class="hljs-attribute">file</span>=None, <span class="hljs-attribute">ncols</span>=None, <span class="hljs-attribute">mininterval</span>=0.1,<br>               <span class="hljs-attribute">maxinterval</span>=10.0, <span class="hljs-attribute">miniters</span>=None, <span class="hljs-attribute">ascii</span>=None, <span class="hljs-attribute">disable</span>=<span class="hljs-literal">False</span>,<br>               <span class="hljs-attribute">unit</span>=<span class="hljs-string">&#x27;it&#x27;</span>, <span class="hljs-attribute">unit_scale</span>=<span class="hljs-literal">False</span>, <span class="hljs-attribute">dynamic_ncols</span>=<span class="hljs-literal">False</span>,<br>               <span class="hljs-attribute">smoothing</span>=0.3, <span class="hljs-attribute">bar_format</span>=None, <span class="hljs-attribute">initial</span>=0, <span class="hljs-attribute">position</span>=None,<br>               <span class="hljs-attribute">postfix</span>=None, <span class="hljs-attribute">unit_divisor</span>=1000):<br></code></pre></div></td></tr></table></figure>
 <table>

@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -222,6 +222,7 @@
 </ul>
 <h2 id="条件"><a href="#条件" class="headerlink" title="条件"></a><strong>条件</strong></h2><p>github账户（拥有SSH秘钥）</p>
 <h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a><strong>使用步骤</strong></h2><h3 id="1-在github上创建一个仓库"><a href="#1-在github上创建一个仓库" class="headerlink" title="1. 在github上创建一个仓库"></a><strong>1. 在github上创建一个仓库</strong></h3><h3 id="2-安装hexo"><a href="#2-安装hexo" class="headerlink" title="2. 安装hexo"></a><strong>2. 安装hexo</strong></h3><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">npm <span class="hljs-keyword">install</span> -g hexo<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="3-初始化hexo"><a href="#3-初始化hexo" class="headerlink" title="3. 初始化hexo"></a><strong>3. 初始化hexo</strong></h3><p>在一个你想要存放博客的文件的地方打开CMD</p>
 <figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp">hexo <span class="hljs-keyword">init</span><br></code></pre></div></td></tr></table></figure>
 <p>命令执行后会生成很多的文件，暂时无需理会，继续于CMD中输入</p>
@@ -231,6 +232,7 @@
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Shen-Yu/</span>hexo-theme-ayer.git themes/ayer<br></code></pre></div></td></tr></table></figure>
 <p>将这个码输入到CMD中，系统会从作者的 仓库里将主题克隆下来。<br>等待git工作完毕后，再次在CMD中输入命令测试效果。</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo g</span> <br><span class="hljs-attribute">hexo s</span><br></code></pre></div></td></tr></table></figure>
+
 <h3 id="6-设置配置文件"><a href="#6-设置配置文件" class="headerlink" title="6. 设置配置文件"></a><strong>6. 设置配置文件</strong></h3><p>在hexo的根目录，会有一个<code>_config.yml</code>文件。<br>你可以用诸如 notepad++ 之类文档工具打开。<br>打开以后找到deploy项进行修改。</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">deploy</span><br></code></pre></div></td></tr></table></figure>
 <p>:-: ↓</p>
@@ -242,6 +244,7 @@
 <p>保存修改后的文件。</p>
 <h3 id="7-安装git插件"><a href="#7-安装git插件" class="headerlink" title="7. 安装git插件"></a><strong>7. 安装git插件</strong></h3><p>在CMD中输入</p>
 <figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">npm <span class="hljs-keyword">install</span> hexo-deployer-git<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="8-上传到github"><a href="#8-上传到github" class="headerlink" title="8. 上传到github"></a><strong>8. 上传到github</strong></h3><p>在CMD中输入</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo g</span><br><span class="hljs-attribute">hexo d</span><br></code></pre></div></td></tr></table></figure>
 <p>将文件上传到 github 仓库中</p>

@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -271,11 +271,15 @@
 </tr>
 </tbody></table>
 <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a><strong>操作</strong></h2><h3 id="1-安装epel源"><a href="#1-安装epel源" class="headerlink" title="1. 安装epel源"></a><strong>1. 安装epel源</strong></h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install epel-release<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="2-安装桌面协议”X-Window-system”"><a href="#2-安装桌面协议”X-Window-system”" class="headerlink" title="2. 安装桌面协议”X Window system”"></a><strong>2. 安装桌面协议”X Window system”</strong></h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum groupinstall <span class="hljs-string">&quot;X Window system&quot;</span><br></code></pre></div></td></tr></table></figure>
+
 <h3 id="3-安装一个GUI"><a href="#3-安装一个GUI" class="headerlink" title="3. 安装一个GUI"></a><strong>3. 安装一个GUI</strong></h3><p>其实有很多种选择，一般在xfce和GNOME中选一个来安装    </p>
 <h4 id="xfce"><a href="#xfce" class="headerlink" title="xfce"></a>xfce</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum groupinstall xfce<br></code></pre></div></td></tr></table></figure>
 <h4 id="GNOME"><a href="#GNOME" class="headerlink" title="GNOME"></a>GNOME</h4><figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">yum</span> groupinstall <span class="hljs-string">&quot;GNOME Desktop&quot;</span> <span class="hljs-string">&quot;Graphical Administration Tools&quot;</span> <br></code></pre></div></td></tr></table></figure>
+
 <h3 id="4-设置运行级别"><a href="#4-设置运行级别" class="headerlink" title="4. 设置运行级别"></a><strong>4. 设置运行级别</strong></h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo systemctl set-default graphical.target<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="5-查看运行级别"><a href="#5-查看运行级别" class="headerlink" title="5. 查看运行级别"></a><strong>5. 查看运行级别</strong></h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">runlevel   返回当前运行级别<br></code></pre></div></td></tr></table></figure>
 <table>
 <thead>

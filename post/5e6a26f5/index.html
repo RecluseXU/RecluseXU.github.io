@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -225,7 +225,8 @@
 <li><p>Selenium<br>浏览器环境<br>Selenium有一个执行js的函数，是一个Web自动化测试工具<br><code>browser.execute_script(js)</code><br>可以运用此函数进行js运行  </p>
 </li>
 <li><p>Pyppeteer<br>浏览器环境<br><code>Puppeteer</code>的Python版本，由第三方开发，是一个Web自动化测试框架<br>原生支持以协程的方式调用，性能比<code>Selenium</code>高<br>对于用<code>Asyncio</code> + <code>Aiohttp</code>写爬虫而言的人可以直接使用</p>
-<figure class="highlight haskell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haskell"><span class="hljs-title">await</span> page.evaluate(js, *<span class="hljs-class"><span class="hljs-keyword">data</span>)</span><br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight haskell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haskell"><span class="hljs-title">await</span> page.evaluate(js, *<span class="hljs-class"><span class="hljs-keyword">data</span>)</span><br></code></pre></div></td></tr></table></figure>
+</li>
 <li><p>NodeJS<br>执行速度快</p>
 <ul>
 <li>RPC<br>写一个简单的RPC服务接口，然后在python调用nodeJS的RPC服务，拿到结果  </li>

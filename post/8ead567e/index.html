@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -245,11 +245,13 @@
 </ul>
 <p>可以通过<code>docker ps</code>命令查看容器的运行信息  </p>
 <h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><h4 id="进入容器控制台"><a href="#进入容器控制台" class="headerlink" title="进入容器控制台"></a>进入容器控制台</h4><figure class="highlight sqf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sqf">docker <span class="hljs-built_in">exec</span> -it mongo mongo <span class="hljs-built_in">admin</span><br></code></pre></div></td></tr></table></figure>
+
 <h4 id="创建一个超级账户"><a href="#创建一个超级账户" class="headerlink" title="创建一个超级账户"></a>创建一个超级账户</h4><figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.createUser</span>(&#123; <span class="hljs-attribute">user</span>:<span class="hljs-string">&#x27;用户名&#x27;</span>,<span class="hljs-attribute">pwd</span>:<span class="hljs-string">&#x27;密码&#x27;</span>,<span class="hljs-attribute">roles</span>:[ &#123; <span class="hljs-attribute">role</span>:<span class="hljs-string">&#x27;root&#x27;</span>, <span class="hljs-attribute">db</span>: <span class="hljs-string">&#x27;admin&#x27;</span>&#125;]&#125;);<br></code></pre></div></td></tr></table></figure>
 <p>在创建完用户以后尝试使用新用户进行连接  </p>
 <figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.auth</span>(<span class="hljs-string">&#x27;用户名&#x27;</span>, <span class="hljs-string">&#x27;密码&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
 <p>如果正确可行的话，会返回1，这也意味着账户切换成功  </p>
 <h3 id="其它创建账户"><a href="#其它创建账户" class="headerlink" title="其它创建账户"></a>其它创建账户</h3><figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.createUser</span>(&#123;<span class="hljs-attribute">user</span>: <span class="hljs-string">&quot;账户名&quot;</span>, <span class="hljs-attribute">pwd</span>: <span class="hljs-string">&quot;密码&quot;</span>, <span class="hljs-attribute">roles</span>: [&#123; <span class="hljs-attribute">role</span>: <span class="hljs-string">&quot;角色类型&quot;</span>, <span class="hljs-attribute">db</span>: <span class="hljs-string">&quot;数据库名称&quot;</span> &#125;]&#125;)   <br></code></pre></div></td></tr></table></figure>
+
 <p>可用角色类型：</p>
 <ul>
 <li>数据库用户角色（Database User Roles）  <ul>
@@ -368,19 +370,14 @@
 </tbody></table>
 <h1 id="集合-Collection"><a href="#集合-Collection" class="headerlink" title="集合 Collection"></a>集合 Collection</h1><h2 id="常用操作-1"><a href="#常用操作-1" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h3><figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">db.create<span class="hljs-constructor">Collection(<span class="hljs-params">name</span>, <span class="hljs-params">options</span>)</span><br></code></pre></div></td></tr></table></figure>
 <ul>
-<li><p>name：集合名</p>
-</li>
-<li><p>option：可选参数</p>
-<ul>
-<li><p>capped（bool)<br> 如果为 true，则创建固定集合。为 true 时，必须指定 size 参数  </p>
-<blockquote>
+<li>name：集合名</li>
+<li>option：可选参数<ul>
+<li>capped（bool)<br> 如果为 true，则创建固定集合。为 true 时，必须指定 size 参数  <blockquote>
 <p>固定集合是指有着固定大小的集合，当达到最大值时，它会自动覆盖最早的文档  </p>
 </blockquote>
 </li>
-<li><p>size (int)<br> 为固定集合指定一个最大值，即字节数<br> 如果 capped 为 true，也需要指定该字段  </p>
-</li>
-<li><p>max (int)<br> 指定固定集合中包含文档的最大数量  </p>
-</li>
+<li>size (int)<br> 为固定集合指定一个最大值，即字节数<br> 如果 capped 为 true，也需要指定该字段  </li>
+<li>max (int)<br> 指定固定集合中包含文档的最大数量  </li>
 </ul>
 </li>
 </ul>
@@ -390,13 +387,17 @@
 <figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata"><span class="hljs-keyword">use</span> <span class="hljs-keyword">test</span><br>&gt;&gt;&gt;switched to <span class="hljs-keyword">db</span> <span class="hljs-keyword">test</span><br><span class="hljs-keyword">db</span>.createCollection(<span class="hljs-string">&quot;runoob&quot;</span>)<br>&gt;&gt;&gt;&#123; <span class="hljs-string">&quot;ok&quot;</span> : 1 &#125;<br></code></pre></div></td></tr></table></figure>
 
 
+
 <h3 id="查看集合"><a href="#查看集合" class="headerlink" title="查看集合"></a>查看集合</h3><p>命令有两个，随便一个都可以  </p>
 <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-keyword">show</span> collections<br><span class="hljs-keyword">show</span> <span class="hljs-keyword">tables</span><br></code></pre></div></td></tr></table></figure>
+
 <h3 id="删除集合"><a href="#删除集合" class="headerlink" title="删除集合"></a>删除集合</h3><figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.collection</span><span class="hljs-selector-class">.drop</span>()<br></code></pre></div></td></tr></table></figure>
+
 <blockquote>
 <p>案例: 删除集合  </p>
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">use mydb<br><span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;switched to db mydb</span><br><br>show collections<br><span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;mycol</span><br><span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;mycol2</span><br><span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;system.indexes</span><br><span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;runoob</span><br><br>show collections<br><span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;mycol</span><br><span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;system.indexes</span><br><span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;runoob</span><br></code></pre></div></td></tr></table></figure>
+
 
 <h1 id="文档-Document"><a href="#文档-Document" class="headerlink" title="文档 Document"></a>文档 Document</h1><p>文档的数据结构和 JSON 基本一样<br>所有存储在集合中的数据都是 <code>BSON</code> 格式<br><code>BSON</code> 是一种类似 JSON 的二进制形式的存储格式，是 <code>Binary JSON</code> 的简称  </p>
 <ul>
@@ -425,13 +426,16 @@
 </blockquote>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.products</span><span class="hljs-selector-class">.insertOne</span>( &#123; <span class="hljs-attribute">item</span>: <span class="hljs-string">&quot;card&quot;</span>, qty: <span class="hljs-number">15</span> &#125; );<br></code></pre></div></td></tr></table></figure>
 
+
 <h4 id="db-collection-insertMany"><a href="#db-collection-insertMany" class="headerlink" title="db.collection.insertMany"></a>db.collection.insertMany</h4><p>作用：向集合插入一个多个文档  </p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.collection</span><span class="hljs-selector-class">.insertMany</span>(<br>   <span class="hljs-selector-attr">[ &lt;document 1&gt; , &lt;document 2&gt;, ... ]</span>,<br>   &#123;<br>      <span class="hljs-attribute">writeConcern</span>: &lt;document&gt;,<br>      ordered: &lt;boolean&gt;<br>   &#125;<br>)<br></code></pre></div></td></tr></table></figure>
+
 <p>参数与<code>db.collection.insertOne</code>一致  </p>
 <blockquote>
 <p>案例  往 products集合 插入一些数据  </p>
 </blockquote>
 <figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.products</span><span class="hljs-selector-class">.insertMany</span>( [<br>  &#123; <span class="hljs-attribute">item</span>: <span class="hljs-string">&quot;card&quot;</span>, <span class="hljs-attribute">qty</span>: <span class="hljs-number">15</span> &#125;,<br>  &#123; <span class="hljs-attribute">item</span>: <span class="hljs-string">&quot;envelope&quot;</span>, <span class="hljs-attribute">qty</span>: <span class="hljs-number">20</span> &#125;,<br>  &#123; <span class="hljs-attribute">item</span>: <span class="hljs-string">&quot;stamps&quot;</span> , <span class="hljs-attribute">qty</span>: <span class="hljs-number">30</span> &#125;<br>   ] );<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
 <h4 id="db-collection-insert"><a href="#db-collection-insert" class="headerlink" title="db.collection.insert()"></a>db.collection.insert()</h4><p>若插入的数据主键已经存在，则会抛<code>org.springframework.dao.DuplicateKeyException</code> 异常，提示主键重复，不保存当前数据  </p>
 <blockquote>
 <p>案例：向 runoob 数据库 的 col 集合中插入数据  </p>
@@ -450,7 +454,8 @@
 <p>假设现在有一个order集合，集合中有这么个文档  </p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">&#123;<br>   <span class="hljs-attribute">_id</span>: <span class="hljs-built_in">ObjectId</span>(<span class="hljs-string">&quot;563237a41a4d68582c2509da&quot;</span>),<br>   stock: <span class="hljs-string">&quot;Brent Crude Futures&quot;</span>,<br>   qty: <span class="hljs-number">250</span>,<br>   type: <span class="hljs-string">&quot;buy-limit&quot;</span>,<br>   limit: <span class="hljs-number">48.90</span>,<br>   creationts: <span class="hljs-built_in">ISODate</span>(<span class="hljs-string">&quot;2015-11-01T12:30:15Z&quot;</span>),<br>   expiryts: <span class="hljs-built_in">ISODate</span>(<span class="hljs-string">&quot;2015-11-01T12:35:15Z&quot;</span>),<br>   client: <span class="hljs-string">&quot;Crude Traders Inc.&quot;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>案例： 根据删除<code>_id</code>为<code>233</code>的文档  </p>
-<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">db.orders.deleteOne( &#123; <span class="hljs-string">&quot;_id&quot;</span> : <span class="hljs-type">ObjectId</span>(<span class="hljs-string">&quot;233&quot;</span>) &#125; );<br></code></pre></div></td></tr></table></figure></blockquote>
+<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">db.orders.deleteOne( &#123; <span class="hljs-string">&quot;_id&quot;</span> : <span class="hljs-type">ObjectId</span>(<span class="hljs-string">&quot;233&quot;</span>) &#125; );<br></code></pre></div></td></tr></table></figure>
+</blockquote>
 </li>
 <li><p>db.collection.deleteMany<br>删除集合中所有符合<code>filter</code>的文档<br><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/">文档地址</a>  </p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.collection</span><span class="hljs-selector-class">.deleteMany</span>(<br>   &lt;<span class="hljs-selector-tag">filter</span>&gt;,<br>   &#123;<br>      <span class="hljs-attribute">writeConcern</span>: &lt;document&gt;,<br>      collation: &lt;document&gt;<br>   &#125;<br>)<br></code></pre></div></td></tr></table></figure>
@@ -461,11 +466,12 @@
 <p>案例： 根据删除<code>client</code>为<code>Crude Traders Inc.</code>的文档  </p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm">db.<span class="hljs-keyword">orders.deleteMany( </span>&#123; <span class="hljs-string">&quot;client&quot;</span> : <span class="hljs-string">&quot;Crude Traders Inc.&quot;</span> &#125; );<br></code></pre></div></td></tr></table></figure>
 </blockquote>
-<h3 id="更改"><a href="#更改" class="headerlink" title="更改"></a>更改</h3><h4 id="db-collection-update"><a href="#db-collection-update" class="headerlink" title="db.collection.update"></a>db.collection.update</h4><p>作用：更新已存在的文档  </p>
 </li>
 </ul>
+<h3 id="更改"><a href="#更改" class="headerlink" title="更改"></a>更改</h3><h4 id="db-collection-update"><a href="#db-collection-update" class="headerlink" title="db.collection.update"></a>db.collection.update</h4><p>作用：更新已存在的文档  </p>
 <p>使用格式</p>
 <figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts">db.collection.update(<br>   <span class="hljs-params">&lt;query&gt;</span>,<br>   <span class="hljs-params">&lt;update&gt;</span>,<br>   &#123;<br><span class="hljs-symbol">     upsert:</span> <span class="hljs-params">&lt;boolean&gt;</span>,<br><span class="hljs-symbol">     multi:</span> <span class="hljs-params">&lt;boolean&gt;</span>,<br><span class="hljs-symbol">     writeConcern:</span> <span class="hljs-params">&lt;document&gt;</span><br>   &#125;<br>)<br></code></pre></div></td></tr></table></figure>
+
 <ul>
 <li>query : update的查询条件，类似sql update查询内where后面的  </li>
 <li>update : update的对象和一些更新的操作符（如$,$inc…）等，也可以理解为sql update查询内set后面的  </li>
@@ -482,18 +488,22 @@
 <figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim">db.<span class="hljs-keyword">col</span>.<span class="hljs-keyword">update</span>(&#123;<span class="hljs-string">&#x27;title&#x27;</span>:<span class="hljs-string">&#x27;MongoDB&#x27;</span>&#125;,&#123;$<span class="hljs-keyword">se</span><span class="hljs-variable">t:</span>&#123;<span class="hljs-string">&#x27;title&#x27;</span>:<span class="hljs-string">&#x27;mysql&#x27;</span>&#125;&#125;)<br></code></pre></div></td></tr></table></figure>
 <p>需要注意的是，这语句只会修改第一个发现的文档<br>如果想要修改多个，需要添加 <code>&#123;multi:true&#125;</code></p>
 <figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim">db.<span class="hljs-keyword">col</span>.<span class="hljs-keyword">update</span>(&#123;<span class="hljs-string">&#x27;title&#x27;</span>:<span class="hljs-string">&#x27;MongoDB&#x27;</span>&#125;,&#123;$<span class="hljs-keyword">se</span><span class="hljs-variable">t:</span>&#123;<span class="hljs-string">&#x27;title&#x27;</span>:<span class="hljs-string">&#x27;mysqls&#x27;</span>&#125;&#125;,&#123;multi:true&#125;)<br></code></pre></div></td></tr></table></figure>
+
 <blockquote>
 <p>官方文档説明：<a target="_blank" rel="noopener" href="https://docs.mongodb.com/master/reference/command/update/">https://docs.mongodb.com/master/reference/command/update/</a>  </p>
 </blockquote>
 <h4 id="db-collection-save"><a href="#db-collection-save" class="headerlink" title="db.collection.save"></a>db.collection.save</h4><p>作用：通过传入的文档来替换已有文档，主键存在就更新，不存在就插入  </p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.collection</span><span class="hljs-selector-class">.save</span>(<br>   &lt;<span class="hljs-selector-tag">document</span>&gt;,<br>   &#123;<br>     <span class="hljs-attribute">writeConcern</span>: &lt;document&gt;<br>   &#125;<br>)<br></code></pre></div></td></tr></table></figure>
+
 <ul>
 <li>document : 文档数据  </li>
 <li>writeConcern :可选，抛出异常的级别  </li>
 </ul>
 <p>实际上就是用一个新的文档来覆盖旧的,关键是要让_id主键一致    </p>
 <figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">db.<span class="hljs-built_in">col</span>.<span class="hljs-built_in">save</span>(&#123;<br>    <span class="hljs-string">&quot;_id&quot;</span> : ObjectId(<span class="hljs-string">&quot;1&quot;</span>),<br>    <span class="hljs-string">&quot;title&quot;</span> : <span class="hljs-string">&quot;MongoDB&quot;</span>,<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><h4 id="db-collection-find"><a href="#db-collection-find" class="headerlink" title="db.collection.find"></a>db.collection.find</h4><figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.collection</span><span class="hljs-selector-class">.find</span>(<span class="hljs-selector-tag">query</span>, <span class="hljs-selector-tag">projection</span>)<br></code></pre></div></td></tr></table></figure>
+
 <ul>
 <li>query ：可选，使用查询操作符指定查询条件  </li>
 <li>projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）  </li>
@@ -503,19 +513,24 @@
 <p>实际上还有一个 <code>findOne</code> 方法专门用来找单个文档    </p>
 <h4 id="限制查询数量-Limit"><a href="#限制查询数量-Limit" class="headerlink" title="限制查询数量 Limit"></a>限制查询数量 Limit</h4><p>如果你需要在<code>MongoDB</code>中读取指定数量的数据记录，可以使用<code>MongoDB</code>的<code>Limit</code>方法<br><code>limit()</code>方法接受一个数字参数，该参数指定从MongoDB中读取的记录条数<br>未指定<code>limit</code>方法中的参数则显示集合中的所有数据  </p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.COLLECTION_NAME</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.limit</span>(<span class="hljs-selector-tag">NUMBER</span>)<br></code></pre></div></td></tr></table></figure>
+
 <blockquote>
 <p>案例：查找前两条数据</p>
 </blockquote>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">db</span>.col.find(&#123;&#125;,&#123;<span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-number">1</span>,_id:<span class="hljs-number">0</span>&#125;).limit(<span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
+
 
 <h4 id="跳过查询数量-Skip"><a href="#跳过查询数量-Skip" class="headerlink" title="跳过查询数量 Skip()"></a>跳过查询数量 Skip()</h4><p>除了可以使用<code>limit</code>方法来读取指定数量的数据外，还可以使用<code>skip</code>方法来跳过指定数量的数据<br>skip方法同样接受一个数字参数作为跳过的记录条数。默认参数为 0   </p>
 <blockquote>
 <p>案例：查找第二条数据</p>
 </blockquote>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.COLLECTION_NAME</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.limit</span>(<span class="hljs-selector-tag">NUMBER</span>)<span class="hljs-selector-class">.skip</span>(<span class="hljs-selector-tag">NUMBER</span>)<br></code></pre></div></td></tr></table></figure>
+
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">db</span>.col.find(&#123;&#125;,&#123;<span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-number">1</span>,_id:<span class="hljs-number">0</span>&#125;).limit(<span class="hljs-number">1</span>).skip(<span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
+
 <h4 id="排序-sort"><a href="#排序-sort" class="headerlink" title="排序 sort()"></a>排序 sort()</h4><p><code>sort</code> 方法可以通过参数指定排序的字段，并使用 1 和 -1 来指定排序的方式<br>1 为升序排列，而 -1 是用于降序排列  </p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.COLLECTION_NAME</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.sort</span>(&#123;<span class="hljs-attribute">KEY</span>:<span class="hljs-number">1</span>&#125;)<br></code></pre></div></td></tr></table></figure>
+
 <h1 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h1><h2 id="比较逻辑"><a href="#比较逻辑" class="headerlink" title="比较逻辑"></a>比较逻辑</h2><table>
 <thead>
 <tr>
@@ -564,10 +579,13 @@
 </tbody></table>
 <h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><h3 id="and-与逻辑"><a href="#and-与逻辑" class="headerlink" title="and 与逻辑"></a>and 与逻辑</h3><p>同时传入多个键即可  </p>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">db</span>.col.find(&#123;key<span class="hljs-number">1</span>:value<span class="hljs-number">1</span>, key<span class="hljs-number">2</span>:value<span class="hljs-number">2</span>&#125;).pretty()<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="or-或逻辑"><a href="#or-或逻辑" class="headerlink" title="or 或逻辑"></a>or 或逻辑</h3><p>使用关键词<code>$or</code>  </p>
 <figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.find</span>(&#123;<br>    $<span class="hljs-attribute">or</span>: [&#123;<span class="hljs-attribute">key1</span>: value1&#125;, &#123;<span class="hljs-attribute">key2</span>:value2&#125;] <br>&#125;)<span class="hljs-selector-class">.pretty</span>()<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="not-非逻辑"><a href="#not-非逻辑" class="headerlink" title="not 非逻辑"></a>not 非逻辑</h3><p>使用关键词<code>$not</code>  </p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.find</span>(<br>    &#123; <span class="hljs-attribute">key</span>: &#123; $not: &#123; $gt: value &#125; &#125; &#125; <br>)<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="type-操作符"><a href="#type-操作符" class="headerlink" title="$type 操作符"></a><code>$type</code> 操作符</h3><p><code>$type</code>操作符是基于<code>BSON</code>类型来检索集合中匹配的数据类型，并返回结果   </p>
 <table>
 <thead>
@@ -678,12 +696,14 @@
 </blockquote>
 <figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">db.col.<span class="hljs-builtin-name">find</span>(&#123;<span class="hljs-string">&quot;title&quot;</span> : &#123;<span class="hljs-variable">$type</span> : 2&#125;&#125;)<br>db.col.<span class="hljs-builtin-name">find</span>(&#123;<span class="hljs-string">&quot;title&quot;</span> : &#123;<span class="hljs-variable">$type</span> : <span class="hljs-string">&#x27;string&#x27;</span>&#125;&#125;)<br></code></pre></div></td></tr></table></figure>
 
+
 <h2 id="多集合查询"><a href="#多集合查询" class="headerlink" title="多集合查询"></a>多集合查询</h2><p>实际上，多集合查询是利用聚合的 <code>$lookup</code>多表关联 实现的<br>具体见后</p>
 <h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>索引通常能够极大的提高查询的效率<br>索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中，索引是对数据库表中一列或多列的值进行排序的一种结构  </p>
 <blockquote>
 <p>如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。这种扫描全集合的查询效率是非常低的，特别在处理大量的数据时，查询可以要花费几十秒甚至几分钟，这对网站的性能是非常致命的  </p>
 </blockquote>
 <h2 id="常用操作-3"><a href="#常用操作-3" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">db.collection.create<span class="hljs-constructor">Index(<span class="hljs-params">keys</span>, <span class="hljs-params">options</span>)</span><br></code></pre></div></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
@@ -747,17 +767,28 @@
 <p>案例：以<code>title</code>键建立索引  </p>
 </blockquote>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">db</span>.col.createIndex(&#123;<span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-number">1</span>&#125;)<br></code></pre></div></td></tr></table></figure>
+
 <blockquote>
 <p>案例：以<code>title</code>与<code>name</code>键在后台建立索引  </p>
 </blockquote>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.values</span><span class="hljs-selector-class">.createIndex</span>(&#123;<span class="hljs-attribute">title</span>: <span class="hljs-number">1</span>, name: <span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-attribute">background</span>: true&#125;)<br></code></pre></div></td></tr></table></figure>
 <p>通过在创建索引时加 <code>background:true</code> 的选项，让创建工作在后台执行</p>
 <h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ul>
-<li>查看集合索引  <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.getIndexes</span>()<br></code></pre></div></td></tr></table></figure></li>
-<li>查看集合索引大小  <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.totalIndexSize</span>()<br></code></pre></div></td></tr></table></figure>
-<h3 id="删除-1"><a href="#删除-1" class="headerlink" title="删除"></a>删除</h3></li>
-<li>删除集合所有索引  <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.dropIndexes</span>()<br></code></pre></div></td></tr></table></figure></li>
-<li>删除集合指定索引  <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.dropIndex</span>(&quot;索引名称&quot;)<br></code></pre></div></td></tr></table></figure>
+<li><p>查看集合索引  </p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.getIndexes</span>()<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>查看集合索引大小  </p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.totalIndexSize</span>()<br></code></pre></div></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="删除-1"><a href="#删除-1" class="headerlink" title="删除"></a>删除</h3><ul>
+<li><p>删除集合所有索引  </p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.dropIndexes</span>()<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>删除集合指定索引  </p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.col</span><span class="hljs-selector-class">.dropIndex</span>(&quot;索引名称&quot;)<br></code></pre></div></td></tr></table></figure>
+
 
 
 </li>
@@ -765,6 +796,7 @@
 <h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p><code>MongoDB</code>中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果  </p>
 <h3 id="aggregate-方法"><a href="#aggregate-方法" class="headerlink" title="aggregate() 方法"></a>aggregate() 方法</h3><p>MongoDB中聚合的方法使用 <code>aggregate()</code>  </p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.COLLECTION_NAME</span><span class="hljs-selector-class">.aggregate</span>(<span class="hljs-selector-tag">AGGREGATE_OPERATION</span>)<br></code></pre></div></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
@@ -818,7 +850,9 @@
 <p>案例：计算每个作者所写的文章数  </p>
 </blockquote>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">&#123;<br>   <span class="hljs-attribute">_id</span>: <span class="hljs-built_in">ObjectId</span>(<span class="hljs-number">7</span>df78ad8902c)<br>   title: <span class="hljs-string">&#x27;MongoDB Overview&#x27;</span>, <br>   description: <span class="hljs-string">&#x27;MongoDB is no sql database&#x27;</span>,<br>   by_user: <span class="hljs-string">&#x27;runoob.com&#x27;</span>,<br>&#125;,<br>&#123;<br>   <span class="hljs-attribute">_id</span>: <span class="hljs-built_in">ObjectId</span>(<span class="hljs-number">7</span>df78ad8902d)<br>   title: <span class="hljs-string">&#x27;NoSQL Overview&#x27;</span>, <br>   description: <span class="hljs-string">&#x27;No sql database is very fast&#x27;</span>,<br>   by_user: <span class="hljs-string">&#x27;runoob.com&#x27;</span>,<br>&#125;,<br>&#123;<br>   <span class="hljs-attribute">_id</span>: <span class="hljs-built_in">ObjectId</span>(<span class="hljs-number">7</span>df78ad8902e)<br>   title: <span class="hljs-string">&#x27;Neo4j Overview&#x27;</span>, <br>   description: <span class="hljs-string">&#x27;Neo4j is no sql database&#x27;</span>,<br>   by_user: <span class="hljs-string">&#x27;Neo4j&#x27;</span>,<br>&#125;,<br></code></pre></div></td></tr></table></figure>
+
 <figure class="highlight groovy"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs groovy">db.mycol.aggregate([&#123;<span class="hljs-attr">$group :</span> &#123;<span class="hljs-attr">_id :</span> <span class="hljs-string">&quot;$by_user&quot;</span>, <span class="hljs-attr">num_tutorial :</span> &#123;<span class="hljs-attr">$sum :</span> <span class="hljs-number">1</span>&#125;&#125;&#125;])<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="管道的概念"><a href="#管道的概念" class="headerlink" title="管道的概念"></a>管道的概念</h3><p>管道在<code>Unix</code>和<code>Linux</code>中一般用于将当前命令的输出结果作为下一个命令的参数。  </p>
 <p><code>MongoDB</code>的聚合管道将<code>MongoDB</code>文档在一个管道处理完毕后将结果传递给下一个管道处理。管道操作是可以重复的。  </p>
 <blockquote>
@@ -877,6 +911,7 @@
 <h3 id="lookup多表查询"><a href="#lookup多表查询" class="headerlink" title="$lookup多表查询"></a><code>$lookup</code>多表查询</h3><p><strong>主要功能</strong><br>处理每个输入的文档，输出的新文档中会包含一个新生成的数组列（户名可根据需要命名新key的名字），如果没有内容适配，集合为空（即<code>[ ]</code>）</p>
 <p><strong>语法</strong>  </p>
 <figure class="highlight smali"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smali">&#123;<br>   $lookup:<br>     &#123;<br>       from: &lt;collection to join&gt;,<br>       localField: &lt;field from the input documents&gt;,<br>       foreignField: &lt;field from the documents of the <span class="hljs-string">&quot;from&quot;</span> collection&gt;,<br>       as: &lt;output<span class="hljs-built_in"> array </span>field&gt;<br>     &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
@@ -909,6 +944,7 @@
 <figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.items</span><span class="hljs-selector-class">.aggregate</span>([<br>   &#123;<br>     $<span class="hljs-attribute">lookup</span>:<br>       &#123;<br>         <span class="hljs-attribute">from</span>: <span class="hljs-string">&quot;effect&quot;</span>,<br>         <span class="hljs-attribute">localField</span>: <span class="hljs-string">&quot;item&quot;</span>,<br>         <span class="hljs-attribute">foreignField</span>: <span class="hljs-string">&quot;name&quot;</span>,<br>         <span class="hljs-attribute">as</span>: <span class="hljs-string">&quot;item_info&quot;</span><br>       &#125;<br>  &#125;<br>])<br></code></pre></div></td></tr></table></figure>
 <p>得到结果</p>
 <figure class="highlight scheme"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scheme">[<br>    &#123;<span class="hljs-symbol">&#x27;_id</span><span class="hljs-symbol">&#x27;:</span> <span class="hljs-number">1</span>, <span class="hljs-symbol">&#x27;item</span><span class="hljs-symbol">&#x27;:</span> <span class="hljs-symbol">&#x27;大剑</span>&#x27;, <span class="hljs-symbol">&#x27;price</span><span class="hljs-symbol">&#x27;:</span> <span class="hljs-number">1200</span>, <span class="hljs-symbol">&#x27;quality</span><span class="hljs-symbol">&#x27;:</span> <span class="hljs-number">100</span>, <span class="hljs-symbol">&#x27;item_info</span><span class="hljs-symbol">&#x27;:</span> []&#125;, <br>    &#123;<span class="hljs-symbol">&#x27;_id</span><span class="hljs-symbol">&#x27;:</span> <span class="hljs-number">2</span>, <span class="hljs-symbol">&#x27;item</span><span class="hljs-symbol">&#x27;:</span> <span class="hljs-symbol">&#x27;弓箭</span>&#x27;, <span class="hljs-symbol">&#x27;price</span><span class="hljs-symbol">&#x27;:</span> <span class="hljs-number">800</span>, <span class="hljs-symbol">&#x27;quality</span><span class="hljs-symbol">&#x27;:</span> <span class="hljs-number">80</span>, <span class="hljs-symbol">&#x27;item_info</span><span class="hljs-symbol">&#x27;:</span> []&#125;<br>]<br></code></pre></div></td></tr></table></figure>
+
 
 
 <hr>

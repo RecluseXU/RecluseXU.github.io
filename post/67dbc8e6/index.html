@@ -59,7 +59,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -259,6 +259,7 @@
 <p>需要注意的是，对规则修改以后，需要重启防火墙才会生效。</p>
 <h4 id="firewall查询"><a href="#firewall查询" class="headerlink" title="firewall查询"></a>firewall查询</h4><figure class="highlight dockerfile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dockerfile">firewall-<span class="hljs-keyword">cmd</span><span class="bash"> --state     <span class="hljs-comment"># 查看firewall的状态</span></span><br>firewall-<span class="hljs-keyword">cmd</span><span class="bash"> --list-all   <span class="hljs-comment"># 查看防火墙规则</span></span><br>firewall-<span class="hljs-keyword">cmd</span><span class="bash"> --query-port=8080/tcp  <span class="hljs-comment"># 查询8080端口是否开放TCP</span></span><br></code></pre></div></td></tr></table></figure>
 <h4 id="firewall修改"><a href="#firewall修改" class="headerlink" title="firewall修改"></a>firewall修改</h4><figure class="highlight dockerfile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dockerfile">firewall-<span class="hljs-keyword">cmd</span><span class="bash"> --permanent --remove-port=8080/tcp  <span class="hljs-comment"># 移除8080端口TCP规则</span></span><br>firewall-<span class="hljs-keyword">cmd</span><span class="bash"> --permanent --add-port=9527/tcp  <span class="hljs-comment"># 添加9527端口TCP规则</span></span><br><br><span class="hljs-comment"># 参数解释</span><br><span class="hljs-comment">#  firwall-cmd：是Linux提供的操作firewall的一个工具；</span><br><span class="hljs-comment">#  --permanent：表示设置为持久；</span><br><span class="hljs-comment">#  --add-port：标识添加的端口；</span><br></code></pre></div></td></tr></table></figure>
+
 
 <h2 id="安全组-设置在前面的-防火墙"><a href="#安全组-设置在前面的-防火墙" class="headerlink" title="安全组 设置在前面的 防火墙"></a><strong>安全组 设置在前面的 防火墙</strong></h2><p>现在很多云都有设立在服务器之前的防火墙。<br>他们一般被称为<code>安全组</code>。<br><img src="/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2-CentOS-firewall-%E9%98%B2%E7%81%AB%E5%A2%99/20200308043435990.png" srcset="/img/loading.gif"><br>这是腾讯云默认的安全组，允许所有Ip和端口的访问。<br><img src="/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2-CentOS-firewall-%E9%98%B2%E7%81%AB%E5%A2%99/20200308043627336.png" srcset="/img/loading.gif"><br>你可以根据自己的需要在这上面通过GUI设置一些规则，内容几乎和服务器的防火墙完全相同。<br><img src="/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2-CentOS-firewall-%E9%98%B2%E7%81%AB%E5%A2%99/20200308053129012.png" srcset="/img/loading.gif"><br>需要注意的是，安全组 和 服务器自身的防火墙 是相互独立的。<br>也就是说，如果你 在服务器里开放了一个原本没有开放的端口，那么在应用的安全组里也需要开放相同的端口才能正常访问。</p>
 
