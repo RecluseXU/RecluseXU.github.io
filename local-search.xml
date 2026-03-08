@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>ClaudeCode</title>
+    <link href="/post/ba950c07/"/>
+    <url>/post/ba950c07/</url>
+    
+    <content type="html"><![CDATA[<h1 id="ClaudeCode"><a href="#ClaudeCode" class="headerlink" title="ClaudeCode"></a>ClaudeCode</h1><p>官方文档：<a href="https://code.claude.com/docs/en/overview">https://code.claude.com/docs/en/overview</a></p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Claude Code 是一款由人工智能驱动的编码助手，帮助您构建功能、修复漏洞并自动化开发任务。它能理解你的整个代码库，并能跨多个文件和工具协作完成任务</p><p>“智能体系统” (Agentic Systems) 实际上是由 模型 (Model)、工具集 (Tools) 和 执行环境 (Environment) 协同工作的系统。<br><img src="/ClaudeCode/image.png" alt="alt text"><br><img src="/ClaudeCode/image-1.png" alt="alt text"><br><img src="/ClaudeCode/image-2.png" alt="alt text"></p><h3 id="Tool"><a href="#Tool" class="headerlink" title="Tool"></a>Tool</h3><p>Claude Code 不会为你的代码库创建结构化的表示或嵌入索引。相反，它利用其智能体和工具集，在需要时 主动地 在你的本地文件系统中查找信息。<br><img src="/ClaudeCode/image-3.png" alt="alt text">  </p><ul><li>安全性高：你的代码永远不会离开本地环境。</li><li>上下文精准：避免了将整个代码库作为上下文的低效做法。</li></ul><p>Claude Code 是 高度可扩展的。你可以通过连接到 MCP (Model Context Protocol) 服务器 来为其添加更多工具。MCP 是一种开源的、模型无关的协议，允许 AI 系统与外部数据和工具轻松通信。</p><h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><p>CLAUDE.md - 跨会话的持久化记忆<br>当你启动 Claude Code 时，它会自动在你的项目中寻找并加载这个 Markdown 文件。你可以将它当作一个 项目工作笔记，在其中定义：</p><ul><li>通用配置</li><li>代码风格指南</li><li>项目依赖说明</li><li>常用命令</li></ul><p>这样，Claude Code 在每次启动时都能快速进入状态，如同一个已经熟悉你项目的团队成员。所有的对话历史也都存储在本地，你可以随时清除或恢复。</p><p>关键：清晰的上下文</p><ul><li>指明相关文件的位置</li><li>明确描述所需的功能和特性</li><li>确保MCP服务和其它工具正确扩展了CloudCode的能力</li></ul><h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/init<br></code></pre></td></tr></table></figure><p>ClaudeCode会扫描代码仓库并在项目根目录生成文件 <code>CLAUDE.md</code><br><code>CLAUDE.md</code> 会记录重要的代码, 项目结构, 关键组件, 运行流程之类的概览信息  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/ide<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>ClaudeCode</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>硬件-电源</title>
     <link href="/post/c840767a/"/>
     <url>/post/c840767a/</url>
@@ -134,7 +153,7 @@
     <link href="/post/784ee20b/"/>
     <url>/post/784ee20b/</url>
     
-    <content type="html"><![CDATA[<h2 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h2><p>WSL是适用于 Linux 的 Windows 子系统<br>可让开发人员按原样运行 GNU/Linux 环境 - 包括大多数命令行工具、实用工具和应用程序 - 且不会产生传统虚拟机或双启动设置开销  </p><blockquote><p><strong>注意WSL安装的版本</strong><br>系统中默认安装的是 WSL 而非 WSL2<br>推荐使用 WSL2, 能避免解决很多问题（比如 Docker 部署数据库出现无端的端口占用报错）  </p></blockquote><p><a href="https://docs.microsoft.com/zh-cn/windows/wsl/install-win10">微软官方WLS文档</a>  </p><h2 id="安装WSL"><a href="#安装WSL" class="headerlink" title="安装WSL"></a>安装WSL</h2><ol><li><p>加入 Windows用户预览计划<br> <strong>win10左下角标-&gt;设置-&gt;更新和安全-&gt;windows预览体验计划</strong> 中加入即可<br> 加入需要一个微软账户。若无, 注册即可   </p><blockquote><p>可能會有的问题：Windows预览体检计划空白<br>管理员身份打开 powershell, 运行代码  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt;<span class="hljs-variable">$path</span> = <span class="hljs-string">&quot;HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection&quot;</span><br>&gt;<span class="hljs-comment"># Telemetry level: 1 - basic, 3 - full</span><br>&gt;<span class="hljs-variable">$value</span> = <span class="hljs-string">&quot;3&quot;</span><br>&gt;New-ItemProperty -Path <span class="hljs-variable">$path</span> -Name AllowTelemetry -Value <span class="hljs-variable">$value</span> -Type Dword -Force<br>&gt;New-ItemProperty -Path <span class="hljs-variable">$path</span> -Name MaxTelemetryAllowed -Value <span class="hljs-variable">$value</span> -Type Dword -Force<br></code></pre></td></tr></table></figure></blockquote></li><li><p>安装WSL2<br>参考<a href="https://docs.microsoft.com/zh-cn/windows/wsl/install-win10#set-your-distribution-version-to-wsl-1-or-wsl-2">官方文档</a>, 按步骤操作即可  </p></li></ol><h2 id="微软软件商城中安装需要的内容"><a href="#微软软件商城中安装需要的内容" class="headerlink" title="微软软件商城中安装需要的内容"></a>微软软件商城中安装需要的内容</h2><p>这里以Ubuntu举例  </p><p>进入<a href="ms-windows-store://pdp?productId=9N6SVWS3RX71&ocid=&cid=&referrer=docs.microsoft.com&scenario=click&webig=2bdcf5f6-49b5-41ad-ad06-df755446dc77&muid=2DA4C9640F1D6575087CD93F0E3364E9&websession=c82becddeb21484385f32561b030a71e&tduid=">微软软件商城-Ubuntu20.04页面</a>, 点击获取即可  </p><p>安装完毕后，在 windows powershell 中查看 Ubuntu 的 WSL 版本  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wsl --list --verbose<br></code></pre></td></tr></table></figure><p>开始菜单中可以打开 Ubuntu 进行使用  </p><p>注意：<br>root用户一开始没有密码，需要设置密码后才能切换过去<br>IDE 安装插件/进行配置 可以使得IDE 能够进入 Ubuntu 中，使用其中的环境对程序进行 运行/调试  </p>]]></content>
+    <content type="html"><![CDATA[<h2 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h2><p>WSL是适用于 Linux 的 Windows 子系统<br>可让开发人员按原样运行 GNU/Linux 环境 - 包括大多数命令行工具、实用工具和应用程序 - 且不会产生传统虚拟机或双启动设置开销  </p><blockquote><p><strong>注意WSL安装的版本</strong><br>系统中默认安装的是 WSL 而非 WSL2<br>推荐使用 WSL2, 能避免解决很多问题（比如 Docker 部署数据库出现无端的端口占用报错）  </p></blockquote><p><a href="https://docs.microsoft.com/zh-cn/windows/wsl/install-win10">微软官方WLS文档</a>  </p><h2 id="安装WSL"><a href="#安装WSL" class="headerlink" title="安装WSL"></a>安装WSL</h2><ol><li><p>加入 Windows用户预览计划<br> <strong>win10左下角标-&gt;设置-&gt;更新和安全-&gt;windows预览体验计划</strong> 中加入即可<br> 加入需要一个微软账户。若无, 注册即可   </p><blockquote><p>可能會有的问题：Windows预览体检计划空白<br>管理员身份打开 powershell, 运行代码  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt;<span class="hljs-variable">$path</span> = <span class="hljs-string">&quot;HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection&quot;</span><br>&gt;<span class="hljs-comment"># Telemetry level: 1 - basic, 3 - full</span><br>&gt;<span class="hljs-variable">$value</span> = <span class="hljs-string">&quot;3&quot;</span><br>&gt;New-ItemProperty -Path <span class="hljs-variable">$path</span> -Name AllowTelemetry -Value <span class="hljs-variable">$value</span> -Type Dword -Force<br>&gt;New-ItemProperty -Path <span class="hljs-variable">$path</span> -Name MaxTelemetryAllowed -Value <span class="hljs-variable">$value</span> -Type Dword -Force<br></code></pre></td></tr></table></figure></blockquote></li><li><p>安装WSL2<br>参考<a href="https://docs.microsoft.com/zh-cn/windows/wsl/install-win10#set-your-distribution-version-to-wsl-1-or-wsl-2">官方文档</a>, 按步骤操作即可  </p></li></ol><h2 id="微软软件商城中安装需要的内容"><a href="#微软软件商城中安装需要的内容" class="headerlink" title="微软软件商城中安装需要的内容"></a>微软软件商城中安装需要的内容</h2><p>这里以Ubuntu举例  </p><p>进入<a href="ms-windows-store://pdp?productId=9N6SVWS3RX71&ocid=&cid=&referrer=docs.microsoft.com&scenario=click&webig=2bdcf5f6-49b5-41ad-ad06-df755446dc77&muid=2DA4C9640F1D6575087CD93F0E3364E9&websession=c82becddeb21484385f32561b030a71e&tduid=">微软软件商城-Ubuntu20.04页面</a>, 点击获取即可  </p><p>安装完毕后，在 windows powershell 中查看 Ubuntu 的 WSL 版本  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wsl --list --verbose<br></code></pre></td></tr></table></figure><p>开始菜单中可以打开 Ubuntu 进行使用  </p><p>注意：<br>root用户一开始没有密码，需要设置密码后才能切换过去<br>IDE 安装插件/进行配置 可以使得IDE 能够进入 Ubuntu 中，使用其中的环境对程序进行 运行/调试  </p><h2 id="WSL2-网络代理"><a href="#WSL2-网络代理" class="headerlink" title="WSL2 网络代理"></a>WSL2 网络代理</h2><p>允许局域网连接代理<br>Windows: v2rayN客户端开启“允许来自局域网的连接”</p><p>需要使用局预网的方式连接至宿主机。<br>以下脚本先查找宿主机虚拟网卡的IP地址，然后设置其为代理服务器结点</p><p>打开bash配置文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim ~/.bashrc<br></code></pre></td></tr></table></figure><p>加入以下内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># add for proxy</span><br><span class="hljs-built_in">export</span> hostip=$(ip route | grep default | awk <span class="hljs-string">&#x27;&#123;print $3&#125;&#x27;</span>)<br><span class="hljs-built_in">export</span> hostport=10811<br><span class="hljs-built_in">alias</span> proxy=<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    export https_proxy=&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;&quot;;</span><br><span class="hljs-string">    export http_proxy=&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;&quot;;</span><br><span class="hljs-string">    export all_proxy=&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;&quot;;</span><br><span class="hljs-string">    echo -e &quot;Acquire::http::Proxy \&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;\&quot;;&quot; | sudo tee -a /etc/apt/apt.conf.d/proxy.conf &gt; /dev/null;</span><br><span class="hljs-string">    echo -e &quot;Acquire::https::Proxy \&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;\&quot;;&quot; | sudo tee -a /etc/apt/apt.conf.d/proxy.conf &gt; /dev/null;</span><br><span class="hljs-string">&#x27;</span><br><span class="hljs-built_in">alias</span> unproxy=<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    unset https_proxy;</span><br><span class="hljs-string">    unset http_proxy;</span><br><span class="hljs-string">    unset all_proxy;</span><br><span class="hljs-string">    sudo sed -i -e &#x27;</span>/Acquire::http::Proxy/d<span class="hljs-string">&#x27; /etc/apt/apt.conf.d/proxy.conf;</span><br><span class="hljs-string">    sudo sed -i -e &#x27;</span>/Acquire::https::Proxy/d<span class="hljs-string">&#x27; /etc/apt/apt.conf.d/proxy.conf;</span><br><span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure><p>其中 hostport 是 v2rayN 中 http局域网代理的端口。默认应该是10811<br>如果你做过修改或使用其它客户端，请注意区别。一定是局域网可访问的代理端口 </p><p>重新读取配置文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure><p>启动代理<br>每次开启WSL2，都需要输入以下命令激活代理 </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 启动代理</span><br>proxy<br><span class="hljs-comment"># 关闭代理</span><br>unproxy<br></code></pre></td></tr></table></figure><p>测试</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl google.com<br></code></pre></td></tr></table></figure><p>有回应就是成功</p><p>如果出问题，请重新修改~/.bashrc文件，并重新读取</p>]]></content>
     
     
     
@@ -776,9 +795,9 @@
     
     <tags>
       
-      <tag>Babel</tag>
-      
       <tag>Javascript</tag>
+      
+      <tag>Babel</tag>
       
       <tag>API</tag>
       
@@ -822,9 +841,9 @@
     
     <tags>
       
-      <tag>Babel</tag>
-      
       <tag>Javascript</tag>
+      
+      <tag>Babel</tag>
       
     </tags>
     
@@ -864,9 +883,9 @@
     
     <tags>
       
-      <tag>Babel</tag>
-      
       <tag>Javascript</tag>
+      
+      <tag>Babel</tag>
       
       <tag>AST</tag>
       
@@ -1635,9 +1654,9 @@
     
     <tags>
       
-      <tag>Babel</tag>
-      
       <tag>Javascript</tag>
+      
+      <tag>Babel</tag>
       
     </tags>
     

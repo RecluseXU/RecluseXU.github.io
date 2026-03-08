@@ -165,7 +165,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      405 字
+      783 字
     </span>
   
 
@@ -208,7 +208,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年7月20日 上午
+                  本文最后更新于：2026年3月8日 下午
                 
               </p>
             
@@ -234,6 +234,26 @@
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">wsl --list --verbose<br></code></pre></div></td></tr></table></figure>
 <p>开始菜单中可以打开 Ubuntu 进行使用  </p>
 <p>注意：<br>root用户一开始没有密码，需要设置密码后才能切换过去<br>IDE 安装插件/进行配置 可以使得IDE 能够进入 Ubuntu 中，使用其中的环境对程序进行 运行/调试  </p>
+<h2 id="WSL2-网络代理"><a href="#WSL2-网络代理" class="headerlink" title="WSL2 网络代理"></a>WSL2 网络代理</h2><p>允许局域网连接代理<br>Windows: v2rayN客户端开启“允许来自局域网的连接”</p>
+<p>需要使用局预网的方式连接至宿主机。<br>以下脚本先查找宿主机虚拟网卡的IP地址，然后设置其为代理服务器结点</p>
+<p>打开bash配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim ~/.bashrc<br></code></pre></div></td></tr></table></figure>
+
+<p>加入以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># add for proxy</span><br><span class="hljs-built_in">export</span> hostip=$(ip route | grep default | awk <span class="hljs-string">&#x27;&#123;print $3&#125;&#x27;</span>)<br><span class="hljs-built_in">export</span> hostport=10811<br><span class="hljs-built_in">alias</span> proxy=<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    export https_proxy=&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;&quot;;</span><br><span class="hljs-string">    export http_proxy=&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;&quot;;</span><br><span class="hljs-string">    export all_proxy=&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;&quot;;</span><br><span class="hljs-string">    echo -e &quot;Acquire::http::Proxy \&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;\&quot;;&quot; | sudo tee -a /etc/apt/apt.conf.d/proxy.conf &gt; /dev/null;</span><br><span class="hljs-string">    echo -e &quot;Acquire::https::Proxy \&quot;http://$&#123;hostip&#125;:$&#123;hostport&#125;\&quot;;&quot; | sudo tee -a /etc/apt/apt.conf.d/proxy.conf &gt; /dev/null;</span><br><span class="hljs-string">&#x27;</span><br><span class="hljs-built_in">alias</span> unproxy=<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    unset https_proxy;</span><br><span class="hljs-string">    unset http_proxy;</span><br><span class="hljs-string">    unset all_proxy;</span><br><span class="hljs-string">    sudo sed -i -e &#x27;</span>/Acquire::http::Proxy/d<span class="hljs-string">&#x27; /etc/apt/apt.conf.d/proxy.conf;</span><br><span class="hljs-string">    sudo sed -i -e &#x27;</span>/Acquire::https::Proxy/d<span class="hljs-string">&#x27; /etc/apt/apt.conf.d/proxy.conf;</span><br><span class="hljs-string">&#x27;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>其中 hostport 是 v2rayN 中 http局域网代理的端口。默认应该是10811<br>如果你做过修改或使用其它客户端，请注意区别。一定是局域网可访问的代理端口 </p>
+<p>重新读取配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></div></td></tr></table></figure>
+
+<p>启动代理<br>每次开启WSL2，都需要输入以下命令激活代理 </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 启动代理</span><br>proxy<br><span class="hljs-comment"># 关闭代理</span><br>unproxy<br></code></pre></div></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">curl google.com<br></code></pre></div></td></tr></table></figure>
+
+<p>有回应就是成功</p>
+<p>如果出问题，请重新修改~/.bashrc文件，并重新读取</p>
 
             </div>
             <hr>
