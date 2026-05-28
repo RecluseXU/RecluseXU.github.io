@@ -17,9 +17,25 @@
   <meta name="description" content="自娱自乐">
   <meta name="author" content="EvilRecluse">
   <meta name="keywords" content="">
-  <title>归档 - EvilRecluse</title>
+  <title>uv - EvilRecluse</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -47,7 +63,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -134,9 +150,38 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="千里之行, 始于足下">
+            <span class="h2" id="subtitle" title="uv">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      345 字
+    </span>
+  
+
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
 
             
           </div>
@@ -149,52 +194,127 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 149 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/post/e1a4d6bf/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">SQL记录</span>
-      <time style="float: right;">03-02</time>
-    </a>
-  
-</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">uv</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2026年5月28日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>uv 一个用 Rust 编写的极速 Python 包和项目管理器   </p>
+<ul>
+<li>🚀 一个工具即可取代 pip、pip-tools、pipx、poetry、pyenv、twine、virtualenv 等  </li>
+<li>⚡️ 比 pip 快 10-100 倍。  </li>
+<li>🗂️ 提供全面的项目管理，并带有通用锁文件。  </li>
+<li>❇️ 运行脚本，支持内联依赖元数据。  </li>
+<li>🐍 安装和管理 Python 版本。  </li>
+<li>🛠️ 运行和安装 作为 Python 包发布的工具。  </li>
+<li>🔩 包含一个 pip 兼容接口，以熟悉的 CLI 提供性能提升。  </li>
+<li>🏢 支持 Cargo 风格的工作区，适用于可扩展项目。  </li>
+<li>💾 磁盘空间高效，具有用于依赖项去重的全局缓存。  </li>
+<li>⏬ 无需 Rust 或 Python，即可通过 curl 或 pip 安装。  </li>
+<li>🖥️ 支持 macOS、Linux 和 Windows。  </li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>Ubuntu  </p>
+  <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ curl -LsSf https://astral.sh/uv/install.sh | sh<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>windows  </p>
+  <figure class="highlight llvm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs llvm">PS&gt; powershell -ExecutionPolicy ByPass -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;irm https://astral.sh/uv/install.ps1 | iex&quot;</span><br></code></pre></div></td></tr></table></figure>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2020/03/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2020/03/">1</a><span class="page-number current">2</span>
-    </span>
-  </nav>
-  
-  <script>
-    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
-      ele.href += '#board';
-    }
-  </script>
+</li>
+</ul>
+<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="uv-管理-Python-版本"><a href="#uv-管理-Python-版本" class="headerlink" title="uv 管理 Python 版本"></a>uv 管理 Python 版本</h3><p>查看可用的 Python 版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">uv python list<br></code></pre></div></td></tr></table></figure>
+
+<p>下载并安装指定的 Python 版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">uv python install 3.11<br></code></pre></div></td></tr></table></figure>
+
+<p>注：uv 会把这些 Python 版本独立安装在 <code>~/.local/share/uv/python/</code> 目录下，完全不会污染你 Ubuntu 系统的自带 Python 环境，非常安全。</p>
+<h3 id="使用-uv-管理虚拟环境（Virtual-Environments）"><a href="#使用-uv-管理虚拟环境（Virtual-Environments）" class="headerlink" title="使用 uv 管理虚拟环境（Virtual Environments）"></a>使用 uv 管理虚拟环境（Virtual Environments）</h3><p>创建虚拟环境  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">uv venv --python 3.11 --seed<br></code></pre></div></td></tr></table></figure>
+
+<p>激活虚拟环境  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> .venv/bin/activate<br></code></pre></div></td></tr></table></figure>
+
+<p>退出虚拟环境  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">deactivate<br></code></pre></div></td></tr></table></figure>
 
 
+<p>虚拟环境  </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 既可以通过uv</span><br>uv pip install requests<br><br><span class="hljs-comment"># 也可以通过原生的pip</span><br>pip install requests<br></code></pre></div></td></tr></table></figure>
 
 
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/ba950c07/">
+                        <span class="hidden-mobile">ClaudeCode</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -328,9 +448,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 

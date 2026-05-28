@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>uv</title>
+    <link href="/post/aaf74b45/"/>
+    <url>/post/aaf74b45/</url>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>uv 一个用 Rust 编写的极速 Python 包和项目管理器   </p><ul><li>🚀 一个工具即可取代 pip、pip-tools、pipx、poetry、pyenv、twine、virtualenv 等  </li><li>⚡️ 比 pip 快 10-100 倍。  </li><li>🗂️ 提供全面的项目管理，并带有通用锁文件。  </li><li>❇️ 运行脚本，支持内联依赖元数据。  </li><li>🐍 安装和管理 Python 版本。  </li><li>🛠️ 运行和安装 作为 Python 包发布的工具。  </li><li>🔩 包含一个 pip 兼容接口，以熟悉的 CLI 提供性能提升。  </li><li>🏢 支持 Cargo 风格的工作区，适用于可扩展项目。  </li><li>💾 磁盘空间高效，具有用于依赖项去重的全局缓存。  </li><li>⏬ 无需 Rust 或 Python，即可通过 curl 或 pip 安装。  </li><li>🖥️ 支持 macOS、Linux 和 Windows。  </li></ul><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul><li><p>Ubuntu  </p>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ curl -LsSf https://astral.sh/uv/install.sh | sh<br></code></pre></td></tr></table></figure></li><li><p>windows  </p>  <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">PS&gt; powershell -ExecutionPolicy ByPass -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;irm https://astral.sh/uv/install.ps1 | iex&quot;</span><br></code></pre></td></tr></table></figure></li></ul><h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="uv-管理-Python-版本"><a href="#uv-管理-Python-版本" class="headerlink" title="uv 管理 Python 版本"></a>uv 管理 Python 版本</h3><p>查看可用的 Python 版本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">uv python list<br></code></pre></td></tr></table></figure><p>下载并安装指定的 Python 版本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">uv python install 3.11<br></code></pre></td></tr></table></figure><p>注：uv 会把这些 Python 版本独立安装在 <code>~/.local/share/uv/python/</code> 目录下，完全不会污染你 Ubuntu 系统的自带 Python 环境，非常安全。</p><h3 id="使用-uv-管理虚拟环境（Virtual-Environments）"><a href="#使用-uv-管理虚拟环境（Virtual-Environments）" class="headerlink" title="使用 uv 管理虚拟环境（Virtual Environments）"></a>使用 uv 管理虚拟环境（Virtual Environments）</h3><p>创建虚拟环境  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">uv venv --python 3.11 --seed<br></code></pre></td></tr></table></figure><p>激活虚拟环境  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> .venv/bin/activate<br></code></pre></td></tr></table></figure><p>退出虚拟环境  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">deactivate<br></code></pre></td></tr></table></figure><p>虚拟环境  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 既可以通过uv</span><br>uv pip install requests<br><br><span class="hljs-comment"># 也可以通过原生的pip</span><br>pip install requests<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ClaudeCode</title>
     <link href="/post/ba950c07/"/>
     <url>/post/ba950c07/</url>
@@ -795,9 +814,9 @@
     
     <tags>
       
-      <tag>Javascript</tag>
-      
       <tag>Babel</tag>
+      
+      <tag>Javascript</tag>
       
       <tag>API</tag>
       
@@ -841,9 +860,9 @@
     
     <tags>
       
-      <tag>Javascript</tag>
-      
       <tag>Babel</tag>
+      
+      <tag>Javascript</tag>
       
     </tags>
     
@@ -883,9 +902,9 @@
     
     <tags>
       
-      <tag>Javascript</tag>
-      
       <tag>Babel</tag>
+      
+      <tag>Javascript</tag>
       
       <tag>AST</tag>
       
@@ -1221,9 +1240,9 @@
     
     <tags>
       
-      <tag>Django</tag>
-      
       <tag>Python</tag>
+      
+      <tag>Django</tag>
       
     </tags>
     
@@ -1654,9 +1673,9 @@
     
     <tags>
       
-      <tag>Javascript</tag>
-      
       <tag>Babel</tag>
+      
+      <tag>Javascript</tag>
       
     </tags>
     
@@ -1937,9 +1956,9 @@
       
       <tag>反爬虫</tag>
       
-      <tag>混淆</tag>
-      
       <tag>Javascript</tag>
+      
+      <tag>混淆</tag>
       
       <tag>加密</tag>
       
@@ -2345,6 +2364,8 @@
     <tags>
       
       <tag>Anaconda</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
